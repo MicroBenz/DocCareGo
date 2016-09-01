@@ -1,0 +1,39 @@
+{
+  "name": "doccare-go",
+  "version": "0.0.1",
+  "description": "Software Engineering Term Project",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://MicroBenz@github.com/MicroBenz/DocCareGo.git"
+  },
+  "author": "Hospital Again?",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MicroBenz/DocCareGo/issues"
+  },
+  "homepage": "https://github.com/MicroBenz/DocCareGo#readme",
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "~1.4.2",
+    "express": "~4.13.4",
+    "jsonwebtoken": "^7.1.9",
+    "method-override": "~2.0.2",
+    "mongoose": "^4.5.9",
+    "mongoose-delete": "^0.3.4",
+    "morgan": "^1.7.0"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.4.0",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-clean-css": "^2.0.12",
+    "gulp-develop-server": "^0.5.2",
+    "gulp-less": "^3.1.0",
+    "gulp-plumber": "^1.1.0",
+    "gulp-rename": "^1.2.2"
+  }
+}
