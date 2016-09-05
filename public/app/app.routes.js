@@ -23,24 +23,6 @@
                     }
                     else {
                         var role = jwtHelper.decodeToken(token).role;
-                        if ($location.path() === '/login') {
-                            switch (role) {
-                                case 'patient':
-                                    $location.path('/patient');
-                                    break;
-                                case 'officer':
-                                    $location.path('/officer');
-                                    break;
-                                case 'admin':
-                                    $location.path('/admin');
-                            }
-                        }
-                        else {
-                            var pathRole = $location.path().split('/')[1];
-                            if (role !== pathRole) {
-                                $location.path('/' + role);
-                            }
-                        }
                         deferred.resolve();
                     }
                     return deferred.promise;
