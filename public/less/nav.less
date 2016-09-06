@@ -1,0 +1,35 @@
+@import "./variables.less";
+
+body {
+    padding-top: 60px;
+}
+
+.navbar-default {
+    background-color: @theme-lightblue;
+    border: none;
+    a {
+        color: @white !important;
+    }
+    .navbar-nav {
+        .active a {
+            background-color: transparent;
+            color: @yellow !important;
+            &:hover {
+                background-color: transparent;
+            }
+        }
+        a {
+            &:hover {
+                background-color: transparent;
+                color: @yellow !important;
+            }
+        }
+
+        .profile {
+            margin: 0;
+            line-height: 50px;
+            color: @white;
+            font-size: 17px;
+        }
+    }
+}
