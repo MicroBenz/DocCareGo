@@ -21,6 +21,11 @@ module.exports = {
                     'ts-loader',
                     'angular2-template-loader'
                 ]
+            },
+            {
+                test: /\.html$/,
+                loader: 'raw-loader',
+                exclude: './web/src/index.html'
             }
         ]
     },
@@ -36,10 +41,14 @@ module.exports = {
             /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
             __dirname
         ),
-        new CopyWebpackPlugin([{
-            from: './web/src/assets',
-            to: 'assets'
-        }])
+        new CopyWebpackPlugin(
+            [
+                {
+                    from: './web/src/assets',
+                    to: 'assets'
+                }
+            ]
+        )
     ],
     output: {
         path: './web/dist',

@@ -39,3 +39,4 @@ jspm_packages
 # Project ignore
 web/dist
 .env
+web/src/assets/css
