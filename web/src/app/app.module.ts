@@ -3,7 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { AppComponent } from './app.component';
 import { routing, appRoutingProviders } from './app.routing';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './auth/login.component';
+import { RegisterComponent } from './auth/register.component';
+import { NavigationService } from './shared/navigation.service';
 
 @NgModule({
     bootstrap: [
@@ -11,7 +13,8 @@ import { LoginComponent } from './login/login.component';
     ],
     declarations: [
         AppComponent,
-        LoginComponent
+        LoginComponent,
+        RegisterComponent
     ],
     imports: [
         BrowserModule,
