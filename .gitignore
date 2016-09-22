@@ -37,6 +37,5 @@ jspm_packages
 .node_repl_history
 
 # Project ignore
-public/libs
-public/css
+web/dist
 .env

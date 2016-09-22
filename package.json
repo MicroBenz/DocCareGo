@@ -4,7 +4,7 @@
   "description": "Software Engineering Term Project",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "install": "bower install"
   },
   "repository": {
     "type": "git",
@@ -17,24 +17,40 @@
   },
   "homepage": "https://github.com/MicroBenz/DocCareGo#readme",
   "dependencies": {
+    "@angular/common": "2.0.0",
+    "@angular/compiler": "2.0.0",
+    "@angular/core": "2.0.0",
+    "@angular/forms": "2.0.0",
+    "@angular/http": "2.0.0",
+    "@angular/platform-browser": "2.0.0",
+    "@angular/platform-browser-dynamic": "2.0.0",
+    "@angular/router": "3.0.0",
+    "core-js": "^2.4.1",
+    "rxjs": "5.0.0-beta.12",
+    "zone.js": "^0.6.23",
+
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "~1.4.2",
     "dotenv": "^2.0.0",
     "express": "~4.13.4",
-    "jsonwebtoken": "^7.1.9",
     "method-override": "~2.0.2",
+
     "mongoose": "^4.5.9",
-    "mongoose-delete": "^0.3.4",
-    "morgan": "^1.7.0"
+    "morgan": "^1.7.0",
+
+    "jsonwebtoken": "^7.1.9"
   },
   "devDependencies": {
+    "webpack": "2.1.0-beta.22",
+    "webpack-dev-server": "^2.1.0-beta.2",
+    "angular2-template-loader": "^0.5.0",
+    "ts-loader": "^0.8.2",
+    "typescript": "2.0.0",
+    "copy-webpack-plugin": "^3.0.1",
+    "html-webpack-plugin": "^2.22.0",
+
     "browser-sync": "^2.4.0",
     "gulp": "^3.9.1",
-    "gulp-autoprefixer": "^3.1.0",
-    "gulp-clean-css": "^2.0.12",
-    "gulp-develop-server": "^0.5.2",
-    "gulp-less": "^3.1.0",
-    "gulp-plumber": "^1.1.0",
-    "gulp-rename": "^1.2.2"
+    "gulp-develop-server": "^0.5.2"
   }
 }

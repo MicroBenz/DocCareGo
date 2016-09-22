@@ -10,7 +10,6 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 app.use(morgan('dev'));
-app.use(express.static('public'));
 
 var tokenSecret = process.env.JWT_SECRET ? process.env.JWT_SECRET : 'doccare-go-special-edition';
 app.set('tokenSecret', tokenSecret);
@@ -20,8 +19,9 @@ app.listen(port, function () {
     console.log('Apps Listening on port ' + port);
 });
 
+app.use(express.static('web/dist'));
 app.get('/', function (req, res) {
-    res.sendFile('./public/index.html');
+    res.sendfile(__dirname + '/web/dist/index.html');
 });
 
 // var mongoose = require('mongoose');
