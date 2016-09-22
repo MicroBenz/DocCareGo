@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { AppComponent } from './app.component';
 import { routing, appRoutingProviders } from './app.routing';
 import { LoginComponent } from './login/login.component';
@@ -17,7 +18,11 @@ import { LoginComponent } from './login/login.component';
         routing
     ],
     providers: [
-        appRoutingProviders
+        appRoutingProviders,
+        {
+            provide: LocationStrategy,
+            useClass: HashLocationStrategy
+        }
     ]
 })
 export class AppModule {}
