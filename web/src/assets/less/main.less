@@ -1,12 +1,9 @@
-@theme: #1E99FF;
+@theme: #48CFAD;
+@theme-darker: #37BC9B;
 @red: #fe424d;
-@light-blue: #daecf3;
-@dark-blue: #085DAD;
-@blue: #55B1E1;
-@umber: #6f5555;
+@blue: #007aff;
 @white: #ffffff;
 @black: #000000;
-@green: #399199;
 @grey: #c8c7cc;
 
 html, body {
@@ -45,14 +42,19 @@ h1, h2, h3, h4, h5, p {
     transition: all 0.2s ease-in-out;
 }
 
-.btn-success {
-    background-color: @dark-blue;
+.btn-default {
     border: none;
-    border-radius: 0px;
+    border-radius:  0px;
+    .inout-transition();    
+}
+
+.btn-success {
+    background-color: @blue;
     height: 41px;
-    .inout-transition();
+    &:hover, &:active {
+        background-color: @blue;
+    }
     &:hover {
-        background-color: @dark-blue;
         .BoxShadowHelper(2);
     }
 }

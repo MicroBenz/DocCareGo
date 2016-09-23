@@ -2,13 +2,14 @@
     <img id="web-logo" src="assets/img/logo.png">
     <div id="login-box" class="center-block">
         <div class="row">
-            <input class="corner-top" type="text" placeholder="ชื่อผู้ใช้งาน">        
+            <input class="corner-top" type="text" placeholder="ชื่อผู้ใช้งาน" onfocus="this.placeholder = ''" onblur="this.placeholder = 'ชื่อผู้ใช้งาน'" [(ngModel)]="usr">        
         </div>
         <div class="row">
-            <input class="corner-bottom" type="password" placeholder="รหัสผ่าน">
+            <input class="corner-bottom" type="password" placeholder="รหัสผ่าน" onfocus="this.placeholder = ''" onblur="this.placeholder = 'รหัสผ่าน'" [(ngModel)]="pwd">
         </div>
+        {{usr}} {{pwd}}
         <div class="row">
-            <button class="btn btn-default btn-success">เข้าสู่ระบบ</button>
+            <button class="btn btn-default btn-success" (click)="login()">เข้าสู่ระบบ</button>
         </div>
         <p class="register-text">ยังไม่มีชื่อผู้ใช้งาน? <a class="register-button" (click)="navigator.navigateToRegister()">ลงทะเบียนใช้งาน</a></p>
     </div>

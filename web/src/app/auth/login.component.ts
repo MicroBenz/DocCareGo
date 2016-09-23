@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { NavigationService } from './../shared/navigation.service';
+import { AuthService } from './../shared/auth.service';
+import { DataService } from './../shared/data.service';
+import { Http } from '@angular/http';
 
 @Component({
     selector: 'login',
@@ -60,6 +63,12 @@ import { NavigationService } from './../shared/navigation.service';
     providers: [NavigationService]
 })
 export class LoginComponent {
-    constructor(private navigator: NavigationService) {}
+    public usr: string;
+    public pwd: string;
 
+    constructor(private navigator: NavigationService, private authService: AuthService) {}
+
+    private login () {
+        console.log('GO LOGIN');
+    }    
 }

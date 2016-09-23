@@ -1,11 +1,14 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { FormsModule }   from '@angular/forms';
+
 import { AppComponent } from './app.component';
 import { routing, appRoutingProviders } from './app.routing';
 import { LoginComponent } from './auth/login.component';
 import { RegisterComponent } from './auth/register.component';
-import { NavigationService } from './shared/navigation.service';
+import { DataService } from './shared/data.service';
+import { AuthService } from './shared/auth.service';
 
 @NgModule({
     bootstrap: [
@@ -18,6 +21,7 @@ import { NavigationService } from './shared/navigation.service';
     ],
     imports: [
         BrowserModule,
+        FormsModule,
         routing
     ],
     providers: [
@@ -25,7 +29,9 @@ import { NavigationService } from './shared/navigation.service';
         {
             provide: LocationStrategy,
             useClass: HashLocationStrategy
-        }
+        },
+        DataService,
+        AuthService
     ]
 })
 export class AppModule {}

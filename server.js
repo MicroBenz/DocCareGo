@@ -24,6 +24,11 @@ app.get('/', function (req, res) {
     res.sendfile(__dirname + '/web/dist/index.html');
 });
 
+app.get('/api/v1/test', function (req, res) {
+    res.json({
+        message: 'text'
+    });
+});
 // var mongoose = require('mongoose');
 // var database = process.env.DB_HOST;
 // mongoose.connect(database);
