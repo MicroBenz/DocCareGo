@@ -60,7 +60,7 @@ import { Http } from '@angular/http';
             cursor: pointer;
         }
     `],
-    providers: [NavigationService]
+    providers: [NavigationService, AuthService]
 })
 export class LoginComponent {
     public usr: string;
@@ -70,5 +70,6 @@ export class LoginComponent {
 
     private login () {
         console.log('GO LOGIN');
-    }    
+        this.authService.makeLogin();
+    }
 }

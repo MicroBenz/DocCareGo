@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { FormsModule }   from '@angular/forms';
+import { HttpModule }from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { routing, appRoutingProviders } from './app.routing';
@@ -22,6 +23,7 @@ import { AuthService } from './shared/auth.service';
     imports: [
         BrowserModule,
         FormsModule,
+        HttpModule,
         routing
     ],
     providers: [
