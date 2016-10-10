@@ -10,6 +10,7 @@ import { LoginComponent } from './auth/login.component';
 import { RegisterComponent } from './auth/register.component';
 import { DataService } from './shared/data.service';
 import { AuthService } from './shared/auth.service';
+import { AppComponentWithNav } from './app.component.withnav';
 
 @NgModule({
     bootstrap: [
@@ -17,6 +18,7 @@ import { AuthService } from './shared/auth.service';
     ],
     declarations: [
         AppComponent,
+        AppComponentWithNav,
         LoginComponent,
         RegisterComponent
     ],

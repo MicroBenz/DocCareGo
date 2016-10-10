@@ -3,6 +3,7 @@ import { ModuleWithProviders } from '@angular/core';
 import { LoginComponent } from './auth/login.component';
 import { AppComponent } from './app.component';
 import { RegisterComponent } from './auth/register.component';
+import { AppComponentWithNav } from './app.component.withnav';
 
 const appRoutes: Routes = [
     {
@@ -11,7 +12,13 @@ const appRoutes: Routes = [
     },
     {
         path: 'register',
-        component: RegisterComponent
+        component: AppComponentWithNav,
+        children: [
+            {
+                path: '',
+                component: RegisterComponent
+            }
+        ]
     },
     {
         path: '',

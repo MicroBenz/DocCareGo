@@ -1,11 +1,11 @@
 <div id="login-view">
-    <img id="web-logo" src="assets/img/logo.png">
+    <img id="web-logo" src="assets/img/logo_horizontal.png">
     <div id="login-box" class="center-block">
         <div class="row">
-            <input class="corner-top" type="text" placeholder="ชื่อผู้ใช้งาน" onfocus="this.placeholder = ''" onblur="this.placeholder = 'ชื่อผู้ใช้งาน'" [(ngModel)]="usr">        
+            <input type="text" placeholder="ชื่อผู้ใช้งาน" onfocus="this.placeholder = ''" onblur="this.placeholder = 'ชื่อผู้ใช้งาน'" [(ngModel)]="usr">        
         </div>
         <div class="row">
-            <input class="corner-bottom" type="password" placeholder="รหัสผ่าน" onfocus="this.placeholder = ''" onblur="this.placeholder = 'รหัสผ่าน'" [(ngModel)]="pwd">
+            <input type="password" placeholder="รหัสผ่าน" onfocus="this.placeholder = ''" onblur="this.placeholder = 'รหัสผ่าน'" [(ngModel)]="pwd">
         </div>
         {{usr}} {{pwd}}
         <div class="row">

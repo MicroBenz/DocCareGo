@@ -1,16 +1,18 @@
-@theme: #48CFAD;
+@theme: #00a250;
 @theme-darker: #37BC9B;
 @red: #fe424d;
 @blue: #007aff;
 @white: #ffffff;
 @black: #000000;
 @grey: #c8c7cc;
+@material-grey: #fafafa;
+@green: #00a250;
 
 html, body {
     width: 100%;
     height: 100%;
-    color: @white;
-    background-color: @theme;
+    color: @black;
+    background-color: @material-grey;
     -webkit-font-smoothing: antialiased;
     font-family: 'Roboto', sans-serif;
 }
@@ -49,10 +51,10 @@ h1, h2, h3, h4, h5, p {
 }
 
 .btn-success {
-    background-color: @blue;
+    background-color: @green;
     height: 41px;
     &:hover, &:active {
-        background-color: @blue;
+        background-color: @green;
     }
     &:hover {
         .BoxShadowHelper(2);
