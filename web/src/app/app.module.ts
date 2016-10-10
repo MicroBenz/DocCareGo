@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
-import { FormsModule }   from '@angular/forms';
-import { HttpModule }from '@angular/http';
+import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
+import { PopoverModule } from 'ng2-popover';
 
 import { AppComponent } from './app.component';
 import { routing, appRoutingProviders } from './app.routing';
@@ -26,6 +27,7 @@ import { AppComponentWithNav } from './app.component.withnav';
         BrowserModule,
         FormsModule,
         HttpModule,
+        PopoverModule,
         routing
     ],
     providers: [

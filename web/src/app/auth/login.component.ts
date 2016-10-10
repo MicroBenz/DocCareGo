@@ -3,6 +3,7 @@ import { NavigationService } from './../shared/navigation.service';
 import { AuthService } from './../shared/auth.service';
 import { DataService } from './../shared/data.service';
 import { Http } from '@angular/http';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'login',
@@ -52,10 +53,10 @@ export class LoginComponent {
     public usr: string;
     public pwd: string;
 
-    constructor(private navigator: NavigationService, private authService: AuthService) {}
+    constructor(private navigator: NavigationService, private authService: AuthService, private router: Router) {}
 
     private login () {
-        console.log('GO LOGIN');
-        this.authService.makeLogin();
+        //TODO: Made Login
+        this.router.navigate(['/']);
     }
 }

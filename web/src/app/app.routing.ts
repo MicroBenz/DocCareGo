@@ -7,23 +7,21 @@ import { AppComponentWithNav } from './app.component.withnav';
 
 const appRoutes: Routes = [
     {
+        path: '',
+        component: AppComponentWithNav,
+        children: [
+            {
+                path: ''
+            }
+        ]
+    },
+    {
         path: 'login',
         component: LoginComponent
     },
     {
         path: 'register',
-        component: AppComponentWithNav,
-        children: [
-            {
-                path: '',
-                component: RegisterComponent
-            }
-        ]
-    },
-    {
-        path: '',
-        redirectTo: '/login',
-        pathMatch: 'full'
+        component: RegisterComponent
     }
 ]
 
