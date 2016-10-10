@@ -11,7 +11,8 @@ const appRoutes: Routes = [
         component: AppComponentWithNav,
         children: [
             {
-                path: ''
+                path: '',
+                component: RegisterComponent
             }
         ]
     },

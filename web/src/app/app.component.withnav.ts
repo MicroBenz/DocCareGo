@@ -6,21 +6,28 @@ import { Component } from '@angular/core';
         <nav class="navbar navbar-default">
             <div class="container web-brand">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="#">
+                    <a class="navbar-brand">
                         <img class="navbar-logo" src="assets/img/logo_vertical.png">
                     </a>
                 </div>
                 <div class="user-manage">
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <a popover="login"><i class="glyphicon glyphicon-user"></i> สวัสดี ธนนันท์</a>
+                            <a [popover]="myPopover"><i class="glyphicon glyphicon-user"></i> สวัสดี ธนนันท์</a>
+                            <popover-content #myPopover
+            title="this header can be omitted"
+            [closeOnClickOutside]="true">
+            <b>Very</b> <span style="color: #C21F39">Dynamic</span> <span style="color: #00b3ee">Reusable</span>
+            <b><i><span style="color: #ffc520">Popover With</span></i></b> <small>Html support</small>.
+            Click outside of this popover and it will be dismissed automatically.
+        </popover-content>
                         </li>
                     </ul>
                 </div>
             </div>
             <div class="container">
                 <div class="apps-menu">
-                    <a>นัดแพทย์</a>
+                    <a class="active">นัดแพทย์</a>
                     <a>ดูการนัดหมาย</a>
                 </div>
             </div>
@@ -53,6 +60,11 @@ import { Component } from '@angular/core';
             margin-bottom: 10px;
         }
         .apps-menu a{
+            cursor: pointer;
+            text-decoration: none;
+            color: #000000;
+        }
+        .apps-menu a:hover, .apps-menu .active {
             color: #00a250;
         }
     `
