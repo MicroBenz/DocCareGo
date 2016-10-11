@@ -59,6 +59,6 @@ export class LoginComponent {
 
     private login () {
         //TODO: Made Login
-        this.router.navigate(['/']);
+        this.authService.makeLogin(this.usr, this.pwd);
     }
 }

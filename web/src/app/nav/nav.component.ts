@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from './../shared/auth.service';
 
 @Component({
     selector: 'apps-nav',
@@ -39,19 +40,19 @@ export class NavComponent {
         'staff': 'เจ้าหน้าที่',
         'pharmacist': 'เภสัชกร'
     }
-    constructor() {
-        if (window.localStorage['doccareGo'] === undefined || window.localStorage['doccareGo'] === null) {
-            this.userRole = 'doctor';
-            this.userRoleDisplay = this.roleMapping[this.userRole];
-        }
-        else if (window.localStorage['doccareGo']['role'] === undefined) {
-            this.userRole = 'staff'
-            this.userRoleDisplay = 'เจ้าหน้าที่';
+    constructor(private authService: AuthService) {
+        console.log(window.localStorage['doccareGoRole']);
+        if (window.localStorage['doccareGoRole'] === undefined || window.localStorage['doccareGoRole'] === null) {
+            console.error('No row');
         }
         else {
-            this.userRole = window.localStorage['doccareGo']['role'];
-            this.userRoleDisplay = this.roleMapping[window.localStorage['doccareGo']['role']]
+            this.userRole = window.localStorage['doccareGoRole'];
+            this.userRoleDisplay = this.roleMapping[window.localStorage['doccareGoRole']]
         }
         this.userName = 'จอห์น';
+    }
+
+    logout () {
+        this.authService.makeLogout();
     }
 }
