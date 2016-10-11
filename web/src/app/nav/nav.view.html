@@ -1,52 +1,50 @@
-<nav class="nav">
-    <div class="nav-left">
-        <a class="nav-item is-brand" href="#">
-            <img src="assets/img/logo_vertical.png">
-        </a>
+<nav class="nav top-nav">
+    <div class="container">
+        <div class="nav-left">
+            <a class="nav-item is-brand" href="#">
+                <img src="assets/img/logo_vertical.png">
+            </a>
+        </div>
+        <div class="nav-right nav-menu">
+            <span class="nav-item nav-profile-wrapper">
+                <div class="nav-profile"
+                    [ngClass]="{
+                        'patient-role': userRole === 'patient',
+                        'doctor-role': userRole === 'doctor',
+                        'nurse-role': userRole === 'nurse',
+                        'officer-role': userRole === 'staff',
+                        'pharmacist-role': userRole === 'pharmacist'
+                    }">
+                    <div class="profile-circle">
+                        <a>{{userName.substring(0,1)}}</a>
+                    </div>
+                    <div class="profile-name">
+                        <p>{{userName}} [{{userRoleDisplay}}]<p>
+                    </div>
+                </div>
+            </span>
+        </div>
     </div>
-
-    <div class="nav-right nav-menu">
-        <span class="nav-item nav-profile-wrapper">
-            <div class="nav-profile officer-role">
-                <div class="profile-circle">
-                    <a>ธ</a>
-                </div>
-                <div class="profile-name">
-                    <p>ธนนันท์ [เจ้าหน้าที่]<p>
-                </div>
-            </div>
-            <div class="nav-profile patient-role">
-                <div class="profile-circle">
-                    <a>ณ</a>
-                </div>
-                <div class="profile-name">
-                    <p>ณัษฐพงศ์ [ผู้ป่วย]<p>
-                </div>
-            </div>
-            <div class="nav-profile doctor-role">
-                <div class="profile-circle">
-                    <a>ธ</a>
-                </div>
-                <div class="profile-name">
-                    <p>ธีรัช [แพทย์]<p>
-                </div>
-            </div>
-            <div class="nav-profile nurse-role">
-                <div class="profile-circle">
-                    <a>ว</a>
-                </div>
-                <div class="profile-name">
-                    <p>วิภาวนี [พยาบาล]<p>
-                </div>
-            </div>
-            <div class="nav-profile pharmacist-role">
-                <div class="profile-circle">
-                    <a>ธ</a>
-                </div>
-                <div class="profile-name">
-                    <p>ธนวัฒน์ [เภสัชกร]<p>
-                </div>
-            </div>
-        </span>
+</nav>
+<nav class="nav menu-nav has-shadow">
+    <div class="container">
+        <div class="nav-left" *ngIf="userRole === 'patient'">
+            <a class="nav-item is-tab is-active">นัดหมายแพทย์</a>
+            <a class="nav-item is-tab">ดูการนัดหมาย</a>
+        </div>
+        <div class="nav-left" *ngIf="userRole === 'doctor'">
+            <a class="nav-item is-tab is-active">จัดการวันออกตรวจ</a>
+            <a class="nav-item is-tab">ตรวจผู้ป่วย</a>
+        </div>
+        <div class="nav-left" *ngIf="userRole === 'nurse'">
+            <a class="nav-item is-tab is-active">ดูรายการผู้ป่วยวันนี้</a>
+        </div>
+        <div class="nav-left" *ngIf="userRole === 'staff'">
+            <a class="nav-item is-tab is-active">จัดการการนัดหมาย</a>
+            <a class="nav-item is-tab">จัดการวันออกตรวจแพทย์</a>
+        </div>
+        <div class="nav-left" *ngIf="userRole === 'pharmacist'">
+            <a class="nav-item is-tab is-active">ดูรายการสั่งยาวันนี้</a>
+        </div>
     </div>
 </nav>
