@@ -11,8 +11,7 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 app.use(morgan('dev'));
 
-var tokenSecret = process.env.JWT_SECRET ? process.env.JWT_SECRET : 'doccare-go-special-edition';
-app.set('tokenSecret', tokenSecret);
+app.set('tokenSecret', process.env.JWT_SECRET);
 
 var port = process.env.PORT ? process.env.PORT : 5555;
 app.listen(port, function () {
@@ -35,9 +34,11 @@ app.post('/api/v1/test', function (req, res) {
         message: 'POST COMPLETED'
     });
 });
-// var mongoose = require('mongoose');
-// var database = process.env.DB_HOST;
-// mongoose.connect(database);
-// mongoose.Promise = global.Promise;
 
+var mongoose = require('mongoose');
+var database = process.env.DB_HOST;
+mongoose.connect(database);
+mongoose.Promise = global.Promise;
+
+require('./server/api/main.api')(app, express);
 module.exports = app;
