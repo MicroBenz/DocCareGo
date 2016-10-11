@@ -54,6 +54,7 @@ import { Router } from '@angular/router';
 export class LoginComponent {
     public usr: string;
     public pwd: string;
+    public isLoginFail: boolean = false;
 
     constructor(private navigator: NavigationService, private authService: AuthService, private router: Router) {
         if (this.authService.hasLogin()) {
@@ -63,6 +64,12 @@ export class LoginComponent {
 
     private login () {
         //TODO: Made Login
-        this.authService.makeLogin(this.usr, this.pwd);
+        if (this.usr === 'patient' || this.usr === 'doctor' || this.usr === 'staff' || this.usr ==='nurse' || this.usr === 'pharmacist') {
+            this.isLoginFail = false;
+            this.authService.makeLogin(this.usr, this.pwd);            
+        }
+        else {
+            this.isLoginFail = true;
+        }
     }
 }

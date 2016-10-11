@@ -11,11 +11,12 @@ export class AuthService {
         //TODO: Call API for make login and get/set JWT Token
         if (usr === 'patient' || usr === 'doctor' || usr === 'staff' || usr ==='nurse' || usr === 'pharmacist') {
             this.setToken(usr);
+            this.router.navigateByUrl('/' + usr);            
         }
         else {
             this.setToken('patient');
+            this.router.navigateByUrl('/' + usr);
         }
-        this.router.navigateByUrl('/' + usr);
     }
 
     public makeLogout () {
