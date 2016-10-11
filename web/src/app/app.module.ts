@@ -30,6 +30,11 @@ import { DataService } from './shared/data.service';
 import { AuthService } from './shared/auth.service';
 import { Router } from '@angular/router';
 import { CanActivateViaAuthGuard } from './auth/auth.guard';
+import { PatientOnlyRoute } from './auth/guard/patient.guard';
+import { NurseOnlyRoute } from './auth/guard/nurse.guard';
+import { DoctorOnlyRoute } from './auth/guard/doctor.guard';
+import { PharmacistOnlyRoute } from './auth/guard/pharmacist.guard';
+import { StaffOnlyRoute } from './auth/guard/staff.guard';
 
 @NgModule({
     bootstrap: [
@@ -53,7 +58,11 @@ import { CanActivateViaAuthGuard } from './auth/auth.guard';
         routing
     ],
     providers: [
-        CanActivateViaAuthGuard,
+        PatientOnlyRoute,
+        DoctorOnlyRoute,
+        NurseOnlyRoute,
+        PharmacistOnlyRoute,
+        StaffOnlyRoute,
         JwtHelper,
         provideAuth({
             headerName: 'x-access-token',

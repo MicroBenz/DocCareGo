@@ -14,6 +14,11 @@ import { MakeAppointmentComponent } from './patient/make.appointment.component';
 import { PatientLandingComponent } from './patient/patient.landing.component';
 import { ViewAppointmentComponent } from './patient/view.appointment.component';
 import { CanActivateViaAuthGuard } from './auth/auth.guard';
+import { PatientOnlyRoute } from './auth/guard/patient.guard';
+import { DoctorOnlyRoute } from './auth/guard/doctor.guard';
+import { NurseOnlyRoute } from './auth/guard/nurse.guard';
+import { StaffOnlyRoute } from './auth/guard/staff.guard';
+import { PharmacistOnlyRoute } from './auth/guard/pharmacist.guard';
 
 const appRoutes: Routes = [
     {
@@ -33,7 +38,7 @@ const appRoutes: Routes = [
         path: 'patient',
         component: AppComponentWithNav,
         canActivate: [
-            CanActivateViaAuthGuard
+            PatientOnlyRoute
         ],
         children: [
             {
@@ -53,6 +58,9 @@ const appRoutes: Routes = [
     {
         path: 'doctor',
         component: AppComponentWithNav,
+        canActivate: [
+            DoctorOnlyRoute
+        ],
         children: [
             {
                 path: ''
@@ -68,6 +76,9 @@ const appRoutes: Routes = [
     {
         path: 'nurse',
         component: AppComponentWithNav,
+        canActivate: [
+            NurseOnlyRoute
+        ],
         children: [
             {
                 path: ''
@@ -80,6 +91,9 @@ const appRoutes: Routes = [
     {
         path: 'staff',
         component: AppComponentWithNav,
+        canActivate: [
+            StaffOnlyRoute
+        ],
         children: [
             {
                 path: ''
@@ -95,6 +109,9 @@ const appRoutes: Routes = [
     {
         path: 'pharmacist',
         component: AppComponentWithNav,
+        canActivate: [
+            PharmacistOnlyRoute
+        ],
         children: [
             {
                 path: ''

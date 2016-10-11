@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataService } from './data.service';
-import { AuthHttp } from 'angular2-jwt';
+import { AuthHttp, JwtHelper } from 'angular2-jwt';
 import { Http, Response } from '@angular/http';
 @Injectable()
 export class AuthService {
 
-    constructor(private dataService: DataService, private router: Router, private authHttp: AuthHttp, private http: Http) { }
+    constructor(private dataService: DataService, private router: Router, private authHttp: AuthHttp, private http: Http, private jwtHelper: JwtHelper) { }
 
     public makeLogin (usr: string, pwd: string) {
         //TODO: Call API for make login and get/set JWT Token
@@ -39,7 +39,10 @@ export class AuthService {
     }
 
     public getUserRole () {
-        return window.localStorage['doccareGoRole'];
+        if (window.localStorage.getItem('doccareGoToken')) {
+            return this.jwtHelper.decodeToken(window.localStorage.getItem('doccareGoToken')).role;
+        }
+        return '';
     }
 
     public testHTTP () {
