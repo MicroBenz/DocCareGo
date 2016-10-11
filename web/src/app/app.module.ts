@@ -1,21 +1,33 @@
+// Angular 2
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { PopoverModule } from 'ng2-popover';
+import { provideAuth, JwtHelper, AUTH_PROVIDERS } from 'angular2-jwt';
 
+// Components Declaration
+// App & Nav Components
 import { AppComponent } from './app.component';
-import { routing, appRoutingProviders } from './app.routing';
-import { LoginComponent } from './auth/login.component';
-import { RegisterComponent } from './auth/register.component';
-import { DataService } from './shared/data.service';
-import { AuthService } from './shared/auth.service';
 import { AppComponentWithNav } from './app.component.withnav';
 import { NavComponent } from './nav/nav.component';
+
+// Auth Components
+import { LoginComponent } from './auth/login.component';
+import { RegisterComponent } from './auth/register.component';
+
+// Patient Components
 import { MakeAppointmentComponent } from './patient/make.appointment.component';
 import { PatientLandingComponent } from './patient/patient.landing.component';
 import { ViewAppointmentComponent } from './patient/view.appointment.component';
+
+// Routing
+import { routing, appRoutingProviders } from './app.routing';
+
+// Service
+import { DataService } from './shared/data.service';
+import { AuthService } from './shared/auth.service';
 
 @NgModule({
     bootstrap: [
@@ -39,6 +51,7 @@ import { ViewAppointmentComponent } from './patient/view.appointment.component';
         routing
     ],
     providers: [
+        AUTH_PROVIDERS
         appRoutingProviders,
         {
             provide: LocationStrategy,
@@ -48,4 +61,11 @@ import { ViewAppointmentComponent } from './patient/view.appointment.component';
         AuthService
     ]
 })
-export class AppModule {}
+export class AppModule {
+    private jwtHelper: JwtHelper;
+
+    constructor() {
+        this.jwtHelper = new JwtHelper();
+        console.log('Apps Startup');
+    }
+}
