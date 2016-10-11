@@ -23,6 +23,7 @@ import { Router } from '@angular/router';
         }
         #login-box {
             width: 350px;
+            margin: auto;
         }
         #login-box input {
             width: 100%;
@@ -30,6 +31,7 @@ import { Router } from '@angular/router';
             text-align: center;
             border: 1px solid #00a250;
             margin-bottom: 10px;
+            box-shadow: none;
         }
 
         #login-box button {

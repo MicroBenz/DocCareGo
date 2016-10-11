@@ -12,6 +12,7 @@ import { RegisterComponent } from './auth/register.component';
 import { DataService } from './shared/data.service';
 import { AuthService } from './shared/auth.service';
 import { AppComponentWithNav } from './app.component.withnav';
+import { NavComponent } from './nav/nav.component';
 
 @NgModule({
     bootstrap: [
@@ -21,7 +22,8 @@ import { AppComponentWithNav } from './app.component.withnav';
         AppComponent,
         AppComponentWithNav,
         LoginComponent,
-        RegisterComponent
+        RegisterComponent,
+        NavComponent
     ],
     imports: [
         BrowserModule,

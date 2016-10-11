@@ -45,19 +45,42 @@ h1, h2, h3, h4, h5, p {
     transition: all 0.2s ease-in-out;
 }
 
-.btn-default {
+.button {
     border: none;
     border-radius:  0px;
-    .inout-transition();    
+    .inout-transition();
 }
 
-.btn-success {
-    background-color: @green;
+.is-primary {
+    color: @white;
+    background-color: @green !important;
     height: 41px;
     &:hover, &:active {
+        color: @white;
         background-color: @green;
     }
     &:hover {
         .BoxShadowHelper(2);
     }
+}
+
+@officer-color: #006883;
+@patient-color: #00a250;
+@doctor-color: #ff6000;
+@nurse-color: #92bee8;
+@pharmacist-color: #6c3925;
+.officer-role > .profile-circle {
+    background-color: @officer-color;
+}
+.patient-role > .profile-circle {
+    background-color: @patient-color;
+}
+.doctor-role > .profile-circle {
+    background-color: @doctor-color;
+}
+.nurse-role > .profile-circle {
+    background-color: @nurse-color;
+}
+.pharmacist-role > .profile-circle {
+    background-color: @pharmacist-color;
 }
