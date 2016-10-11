@@ -1,16 +1,17 @@
 <div id="login-view">
     <img id="web-logo" src="assets/img/logo_horizontal.png">
     <div id="login-box">
-        <div class="row">
-            <input class="input" type="text" placeholder="ชื่อผู้ใช้งาน" onfocus="this.placeholder = ''" onblur="this.placeholder = 'ชื่อผู้ใช้งาน'" [(ngModel)]="usr">        
-        </div>
-        <div class="row">
-            <input class="input" type="password" placeholder="รหัสผ่าน" onfocus="this.placeholder = ''" onblur="this.placeholder = 'รหัสผ่าน'" [(ngModel)]="pwd">
-        </div>
-        {{usr}} {{pwd}}
-        <div class="row">
-            <button class="button is-primary" (click)="login()">เข้าสู่ระบบ</button>
-        </div>
-        <p class="register-text">ยังไม่มีชื่อผู้ใช้งาน? <a class="register-button" (click)="navigator.navigateToRegister()">ลงทะเบียนใช้งาน</a></p>
+        <form #loginForm="ngForm" (ngSubmit)="login()">
+            <div class="row">
+                <input class="input" name="usr" type="text" placeholder="ชื่อผู้ใช้งาน" onfocus="this.placeholder = ''" onblur="this.placeholder = 'ชื่อผู้ใช้งาน'" [(ngModel)]="usr">        
+            </div>
+            <div class="row">
+                <input class="input" name="pwd" type="password" placeholder="รหัสผ่าน" onfocus="this.placeholder = ''" onblur="this.placeholder = 'รหัสผ่าน'" [(ngModel)]="pwd">
+            </div>
+            <div class="row">
+                <button type="submit" class="button is-primary" (submit)="login()">เข้าสู่ระบบ</button>
+            </div>
+            <p class="register-text">ยังไม่มีชื่อผู้ใช้งาน? <a class="register-button" (click)="navigator.navigateToRegister()">ลงทะเบียนใช้งาน</a></p>
+        </form>
     </div>
 </div>

@@ -15,7 +15,7 @@ export class AuthService {
         else {
             this.setToken('patient');
         }
-        this.router.navigateByUrl('/');
+        this.router.navigateByUrl('/' + usr);
     }
 
     public makeLogout () {
@@ -25,5 +25,16 @@ export class AuthService {
 
     private setToken(usr: string) {
         window.localStorage['doccareGoRole'] = usr;
+    }
+
+    public hasLogin() {
+        if (window.localStorage['doccareGoRole'] === undefined || window.localStorage['doccareGoRole'] === null) {
+            return false;
+        }
+        return true;
+    }
+
+    public getUserRole () {
+        return window.localStorage['doccareGoRole'];
     }
 }

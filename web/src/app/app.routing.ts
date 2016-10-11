@@ -1,20 +1,24 @@
 import { Routes, RouterModule } from '@angular/router';
 import { ModuleWithProviders } from '@angular/core';
-import { LoginComponent } from './auth/login.component';
+
+// Apps Components
 import { AppComponent } from './app.component';
-import { RegisterComponent } from './auth/register.component';
 import { AppComponentWithNav } from './app.component.withnav';
+
+// Auth Components
+import { LoginComponent } from './auth/login.component';
+import { RegisterComponent } from './auth/register.component';
+
+// Patient Components
+import { MakeAppointmentComponent } from './patient/make.appointment.component';
+import { PatientLandingComponent } from './patient/patient.landing.component';
+import { ViewAppointmentComponent } from './patient/view.appointment.component';
 
 const appRoutes: Routes = [
     {
         path: '',
-        component: AppComponentWithNav,
-        children: [
-            {
-                path: '',
-                component: RegisterComponent
-            }
-        ]
+        redirectTo: '/login',
+        pathMatch: 'full'
     },
     {
         path: 'login',
@@ -23,6 +27,78 @@ const appRoutes: Routes = [
     {
         path: 'register',
         component: RegisterComponent
+    },
+    {
+        path: 'patient',
+        component: AppComponentWithNav,
+        children: [
+            {
+                path: '',
+                component: PatientLandingComponent  
+            },
+            {
+                path: 'make-appointment',
+                component: MakeAppointmentComponent
+            },
+            {
+                path: 'view-appointment',
+                component: ViewAppointmentComponent
+            }
+        ]
+    },
+    {
+        path: 'doctor',
+        component: AppComponentWithNav,
+        children: [
+            {
+                path: ''
+            },
+            {
+                path: 'manage-workday'
+            },
+            {
+                path: 'start-working'
+            }
+        ]
+    },
+    {
+        path: 'nurse',
+        component: AppComponentWithNav,
+        children: [
+            {
+                path: ''
+            },
+            {
+                path: 'view-today-patient'
+            }
+        ]
+    },
+    {
+        path: 'staff',
+        component: AppComponentWithNav,
+        children: [
+            {
+                path: ''
+            },
+            {
+                path: 'manage-appointment'
+            },
+            {
+                path: 'manage-workday'
+            }
+        ]
+    },
+    {
+        path: 'pharmacist',
+        component: AppComponentWithNav,
+        children: [
+            {
+                path: ''
+            },
+            {
+                path: 'view-prescription',
+            }
+        ]
     }
 ]
 

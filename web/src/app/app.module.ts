@@ -13,6 +13,9 @@ import { DataService } from './shared/data.service';
 import { AuthService } from './shared/auth.service';
 import { AppComponentWithNav } from './app.component.withnav';
 import { NavComponent } from './nav/nav.component';
+import { MakeAppointmentComponent } from './patient/make.appointment.component';
+import { PatientLandingComponent } from './patient/patient.landing.component';
+import { ViewAppointmentComponent } from './patient/view.appointment.component';
 
 @NgModule({
     bootstrap: [
@@ -21,9 +24,12 @@ import { NavComponent } from './nav/nav.component';
     declarations: [
         AppComponent,
         AppComponentWithNav,
+        NavComponent,
         LoginComponent,
         RegisterComponent,
-        NavComponent
+        MakeAppointmentComponent,
+        PatientLandingComponent,
+        ViewAppointmentComponent
     ],
     imports: [
         BrowserModule,

@@ -55,7 +55,11 @@ export class LoginComponent {
     public usr: string;
     public pwd: string;
 
-    constructor(private navigator: NavigationService, private authService: AuthService, private router: Router) {}
+    constructor(private navigator: NavigationService, private authService: AuthService, private router: Router) {
+        if (this.authService.hasLogin()) {
+            this.router.navigateByUrl('/' + this.authService.getUserRole());
+        }
+    }
 
     private login () {
         //TODO: Made Login
