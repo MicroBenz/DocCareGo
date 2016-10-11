@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from './../shared/auth.service';
+import { JwtHelper } from 'angular2-jwt';
 
 @Component({
     selector: 'apps-nav',
@@ -40,14 +41,15 @@ export class NavComponent {
         'staff': 'เจ้าหน้าที่',
         'pharmacist': 'เภสัชกร'
     }
-    constructor(private authService: AuthService) {
-        console.log(window.localStorage['doccareGoRole']);
-        if (window.localStorage['doccareGoRole'] === undefined || window.localStorage['doccareGoRole'] === null) {
+    constructor(private authService: AuthService, private jwtHelper: JwtHelper) {
+        console.log(window.localStorage['doccareGoToken']);
+        if (window.localStorage['doccareGoToken'] === undefined || window.localStorage['doccareGoToken'] === null) {
             console.error('No row');
         }
         else {
-            this.userRole = window.localStorage['doccareGoRole'];
-            this.userRoleDisplay = this.roleMapping[window.localStorage['doccareGoRole']]
+            let user = this.jwtHelper.decodeToken(window.localStorage['doccareGoToken']);
+            this.userRole = user.role;
+            this.userRoleDisplay = this.roleMapping[this.userRole];
         }
         this.userName = 'จอห์น';
     }
