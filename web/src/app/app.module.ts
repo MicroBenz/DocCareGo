@@ -5,7 +5,7 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { PopoverModule } from 'ng2-popover';
-import { provideAuth, JwtHelper, AUTH_PROVIDERS } from 'angular2-jwt';
+import { provideAuth, JwtHelper } from 'angular2-jwt';
 
 // Components Declaration
 // App & Nav Components
@@ -28,6 +28,8 @@ import { routing, appRoutingProviders } from './app.routing';
 // Service
 import { DataService } from './shared/data.service';
 import { AuthService } from './shared/auth.service';
+import { Router } from '@angular/router';
+import { CanActivateViaAuthGuard } from './auth/auth.guard';
 
 @NgModule({
     bootstrap: [
@@ -51,7 +53,15 @@ import { AuthService } from './shared/auth.service';
         routing
     ],
     providers: [
-        AUTH_PROVIDERS
+        CanActivateViaAuthGuard,
+        JwtHelper,
+        provideAuth({
+            headerName: 'x-access-token',
+            tokenName: 'doccareGoToken',
+            tokenGetter: (
+                () => window.localStorage.getItem('doccareGoToken')
+            )
+        }),
         appRoutingProviders,
         {
             provide: LocationStrategy,
@@ -62,10 +72,7 @@ import { AuthService } from './shared/auth.service';
     ]
 })
 export class AppModule {
-    private jwtHelper: JwtHelper;
-
     constructor() {
-        this.jwtHelper = new JwtHelper();
-        console.log('Apps Startup');
+        console.log(window.localStorage.getItem('doccareGoToken'));
     }
 }

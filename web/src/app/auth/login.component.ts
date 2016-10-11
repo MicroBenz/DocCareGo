@@ -66,7 +66,11 @@ export class LoginComponent {
         //TODO: Made Login
         if (this.usr === 'patient' || this.usr === 'doctor' || this.usr === 'staff' || this.usr ==='nurse' || this.usr === 'pharmacist') {
             this.isLoginFail = false;
-            this.authService.makeLogin(this.usr, this.pwd);            
+            this.authService.makeLogin(this.usr, this.pwd)
+                .subscribe((data) => {
+                    console.log(data);
+                    window.localStorage['doccareGoToken'] = data.data.token;
+                });
         }
         else {
             this.isLoginFail = true;

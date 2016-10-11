@@ -13,6 +13,7 @@ import { RegisterComponent } from './auth/register.component';
 import { MakeAppointmentComponent } from './patient/make.appointment.component';
 import { PatientLandingComponent } from './patient/patient.landing.component';
 import { ViewAppointmentComponent } from './patient/view.appointment.component';
+import { CanActivateViaAuthGuard } from './auth/auth.guard';
 
 const appRoutes: Routes = [
     {
@@ -31,6 +32,9 @@ const appRoutes: Routes = [
     {
         path: 'patient',
         component: AppComponentWithNav,
+        canActivate: [
+            CanActivateViaAuthGuard
+        ],
         children: [
             {
                 path: '',
