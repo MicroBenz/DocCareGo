@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
     selector: 'appointment-table-compact',
@@ -21,5 +21,11 @@ export class AppointmentTableCompact {
     @Input()
     set appointments(appointments) {
         this.appointmentData = appointments;
+    }
+
+    @Output() onSelectRow = new EventEmitter<number>();
+
+    selectAppointment(idx) {
+        this.onSelectRow.emit(idx);
     }
 }

@@ -19,4 +19,8 @@ export class ViewAppointmentComponent {
         {'date': '13 ม.ค. 2559', 'time': '13:00', 'clinic': 'GGSE'},
         {'date': '14 ม.ค. 2559', 'time': '13:00', 'clinic': 'ทดสอบแผนกยาวมากมากมากยาวโคตรๆ'}  
     ]
+
+    public onSelectRow(idx) {
+        console.log(this.appointments[idx]);
+    }
 }

@@ -9,7 +9,8 @@
             <div class="tile is-child box">
                 <h1 class="title">การนัดหมายของท่าน</h1>  
                 <appointment-table-compact
-                    [appointments]="appointments">
+                    [appointments]="appointments"
+                    (onSelectRow)="onSelectRow($event)">
                 </appointment-table-compact>               
             </div>
         </div>
