@@ -4,16 +4,17 @@ import { JwtHelper } from 'angular2-jwt';
 import { AuthService } from './../../shared/auth.service';
 
 @Injectable()
-export class PatientOnlyRoute implements CanActivate {
+export class NonLoggedInRoute implements CanActivate {
     constructor(private authService: AuthService, private router: Router) {}
 
     canActivate() {
-        if (this.authService.getUserRole() !== 'patient') {
-            this.redirectToLogin();
+        if (this.authService.hasLogin()) {
+            this.router.navigateByUrl('/' + this.authService.getUserRole());
             return false;
         }
-
-        return true;
+        else {
+            return true;
+        }
     }
 
     private redirectToLogin () {

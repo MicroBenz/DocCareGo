@@ -35,6 +35,7 @@ import { NurseOnlyRoute } from './auth/guard/nurse.guard';
 import { DoctorOnlyRoute } from './auth/guard/doctor.guard';
 import { PharmacistOnlyRoute } from './auth/guard/pharmacist.guard';
 import { StaffOnlyRoute } from './auth/guard/staff.guard';
+import { NonLoggedInRoute } from './auth/guard/non.logged.in.guard';
 
 @NgModule({
     bootstrap: [
@@ -63,6 +64,7 @@ import { StaffOnlyRoute } from './auth/guard/staff.guard';
         NurseOnlyRoute,
         PharmacistOnlyRoute,
         StaffOnlyRoute,
+        NonLoggedInRoute,
         JwtHelper,
         provideAuth({
             headerName: 'x-access-token',

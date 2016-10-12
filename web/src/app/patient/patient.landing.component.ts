@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
     selector: '<patient-landing></patient-landing>',
@@ -7,5 +8,7 @@ import { Component } from '@angular/core';
     `
 })
 export class PatientLandingComponent {
-
+    constructor(private router: Router) {
+        console.log(this.router.url);
+    }
 }

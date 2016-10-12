@@ -3,10 +3,11 @@ import { Router } from '@angular/router';
 import { DataService } from './data.service';
 import { AuthHttp, JwtHelper } from 'angular2-jwt';
 import { Http, Response } from '@angular/http';
+import { Observable } from 'rxjs/Rx';
+
 @Injectable()
 export class AuthService {
-
-    constructor(private dataService: DataService, private router: Router, private authHttp: AuthHttp, private http: Http, private jwtHelper: JwtHelper) { }
+    constructor(private dataService: DataService, private router: Router, private authHttp: AuthHttp, private http: Http, private jwtHelper: JwtHelper) {}
 
     public makeLogin (usr: string, pwd: string) {
         //TODO: Call API for make login and get/set JWT Token
@@ -27,19 +28,17 @@ export class AuthService {
         this.router.navigateByUrl('/login');
     }
 
-    private setToken(usr: string) {
-        window.localStorage['doccareGoRole'] = usr;
+    public setToken(token: string) {
+        window.localStorage.setItem('doccareGoToken', token);
     }
 
     public hasLogin() {
-        if (window.localStorage['doccareGoRole'] === undefined || window.localStorage['doccareGoRole'] === null) {
-            return false;
-        }
-        return true;
+        var token = window.localStorage.getItem('doccareGoToken');
+        return !(token === undefined || token === null);
     }
 
     public getUserRole () {
-        if (window.localStorage.getItem('doccareGoToken')) {
+        if (this.hasLogin()) {
             return this.jwtHelper.decodeToken(window.localStorage.getItem('doccareGoToken')).role;
         }
         return '';

@@ -69,7 +69,9 @@ export class LoginComponent {
             this.authService.makeLogin(this.usr, this.pwd)
                 .subscribe((data) => {
                     console.log(data);
-                    window.localStorage['doccareGoToken'] = data.data.token;
+                    this.authService.setToken(data.data.token);
+                    console.log('before navigate');
+                    this.router.navigateByUrl('/' + data.data.role);
                 });
         }
         else {

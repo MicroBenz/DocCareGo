@@ -19,6 +19,7 @@ import { DoctorOnlyRoute } from './auth/guard/doctor.guard';
 import { NurseOnlyRoute } from './auth/guard/nurse.guard';
 import { StaffOnlyRoute } from './auth/guard/staff.guard';
 import { PharmacistOnlyRoute } from './auth/guard/pharmacist.guard';
+import { NonLoggedInRoute } from './auth/guard/non.logged.in.guard';
 
 const appRoutes: Routes = [
     {
@@ -28,11 +29,17 @@ const appRoutes: Routes = [
     },
     {
         path: 'login',
-        component: LoginComponent
+        component: LoginComponent,
+        canActivate: [
+            NonLoggedInRoute
+        ]
     },
     {
         path: 'register',
-        component: RegisterComponent
+        component: RegisterComponent,
+        canActivate: [
+            NonLoggedInRoute
+        ]
     },
     {
         path: 'patient',

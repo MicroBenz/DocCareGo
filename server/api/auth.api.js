@@ -15,7 +15,8 @@ module.exports = function (app, express) {
             message: 'Login Success',
             clientMessage: 'Login Success',
             data: {
-                token: token
+                token: token,
+                role: req.body.role
             }
         });
     }
