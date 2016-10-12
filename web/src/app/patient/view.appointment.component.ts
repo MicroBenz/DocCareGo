@@ -13,7 +13,5 @@ import { Component } from '@angular/core';
     `]
 })
 export class ViewAppointmentComponent {
-    public testAppointment = [
-        {'date': '11 ม.ค. 2559', 'time': '13:00-15:00', 'clinic': 'หนึ่งเดียวเท่านั้น'},
-    ]
+    public testAppointment = []
 }
