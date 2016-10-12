@@ -28,6 +28,9 @@ import { JwtHelper } from 'angular2-jwt';
         .profile-name, .profile-circle{
             display: inline-block;
         }
+        .button {
+            border-radius: 3px;
+        }
     `]
 })
 export class NavComponent {

@@ -6,7 +6,6 @@
             </a>
         </div>
         <div class="nav-right nav-menu">
-            <a (click)="logout()">LOGOUT</a>
             <span class="nav-item nav-profile-wrapper">
                 <div class="nav-profile"
                     [ngClass]="{
@@ -23,6 +22,14 @@
                         <p>{{userName}} [{{userRoleDisplay}}]<p>
                     </div>
                 </div>
+            </span>
+            <span class="nav-item">
+                <a class="button is-danger" (click)="logout()">
+                    <span class="icon">
+                        <i class="fa fa-power-off"></i>
+                    </span>
+                    <span>ออกจากระบบ</span>
+                </a>
             </span>
         </div>
     </div>
