@@ -26,8 +26,8 @@ import { ViewAppointmentComponent } from './patient/view.appointment.component';
 import { routing, appRoutingProviders } from './app.routing';
 
 // Service
-import { DataService } from './shared/data.service';
-import { AuthService } from './shared/auth.service';
+// import { DataService } from './shared/data.service';
+import { AuthService } from './shared/service/auth.service';
 import { Router } from '@angular/router';
 import { CanActivateViaAuthGuard } from './auth/auth.guard';
 import { PatientOnlyRoute } from './auth/guard/patient.guard';
@@ -36,6 +36,7 @@ import { DoctorOnlyRoute } from './auth/guard/doctor.guard';
 import { PharmacistOnlyRoute } from './auth/guard/pharmacist.guard';
 import { StaffOnlyRoute } from './auth/guard/staff.guard';
 import { NonLoggedInRoute } from './auth/guard/non.logged.in.guard';
+import { AppointmentTableCompact } from './shared/appointment/appointment.table.compact.component';
 
 @NgModule({
     bootstrap: [
@@ -45,8 +46,11 @@ import { NonLoggedInRoute } from './auth/guard/non.logged.in.guard';
         AppComponent,
         AppComponentWithNav,
         NavComponent,
+
         LoginComponent,
         RegisterComponent,
+
+        AppointmentTableCompact,
         MakeAppointmentComponent,
         PatientLandingComponent,
         ViewAppointmentComponent
@@ -78,7 +82,6 @@ import { NonLoggedInRoute } from './auth/guard/non.logged.in.guard';
             provide: LocationStrategy,
             useClass: HashLocationStrategy
         },
-        DataService,
         AuthService
     ]
 })

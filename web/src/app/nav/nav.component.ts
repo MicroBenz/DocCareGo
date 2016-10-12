@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthService } from './../shared/auth.service';
+import { AuthService } from './../shared/service/auth.service';
 import { JwtHelper } from 'angular2-jwt';
 
 @Component({

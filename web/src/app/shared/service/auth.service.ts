@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { DataService } from './data.service';
 import { AuthHttp, JwtHelper } from 'angular2-jwt';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 
 @Injectable()
 export class AuthService {
-    constructor(private dataService: DataService, private router: Router, private authHttp: AuthHttp, private http: Http, private jwtHelper: JwtHelper) {}
+    constructor(private router: Router, private authHttp: AuthHttp, private http: Http, private jwtHelper: JwtHelper) {}
 
+    // Authenticate with Server-Side
     public makeLogin (usr: string, pwd: string) {
         //TODO: Call API for make login and get/set JWT Token
         if (usr === 'patient' || usr === 'doctor' || usr === 'staff' || usr ==='nurse' || usr === 'pharmacist') {
@@ -23,11 +23,11 @@ export class AuthService {
     }
 
     public makeLogout () {
-        window.localStorage.removeItem('doccareGoRole');
         window.localStorage.removeItem('doccareGoToken');
         this.router.navigateByUrl('/login');
     }
 
+    // Client Side
     public setToken(token: string) {
         window.localStorage.setItem('doccareGoToken', token);
     }

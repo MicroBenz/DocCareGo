@@ -1,0 +1,16 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th class="date-col">วันที่</th>
+            <th class="time-col">เวลา</th>
+            <th class="clinic-col">แผนก</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let appointment of appointmentData">
+            <td>{{appointment.date}}</td>
+            <td>{{appointment.time}}</td>    
+            <td>{{appointment.clinic}}</td>
+        </tr>
+    </tbody>
+</table>  

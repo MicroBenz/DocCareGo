@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-import { NavigationService } from './../shared/navigation.service';
-import { AuthService } from './../shared/auth.service';
-import { DataService } from './../shared/data.service';
+import { AuthService } from './../shared/service/auth.service';
 import { Http } from '@angular/http';
 import { Router } from '@angular/router';
 
@@ -48,15 +46,14 @@ import { Router } from '@angular/router';
         #login-box .register-button:hover {
             cursor: pointer;
         }
-    `],
-    providers: [NavigationService, AuthService]
+    `]
 })
 export class LoginComponent {
     public usr: string;
     public pwd: string;
     public isLoginFail: boolean = false;
 
-    constructor(private navigator: NavigationService, private authService: AuthService, private router: Router) {
+    constructor(private authService: AuthService, private router: Router) {
         if (this.authService.hasLogin()) {
             this.router.navigateByUrl('/' + this.authService.getUserRole());
         }

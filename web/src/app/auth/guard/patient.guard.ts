@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 import { JwtHelper } from 'angular2-jwt';
-import { AuthService } from './../../shared/auth.service';
+import { AuthService } from './../../shared/service/auth.service';
 
 @Injectable()
 export class PatientOnlyRoute implements CanActivate {
