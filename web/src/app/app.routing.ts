@@ -3,12 +3,12 @@ import { ModuleWithProviders } from '@angular/core';
 
 // Apps Components
 import { AppComponent, AppComponentWithNav } from './main/index';
-
 import { LoginComponent, RegisterComponent } from './auth/index';
 
 // Patient Components
 import { PatientLandingComponent, MakeAppointmentComponent, ViewAppointmentComponent } from './role/patient/index';
 
+// Auth Guard
 import { PatientOnlyRoute, DoctorOnlyRoute, NurseOnlyRoute, StaffOnlyRoute, PharmacistOnlyRoute, NonLoggedInRoute } from './auth/guard/index';
 
 const appRoutes: Routes = [
@@ -40,7 +40,8 @@ const appRoutes: Routes = [
         children: [
             {
                 path: '',
-                component: PatientLandingComponent  
+                redirectTo: '/patient/view-appointment',
+                pathMatch: 'full'
             },
             {
                 path: 'make-appointment',

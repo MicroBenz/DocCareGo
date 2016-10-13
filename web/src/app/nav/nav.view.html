@@ -38,11 +38,11 @@
     <div class="container">
         <div class="nav-left" *ngIf="userRole === 'patient'">
             <a class="nav-item is-tab"
-                routerLink="/patient/make-appointment"
-                routerLinkActive="is-active">นัดหมายแพทย์</a>
-            <a class="nav-item is-tab"
                 routerLink="/patient/view-appointment"
                 routerLinkActive="is-active">ดูการนัดหมาย</a>
+            <a class="nav-item is-tab"
+                routerLink="/patient/make-appointment"
+                routerLinkActive="is-active">นัดหมายแพทย์</a>
         </div>
         <div class="nav-left" *ngIf="userRole === 'doctor'">
             <a class="nav-item is-tab"

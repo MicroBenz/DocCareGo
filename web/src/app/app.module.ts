@@ -7,24 +7,18 @@ import { HttpModule } from '@angular/http';
 import { provideAuth, JwtHelper } from 'angular2-jwt';
 
 // Components Declaration
-// App & Nav Components
 import { AppComponent, AppComponentWithNav} from './main/index';
 import { NavComponent } from './nav/nav.component';
-
-// Auth Components
 import { LoginComponent, RegisterComponent } from './auth/index';
-
-// Patient Components
 import { PatientLandingComponent, MakeAppointmentComponent, ViewAppointmentComponent } from './role/patient/index';
+import { AppointmentTableCompact } from './shared/appointment/appointment.table.compact.component';
+
 // Routing
 import { routing, appRoutingProviders } from './app.routing';
+import { PatientOnlyRoute, NurseOnlyRoute, DoctorOnlyRoute, PharmacistOnlyRoute, StaffOnlyRoute, NonLoggedInRoute } from './auth/guard/index';
 
 // Service
 import { AuthService } from './shared/service/auth.service';
-import { Router } from '@angular/router';
-import { PatientOnlyRoute, NurseOnlyRoute, DoctorOnlyRoute, PharmacistOnlyRoute, StaffOnlyRoute, NonLoggedInRoute } from './auth/guard/index';
-
-import { AppointmentTableCompact } from './shared/appointment/appointment.table.compact.component';
 
 @NgModule({
     bootstrap: [
