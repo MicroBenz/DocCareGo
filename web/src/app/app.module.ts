@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { PopoverModule } from 'ng2-popover';
 import { provideAuth, JwtHelper } from 'angular2-jwt';
 
 // Components Declaration
@@ -26,7 +25,6 @@ import { ViewAppointmentComponent } from './patient/view.appointment.component';
 import { routing, appRoutingProviders } from './app.routing';
 
 // Service
-// import { DataService } from './shared/data.service';
 import { AuthService } from './shared/service/auth.service';
 import { Router } from '@angular/router';
 import { CanActivateViaAuthGuard } from './auth/auth.guard';
@@ -59,7 +57,6 @@ import { AppointmentTableCompact } from './shared/appointment/appointment.table.
         BrowserModule,
         FormsModule,
         HttpModule,
-        PopoverModule,
         routing
     ],
     providers: [

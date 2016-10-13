@@ -1,10 +1,10 @@
 {
   "name": "doccare-go",
   "version": "0.0.1",
-  "description": "Software Engineering Term Project",
+  "description": "DocCare Go: Hospital Appointment System - Software Engineering Term Project",
   "main": "server.js",
   "scripts": {
-    "install": "bower install"
+    "install": "bower install && gulp less && webpack --progress"
   },
   "repository": {
     "type": "git",
@@ -17,14 +17,14 @@
   },
   "homepage": "https://github.com/MicroBenz/DocCareGo#readme",
   "dependencies": {
-    "@angular/common": "2.0.0",
-    "@angular/compiler": "2.0.0",
-    "@angular/core": "2.0.0",
-    "@angular/forms": "2.0.0",
-    "@angular/http": "2.0.0",
-    "@angular/platform-browser": "2.0.0",
-    "@angular/platform-browser-dynamic": "2.0.0",
-    "@angular/router": "3.0.0",
+    "@angular/common": "~2.1.0",
+    "@angular/compiler": "~2.1.0",
+    "@angular/core": "~2.1.0",
+    "@angular/forms": "~2.1.0",
+    "@angular/http": "~2.1.0",
+    "@angular/platform-browser": "~2.1.0",
+    "@angular/platform-browser-dynamic": "~2.1.0",
+    "@angular/router": "~3.1.0",
     "angular2-jwt": "^0.1.24",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "~1.4.2",
@@ -35,11 +35,11 @@
     "method-override": "~2.0.2",
     "mongoose": "^4.5.9",
     "morgan": "^1.7.0",
-    "ng2-popover": "0.0.10",
     "rxjs": "5.0.0-beta.12",
     "zone.js": "^0.6.23"
   },
   "devDependencies": {
+    "@types/node": "^6.0.45",
     "angular2-template-loader": "^0.5.0",
     "browser-sync": "^2.4.0",
     "copy-webpack-plugin": "^3.0.1",
