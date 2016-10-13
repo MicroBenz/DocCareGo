@@ -1,0 +1,44 @@
+<div class="appointment-choice">
+    <div class="notification is-info"
+        [class.expand]="isExpand" (click)="isExpand = !isExpand">
+        นายแพทย์ธีรัช รักษ์เถา
+    </div>
+    <div class="box appointment-timetable" *ngIf="isExpand">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>วันที่ 18 สิงหาคม 2559</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>13:00 - 14:00</td>
+                    <td>3</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="appointment-choice">
+    <div class="notification is-info expand"
+        [class.expand]="isExpand" (click)="isExpand = !isExpand">
+        นายแพทย์ธีรัช รักษ์เถา
+    </div>
+    <div class="box">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>วันที่ 18 สิงหาคม 2559</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>13:00 - 14:00</td>
+                    <td>3</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

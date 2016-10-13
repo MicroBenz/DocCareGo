@@ -10,7 +10,8 @@ import { provideAuth, JwtHelper } from 'angular2-jwt';
 import { AppComponent, AppComponentWithNav} from './main/index';
 import { NavComponent } from './nav/nav.component';
 import { LoginComponent, RegisterComponent } from './auth/index';
-import { PatientLandingComponent, MakeAppointmentComponent, ViewAppointmentComponent } from './role/patient/index';
+import { PatientLandingComponent, MakeAppointmentComponent, ViewAppointmentComponent, AppointmentAccordionComponent, AppointmentTableSelectionComponent } from './role/patient/index';
+
 import { AppointmentTableCompact } from './shared/appointment/appointment.table.compact.component';
 
 // Routing
@@ -35,7 +36,9 @@ import { AuthService } from './shared/service/auth.service';
         AppointmentTableCompact,
         MakeAppointmentComponent,
         PatientLandingComponent,
-        ViewAppointmentComponent
+        ViewAppointmentComponent,
+        AppointmentAccordionComponent,
+        AppointmentTableSelectionComponent
     ],
     imports: [
         BrowserModule,

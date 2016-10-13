@@ -1,0 +1,17 @@
+<table class="table" *ngFor="let timeTableItem of timeTable; let i = index">
+    <thead>
+        <tr>
+            <th>{{timeTableItem.date}}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <a class="button is-success is-outlined"
+                    *ngFor="let time of timeTableItem.time; let j = index" (click)="selectTime(i,j)">
+                    {{time}}
+                </a>
+            </td>
+        </tr>
+    </tbody>
+</table>

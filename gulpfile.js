@@ -50,8 +50,7 @@ function watcher () {
     gulp.watch('server.js', server.restart);
     gulp.watch('./server/**/*.js', server.restart);
     gulp.watch('./web/dist/index.html', browserSync.reload);
-    gulp.watch('./web/dist/*.js', browserSync.reload);
-    gulp.watch('./web/dist/*.css', browserSync.reload);    
+    gulp.watch('./web/dist/*.js', browserSync.reload); 
     // gulp.watch('./web/dist/assets/less/*.less', browserSync.reload);
     // gulp.watch('./web/src/assets/less/*.less', ['less']);
 }

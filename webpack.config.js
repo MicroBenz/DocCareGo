@@ -50,8 +50,7 @@ module.exports = {
     },
     plugins: [
         new ExtractTextPlugin({
-            filename: 'styles.css',
-            allChunks: true
+            filename: 'styles.css'
         }),
         new webpack.optimize.CommonsChunkPlugin({
             name: ['polyfills', 'vendor'].reverse()

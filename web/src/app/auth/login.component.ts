@@ -46,6 +46,23 @@ import { Router } from '@angular/router';
         #login-box .register-button:hover {
             cursor: pointer;
         }
+        .button {
+            border: none;
+            border-radius:  0px;
+            transition: all 0.2s ease-in-out;
+        }
+        .is-primary {
+            color: #ffffff;
+            background-color: #00a250;
+            height: 41px;
+        }
+        .is-primary:hover, .is-primary:active {
+            color: #ffffff;
+            background-color: #00a250;
+        }
+        .is-primary:hover {
+            box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+        }
     `]
 })
 export class LoginComponent {

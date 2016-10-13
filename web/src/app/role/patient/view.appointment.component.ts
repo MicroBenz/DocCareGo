@@ -7,9 +7,6 @@ import { Component } from '@angular/core';
         .container {
             margin-top: 13px;
         }
-        .title {
-
-        }
     `]
 })
 export class ViewAppointmentComponent {
