@@ -36,7 +36,7 @@
 </nav>
 <nav class="nav menu-nav has-shadow">
     <div class="container">
-        <div class="nav-left" *ngIf="userRole === 'patient'">
+        <div class="nav-left patient-role" *ngIf="userRole === 'patient'">
             <a class="nav-item is-tab"
                 routerLink="/patient/view-appointment"
                 routerLinkActive="is-active">ดูการนัดหมาย</a>
@@ -44,7 +44,7 @@
                 routerLink="/patient/make-appointment"
                 routerLinkActive="is-active">นัดหมายแพทย์</a>
         </div>
-        <div class="nav-left" *ngIf="userRole === 'doctor'">
+        <div class="nav-left doctor-role" *ngIf="userRole === 'doctor'">
             <a class="nav-item is-tab"
                 routerLink="/doctor/manage-workday"
                 routerLinkActive="is-active">จัดการวันออกตรวจ</a>
@@ -52,12 +52,12 @@
                 routerLink="/doctor/start-working"
                 routerLinkActive="is-active">ตรวจผู้ป่วย</a>
         </div>
-        <div class="nav-left" *ngIf="userRole === 'nurse'">
+        <div class="nav-left nurse-role" *ngIf="userRole === 'nurse'">
             <a class="nav-item is-tab"
                 routerLink="/nurse/view-today-patient"
                 routerLinkActive="is-active">ดูรายการผู้ป่วยวันนี้</a>
         </div>
-        <div class="nav-left" *ngIf="userRole === 'staff'">
+        <div class="nav-left officer-role" *ngIf="userRole === 'staff'">
             <a class="nav-item is-tab"
                 routerLink="/staff/manage-appointment"
                 routerLinkActive="is-active">จัดการการนัดหมาย</a>
@@ -65,7 +65,7 @@
                 routerLink="/staff/manage-workday"
                 routerLinkActive="is-active">จัดการวันออกตรวจแพทย์</a>
         </div>
-        <div class="nav-left" *ngIf="userRole === 'pharmacist'">
+        <div class="nav-left pharmacist-role" *ngIf="userRole === 'pharmacist'">
             <a class="nav-item is-tab"
                 routerLink="/pharmacist/view-prescription"
                 routerLinkActive="is-active">ดูรายการสั่งยาวันนี้</a>

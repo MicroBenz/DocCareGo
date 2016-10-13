@@ -84,3 +84,26 @@ h1, h2, h3, h4, h5, p {
 .pharmacist-role > .profile-circle {
     background-color: @pharmacist-color;
 }
+
+.active-helper (@color) {
+    color: @color !important;
+    border-bottom-color: @color !important;
+    &:hover {
+        border-bottom-color: @color !important;
+    }
+}
+.officer-role a.is-active {
+    .active-helper(@officer-color);
+}
+.patient-role a.is-active {
+    .active-helper(@patient-color);
+}
+.doctor-role a.is-active {
+    .active-helper(@doctor-color);
+}
+.nurse-role a.is-active {
+    .active-helper(@nurse-color);
+}
+.pharmacist-role a.is-active {
+    .active-helper(@pharmacist-color);
+}
