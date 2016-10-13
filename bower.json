@@ -8,8 +8,6 @@
   "license": "MIT",
   "homepage": "https://github.com/MicroBenz/DocCareGo",
   "dependencies": {
-    "bulma": "^0.2.1",
-    "font-awesome": "^4.6.3",
     "jquery": "3.0.0"
   }
 }

@@ -4,7 +4,7 @@
   "description": "DocCare Go: Hospital Appointment System - Software Engineering Term Project",
   "main": "server.js",
   "scripts": {
-    "install": "bower install && gulp less && webpack --progress"
+    "install": "bower install && webpack --progress"
   },
   "repository": {
     "type": "git",
@@ -28,9 +28,11 @@
     "angular2-jwt": "^0.1.24",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "~1.4.2",
+    "bulma": "^0.2.1",
     "core-js": "^2.4.1",
     "dotenv": "^2.0.0",
     "express": "~4.13.4",
+    "font-awesome": "^4.6.3",
     "jsonwebtoken": "^7.1.9",
     "method-override": "~2.0.2",
     "mongoose": "^4.5.9",
@@ -43,6 +45,9 @@
     "angular2-template-loader": "^0.5.0",
     "browser-sync": "^2.4.0",
     "copy-webpack-plugin": "^3.0.1",
+    "css-loader": "^0.25.0",
+    "extract-text-webpack-plugin": "^2.0.0-beta",
+    "file-loader": "^0.9.0",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^3.1.1",
     "gulp-clean-css": "^2.0.12",
@@ -51,9 +56,12 @@
     "gulp-plumber": "^1.1.0",
     "gulp-rename": "^1.2.2",
     "html-webpack-plugin": "^2.22.0",
+    "less-loader": "^2.2.3",
     "raw-loader": "^0.5.1",
+    "style-loader": "^0.13.1",
     "ts-loader": "^0.8.2",
     "typescript": "2.0.0",
+    "url-loader": "^0.5.7",
     "webpack": "2.1.0-beta.22",
     "webpack-dev-server": "^2.1.0-beta.2"
   }

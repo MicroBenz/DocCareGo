@@ -1,6 +1,7 @@
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
     entry: {
@@ -9,7 +10,7 @@ module.exports = {
         'main': './web/src/main.ts'
     },
     resolve: {
-        extensions: ['', '.ts', '.js'],
+        extensions: ['', '.ts', '.js', '.css', '.less'],
         root: './web/src',
         modulesDirectories: ['node_modules']
     },
@@ -26,10 +27,32 @@ module.exports = {
                 test: /\.html$/,
                 loader: 'raw-loader',
                 exclude: './web/src/index.html'
+            },
+            {
+                test: /\.css$/,
+                loader: ExtractTextPlugin.extract({
+                    fallbackLoader: "style-loader",
+                    loader:  "css-loader"
+                })
+            },
+            {
+                test: /\.less$/,
+                loader: ExtractTextPlugin.extract({
+                    fallbackLoader: 'style-loader',
+                    loader: ['css-loader', 'less-loader']
+                })
+            },
+            {
+                test: /\.woff($|\?)|\.woff2($|\?)|\.ttf($|\?)|\.eot($|\?)|\.svg($|\?)/,
+                loader: 'url-loader'
             }
         ]
     },
     plugins: [
+        new ExtractTextPlugin({
+            filename: 'styles.css',
+            allChunks: true
+        }),
         new webpack.optimize.CommonsChunkPlugin({
             name: ['polyfills', 'vendor'].reverse()
         }),
@@ -44,8 +67,8 @@ module.exports = {
         new CopyWebpackPlugin(
             [
                 {
-                    from: './web/src/assets',
-                    to: 'assets'
+                    from: './web/src/assets/img',
+                    to: 'assets/img'
                 }
             ]
         )

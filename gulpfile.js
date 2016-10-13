@@ -11,9 +11,9 @@ require('dotenv').config();
 // Register Tasks
 gulp.task('start-server', startServer);
 gulp.task('browser-sync', liveReload);
-gulp.task('less', compileLess);
+// gulp.task('less', compileLess);
 gulp.task('watch', ['browser-sync'], watcher);
-gulp.task('dev', ['start-server', 'watch', 'less']);
+gulp.task('dev', ['start-server', 'watch']);
 
 // Tasks Function
 function startServer () {
@@ -47,9 +47,11 @@ function compileLess () {
 }
 
 function watcher () {
-    gulp.watch('server.js', server.restart);    
+    gulp.watch('server.js', server.restart);
+    gulp.watch('./server/**/*.js', server.restart);
     gulp.watch('./web/dist/index.html', browserSync.reload);
     gulp.watch('./web/dist/*.js', browserSync.reload);
-    gulp.watch('./web/dist/assets/less/*.less', browserSync.reload);
-    gulp.watch('./web/src/assets/less/*.less', ['less']);
+    gulp.watch('./web/dist/*.css', browserSync.reload);    
+    // gulp.watch('./web/dist/assets/less/*.less', browserSync.reload);
+    // gulp.watch('./web/src/assets/less/*.less', ['less']);
 }
