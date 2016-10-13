@@ -1,27 +1,36 @@
 <div class="container">
     <div class="box">
-        <p class="control">
+        <p class="control appointment-choice-wrapper">
             <a class="button is-info is-medium"
                 (click)="appointmentChoice = 'byDoctor'; isFirstSelect = false"
                 [class.is-disabled]="!isFirstSelect && appointmentChoice !== 'byDoctor'">
-                นัดหมายโดยเลือกแพทย์
+                <span class="icon">
+                    <i class="fa fa-user-md"></i>
+                </span>
+                <span>นัดหมายโดยเลือกแพทย์</span>
             </a>
             <a class="button is-danger is-medium"
                 (click)="appointmentChoice = 'byClinic'; isFirstSelect = false"
                 [class.is-disabled]="!isFirstSelect && appointmentChoice !== 'byClinic'">
-                นัดหมายโดยเลือกแผนก
+                <span class="icon">
+                    <i class="fa fa-building"></i>
+                </span>
+                <span>นัดหมายโดยเลือกแผนก</span>
             </a>
         </p>
 
-        <div *ngIf="appointmentChoice !== 'byDoctor'">
+        <div *ngIf="appointmentChoice === 'byDoctor'">
             <label class="label">ชื่อแพทย์</label>
             <p class="control">
-                <input class="input" type="text" placeholder=""
+                <input class="input" required type="text" placeholder=""
                     [(ngModel)]="appointmentData.doctor">
             </p>
-            <label class="label">แผนกของแพทย์: {{appointmentData.clinic}}</label>
+            <label class="label clinic-label">แผนกของแพทย์: {{appointmentData.clinic}}</label>
             <label class="label">เลือกวันเวลาที่จะทำนัดหมาย</label>            
-            <appointment-table-selection></appointment-table-selection>
+            <appointment-table-selection
+                [timeTable]="timeTable"
+                (selectedTime)="onSelectTime($event)">
+            </appointment-table-selection>
         </div>
 
         <div *ngIf="appointmentChoice === 'byClinic'">
@@ -34,12 +43,18 @@
             <appointment-selection></appointment-selection>
         </div>
 
+        <div *ngIf="!isFirstSelect">
+            <label class="label cause-of-appointment">สาเหตุที่เข้าขอพบแพทย์/อาการเบื้องต้น</label>
+            <p class="control">
+                <textarea class="textarea" placeholder=""
+                    [(ngModel)]="appointmentData.cause">
+                </textarea>
+            </p>
 
-        <label class="label cause-of-appointment">สาเหตุที่เข้าขอพบแพทย์/อาการเบื้องต้น</label>
-        <p class="control">
-            <textarea class="textarea" placeholder=""
-                [(ngModel)]="appointmentData.cause">
-            </textarea>
-        </p>
+            <p class="control">
+                <a class="button is-success" (click)="makeAppointment()">นัดหมายแพทย์</a>
+                <a class="button" (click)="cancelAppointment()">ยกเลิก</a>
+            </p>
+        </div>
     </div>
 </div>

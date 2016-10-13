@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
     selector: 'appointment-table-selection',
@@ -7,6 +7,9 @@ import { Component } from '@angular/core';
         .table {
             margin-bottom: 0px;
         }
+        .table tr:hover {
+            background-color: transparent;
+        }
         .button {
             margin-bottom: 10px;
             margin-right: 5px;
@@ -14,36 +17,24 @@ import { Component } from '@angular/core';
     `]
 })
 export class AppointmentTableSelectionComponent {
-    public timeTable = [
+    @Input('timeTable') timeTable = [
         {
-            date: 'วันที่ 18 สิงหาคม 2559',
+            date: 'วันที่ default สิงหาคม 2559 (ไปใส่ [timeTable] มาด้วย)',
             time: [
                 '13:00 - 13:30',
-                '13:30 - 14:00',
-                '14:00 - 14:30',
-                '14:30 - 15:00',
-                '15:00 - 15:30',
-                '15:30 - 16:00',
-                '16:00 - 16:30',
-                '16:30 - 17:00',
-                '17:00 - 17:30',
-                '17:30 - 18:00',
-                '18:00 - 18:30'
-            ]
-        },
-        {
-            date: 'วันที่ 19 สิงหาคม 2559',
-            time: [
-                '13:00 - 13:30',
-                '13:30 - 14:00',
-                '14:00 - 14:30',
-                '14:30 - 15:00'
+                '13:30 - 14:00'
             ]
         }
-    ]
+    ];
+
+    @Output() selectedTime = new EventEmitter<any>();
+
+    public currentSelectIndex = {}
 
     selectTime (i: number, j: number) {
-        console.log(this.getDateTimeByIndex(i, j));
+        this.currentSelectIndex['i'] = i;
+        this.currentSelectIndex['j'] = j;
+        this.selectedTime.emit(this.getDateTimeByIndex(i, j));
     }
 
     private getDateTimeByIndex(i: number, j: number) {

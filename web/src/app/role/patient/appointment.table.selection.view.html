@@ -7,8 +7,11 @@
     <tbody>
         <tr>
             <td>
-                <a class="button is-success is-outlined"
-                    *ngFor="let time of timeTableItem.time; let j = index" (click)="selectTime(i,j)">
+                <a class="button is-info"
+                    *ngFor="let time of timeTableItem.time; let j = index"
+                    (click)="selectTime(i,j)"
+                    [class.is-active]="currentSelectIndex.i === i && currentSelectIndex.j === j"
+                    [class.is-outlined]="currentSelectIndex.i !== i ||currentSelectIndex.j !== j">
                     {{time}}
                 </a>
             </td>

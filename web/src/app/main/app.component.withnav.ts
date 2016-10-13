@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
     selector: 'app',
@@ -7,8 +7,10 @@ import { Component } from '@angular/core';
         <router-outlet></router-outlet>
     `,
     styles: [`
-        
-    `
-    ]
+        body {
+            padding-top: 115px;
+        }
+    `],
+    encapsulation: ViewEncapsulation.None
 })
 export class AppComponentWithNav {}

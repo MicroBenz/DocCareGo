@@ -6,6 +6,13 @@ import { JwtHelper } from 'angular2-jwt';
     selector: 'apps-nav',
     templateUrl: './nav.view.html',
     styles: [`
+        :host {
+            position: fixed;
+            right: 0;
+            left: 0;
+            top: 0;
+            z-index: 9999;
+        }
         .top-nav > .container{
             border-bottom: 1px solid #f3f3f3;
         }
