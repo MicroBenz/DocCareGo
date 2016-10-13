@@ -8,32 +8,22 @@ import { provideAuth, JwtHelper } from 'angular2-jwt';
 
 // Components Declaration
 // App & Nav Components
-import { AppComponent } from './app.component';
-import { AppComponentWithNav } from './app.component.withnav';
+import { AppComponent, AppComponentWithNav} from './main/index';
 import { NavComponent } from './nav/nav.component';
 
 // Auth Components
-import { LoginComponent } from './auth/login.component';
-import { RegisterComponent } from './auth/register.component';
+import { LoginComponent, RegisterComponent } from './auth/index';
 
 // Patient Components
-import { MakeAppointmentComponent } from './patient/make.appointment.component';
-import { PatientLandingComponent } from './patient/patient.landing.component';
-import { ViewAppointmentComponent } from './patient/view.appointment.component';
-
+import { PatientLandingComponent, MakeAppointmentComponent, ViewAppointmentComponent } from './role/patient/index';
 // Routing
 import { routing, appRoutingProviders } from './app.routing';
 
 // Service
 import { AuthService } from './shared/service/auth.service';
 import { Router } from '@angular/router';
-import { CanActivateViaAuthGuard } from './auth/auth.guard';
-import { PatientOnlyRoute } from './auth/guard/patient.guard';
-import { NurseOnlyRoute } from './auth/guard/nurse.guard';
-import { DoctorOnlyRoute } from './auth/guard/doctor.guard';
-import { PharmacistOnlyRoute } from './auth/guard/pharmacist.guard';
-import { StaffOnlyRoute } from './auth/guard/staff.guard';
-import { NonLoggedInRoute } from './auth/guard/non.logged.in.guard';
+import { PatientOnlyRoute, NurseOnlyRoute, DoctorOnlyRoute, PharmacistOnlyRoute, StaffOnlyRoute, NonLoggedInRoute } from './auth/guard/index';
+
 import { AppointmentTableCompact } from './shared/appointment/appointment.table.compact.component';
 
 @NgModule({
@@ -84,6 +74,6 @@ import { AppointmentTableCompact } from './shared/appointment/appointment.table.
 })
 export class AppModule {
     constructor() {
-        console.log(window.localStorage.getItem('doccareGoToken'));
+        console.log('[AppModule] current token: ', window.localStorage.getItem('doccareGoToken'));
     }
 }

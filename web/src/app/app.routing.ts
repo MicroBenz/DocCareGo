@@ -2,24 +2,14 @@ import { Routes, RouterModule } from '@angular/router';
 import { ModuleWithProviders } from '@angular/core';
 
 // Apps Components
-import { AppComponent } from './app.component';
-import { AppComponentWithNav } from './app.component.withnav';
+import { AppComponent, AppComponentWithNav } from './main/index';
 
-// Auth Components
-import { LoginComponent } from './auth/login.component';
-import { RegisterComponent } from './auth/register.component';
+import { LoginComponent, RegisterComponent } from './auth/index';
 
 // Patient Components
-import { MakeAppointmentComponent } from './patient/make.appointment.component';
-import { PatientLandingComponent } from './patient/patient.landing.component';
-import { ViewAppointmentComponent } from './patient/view.appointment.component';
-import { CanActivateViaAuthGuard } from './auth/auth.guard';
-import { PatientOnlyRoute } from './auth/guard/patient.guard';
-import { DoctorOnlyRoute } from './auth/guard/doctor.guard';
-import { NurseOnlyRoute } from './auth/guard/nurse.guard';
-import { StaffOnlyRoute } from './auth/guard/staff.guard';
-import { PharmacistOnlyRoute } from './auth/guard/pharmacist.guard';
-import { NonLoggedInRoute } from './auth/guard/non.logged.in.guard';
+import { PatientLandingComponent, MakeAppointmentComponent, ViewAppointmentComponent } from './role/patient/index';
+
+import { PatientOnlyRoute, DoctorOnlyRoute, NurseOnlyRoute, StaffOnlyRoute, PharmacistOnlyRoute, NonLoggedInRoute } from './auth/guard/index';
 
 const appRoutes: Routes = [
     {
