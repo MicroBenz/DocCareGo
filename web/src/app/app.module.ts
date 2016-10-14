@@ -13,6 +13,7 @@ import { LoginComponent, RegisterComponent } from './auth/index';
 import { PatientLandingComponent, MakeAppointmentComponent, ViewAppointmentComponent, AppointmentAccordionComponent, AppointmentTableSelectionComponent } from './role/patient/index';
 
 import { AppointmentTableCompact } from './shared/appointment/appointment.table.compact.component';
+import { MiniCalendarComponent } from './shared/component/mini.calendar.component';
 
 // Routing
 import { routing, appRoutingProviders } from './app.routing';
@@ -32,6 +33,8 @@ import { AuthService } from './shared/service/auth.service';
 
         LoginComponent,
         RegisterComponent,
+
+        MiniCalendarComponent,
 
         AppointmentTableCompact,
         MakeAppointmentComponent,

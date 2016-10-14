@@ -7,25 +7,22 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
         .date-col {
             width: 23%;
         }
-        .time-col {
-            width: 21%;
-        }
         .clinic-col {
-            width: 56%;
+            width: 49%;
         }
     `]
 })
 export class AppointmentTableCompact {
-    public appointmentData = []
+    // public appointmentData = []
 
-    @Input()
-    set appointments(appointments) {
-        this.appointmentData = appointments;
-    }
+    @Input('appointments') appointmentData = [];
+    // set appointments(appointments) {
+    //     this.appointmentData = appointments;
+    // }
 
     @Output() onSelectRow = new EventEmitter<number>();
 
     selectAppointment(idx) {
-        this.onSelectRow.emit(idx);
+        this.onSelectRow.emit(this.appointmentData[idx]);
     }
 }
