@@ -2,7 +2,42 @@
     <div class="tile is-ancestor">
         <div class="tile is-parent is-5">
             <div class="tile is-child box">
-                <h1 class="title">รายละเอียดการนัดหมาย</h1>                        
+                <h1 class="title">รายละเอียดการนัดหมาย</h1>
+                <div class="mini-calendar">
+                    <mini-calendar
+                        [date]="getSelectedAppointment().date">
+                    </mini-calendar>
+                </div>
+                <div class="appointment-detail">
+                    <p>
+                        <span class="icon"><i class="fa fa-user-md"></i></span>
+                        <span class="appointment-detail-description">
+                            <b>แพทย์เจ้าของนัด: </b>
+                            {{getSelectedAppointment().doctor}}
+                        </span>
+                    </p>
+                    <p>
+                        <span class="icon"><i class="fa fa-building"></i></span>
+                        <span class="appointment-detail-description">
+                            <b>แผนก: </b>
+                            {{getSelectedAppointment().clinic}}
+                        </span>
+                    </p>
+                    <p>
+                        <span class="icon"><i class="fa fa-calendar-o"></i></span>
+                        <span class="appointment-detail-description">
+                            <b>วันที่: </b>
+                            {{getSelectedAppointmentDate()}}
+                        </span>
+                    </p>
+                    <p>
+                        <span class="icon"><i class="fa fa-clock-o"></i></span>
+                        <span class="appointment-detail-description">
+                            <b>เวลา: </b>
+                            {{getSelectedAppointment().time}}
+                        </span>
+                    </p>
+                </div>
             </div>
         </div>
         <div class="tile is-parent is-7">
@@ -11,7 +46,7 @@
                 <appointment-table-compact
                     [appointments]="appointments"
                     (onSelectRow)="onSelectRow($event)">
-                </appointment-table-compact>               
+                </appointment-table-compact>
             </div>
         </div>
     </div>

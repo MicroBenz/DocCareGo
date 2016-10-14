@@ -26,7 +26,7 @@ export class AppointmentTableSelectionComponent {
             ]
         }
     ];
-
+    @Input('isClearSelection') isClearSelection = true;
     @Output() selectedTime = new EventEmitter<any>();
 
     public currentSelectIndex = {}

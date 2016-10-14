@@ -19,6 +19,7 @@
             </a>
         </p>
 
+        <!-- Appointment Form by select doctor -->
         <div *ngIf="appointmentChoice === 'byDoctor'">
             <label class="label">ชื่อแพทย์</label>
             <p class="control">
@@ -29,10 +30,12 @@
             <label class="label">เลือกวันเวลาที่จะทำนัดหมาย</label>            
             <appointment-table-selection
                 [timeTable]="timeTable"
-                (selectedTime)="onSelectTime($event)">
+                (selectedTime)="onSelectTime($event)"
+                [isClearSelection]="false">
             </appointment-table-selection>
         </div>
 
+        <!-- Appointment Form by select clinic -->        
         <div *ngIf="appointmentChoice === 'byClinic'">
             <label class="label">แผนกที่ต้องการนัด</label>
             <p class="control">
@@ -40,7 +43,13 @@
                     [(ngModel)]="appointmentData.clinic">
             </p>
             <label class="label">รอบการตรวจของแผนก{{appointmentData.clinic}}</label>
-            <appointment-selection></appointment-selection>
+            <appointment-accordion
+                *ngFor="let eachDoctorTimeTable of doctorTimeTable; let i = index"
+                [doctorName]="eachDoctorTimeTable.doctor"
+                [timeTable]="eachDoctorTimeTable.timeTable"
+                (selectedTime)="onSelectTime($event, i)"
+                [isClearSelection]="isNoSelection[i]">
+            </appointment-accordion>            
         </div>
 
         <div *ngIf="!isFirstSelect">
