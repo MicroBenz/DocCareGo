@@ -16,6 +16,7 @@ export class AppointmentTableCompact {
     // public appointmentData = []
 
     @Input('appointments') appointmentData = [];
+    @Input('isClearSelection') isClearSelection = true;
     // set appointments(appointments) {
     //     this.appointmentData = appointments;
     // }

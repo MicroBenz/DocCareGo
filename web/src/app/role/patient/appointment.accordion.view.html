@@ -1,18 +1,21 @@
-<div class="appointment-choice">
-    <div class="notification is-info"
-        [class.expand]="isExpand" (click)="isExpand = !isExpand">
-        นายแพทย์ธีรัช รักษ์เถา
-    </div>
-    <div class="box appointment-timetable" *ngIf="isExpand">
-        <appointment-table-selection></appointment-table-selection>        
-    </div>
-</div>
-<div class="appointment-choice">
-    <div class="notification is-info expand"
-        [class.expand]="isExpand" (click)="isExpand = !isExpand">
-        นายแพทย์ธีรัช รักษ์เถา
-    </div>
-    <div class="box">
-        <appointment-table-selection></appointment-table-selection>
+<div class="card is-fullwidth">
+    <header class="card-header" (click)="isExpand = !isExpand">
+        <p class="card-header-title no-text-selection">
+            <i class="fa fa-user-md"></i>
+            <span class="doctor"> {{doctor}}</span>
+        </p>
+        <a class="card-header-icon icon is-medium" (click)="isExpand = !isExpand">
+            <i class="fa fa-angle-down" *ngIf="!isExpand"></i>
+            <i class="fa fa-angle-up" *ngIf="isExpand"></i>
+        </a>
+    </header>
+    <div class="card-content" [hidden]="!isExpand">
+        <div class="content">
+            <appointment-table-selection
+                [timeTable]='timeTable'
+                (selectedTime)='onSelectedAppointmentTime($event)'
+                [isClearSelection]="isClearSelection">
+            </appointment-table-selection>
+        </div>
     </div>
 </div>

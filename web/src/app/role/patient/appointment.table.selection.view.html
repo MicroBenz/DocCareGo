@@ -10,8 +10,8 @@
                 <a class="button is-info"
                     *ngFor="let time of timeTableItem.time; let j = index"
                     (click)="selectTime(i,j)"
-                    [class.is-active]="currentSelectIndex.i === i && currentSelectIndex.j === j"
-                    [class.is-outlined]="currentSelectIndex.i !== i ||currentSelectIndex.j !== j">
+                    [class.is-active]="currentSelectIndex.i === i && currentSelectIndex.j === j && !isClearSelection"
+                    [class.is-outlined]="(currentSelectIndex.i !== i ||currentSelectIndex.j !== j) || isClearSelection">
                     {{time}}
                 </a>
             </td>
