@@ -7,10 +7,13 @@
         </tr>
     </thead>
     <tbody *ngIf="appointmentData.length !== 0">
-        <tr *ngFor="let appointment of appointmentData; let i = index" (click)="selectAppointment(i)">
-            <td>{{appointment.date}}</td>
-            <td>{{appointment.time}}</td>    
-            <td>{{appointment.clinic}}</td>
+        <tr 
+            *ngFor="let appointment of appointmentData; let i = index"
+            (click)="selectAppointment(i)"
+            [class.active]="i === selectedIndex">
+            <td class="no-text-selection">{{appointment.date}}</td>
+            <td class="no-text-selection">{{appointment.time}}</td>    
+            <td class="no-text-selection">{{appointment.clinic}}</td>
         </tr>
     </tbody>
     <tbody *ngIf="appointmentData.length === 0">

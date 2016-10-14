@@ -10,20 +10,22 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
         .clinic-col {
             width: 49%;
         }
+        tbody .active {
+            background-color: whitesmoke;
+        }
+        tbody td {
+            cursor: default;   
+        }
     `]
 })
 export class AppointmentTableCompact {
-    // public appointmentData = []
-
     @Input('appointments') appointmentData = [];
     @Input('isClearSelection') isClearSelection = true;
-    // set appointments(appointments) {
-    //     this.appointmentData = appointments;
-    // }
+    @Output() onSelectRow = new EventEmitter<any>();
 
-    @Output() onSelectRow = new EventEmitter<number>();
-
+    private selectedIndex = 0;
     selectAppointment(idx) {
         this.onSelectRow.emit(this.appointmentData[idx]);
+        this.selectedIndex = idx;
     }
 }
