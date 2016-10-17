@@ -8,7 +8,6 @@ import { Component } from '@angular/core';
             background-color: whitesmoke;
         }
         .patient-item {
-            border-top: 1px solid #c8c7cc;
             border-bottom: 1px solid #c8c7cc;
             margin-left: -20px;
             margin-right: -20px;

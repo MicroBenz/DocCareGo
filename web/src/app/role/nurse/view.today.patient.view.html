@@ -2,14 +2,22 @@
     <div class="columns is-gapless">
         <div class="column is-5">
             <div class="box patient-list-wrapper">
-                <h1 class="title">รายชื่อผู้ป่วยวันนี้</h1>
-                <patient-list></patient-list>              
+                <div class="patient-list-header">
+                    <h1 class="title">รายชื่อผู้ป่วยวันนี้</h1>
+                </div>
+                <div class="patient-list-content">
+                    <patient-list></patient-list>
+                </div>
             </div>
         </div>
         <div class="column is-7">
             <div class="box patient-recorder-wrapper">
-                <h1 class="title">บันทึกข้อมูลผู้ป่วย</h1>
-                <record-patient-detail></record-patient-detail>
+                <div class="patient-recorder-header">
+                    <h1 class="title">บันทึกข้อมูลผู้ป่วย</h1>
+                </div>
+                <div class="patient-recorder-content">
+                    <record-patient-detail></record-patient-detail>
+                </div>
             </div>
         </div>
     </div>
