@@ -48,10 +48,10 @@
         <div class="nav-left doctor-role" *ngIf="userRole === 'doctor'">
             <a class="nav-item is-tab"
                 routerLink="/doctor/manage-workday"
-                routerLinkActive="is-active">จัดการวันออกตรวจ</a>
+                routerLinkActive="is-active"><i class="fa fa-calendar"></i> จัดการวันออกตรวจ</a>
             <a class="nav-item is-tab"
                 routerLink="/doctor/start-working"
-                routerLinkActive="is-active">ตรวจผู้ป่วย</a>
+                routerLinkActive="is-active"><i class="fa fa-stethoscope"></i> ตรวจผู้ป่วย</a>
         </div>
 
         <div class="nav-left nurse-role" *ngIf="userRole === 'nurse'">

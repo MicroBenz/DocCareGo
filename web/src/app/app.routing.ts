@@ -67,7 +67,9 @@ const appRoutes: Routes = [
         ],
         children: [
             {
-                path: ''
+                path: '',
+                redirectTo: '/doctor/manage-workday',
+                pathMatch: 'full'
             },
             {
                 path: 'manage-workday'
