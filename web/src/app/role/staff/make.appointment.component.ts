@@ -30,8 +30,7 @@ export class MakeAppointmentByStaffComponent {
             cause: this.makeAppointmentForm.appointmentData['cause']
         };     
         console.log(this.appointmentData);
-        // TODO: Use this.appointmentData to get form data
-        // this.router.navigateByUrl('/staff/manage-appointment');
+        this.router.navigateByUrl('/staff/manage-appointment');
     }
 
     cancelAppointment () {
