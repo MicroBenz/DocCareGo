@@ -12,7 +12,7 @@ import { NavComponent } from './nav/nav.component';
 import { LoginComponent, RegisterComponent } from './auth/index';
 import { MakeAppointmentComponent, ViewAppointmentComponent, AppointmentAccordionComponent, AppointmentTableSelectionComponent } from './role/patient/index';
 import { AppointmentManagementComponent, MakeAppointmentByStaffComponent } from './role/staff/index';
-import { ViewTodayPatientComponent, PatientListComponent } from './role/nurse/index';
+import { ViewTodayPatientComponent, PatientListComponent, RecordPatientDetailComponent } from './role/nurse/index';
 
 // Shared Components
 import { AppointmentTableCompact } from './shared/appointment/appointment.table.compact.component';
@@ -63,7 +63,8 @@ import { AuthService } from './shared/service/auth.service';
 
         /* Nurse Components */
         ViewTodayPatientComponent,
-        PatientListComponent
+        PatientListComponent,
+        RecordPatientDetailComponent
     ],
     imports: [
         BrowserModule,

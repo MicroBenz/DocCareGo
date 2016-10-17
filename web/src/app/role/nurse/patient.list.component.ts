@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+
 @Component({
     selector: 'patient-list',
     templateUrl: './patient.list.view.html',
