@@ -28,7 +28,7 @@ import { Component } from '@angular/core';
             margin-top: -20px;
             margin-right: -20px;
             padding: 20px;       
-            background-color: #fe0070;            
+            background-color: #00bfff;            
         }
         .patient-list-wrapper .patient-list-header {
             border-top-left-radius: 5px;
