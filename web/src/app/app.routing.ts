@@ -130,7 +130,9 @@ const appRoutes: Routes = [
         ],
         children: [
             {
-                path: ''
+                path: '',
+                redirectTo: '/pharmacist/view-prescription',
+                pathMatch: 'full'
             },
             {
                 path: 'view-prescription',
