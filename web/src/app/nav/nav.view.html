@@ -48,10 +48,10 @@
         <div class="nav-left doctor-role" *ngIf="userRole === 'doctor'">
             <a class="nav-item is-tab"
                 routerLink="/doctor/manage-workday"
-                routerLinkActive="is-active">จัดการวันออกตรวจ</a>
+                routerLinkActive="is-active"><i class="fa fa-calendar"></i> จัดการวันออกตรวจ</a>
             <a class="nav-item is-tab"
                 routerLink="/doctor/start-working"
-                routerLinkActive="is-active">ตรวจผู้ป่วย</a>
+                routerLinkActive="is-active"><i class="fa fa-stethoscope"></i> ตรวจผู้ป่วย</a>
         </div>
 
         <div class="nav-left nurse-role" *ngIf="userRole === 'nurse'">
@@ -65,6 +65,9 @@
                 routerLink="/staff/manage-appointment"
                 routerLinkActive="is-active"><i class="fa fa-plus-square"></i> จัดการการนัดหมาย</a>
             <a class="nav-item is-tab"
+                routerLink="/staff/make-appointment"
+                routerLinkActive="is-active"><i class="fa fa-plus"></i> เพิ่มการนัดหมาย</a>
+            <a class="nav-item is-tab"
                 routerLink="/staff/manage-workday"
                 routerLinkActive="is-active"><i class="fa fa-calendar"></i> จัดการวันออกตรวจแพทย์</a>
         </div>
@@ -72,7 +75,7 @@
         <div class="nav-left pharmacist-role" *ngIf="userRole === 'pharmacist'">
             <a class="nav-item is-tab"
                 routerLink="/pharmacist/view-prescription"
-                routerLinkActive="is-active">ดูรายการสั่งยาวันนี้</a>
+                routerLinkActive="is-active"><i class="fa fa-medkit"></i> ดูรายการสั่งยาวันนี้</a>
         </div>
     </div>
 </nav>

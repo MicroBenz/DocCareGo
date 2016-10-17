@@ -1,0 +1,36 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th>ผู้ป่วย</th>
+            <th>แพทย์เจ้าของนัด</th>
+            <th>แผนก</th>                          
+            <th>วันที่</th>
+            <th>เวลา</th>                              
+            <th class="action-column"></th>         
+        </tr>
+    </thead>
+    <tbody *ngIf="appointmentList.length !== 0">
+        <tr *ngFor="let appointment of appointmentList;">
+            <td>{{appointment.patient}}</td>
+            <td>{{appointment.doctor}}</td>
+            <td>{{appointment.clinic}}</td>
+            <td>{{appointment.date}}</td>
+            <td>{{appointment.time}}</td>
+            <td>
+                <a class="button is-primary"
+                    (click)="postponeAppointment(appointment.id)">
+                    <i class="fa fa-pencil"></i>เลื่อนวันนัด</a>
+                <a class="button is-danger"
+                    (click)="cancelAppointment(appointment.id)">
+                    <i class="fa fa-trash"></i>ยกเลิกนัด</a>
+                <a class="button is-info"
+                    (click)="printoutAppointment(appoinment.id)"><i class="fa fa-print"></i>พิมพ์ใบนัด</a>
+            </td>            
+        </tr>
+    </tbody>
+    <tbody *ngIf="appointmentList.length === 0">
+        <tr>
+            <td colspan="5">ไม่พบข้อมูลการนัดหมาย</td>
+        </tr>
+    </tbody>
+</table>

@@ -6,7 +6,13 @@ import { AppComponent, AppComponentWithNav } from './main/index';
 import { LoginComponent, RegisterComponent } from './auth/index';
 
 // Patient Components
-import { PatientLandingComponent, MakeAppointmentComponent, ViewAppointmentComponent } from './role/patient/index';
+import { MakeAppointmentComponent, ViewAppointmentComponent } from './role/patient/index';
+
+// Staff Components
+import { AppointmentManagementComponent, MakeAppointmentByStaffComponent } from './role/staff/index';
+
+// Nurse Components
+import { ViewTodayPatientComponent } from './role/nurse/index';
 
 // Auth Guard
 import { PatientOnlyRoute, DoctorOnlyRoute, NurseOnlyRoute, StaffOnlyRoute, PharmacistOnlyRoute, NonLoggedInRoute } from './auth/guard/index';
@@ -61,7 +67,9 @@ const appRoutes: Routes = [
         ],
         children: [
             {
-                path: ''
+                path: '',
+                redirectTo: '/doctor/manage-workday',
+                pathMatch: 'full'
             },
             {
                 path: 'manage-workday'
@@ -79,10 +87,13 @@ const appRoutes: Routes = [
         ],
         children: [
             {
-                path: ''
+                path: '',
+                redirectTo: '/nurse/view-today-patient',
+                pathMatch: 'full'
             },
             {
-                path: 'view-today-patient'
+                path: 'view-today-patient',
+                component: ViewTodayPatientComponent
             }
         ]
     },
@@ -94,10 +105,17 @@ const appRoutes: Routes = [
         ],
         children: [
             {
-                path: ''
+                path: '',
+                redirectTo: '/staff/manage-appointment',
+                pathMatch: 'full'
             },
             {
-                path: 'manage-appointment'
+                path: 'manage-appointment',
+                component: AppointmentManagementComponent
+            },
+            {
+                path: 'make-appointment',
+                component: MakeAppointmentByStaffComponent
             },
             {
                 path: 'manage-workday'
@@ -112,7 +130,9 @@ const appRoutes: Routes = [
         ],
         children: [
             {
-                path: ''
+                path: '',
+                redirectTo: '/pharmacist/view-prescription',
+                pathMatch: 'full'
             },
             {
                 path: 'view-prescription',

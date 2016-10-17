@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnChanges, SimpleChange, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { MakeAppointmentForm } from './../../shared/appointment/make.appointment.form.component';
 
 @Component({
     selector: 'make-appointment',
@@ -7,146 +8,17 @@ import { Router } from '@angular/router';
     styles: [`
         .container {
             margin-top: 13px;
-            //height: calc(100vh - 140px);
-        }
-        .appointment-choice-wrapper {
-            text-align: center;
         }
         .box {
-            //max-height: 100%;            
-            //overflow-y: scroll; 
             margin-bottom: 25px;           
-        }
-        .cause-of-appointment {
-            padding-top: 10px !important;
-        }
-        .clinic-label {
-            margin-bottom: 20px;
         }
     `]
 })
 export class MakeAppointmentComponent {
-    public isFirstSelect: boolean = true;
-    public appointmentData;
-    public appointmentChoice;
-    public timeTable = [
-        {
-            date: 'วันที่ 18 สิงหาคม 2559',
-            time: [
-                '13:00 - 13:30',
-                '13:30 - 14:00',
-                '14:00 - 14:30',
-                '14:30 - 15:00',
-                '15:00 - 15:30',
-                '15:30 - 16:00',
-                '16:00 - 16:30',
-                '16:30 - 17:00',
-                '17:00 - 17:30',
-                '17:30 - 18:00',
-                '18:00 - 18:30'
-            ]
-        },
-        {
-            date: 'วันที่ 19 สิงหาคม 2559',
-            time: [
-                '13:00 - 13:30',
-                '13:30 - 14:00',
-                '14:00 - 14:30',
-                '14:30 - 15:00'
-            ]
-        },
-        {
-            date: 'วันที่ 20 สิงหาคม 2559',
-            time: [
-                '13:30 - 14:00'
-            ]
-        }
-    ];
+    @ViewChild(MakeAppointmentForm) private makeAppointmentForm: MakeAppointmentForm;
+    private appointmentData = {};
 
-    public doctorTimeTable = [
-        {
-            doctor: 'นายแพทย์ธีรัช รักษ์เถา',
-            timeTable : [
-                {
-                    date: 'วันที่ 15 สิงหาคม 2559',
-                    time: [
-                        '13:00 - 13:30',
-                        '13:30 - 14:00',
-                        '14:00 - 14:30',
-                        '14:30 - 15:00',
-                        '15:00 - 15:30',
-                        '15:30 - 16:00',
-                        '16:00 - 16:30',
-                        '16:30 - 17:00',
-                        '17:00 - 17:30',
-                        '17:30 - 18:00',
-                        '18:00 - 18:30'
-                    ]
-                },
-                {
-                    date: 'วันที่ 16 สิงหาคม 2559',
-                    time: [
-                        '13:00 - 13:30',
-                        '13:30 - 14:00',
-                        '14:00 - 14:30',
-                        '14:30 - 15:00'
-                    ]
-                },
-            ]
-        },
-        {
-            doctor: 'นายแพทย์ธนวัฒน์ เค้าฉลองเคียง',
-            timeTable : [
-                {
-                    date: 'วันที่ 22 สิงหาคม 2559',
-                    time: [
-                        '13:00 - 13:30',
-                        '13:30 - 14:00',
-                        '14:30 - 15:00',
-                        '15:00 - 15:30',
-                    ]
-                },
-                {
-                    date: 'วันที่ 23 สิงหาคม 2559',
-                    time: [
-                        '14:30 - 15:00'
-                    ]
-                },
-            ]
-        }
-    ]
-
-    private isNoSelection = [];
-    constructor(private router: Router) {
-        this.appointmentData = {}
-        for (let i = 0 ; i < this.doctorTimeTable.length ; i++) {
-            this.isNoSelection.push(true);
-        }
-    }
-
-    onSelectTime(time , i) {
-        this.setClearSelection(i);
-        console.log('[MakeAppointmentComponent -> time obtain from child component] ', time);
-        this.appointmentData['date'] = time.date;
-        this.appointmentData['time'] = time.time;
-        if (time.doctor) {
-            this.appointmentData['doctor'] = time.doctor;
-        }
-        console.log('[MakeAppointmentComponent -> appointmentData]', this.appointmentData);        
-    }
-
-    private setClearSelection (idx) {
-        // Idx will pass latest selection index
-        for (let i = 0 ; i < this.isNoSelection.length ; i++) {
-            if (i !== idx) {
-                this.isNoSelection[i] = true;
-            }
-            else {
-                this.isNoSelection[i] = false;
-            }
-        }
-        console.log(this.isNoSelection);
-    }
+    constructor(private router: Router) {}
 
     makeAppointment() {
         /*
@@ -158,8 +30,15 @@ export class MakeAppointmentComponent {
                 3.2) When API Response
                     a) If success: Bring success SweetAlert then navigate back to "ดูการนัดหมาย"
                     b) If fail: Bring error SweetAlert and put clientMessage field from error response
-
-        this.router.navigateByUrl('/patient/view-appointment');        
+        */
+        this.appointmentData = {
+            date: this.makeAppointmentForm.appointmentData['date'],
+            time: this.makeAppointmentForm.appointmentData['time'],
+            doctor: this.makeAppointmentForm.appointmentData['doctor'],
+            cause: this.makeAppointmentForm.appointmentData['cause']
+        };
+        console.log(this.appointmentData);
+        // this.router.navigateByUrl('/patient/view-appointment');    
     }
 
     cancelAppointment() {

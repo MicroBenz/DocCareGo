@@ -1,0 +1,13 @@
+<div class="container">
+    <searchbox
+        [searchBoxLabel]="'ค้นหาการนัดหมาย โดยพิมพ์ชื่อ-นามสกุลผู้ป่วย หรือรหัสการนัดหมาย'">
+    </searchbox>
+    <div class="box">
+        <appointment-table
+            [appointmentList]="appointmentList"
+            [postponeAppointment]="postponeAppointment"
+            [cancelAppointment]="cancelAppointment"
+            [printoutAppointment]="printoutAppointment">
+        </appointment-table>
+    </div>
+</div>
