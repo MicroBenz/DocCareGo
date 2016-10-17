@@ -11,6 +11,9 @@ import { MakeAppointmentComponent, ViewAppointmentComponent } from './role/patie
 // Staff Components
 import { AppointmentManagementComponent, MakeAppointmentByStaffComponent } from './role/staff/index';
 
+// Nurse Components
+import { ViewTodayPatientComponent } from './role/nurse/index';
+
 // Auth Guard
 import { PatientOnlyRoute, DoctorOnlyRoute, NurseOnlyRoute, StaffOnlyRoute, PharmacistOnlyRoute, NonLoggedInRoute } from './auth/guard/index';
 
@@ -82,10 +85,13 @@ const appRoutes: Routes = [
         ],
         children: [
             {
-                path: ''
+                path: '',
+                redirectTo: '/view-today-patient',
+                pathMatch: 'full'
             },
             {
-                path: 'view-today-patient'
+                path: 'view-today-patient',
+                component: ViewTodayPatientComponent
             }
         ]
     },

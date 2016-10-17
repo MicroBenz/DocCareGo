@@ -12,6 +12,7 @@ import { NavComponent } from './nav/nav.component';
 import { LoginComponent, RegisterComponent } from './auth/index';
 import { MakeAppointmentComponent, ViewAppointmentComponent, AppointmentAccordionComponent, AppointmentTableSelectionComponent } from './role/patient/index';
 import { AppointmentManagementComponent, MakeAppointmentByStaffComponent } from './role/staff/index';
+import { ViewTodayPatientComponent, PatientListComponent } from './role/nurse/index';
 
 // Shared Components
 import { AppointmentTableCompact } from './shared/appointment/appointment.table.compact.component';
@@ -32,26 +33,37 @@ import { AuthService } from './shared/service/auth.service';
         AppComponent
     ],
     declarations: [
+        /* Main Components */
         AppComponent,
         AppComponentWithNav,
         NavComponent,
 
+        /* Auth Components */
         LoginComponent,
         RegisterComponent,
 
+        /* Shared Components */
         MiniCalendarComponent,
         SearchBoxComponent,
+
+        /* Shared Components -> Appointment related */
         MakeAppointmentForm,
-
         AppointmentTableCompact,
-        MakeAppointmentComponent,
-        ViewAppointmentComponent,
-        AppointmentAccordionComponent,
-        AppointmentTableSelectionComponent,
+        AppointmentTableComponent,        
 
+        /* Patient Components */
+        MakeAppointmentComponent,        
+        ViewAppointmentComponent,        
+        AppointmentTableSelectionComponent,
+        AppointmentAccordionComponent,
+
+        /* Staff Components */
         AppointmentManagementComponent,
-        AppointmentTableComponent,
-        MakeAppointmentByStaffComponent
+        MakeAppointmentByStaffComponent,
+
+        /* Nurse Components */
+        ViewTodayPatientComponent,
+        PatientListComponent
     ],
     imports: [
         BrowserModule,
