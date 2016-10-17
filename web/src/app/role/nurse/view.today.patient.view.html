@@ -6,7 +6,9 @@
                     <h1 class="title">รายชื่อผู้ป่วยวันนี้</h1>
                 </div>
                 <div class="patient-list-content">
-                    <patient-list></patient-list>
+                    <patient-list 
+                        [patientList]="patientList"
+                        (onSelectPatient)="onSelectPatient($event)"></patient-list>
                 </div>
             </div>
         </div>
@@ -16,7 +18,9 @@
                     <h1 class="title">บันทึกข้อมูลผู้ป่วย</h1>
                 </div>
                 <div class="patient-recorder-content">
-                    <record-patient-detail></record-patient-detail>
+                    <record-patient-detail
+                        [patient]="selectedPatient">
+                    </record-patient-detail>
                 </div>
             </div>
         </div>

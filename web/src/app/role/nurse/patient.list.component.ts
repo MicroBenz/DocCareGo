@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
     selector: 'patient-list',
@@ -36,93 +36,12 @@ import { Component } from '@angular/core';
     `]
 })
 export class PatientListComponent {
-    private selectedIndex = -1;
-    public patientList = [
-        {
-            id: 1,
-            hn: '000022',
-            name: 'นายธนนันท์ ตั้งธนาชัยกุล',
-            doctor: 'นายแพทย์ธีรัช รักษ์เถา',
-            clinic: 'ทางเดินอาหารและตับ',
-            date: '13/1/2559',
-            time: '13:00 - 13:30'
-        },
-        {
-            id: 2,            
-            hn: '000022',
-            name: 'นายธนนันท์ ตั้งธนาชัยกุล',
-            doctor: 'นายแพทย์ธีรัช รักษ์เถา',
-            clinic: 'ทางเดินอาหารและตับ',
-            date: '13/1/2559',
-            time: '12:00 - 12:30'
-        },
-        {
-            id: 3,            
-            hn: '000022',
-            name: 'นายธนนันท์ ตั้งธนาชัยกุล',
-            doctor: 'นายแพทย์ธีรัช รักษ์เถา',
-            clinic: 'ทางเดินอาหารและตับ',
-            date: '13/1/2559',
-            time: '12:00 - 12:30'
-        },
-        {
-            id: 3,            
-            hn: '000022',
-            name: 'นายธนนันท์ ตั้งธนาชัยกุล',
-            doctor: 'นายแพทย์ธีรัช รักษ์เถา',
-            clinic: 'ทางเดินอาหารและตับ',
-            date: '13/1/2559',
-            time: '12:00 - 12:30'
-        },
-        {
-            id: 4,            
-            hn: '000022',
-            name: 'นายธนนันท์ ตั้งธนาชัยกุล',
-            doctor: 'นายแพทย์ธีรัช รักษ์เถา',
-            clinic: 'ทางเดินอาหารและตับ',
-            date: '13/1/2559',
-            time: '12:00 - 12:30'
-        },
-        {
-            id: 5,            
-            hn: '000022',
-            name: 'นายธนนันท์ ตั้งธนาชัยกุล',
-            doctor: 'นายแพทย์ธีรัช รักษ์เถา',
-            clinic: 'ทางเดินอาหารและตับ',
-            date: '13/1/2559',
-            time: '12:00 - 12:30'
-        },
-        {
-            id: 6,            
-            hn: '000022',
-            name: 'นายธนนันท์ ตั้งธนาชัยกุล',
-            doctor: 'นายแพทย์ธีรัช รักษ์เถา',
-            clinic: 'ทางเดินอาหารและตับ',
-            date: '13/1/2559',
-            time: '12:00 - 12:30'
-        },
-        {
-            id: 7,            
-            hn: '000022',
-            name: 'นายธนนันท์ ตั้งธนาชัยกุล',
-            doctor: 'นายแพทย์ธีรัช รักษ์เถา',
-            clinic: 'ทางเดินอาหารและตับ',
-            date: '13/1/2559',
-            time: '12:00 - 12:30'
-        },
-        {
-            id: 8,            
-            hn: '000022',
-            name: 'นายธนนันท์ ตั้งธนาชัยกุล',
-            doctor: 'นายแพทย์ธีรัช รักษ์เถา',
-            clinic: 'ทางเดินอาหารและตับ',
-            date: '13/1/2559',
-            time: '12:00 - 12:30'
-        }
-    ]
+    @Output('onSelectPatient') patientEmitter = new EventEmitter<any>();
+    @Input('patientList') patientList;
 
+    private selectedIndex = -1;    
     onSelectPatient (idx) {
         this.selectedIndex = idx;
-        console.log(this.patientList[idx]);
+        this.patientEmitter.emit(idx);
     }
 }

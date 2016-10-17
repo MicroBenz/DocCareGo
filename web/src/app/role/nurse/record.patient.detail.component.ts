@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
     selector: 'record-patient-detail',
@@ -17,8 +17,11 @@ import { Component } from '@angular/core';
         .input-wrapper .systolic, .input-wrapper .diastolic{
             width: 46%;
         }
+        .patient-info {
+            margin-bottom: 15px;
+        }
     `]
 })
 export class RecordPatientDetailComponent {
-
+    @Input('patient') patient;
 }

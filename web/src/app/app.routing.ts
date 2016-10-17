@@ -86,7 +86,7 @@ const appRoutes: Routes = [
         children: [
             {
                 path: '',
-                redirectTo: '/view-today-patient',
+                redirectTo: '/nurse/view-today-patient',
                 pathMatch: 'full'
             },
             {
