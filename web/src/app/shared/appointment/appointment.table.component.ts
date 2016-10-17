@@ -17,4 +17,7 @@ import { Component, Input } from '@angular/core';
 })
 export class AppointmentTableComponent {
     @Input('appointmentList') appointmentList = [];
+    @Input('postponeAppointment') postponeAppointment: Function;
+    @Input('cancelAppointment') cancelAppointment: Function;
+    @Input('printoutAppointment') printoutAppointment: Function;    
 }
