@@ -8,9 +8,11 @@ import { LoginComponent, RegisterComponent } from './auth/index';
 // Patient Components
 import { MakeAppointmentComponent, ViewAppointmentComponent } from './role/patient/index';
 
+// Staff Components
+import { AppointmentManagementComponent, MakeAppointmentByStaffComponent } from './role/staff/index';
+
 // Auth Guard
 import { PatientOnlyRoute, DoctorOnlyRoute, NurseOnlyRoute, StaffOnlyRoute, PharmacistOnlyRoute, NonLoggedInRoute } from './auth/guard/index';
-import { AppointmentManagementComponent } from './role/staff/appointment.management.component';
 
 const appRoutes: Routes = [
     {
@@ -102,6 +104,10 @@ const appRoutes: Routes = [
             {
                 path: 'manage-appointment',
                 component: AppointmentManagementComponent
+            },
+            {
+                path: 'make-appointment',
+                component: MakeAppointmentByStaffComponent
             },
             {
                 path: 'manage-workday'

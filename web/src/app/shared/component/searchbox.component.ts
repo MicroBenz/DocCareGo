@@ -4,8 +4,9 @@ import { Component, Input } from '@angular/core';
     selector: 'searchbox',
     template: `
         <label class="label">{{searchBoxLabel}}</label>
-        <p class="control">
+        <p class="control has-icon has-icon-right">
             <input class="input" type="text" placeholder="">
+            <i class="fa fa-spinner"></i>
         </p>
     `,
     styles: [`

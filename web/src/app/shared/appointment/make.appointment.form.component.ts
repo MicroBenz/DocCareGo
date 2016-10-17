@@ -1,35 +1,20 @@
-import { Component, Input, Output, EventEmitter, OnChanges, SimpleChange } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-    selector: 'make-appointment1',
-    templateUrl: './make.appointment.view.html',
+    selector: 'make-appointment-form',
+    templateUrl: './make.appointment.form.view.html',
     styles: [`
-        .container {
-            margin-top: 13px;
-            //height: calc(100vh - 140px);
-        }
         .appointment-choice-wrapper {
             text-align: center;
         }
-        .box {
-            //max-height: 100%;            
-            //overflow-y: scroll; 
-            margin-bottom: 25px;           
-        }
-        .cause-of-appointment {
-            padding-top: 10px !important;
-        }
-        .clinic-label {
-            margin-bottom: 20px;
-        }
     `]
 })
-export class MakeAppointmentComponent implements OnChanges {
+export class MakeAppointmentForm {
     public isFirstSelect: boolean = true;
-    public appointmentData;
-    @Output('formData') formData = new EventEmitter<any>();
     public appointmentChoice;
+    public appointmentData;
+
     public timeTable = [
         {
             date: 'วันที่ 18 สิงหาคม 2559',
@@ -149,35 +134,4 @@ export class MakeAppointmentComponent implements OnChanges {
         console.log(this.isNoSelection);
     }
 
-    @Input('makeAppointmentFn') makeAppointment() {
-        /*
-            TODO:
-            1) Bring Up SweetAlert with 2 button "นัดหมายแพทย์" and "กลับ"
-            2) Inside SweetAlert tell user about appointment information (as user put in form)
-            3) If user press "นัดหมายแพทย์"
-                3.1) Calling API to make appointment
-                3.2) When API Response
-                    a) If success: Bring success SweetAlert then navigate back to "ดูการนัดหมาย"
-                    b) If fail: Bring error SweetAlert and put clientMessage field from error response
-        */
-        this.formData.emit(this.appointmentData);
-        this.router.navigateByUrl('/patient/view-appointment');    
-    }
-
-    @Input('cancelAppointmentFn') cancelAppointment() {
-        /*
-            TODO:
-            1) Bring Up SweetAlert with 2 button "ใช่" and "ไม่ใช่"
-            2) Inside SweetAlert tell user that you are about to dismiss this form, are you sure?
-            3) If user press "ใช่": navigate back to "ดูการนัดหมาย"
-            4) If user press "ไม่" dismiss SweetAlert
-        */
-        this.router.navigateByUrl('/patient/view-appointment');
-    }
-
-    ngOnChanges (changes: {[propKeys: string]: SimpleChange}) {
-        // TODO: Checking form data
-        console.log('ngOnChages ', changes);
-        this.formData.emit(changes);
-    }
 }

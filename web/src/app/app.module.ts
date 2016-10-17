@@ -11,13 +11,14 @@ import { AppComponent, AppComponentWithNav} from './main/index';
 import { NavComponent } from './nav/nav.component';
 import { LoginComponent, RegisterComponent } from './auth/index';
 import { MakeAppointmentComponent, ViewAppointmentComponent, AppointmentAccordionComponent, AppointmentTableSelectionComponent } from './role/patient/index';
-import { AppointmentManagementComponent } from './role/staff/appointment.management.component';
+import { AppointmentManagementComponent, MakeAppointmentByStaffComponent } from './role/staff/index';
 
 // Shared Components
 import { AppointmentTableCompact } from './shared/appointment/appointment.table.compact.component';
 import { AppointmentTableComponent } from './shared/appointment/appointment.table.component';
 import { MiniCalendarComponent } from './shared/component/mini.calendar.component';
 import { SearchBoxComponent } from './shared/component/searchbox.component';
+import { MakeAppointmentForm } from './shared/appointment/make.appointment.form.component';
 
 // Routing
 import { routing, appRoutingProviders } from './app.routing';
@@ -40,6 +41,7 @@ import { AuthService } from './shared/service/auth.service';
 
         MiniCalendarComponent,
         SearchBoxComponent,
+        MakeAppointmentForm,
 
         AppointmentTableCompact,
         MakeAppointmentComponent,
@@ -48,7 +50,8 @@ import { AuthService } from './shared/service/auth.service';
         AppointmentTableSelectionComponent,
 
         AppointmentManagementComponent,
-        AppointmentTableComponent
+        AppointmentTableComponent,
+        MakeAppointmentByStaffComponent
     ],
     imports: [
         BrowserModule,
