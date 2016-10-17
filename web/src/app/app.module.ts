@@ -1,4 +1,4 @@
-// Angular 2
+// Angular 2 Libs
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
@@ -6,14 +6,18 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { provideAuth, JwtHelper } from 'angular2-jwt';
 
-// Components Declaration
+// Components
 import { AppComponent, AppComponentWithNav} from './main/index';
 import { NavComponent } from './nav/nav.component';
 import { LoginComponent, RegisterComponent } from './auth/index';
-import { PatientLandingComponent, MakeAppointmentComponent, ViewAppointmentComponent, AppointmentAccordionComponent, AppointmentTableSelectionComponent } from './role/patient/index';
+import { MakeAppointmentComponent, ViewAppointmentComponent, AppointmentAccordionComponent, AppointmentTableSelectionComponent } from './role/patient/index';
+import { AppointmentManagementComponent } from './role/staff/appointment.management.component';
 
+// Shared Components
 import { AppointmentTableCompact } from './shared/appointment/appointment.table.compact.component';
+import { AppointmentTableComponent } from './shared/appointment/appointment.table.component';
 import { MiniCalendarComponent } from './shared/component/mini.calendar.component';
+import { SearchBoxComponent } from './shared/component/searchbox.component';
 
 // Routing
 import { routing, appRoutingProviders } from './app.routing';
@@ -35,13 +39,16 @@ import { AuthService } from './shared/service/auth.service';
         RegisterComponent,
 
         MiniCalendarComponent,
+        SearchBoxComponent,
 
         AppointmentTableCompact,
         MakeAppointmentComponent,
-        PatientLandingComponent,
         ViewAppointmentComponent,
         AppointmentAccordionComponent,
-        AppointmentTableSelectionComponent
+        AppointmentTableSelectionComponent,
+
+        AppointmentManagementComponent,
+        AppointmentTableComponent
     ],
     imports: [
         BrowserModule,
