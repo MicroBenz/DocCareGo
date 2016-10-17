@@ -39,11 +39,12 @@
         <div class="nav-left patient-role" *ngIf="userRole === 'patient'">
             <a class="nav-item is-tab"
                 routerLink="/patient/view-appointment"
-                routerLinkActive="is-active">ดูการนัดหมาย</a>
+                routerLinkActive="is-active"><i class="fa fa-calendar"></i> ดูการนัดหมาย</a>
             <a class="nav-item is-tab"
                 routerLink="/patient/make-appointment"
-                routerLinkActive="is-active">นัดหมายแพทย์</a>
+                routerLinkActive="is-active"><i class="fa fa-calendar-plus-o"></i> นัดหมายแพทย์</a>
         </div>
+
         <div class="nav-left doctor-role" *ngIf="userRole === 'doctor'">
             <a class="nav-item is-tab"
                 routerLink="/doctor/manage-workday"
@@ -52,19 +53,22 @@
                 routerLink="/doctor/start-working"
                 routerLinkActive="is-active">ตรวจผู้ป่วย</a>
         </div>
+
         <div class="nav-left nurse-role" *ngIf="userRole === 'nurse'">
             <a class="nav-item is-tab"
                 routerLink="/nurse/view-today-patient"
-                routerLinkActive="is-active">ดูรายการผู้ป่วยวันนี้</a>
+                routerLinkActive="is-active"><i class="fa fa-users"></i> ดูรายการผู้ป่วยวันนี้</a>
         </div>
+
         <div class="nav-left officer-role" *ngIf="userRole === 'staff'">
             <a class="nav-item is-tab"
                 routerLink="/staff/manage-appointment"
-                routerLinkActive="is-active">จัดการการนัดหมาย</a>
+                routerLinkActive="is-active"><i class="fa fa-plus-square"></i> จัดการการนัดหมาย</a>
             <a class="nav-item is-tab"
                 routerLink="/staff/manage-workday"
-                routerLinkActive="is-active">จัดการวันออกตรวจแพทย์</a>
+                routerLinkActive="is-active"><i class="fa fa-calendar"></i> จัดการวันออกตรวจแพทย์</a>
         </div>
+
         <div class="nav-left pharmacist-role" *ngIf="userRole === 'pharmacist'">
             <a class="nav-item is-tab"
                 routerLink="/pharmacist/view-prescription"
