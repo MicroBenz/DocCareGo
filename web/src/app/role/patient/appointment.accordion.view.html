@@ -5,8 +5,10 @@
             <span class="doctor"> {{doctor}}</span>
         </p>
         <a class="card-header-icon icon is-medium" (click)="isExpand = !isExpand">
-            <i class="fa fa-angle-down" *ngIf="!isExpand"></i>
-            <i class="fa fa-angle-up" *ngIf="isExpand"></i>
+            <i class="fa fa-angle-down" *ngIf="!isExpand"
+                (click)="isExpand = !isExpand"></i>
+            <i class="fa fa-angle-up" *ngIf="isExpand"
+                (click)="isExpand = !isExpand"></i>
         </a>
     </header>
     <div class="card-content" [hidden]="!isExpand">

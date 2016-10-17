@@ -22,6 +22,9 @@ import { JwtHelper } from 'angular2-jwt';
         .menu-nav .nav-item {
             border-top: none;
         }
+        .menu-nav .nav-item i {
+            line-height: 34px;
+        }
         .profile-circle {
             width: 40px;
             height: 40px;
