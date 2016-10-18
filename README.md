@@ -1,6 +1,6 @@
 # DocCare Go
 
-![](./web/src/assets/img/logo_horizontal.png)
+<center><img src="./web/src/assets/img/logo_horizontal.png"></center>
 
 > Term Project รายวิชา Software Engineering คณะวิศวกรรมศาสตร์ ภาควิชาวิศวกรรมคอมพิวเตอร์ จุฬาลงกรณ์มหาวิทยาลัย ปีการศึกษา 2559 พัฒนาโดยกลุ่ม Hospital Again? โดยใช้ชุด MEAN Stack ในการพัฒนา
 
