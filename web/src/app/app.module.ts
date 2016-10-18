@@ -14,13 +14,14 @@ import { MakeAppointmentComponent, ViewAppointmentComponent, AppointmentAccordio
 import { AppointmentManagementComponent, MakeAppointmentByStaffComponent } from './role/staff/index';
 import { ViewTodayPatientComponent, RecordPatientDetailComponent } from './role/nurse/index';
 import { ViewTodayPrescriptionComponent, PatientPrescriptionComponent } from './role/pharmacist/index';
+import { ManageWorkdayComponent } from './role/doctor/index';
 
 // Shared Components
 import { AppointmentTableCompactComponent } from './shared/appointment/appointment.table.compact.component';
 import { AppointmentTableComponent } from './shared/appointment/appointment.table.component';
 import { MiniCalendarComponent, SearchBoxComponent, PatientListComponent } from './shared/component/index';
 import { MakeAppointmentFormComponent } from './shared/appointment/make.appointment.form.component';
-
+import { FullCalendarComponent } from './shared/calendar/full.calendar.component';
 
 // Routing
 import { routing, appRoutingProviders } from './app.routing';
@@ -28,7 +29,7 @@ import { PatientOnlyRoute, NurseOnlyRoute, DoctorOnlyRoute, PharmacistOnlyRoute,
 
 // Service
 import { AuthService } from './shared/service/auth.service';
-import { CalendarComponent } from './shared/component/calendar.component';
+
 
 @NgModule({
     bootstrap: [
@@ -48,6 +49,7 @@ import { CalendarComponent } from './shared/component/calendar.component';
         MiniCalendarComponent,
         SearchBoxComponent,
         PatientListComponent,
+        FullCalendarComponent,        
 
         /* Shared Components -> Appointment related */
         MakeAppointmentFormComponent,
@@ -73,7 +75,8 @@ import { CalendarComponent } from './shared/component/calendar.component';
         ViewTodayPrescriptionComponent,
         PatientPrescriptionComponent,
 
-        CalendarComponent
+        /* Doctor Components */
+        ManageWorkdayComponent
     ],
     imports: [
         BrowserModule,
