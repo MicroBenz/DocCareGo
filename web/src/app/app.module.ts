@@ -28,6 +28,7 @@ import { PatientOnlyRoute, NurseOnlyRoute, DoctorOnlyRoute, PharmacistOnlyRoute,
 
 // Service
 import { AuthService } from './shared/service/auth.service';
+import { CalendarComponent } from './shared/component/calendar.component';
 
 @NgModule({
     bootstrap: [
@@ -70,7 +71,9 @@ import { AuthService } from './shared/service/auth.service';
 
         /* Pharmacist Components */
         ViewTodayPrescriptionComponent,
-        PatientPrescriptionComponent
+        PatientPrescriptionComponent,
+
+        CalendarComponent
     ],
     imports: [
         BrowserModule,

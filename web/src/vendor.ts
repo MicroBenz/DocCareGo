@@ -12,3 +12,5 @@ import 'rxjs/add/operator/mergeMap';
 import 'bulma/css/bulma';
 import 'font-awesome/css/font-awesome';
 import './assets/less/main';
+
+import 'jquery/dist/jquery';
