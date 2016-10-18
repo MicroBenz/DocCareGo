@@ -34,11 +34,11 @@ export class MiniCalendarComponent {
 
     private monthMapping = ['มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน', 'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม'];
 
-    private getDate () {
+    public getDate () {
         return this.date.split('/')[0];
     }
 
-    private getMonth () {
+    public getMonth () {
         let monthIdx: number = Number(this.date.split('/')[1]);
         return this.monthMapping[monthIdx - 1];
     }

@@ -4,7 +4,7 @@ import { Http } from '@angular/http';
 import { Router } from '@angular/router';
 
 @Component({
-    selector: 'login',
+    selector: 'auth-login',
     templateUrl: 'login.view.html',
     styles: [`
         :host {

@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-    selector: 'searchbox',
+    selector: 'search-box',
     template: `
         <label class="label">{{searchBoxLabel}}</label>
         <p class="control has-icon has-icon-right">

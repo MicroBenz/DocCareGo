@@ -2,7 +2,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ModuleWithProviders } from '@angular/core';
 
 // Apps Components
-import { AppComponent, AppComponentWithNav } from './main/index';
+import { AppComponent, AppComponentWithNavComponent } from './main/index';
 import { LoginComponent, RegisterComponent } from './auth/index';
 
 // Patient Components
@@ -39,7 +39,7 @@ const appRoutes: Routes = [
     },
     {
         path: 'patient',
-        component: AppComponentWithNav,
+        component: AppComponentWithNavComponent,
         canActivate: [
             PatientOnlyRoute
         ],
@@ -61,7 +61,7 @@ const appRoutes: Routes = [
     },
     {
         path: 'doctor',
-        component: AppComponentWithNav,
+        component: AppComponentWithNavComponent,
         canActivate: [
             DoctorOnlyRoute
         ],
@@ -81,7 +81,7 @@ const appRoutes: Routes = [
     },
     {
         path: 'nurse',
-        component: AppComponentWithNav,
+        component: AppComponentWithNavComponent,
         canActivate: [
             NurseOnlyRoute
         ],
@@ -99,7 +99,7 @@ const appRoutes: Routes = [
     },
     {
         path: 'staff',
-        component: AppComponentWithNav,
+        component: AppComponentWithNavComponent,
         canActivate: [
             StaffOnlyRoute
         ],
@@ -124,7 +124,7 @@ const appRoutes: Routes = [
     },
     {
         path: 'pharmacist',
-        component: AppComponentWithNav,
+        component: AppComponentWithNavComponent,
         canActivate: [
             PharmacistOnlyRoute
         ],

@@ -7,7 +7,7 @@ import { HttpModule } from '@angular/http';
 import { provideAuth, JwtHelper } from 'angular2-jwt';
 
 // Components
-import { AppComponent, AppComponentWithNav} from './main/index';
+import { AppComponent, AppComponentWithNavComponent } from './main/index';
 import { NavComponent } from './nav/nav.component';
 import { LoginComponent, RegisterComponent } from './auth/index';
 import { MakeAppointmentComponent, ViewAppointmentComponent, AppointmentAccordionComponent, AppointmentTableSelectionComponent } from './role/patient/index';
@@ -15,11 +15,11 @@ import { AppointmentManagementComponent, MakeAppointmentByStaffComponent } from 
 import { ViewTodayPatientComponent, PatientListComponent, RecordPatientDetailComponent } from './role/nurse/index';
 
 // Shared Components
-import { AppointmentTableCompact } from './shared/appointment/appointment.table.compact.component';
+import { AppointmentTableCompactComponent } from './shared/appointment/appointment.table.compact.component';
 import { AppointmentTableComponent } from './shared/appointment/appointment.table.component';
 import { MiniCalendarComponent } from './shared/component/mini.calendar.component';
 import { SearchBoxComponent } from './shared/component/searchbox.component';
-import { MakeAppointmentForm } from './shared/appointment/make.appointment.form.component';
+import { MakeAppointmentFormComponent } from './shared/appointment/make.appointment.form.component';
 
 // Routing
 import { routing, appRoutingProviders } from './app.routing';
@@ -35,7 +35,7 @@ import { AuthService } from './shared/service/auth.service';
     declarations: [
         /* Main Components */
         AppComponent,
-        AppComponentWithNav,
+        AppComponentWithNavComponent,
         NavComponent,
 
         /* Auth Components */
@@ -47,8 +47,8 @@ import { AuthService } from './shared/service/auth.service';
         SearchBoxComponent,
 
         /* Shared Components -> Appointment related */
-        MakeAppointmentForm,
-        AppointmentTableCompact,
+        MakeAppointmentFormComponent,
+        AppointmentTableCompactComponent,
         AppointmentTableComponent,        
 
         /* Patient Components */

@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
         }
     `]
 })
-export class MakeAppointmentForm {
+export class MakeAppointmentFormComponent {
     public isFirstSelect: boolean = true;
     public appointmentChoice;
     public appointmentData;

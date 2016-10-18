@@ -36,7 +36,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
     `]
 })
 export class PatientListComponent {
-    @Output('onSelectPatient') patientEmitter = new EventEmitter<any>();
+    @Output('patientEmitter') patientEmitter = new EventEmitter<any>();
     @Input('patientList') patientList;
 
     private selectedIndex = -1;    

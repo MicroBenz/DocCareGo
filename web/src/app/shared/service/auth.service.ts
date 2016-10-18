@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthHttp, JwtHelper } from 'angular2-jwt';
 import { Http, Response } from '@angular/http';
+import { AuthHttp, JwtHelper } from 'angular2-jwt';
 import { Observable } from 'rxjs/Rx';
+import { LOGIN_ENDPOINT } from './../../config/api.config';
 
 @Injectable()
 export class AuthService {
@@ -12,7 +13,7 @@ export class AuthService {
     public makeLogin (usr: string, pwd: string) {
         //TODO: Call API for make login and get/set JWT Token
         if (usr === 'patient' || usr === 'doctor' || usr === 'staff' || usr ==='nurse' || usr === 'pharmacist') {
-            return this.http.post('/auth/login', {
+            return this.http.post(LOGIN_ENDPOINT, {
                 username: 'John',
                 role: usr
             })
@@ -27,7 +28,6 @@ export class AuthService {
         this.router.navigateByUrl('/login');
     }
 
-    // Client Side
     public setToken(token: string) {
         window.localStorage.setItem('doccareGoToken', token);
     }
@@ -42,13 +42,5 @@ export class AuthService {
             return this.jwtHelper.decodeToken(window.localStorage.getItem('doccareGoToken')).role;
         }
         return '';
-    }
-
-    public testHTTP () {
-        console.log('inside service');
-        return this.authHttp.post('/api/v1/test', {
-            a: '111',
-            b: '223'
-        });
     }
 }
