@@ -1,4 +1,7 @@
 # DocCare Go
+
+![](./web/src/assets/img/logo_horizontal.png)
+
 > Term Project รายวิชา Software Engineering คณะวิศวกรรมศาสตร์ ภาควิชาวิศวกรรมคอมพิวเตอร์ จุฬาลงกรณ์มหาวิทยาลัย ปีการศึกษา 2559 พัฒนาโดยกลุ่ม Hospital Again? โดยใช้ชุด MEAN Stack ในการพัฒนา
 
 DocCare Go เป็นระบบจัดการการนัดหมายของผู้ป่วยนอก (OPD - Out Patient Department)
