@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-    selector: 'app',
+    selector: 'doccare-go-app',
     template: `
         <router-outlet></router-outlet>
     `,
