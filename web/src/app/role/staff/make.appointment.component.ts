@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { MakeAppointmentForm } from './../../shared/appointment/make.appointment.form.component';
+import { MakeAppointmentFormComponent } from './../../shared/appointment/make.appointment.form.component';
 
 @Component({
     selector: 'staff-make-appointment',
@@ -15,7 +15,7 @@ import { MakeAppointmentForm } from './../../shared/appointment/make.appointment
     `]
 })
 export class MakeAppointmentByStaffComponent {
-    @ViewChild(MakeAppointmentForm) private makeAppointmentForm: MakeAppointmentForm;
+    @ViewChild(MakeAppointmentFormComponent) private makeAppointmentForm: MakeAppointmentFormComponent;
     private appointmentData = {};
     private patient;
 

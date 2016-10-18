@@ -12,14 +12,15 @@ import { NavComponent } from './nav/nav.component';
 import { LoginComponent, RegisterComponent } from './auth/index';
 import { MakeAppointmentComponent, ViewAppointmentComponent, AppointmentAccordionComponent, AppointmentTableSelectionComponent } from './role/patient/index';
 import { AppointmentManagementComponent, MakeAppointmentByStaffComponent } from './role/staff/index';
-import { ViewTodayPatientComponent, PatientListComponent, RecordPatientDetailComponent } from './role/nurse/index';
+import { ViewTodayPatientComponent, RecordPatientDetailComponent } from './role/nurse/index';
+import { ViewTodayPrescriptionComponent, PatientPrescriptionComponent } from './role/pharmacist/index';
 
 // Shared Components
 import { AppointmentTableCompactComponent } from './shared/appointment/appointment.table.compact.component';
 import { AppointmentTableComponent } from './shared/appointment/appointment.table.component';
-import { MiniCalendarComponent } from './shared/component/mini.calendar.component';
-import { SearchBoxComponent } from './shared/component/searchbox.component';
+import { MiniCalendarComponent, SearchBoxComponent, PatientListComponent } from './shared/component/index';
 import { MakeAppointmentFormComponent } from './shared/appointment/make.appointment.form.component';
+
 
 // Routing
 import { routing, appRoutingProviders } from './app.routing';
@@ -45,6 +46,7 @@ import { AuthService } from './shared/service/auth.service';
         /* Shared Components */
         MiniCalendarComponent,
         SearchBoxComponent,
+        PatientListComponent,
 
         /* Shared Components -> Appointment related */
         MakeAppointmentFormComponent,
@@ -64,7 +66,11 @@ import { AuthService } from './shared/service/auth.service';
         /* Nurse Components */
         ViewTodayPatientComponent,
         PatientListComponent,
-        RecordPatientDetailComponent
+        RecordPatientDetailComponent,
+
+        /* Pharmacist Components */
+        ViewTodayPrescriptionComponent,
+        PatientPrescriptionComponent
     ],
     imports: [
         BrowserModule,

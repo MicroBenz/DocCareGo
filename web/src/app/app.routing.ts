@@ -14,8 +14,12 @@ import { AppointmentManagementComponent, MakeAppointmentByStaffComponent } from 
 // Nurse Components
 import { ViewTodayPatientComponent } from './role/nurse/index';
 
+// Pharmacist Components
+import { ViewTodayPrescriptionComponent } from './role/pharmacist/index';
+
 // Auth Guard
 import { PatientOnlyRoute, DoctorOnlyRoute, NurseOnlyRoute, StaffOnlyRoute, PharmacistOnlyRoute, NonLoggedInRoute } from './auth/guard/index';
+
 
 const appRoutes: Routes = [
     {
@@ -136,6 +140,7 @@ const appRoutes: Routes = [
             },
             {
                 path: 'view-prescription',
+                component: ViewTodayPrescriptionComponent
             }
         ]
     }

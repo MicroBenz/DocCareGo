@@ -92,11 +92,4 @@ export class LoginComponent {
             this.isLoginFail = true;
         }
     }
-
-    testHTTP () {
-        console.log('test http');
-        this.authService.testHTTP().subscribe((data) => {
-            console.log(data);
-        });
-    }
 }

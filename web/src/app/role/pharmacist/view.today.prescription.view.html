@@ -3,7 +3,7 @@
         <div class="column is-5">
             <div class="box patient-list-wrapper">
                 <div class="patient-list-header">
-                    <h1 class="title">รายชื่อผู้ป่วยวันนี้</h1>
+                    <h1 class="title">รายชื่อผู้ป่วย</h1>
                 </div>
                 <div class="patient-list-content">
                     <patient-list 
@@ -14,14 +14,15 @@
             </div>
         </div>
         <div class="column is-7">
-            <div class="box patient-recorder-wrapper">
-                <div class="patient-recorder-header">
-                    <h1 class="title">บันทึกข้อมูลผู้ป่วย</h1>
+            <div class="box patient-prescription-wrapper">
+                <div class="patient-prescription-header">
+                    <h1 class="title">ข้อมูลการจ่ายยา</h1>
                 </div>
-                <div class="patient-recorder-content">
-                    <record-patient-detail
-                        [patient]="selectedPatient">
-                    </record-patient-detail>
+                <div class="patient-prescription-content">
+                    <patient-prescription
+                        [patient]="selectedPatient"
+                        [prescription]="prescription">
+                    </patient-prescription>
                 </div>
             </div>
         </div>

@@ -20,6 +20,16 @@ import { Component, Input } from '@angular/core';
         .patient-info {
             margin-bottom: 15px;
         }
+        .weight-wrapper {
+            width: 28% !important;
+        }
+        .height-wrapper {
+            width: 28% !important;
+            margin-right: 2%;
+        }
+        .temp-wrapper {
+            width: 37% !important;
+        }
     `]
 })
 export class RecordPatientDetailComponent {
