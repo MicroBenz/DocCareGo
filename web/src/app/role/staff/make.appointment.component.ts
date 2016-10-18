@@ -1,6 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { MakeAppointmentFormComponent } from './../../shared/appointment/make.appointment.form.component';
+import { Title } from '@angular/platform-browser';
+import { MAKE_APPOINTMENT_TITLE } from './../../config/title.config';
 
 @Component({
     selector: 'staff-make-appointment',
@@ -19,7 +21,9 @@ export class MakeAppointmentByStaffComponent {
     private appointmentData = {};
     private patient;
 
-    constructor(private router: Router) {}
+    constructor(private router: Router, private title: Title) {
+        title.setTitle(MAKE_APPOINTMENT_TITLE);
+    }
 
     makeAppointment () {
         this.appointmentData = {

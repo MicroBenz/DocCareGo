@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Title } from '@angular/platform-browser';
+import { VIEW_APPOINTMENT_TITLE } from './../../config/title.config';
 
 @Component({
     selector: 'view-appointment',
@@ -19,6 +21,10 @@ import { Component } from '@angular/core';
     `]
 })
 export class ViewAppointmentComponent {
+    constructor(private title: Title) {
+        title.setTitle(VIEW_APPOINTMENT_TITLE);
+    }
+    
     public appointments = [
         {'date': '11/1/2559', 'time': '13:00 - 15:00', 'clinic': 'ระบบประสาทและสมอง', 'doctor': 'นายแพทย์ธีรัช รักษ์เถา'},
         {'date': '12/1/2559', 'time': '13:00 - 13:30', 'clinic': 'ทางเดินอาหารและตับ', 'doctor': 'นายแพทย์ธนนันท์ ตั้งธนาชัยกุล'},

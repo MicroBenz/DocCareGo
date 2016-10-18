@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Title } from '@angular/platform-browser';
+import { VIEW_PATIENT_PRESCRIPTION } from './../../config/title.config';
+
 @Component({
     selector: 'view-today-prescription',
     templateUrl: './view.today.prescription.view.html',
@@ -62,6 +65,9 @@ import { Component } from '@angular/core';
     `]
 })
 export class ViewTodayPrescriptionComponent {
+    constructor(private title: Title) {
+        title.setTitle(VIEW_PATIENT_PRESCRIPTION);
+    }
     public patientList = [
         {
             id: 1,

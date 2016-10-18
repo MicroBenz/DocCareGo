@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Title } from '@angular/platform-browser';
+import { MANAGE_APPOINTMENT_TITLE } from './../../config/title.config';
 
 @Component({
     selector: 'appointment-management',
@@ -14,6 +16,10 @@ import { Component } from '@angular/core';
     `]
 })
 export class AppointmentManagementComponent {
+    constructor(private title: Title) {
+        title.setTitle(MANAGE_APPOINTMENT_TITLE);
+    }
+    
     private appointmentList = [
         {
             id: 1,

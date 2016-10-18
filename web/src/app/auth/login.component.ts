@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { AuthService } from './../shared/service/auth.service';
 import { Http } from '@angular/http';
 import { Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
+import { AuthService } from './../shared/service/auth.service';
+import { LOGIN_TITLE } from './../config/title.config';
 
 @Component({
     selector: 'auth-login',
@@ -70,10 +72,11 @@ export class LoginComponent {
     public pwd: string;
     public isLoginFail: boolean = false;
 
-    constructor(private authService: AuthService, private router: Router) {
+    constructor(private authService: AuthService, private router: Router, private titleService: Title) {
         if (this.authService.hasLogin()) {
             this.router.navigateByUrl('/' + this.authService.getUserRole());
         }
+        titleService.setTitle(LOGIN_TITLE);
     }
 
     private login () {

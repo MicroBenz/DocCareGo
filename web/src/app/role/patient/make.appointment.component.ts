@@ -1,6 +1,8 @@
 import { Component, Input, Output, EventEmitter, OnChanges, SimpleChange, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { MakeAppointmentFormComponent } from './../../shared/appointment/make.appointment.form.component';
+import { Title } from '@angular/platform-browser';
+import { MAKE_APPOINTMENT_TITLE } from './../../config/title.config';
 
 @Component({
     selector: 'make-appointment',
@@ -18,7 +20,9 @@ export class MakeAppointmentComponent {
     @ViewChild(MakeAppointmentFormComponent) private makeAppointmentForm: MakeAppointmentFormComponent;
     private appointmentData = {};
 
-    constructor(private router: Router) {}
+    constructor(private router: Router, private title: Title) {
+        title.setTitle(MAKE_APPOINTMENT_TITLE);
+    }
 
     makeAppointment() {
         /*
