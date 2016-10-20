@@ -36,6 +36,7 @@ import { PharmacistModule } from './module/pharmacist.module';
 import { StaffModule } from './module/staff.module';
 import { AdminModule } from './module/admin.module';
 import { SharedModule } from './module/shared.module';
+import { AuthModule } from './module/auth.module';
 
 @NgModule({
     bootstrap: [
@@ -48,8 +49,8 @@ import { SharedModule } from './module/shared.module';
         NavComponent,
 
         /* Auth Components */
-        LoginComponent,
-        RegisterComponent,
+        // LoginComponent,
+        // RegisterComponent,
         
         /* Shared Components */
         // MiniCalendarComponent,
@@ -89,6 +90,7 @@ import { SharedModule } from './module/shared.module';
         FormsModule,
         HttpModule,
         routing,
+        AuthModule,
         SharedModule,
         PatientModule,
         DoctorModule,
@@ -104,7 +106,7 @@ import { SharedModule } from './module/shared.module';
         // NurseOnlyRoute,
         // PharmacistOnlyRoute,
         // StaffOnlyRoute,
-        NonLoggedInRoute,
+        // NonLoggedInRoute,
         JwtHelper,
         provideAuth({
             headerName: 'x-access-token',
