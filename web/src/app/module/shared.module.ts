@@ -1,14 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MakeAppointmentFormComponent } from './../shared/appointment/make.appointment.form.component';
 import { FormsModule } from '@angular/forms';
-import { AppointmentTableSelectionComponent } from './../role/patient/appointment.table.selection.component';
-import { AppointmentAccordionComponent } from './../role/patient/appointment.accordion.component';
-import { PatientListComponent } from './../shared/component/patient.list.component';
-import { MiniCalendarComponent } from './../shared/component/mini.calendar.component';
-import { SearchBoxComponent } from './../shared/component/searchbox.component';
+
+
+import { AppointmentTableSelectionComponent, AppointmentAccordionComponent } from './../role/patient/index';
+import { MakeAppointmentFormComponent, AppointmentTableCompactComponent } from './../shared/appointment/index';
+import { PatientListComponent, MiniCalendarComponent, SearchBoxComponent } from './../shared/component/index';
 import { FullCalendarComponent } from './../shared/calendar/full.calendar.component';
-import { AppointmentTableCompactComponent } from './../shared/appointment/appointment.table.compact.component';
 @NgModule({
     imports: [
         CommonModule,

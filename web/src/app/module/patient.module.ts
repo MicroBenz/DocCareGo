@@ -1,13 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { AppointmentAccordionComponent, AppointmentTableSelectionComponent, MakeAppointmentComponent, ViewAppointmentComponent } from './../role/patient/index';
-import { PatientOnlyRoute } from './../auth/guard/patient.guard';
 
-import { MakeAppointmentFormComponent } from './../shared/appointment/make.appointment.form.component';
-import { MiniCalendarComponent } from './../shared/component/mini.calendar.component';
-import { AppointmentTableCompactComponent } from './../shared/appointment/appointment.table.compact.component';
 import { SharedModule } from './shared.module';
+import { PatientOnlyRoute } from './../auth/guard/patient.guard';
+import { MakeAppointmentComponent, ViewAppointmentComponent } from './../role/patient/index';
 
 @NgModule({
     imports: [
@@ -16,18 +13,12 @@ import { SharedModule } from './shared.module';
         SharedModule
     ],
     declarations: [
-        // AppointmentAccordionComponent,
-        // AppointmentTableSelectionComponent,
         MakeAppointmentComponent,
-        ViewAppointmentComponent,
-        // MiniCalendarComponent,
-        // AppointmentTableCompactComponent
+        ViewAppointmentComponent
     ],
     exports: [
-        // AppointmentAccordionComponent,        
-        // AppointmentTableSelectionComponent,
         MakeAppointmentComponent,
-        ViewAppointmentComponent,
+        ViewAppointmentComponent
     ],
     providers: [
         PatientOnlyRoute
