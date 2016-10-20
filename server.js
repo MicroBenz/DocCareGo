@@ -23,22 +23,10 @@ app.get('/', function (req, res) {
     res.sendfile(__dirname + '/web/dist/index.html');
 });
 
-app.get('/api/v1/test', function (req, res) {
-    res.json({
-        message: 'text'
-    });
-});
-
-app.post('/api/v1/test', function (req, res) {
-    res.json({
-        message: 'POST COMPLETED'
-    });
-});
-
 var mongoose = require('mongoose');
 var database = process.env.DB_HOST;
 mongoose.connect(database);
 mongoose.Promise = global.Promise;
 
-require('./server/api/main.api')(app, express);
+require('./server/main.api')(app, express);
 module.exports = app;
