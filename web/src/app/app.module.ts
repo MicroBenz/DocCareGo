@@ -29,7 +29,13 @@ import { AdminOnlyRoute, PatientOnlyRoute, NurseOnlyRoute, DoctorOnlyRoute, Phar
 
 // Service
 import { AuthService } from './shared/service/auth.service';
-
+import { PatientModule } from './module/patient.module';
+import { DoctorModule } from './module/doctor.module';
+import { NurseModule } from './module/nurse.module';
+import { PharmacistModule } from './module/pharmacist.module';
+import { StaffModule } from './module/staff.module';
+import { AdminModule } from './module/admin.module';
+import { SharedModule } from './module/shared.module';
 
 @NgModule({
     bootstrap: [
@@ -44,53 +50,60 @@ import { AuthService } from './shared/service/auth.service';
         /* Auth Components */
         LoginComponent,
         RegisterComponent,
-
+        
         /* Shared Components */
-        MiniCalendarComponent,
-        SearchBoxComponent,
-        PatientListComponent,
-        FullCalendarComponent,        
+        // MiniCalendarComponent,
+        // SearchBoxComponent,
+        // PatientListComponent,
+        // FullCalendarComponent,        
 
         /* Shared Components -> Appointment related */
-        MakeAppointmentFormComponent,
-        AppointmentTableCompactComponent,
-        AppointmentTableComponent,        
+        // MakeAppointmentFormComponent,
+        // AppointmentTableCompactComponent,
+        // AppointmentTableComponent,        
 
         /* Patient Components */
-        MakeAppointmentComponent,        
-        ViewAppointmentComponent,        
-        AppointmentTableSelectionComponent,
-        AppointmentAccordionComponent,
+        // MakeAppointmentComponent,        
+        // ViewAppointmentComponent,        
+        // AppointmentTableSelectionComponent,
+        // AppointmentAccordionComponent,
 
         /* Staff Components */
-        AppointmentManagementComponent,
-        MakeAppointmentByStaffComponent,
+        // AppointmentManagementComponent,
+        // MakeAppointmentByStaffComponent,
 
         /* Nurse Components */
-        ViewTodayPatientComponent,
-        PatientListComponent,
-        RecordPatientDetailComponent,
+        // ViewTodayPatientComponent,
+        // PatientListComponent,
+        // RecordPatientDetailComponent,
 
         /* Pharmacist Components */
-        ViewTodayPrescriptionComponent,
-        PatientPrescriptionComponent,
+        // ViewTodayPrescriptionComponent,
+        // PatientPrescriptionComponent,
 
         /* Doctor Components */
-        ManageWorkdayComponent
+        // ManageWorkdayComponent
     ],
     imports: [
         BrowserModule,
         FormsModule,
         HttpModule,
-        routing
+        routing,
+        SharedModule,
+        PatientModule,
+        DoctorModule,
+        NurseModule,
+        PharmacistModule,
+        StaffModule,
+        AdminModule
     ],
     providers: [
-        AdminOnlyRoute,
-        PatientOnlyRoute,
-        DoctorOnlyRoute,
-        NurseOnlyRoute,
-        PharmacistOnlyRoute,
-        StaffOnlyRoute,
+        // AdminOnlyRoute,
+        // PatientOnlyRoute,
+        // DoctorOnlyRoute,
+        // NurseOnlyRoute,
+        // PharmacistOnlyRoute,
+        // StaffOnlyRoute,
         NonLoggedInRoute,
         JwtHelper,
         provideAuth({
