@@ -13,7 +13,8 @@
                         'doctor-role': userRole === 'doctor',
                         'nurse-role': userRole === 'nurse',
                         'officer-role': userRole === 'staff',
-                        'pharmacist-role': userRole === 'pharmacist'
+                        'pharmacist-role': userRole === 'pharmacist',
+                        'admin-role': userRole === 'admin'
                     }">
                     <div class="profile-circle">
                         <a>{{userName.substring(0,1)}}</a>
@@ -76,6 +77,18 @@
             <a class="nav-item is-tab"
                 routerLink="/pharmacist/view-prescription"
                 routerLinkActive="is-active"><i class="fa fa-medkit"></i> ดูรายการสั่งยาวันนี้</a>
+        </div>
+
+        <div class="nav-left admin-role" *ngIf="userRole === 'admin'">
+            <a class="nav-item is-tab"
+                routerLink="/admin/staff-management"
+                routerLinkActive="is-active"><i class="fa fa-users"></i> จัดการข้อมูลบุคลากร</a>
+            <a class="nav-item is-tab"
+                routerLink="/admin/medical-management"
+                routerLinkActive="is-active"><i class="fa fa fa-medkit"></i> จัดการข้อมูลยา</a>
+            <a class="nav-item is-tab"
+                routerLink="/admin/clinic-management"
+                routerLinkActive="is-active"><i class="fa fa-hospital-o"></i> จัดการข้อมูลแผนก</a>
         </div>
     </div>
 </nav>

@@ -25,7 +25,7 @@ import { FullCalendarComponent } from './shared/calendar/full.calendar.component
 
 // Routing
 import { routing, appRoutingProviders } from './app.routing';
-import { PatientOnlyRoute, NurseOnlyRoute, DoctorOnlyRoute, PharmacistOnlyRoute, StaffOnlyRoute, NonLoggedInRoute } from './auth/guard/index';
+import { AdminOnlyRoute, PatientOnlyRoute, NurseOnlyRoute, DoctorOnlyRoute, PharmacistOnlyRoute, StaffOnlyRoute, NonLoggedInRoute } from './auth/guard/index';
 
 // Service
 import { AuthService } from './shared/service/auth.service';
@@ -85,6 +85,7 @@ import { AuthService } from './shared/service/auth.service';
         routing
     ],
     providers: [
+        AdminOnlyRoute,
         PatientOnlyRoute,
         DoctorOnlyRoute,
         NurseOnlyRoute,

@@ -21,7 +21,7 @@ import { ViewTodayPrescriptionComponent } from './role/pharmacist/index';
 import { ManageWorkdayComponent } from './role/doctor/index';
 
 // Auth Guard
-import { PatientOnlyRoute, DoctorOnlyRoute, NurseOnlyRoute, StaffOnlyRoute, PharmacistOnlyRoute, NonLoggedInRoute } from './auth/guard/index';
+import { AdminOnlyRoute, PatientOnlyRoute, DoctorOnlyRoute, NurseOnlyRoute, StaffOnlyRoute, PharmacistOnlyRoute, NonLoggedInRoute } from './auth/guard/index';
 
 const appRoutes: Routes = [
     {
@@ -144,6 +144,29 @@ const appRoutes: Routes = [
             {
                 path: 'view-prescription',
                 component: ViewTodayPrescriptionComponent
+            }
+        ]
+    },
+    {
+        path: 'admin',
+        component: AppComponentWithNavComponent,
+        canActivate: [
+            AdminOnlyRoute
+        ],
+        children: [
+            {
+                path: '',
+                redirectTo: '/admin/staff-management',
+                pathMatch: 'full'
+            },
+            {
+                path: 'staff-management',
+            },
+            {
+                path: 'medical-management',
+            },
+            {
+                path: 'clinic-management'
             }
         ]
     }

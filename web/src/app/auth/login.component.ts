@@ -81,7 +81,7 @@ export class LoginComponent {
 
     private login () {
         //TODO: Made Login
-        if (this.usr === 'patient' || this.usr === 'doctor' || this.usr === 'staff' || this.usr ==='nurse' || this.usr === 'pharmacist') {
+        if (this.usr === 'patient' || this.usr === 'doctor' || this.usr === 'staff' || this.usr ==='nurse' || this.usr === 'pharmacist' || this.usr === 'admin') {
             this.isLoginFail = false;
             this.authService.makeLogin(this.usr, this.pwd)
                 .subscribe((data) => {

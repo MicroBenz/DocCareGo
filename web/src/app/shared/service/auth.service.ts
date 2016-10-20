@@ -12,7 +12,7 @@ export class AuthService {
     // Authenticate with Server-Side
     public makeLogin (usr: string, pwd: string) {
         //TODO: Call API for make login and get/set JWT Token
-        if (usr === 'patient' || usr === 'doctor' || usr === 'staff' || usr ==='nurse' || usr === 'pharmacist') {
+        if (usr === 'patient' || usr === 'doctor' || usr === 'staff' || usr ==='nurse' || usr === 'pharmacist' || usr === 'admin') {
             return this.http.post(LOGIN_ENDPOINT, {
                 username: 'John',
                 role: usr

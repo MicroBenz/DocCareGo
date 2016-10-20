@@ -51,6 +51,7 @@ export class NavComponent {
     public userRoleDisplay: string;
     public userName: string;
     private roleMapping = {
+        'admin': 'ผู้ดูแลระบบ',
         'patient': 'ผู้ป่วย',
         'doctor': 'แพทย์',
         'nurse': 'พยาบาล',
