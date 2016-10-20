@@ -15,7 +15,8 @@
     ],
     "types": [
       "node",
-      "jquery"
+      "jquery",
+      "fullcalendar"
     ]
   },
   "exclude": [

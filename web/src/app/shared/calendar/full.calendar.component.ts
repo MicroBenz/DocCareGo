@@ -6,7 +6,15 @@ import { Component, AfterViewInit } from '@angular/core';
 
 export class FullCalendarComponent implements AfterViewInit {
     ngAfterViewInit () {
-        jQuery('#calendar').fullCalendar({});
+        jQuery('#calendar').fullCalendar({
+            dayClick: function () {
+                alert('clicked');
+            }
+        });
+
+        jQuery('#calendar .fc-toolbar .fc-right button')
+            .removeClass()
+            .addClass('button');
     }
     
 }

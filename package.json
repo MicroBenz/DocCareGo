@@ -44,6 +44,7 @@
     "zone.js": "^0.6.23"
   },
   "devDependencies": {
+    "@types/fullcalendar": "^2.7.34",
     "@types/jquery": "^2.0.33",
     "@types/node": "^6.0.45",
     "angular2-template-loader": "^0.5.0",
