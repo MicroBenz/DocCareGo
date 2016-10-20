@@ -163,7 +163,7 @@ const appRoutes: Routes = [
                 path: 'staff-management',
             },
             {
-                path: 'medical-management',
+                path: 'medicine-management',
             },
             {
                 path: 'clinic-management'
