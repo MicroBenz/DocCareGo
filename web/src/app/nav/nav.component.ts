@@ -12,7 +12,7 @@ import { PATIENT_ROLE_NAV, DOCTOR_ROLE_NAV, NURSE_ROLE_NAV, PHARMACIST_ROLE_NAV,
             right: 0;
             left: 0;
             top: 0;
-            z-index: 9999;
+            z-index: 555;
         }
         .top-nav > .container{
             border-bottom: 1px solid #f3f3f3;
