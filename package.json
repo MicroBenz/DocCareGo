@@ -4,9 +4,9 @@
   "description": "DocCare Go: Hospital Appointment System - Software Engineering Term Project",
   "main": "server.js",
   "scripts": {
-    "install": "webpack --progress",
-    "build:dev": "webpack --progress",
-    "build:prod": "webpack --config webpack.prod.js --progress"
+    "build:dev": "node_modules/webpack/bin/webpack.js --progress",
+    "build:prod": "node_modules/webpack/bin/webpack.js --config webpack.prod.js --progress",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
