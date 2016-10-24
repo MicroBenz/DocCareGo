@@ -35,3 +35,6 @@
     </div>
     <a class="button is-success">บันทึกข้อมูล</a>
 </div>
+<div *ngIf="(patient | json) == '{}'">
+    <h1>เลือกผู้ป่วยที่ต้องการบันทึกข้อมูลทางด้านซ้าย</h1>
+</div>
