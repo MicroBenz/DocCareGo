@@ -1,8 +1,13 @@
 <div class="container">
     <div class="box">
-        <search-box
-            [searchBoxLabel]="'ค้นหาบุคลากร โดยพิมพ์ชื่อ-นามสกุล หรือรหัสประจำตัวบุคลากร'">
-        </search-box>
+        <div class="search-box-wrapper">
+            <search-box
+                [searchBoxLabel]="'ค้นหาบุคลากร โดยพิมพ์ชื่อ-นามสกุล หรือรหัสประจำตัวบุคลากร'">
+            </search-box>
+        </div>
+        <div class="add-button-wrapper">
+            <a class="button is-info"><i class="fa fa-plus-circle"></i> เพิ่มบุคลากรโรงพยาบาล</a>            
+        </div>
     </div>
     <div class="box">
         <personnel-table

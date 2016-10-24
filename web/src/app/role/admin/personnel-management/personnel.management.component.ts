@@ -9,6 +9,17 @@ import { PERSONNEL_MANAGEMENT_TITLE } from '../../../config/title.config';
         .container {
             margin-top: 13px;
         }
+        .search-box-wrapper {
+            display: inline-block;
+            width: 69%;
+            margin-right: 10px;
+        }
+        .add-button-wrapper {
+            display: inline-block;
+        }
+        .add-button-wrapper .fa {
+            padding-right: 5px;
+        }
     `]
 })
 export class PersonnelManagementComponent implements OnInit {
