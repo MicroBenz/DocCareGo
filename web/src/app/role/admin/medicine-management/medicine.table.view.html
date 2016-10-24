@@ -1,0 +1,28 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th>รหัสยา</th>
+            <th>ชื่อยา</th>                     
+            <th class="action-column"></th>         
+        </tr>
+    </thead>
+    <tbody *ngIf="medicineList.length !== 0">
+        <tr *ngFor="let medicine of medicineList;">
+            <td>{{medicine.id}}</td>
+            <td>{{medicine.name}}</td>
+            <td>
+                <a class="button is-primary"
+                    (click)="editInfo(medicine.id)">
+                    <i class="fa fa-pencil"></i>แก้ไขข้อมูล</a>
+                <a class="button is-danger"
+                    (click)="deleteItem(medicine.id)">
+                    <i class="fa fa-trash"></i>ลบข้อมูล</a>
+            </td>            
+        </tr>
+    </tbody>
+    <tbody *ngIf="medicineList.length === 0">
+        <tr>
+            <td colspan="2">ไม่พบข้อมูลยา</td>
+        </tr>
+    </tbody>
+</table>

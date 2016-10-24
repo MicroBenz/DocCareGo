@@ -1,7 +1,9 @@
 <div class="container">
-    <search-box
-        [searchBoxLabel]="'ค้นหาการนัดหมาย โดยพิมพ์ชื่อ-นามสกุลผู้ป่วย หรือรหัสการนัดหมาย'">
-    </search-box>
+    <div class="box">
+        <search-box
+            [searchBoxLabel]="'ค้นหาการนัดหมาย โดยพิมพ์ชื่อ-นามสกุลผู้ป่วย หรือรหัสการนัดหมาย'">
+        </search-box>
+    </div>
     <div class="box">
         <appointment-table
             [appointmentList]="appointmentList"

@@ -86,7 +86,7 @@ export const ADMIN_ROLE_NAV = {
     class: 'admin-role',
     links : [
         {
-            url: rootPath.admin + 'staff-management',
+            url: rootPath.admin + 'personnel-management',
             iconClass: 'fa fa-users',
             text: 'จัดการข้อมูลบุคลากร'
         },

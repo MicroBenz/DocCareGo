@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { MANAGE_APPOINTMENT_TITLE } from './../../config/title.config';
 
@@ -15,86 +15,89 @@ import { MANAGE_APPOINTMENT_TITLE } from './../../config/title.config';
         }
     `]
 })
-export class AppointmentManagementComponent {
-    constructor(private title: Title) {
-        title.setTitle(MANAGE_APPOINTMENT_TITLE);
+export class AppointmentManagementComponent implements OnInit {
+    constructor(private title: Title) {}
+    
+    public appointmentList;
+
+    ngOnInit () {
+        this.appointmentList = [
+            {
+                id: 1,
+                patient: 'นายธนนันท์ ตั้งธนาชัยกุล',
+                doctor: 'นายแพทย์ธีรัช รักษ์เถา',
+                clinic: 'ทางเดินอาหารและตับ',
+                date: '13/10/2559',
+                time: '13:00 - 13:30'
+            },
+            {
+                id: 2,
+                patient: 'นายณัฐนัย จารย์อิ้ง',
+                doctor: 'นายแพทย์ธนนันท์ ตั้งธนาชัยกุล',
+                clinic: 'ทางเดินอาหารและตับ',
+                date: '13/10/2559',
+                time: '13:00 - 13:30'
+            },
+            {
+                id: 3,
+                patient: 'นายธนวัฒน์ เค้าฉลองเคียง',
+                doctor: 'นายแพทย์ธีรัช รักษ์เถา',
+                clinic: 'ทางเดินอาหารและตับ',
+                date: '13/10/2559',
+                time: '13:00 - 13:30'
+            },
+            {
+                id: 4,
+                patient: 'นายธนวัฒน์ เค้าฉลองเคียง',
+                doctor: 'นายแพทย์ธีรัช รักษ์เถา',
+                clinic: 'ทางเดินอาหารและตับ',
+                date: '13/10/2559',
+                time: '13:00 - 13:30'
+            },
+            {
+                id: 5,
+                patient: 'นายธนวัฒน์ เค้าฉลองเคียง',
+                doctor: 'นายแพทย์ธีรัช รักษ์เถา',
+                clinic: 'ทางเดินอาหารและตับ',
+                date: '13/10/2559',
+                time: '13:00 - 13:30'
+            },
+            {
+                id: 6,
+                patient: 'นายธนวัฒน์ เค้าฉลองเคียง',
+                doctor: 'นายแพทย์ธีรัช รักษ์เถา',
+                clinic: 'ทางเดินอาหารและตับ',
+                date: '13/10/2559',
+                time: '13:00 - 13:30'
+            },
+            {
+                id: 7,
+                patient: 'นายธนวัฒน์ เค้าฉลองเคียง',
+                doctor: 'นายแพทย์ธีรัช รักษ์เถา',
+                clinic: 'ทางเดินอาหารและตับ',
+                date: '13/10/2559',
+                time: '13:00 - 13:30'
+            },
+            {
+                id: 8,
+                patient: 'นายธนวัฒน์ เค้าฉลองเคียง',
+                doctor: 'นายแพทย์ธีรัช รักษ์เถา',
+                clinic: 'ทางเดินอาหารและตับ',
+                date: '13/10/2559',
+                time: '13:00 - 13:30'
+            },
+            {
+                id: 9,
+                patient: 'นายธนวัฒน์ เค้าฉลองเคียง',
+                doctor: 'นายแพทย์ธีรัช รักษ์เถา',
+                clinic: 'ทางเดินอาหารและตับ',
+                date: '13/10/2559',
+                time: '13:00 - 13:30'
+            }
+        ]
+        this.title.setTitle(MANAGE_APPOINTMENT_TITLE);
     }
     
-    private appointmentList = [
-        {
-            id: 1,
-            patient: 'นายธนนันท์ ตั้งธนาชัยกุล',
-            doctor: 'นายแพทย์ธีรัช รักษ์เถา',
-            clinic: 'ทางเดินอาหารและตับ',
-            date: '13/10/2559',
-            time: '13:00 - 13:30'
-        },
-        {
-            id: 2,
-            patient: 'นายณัฐนัย จารย์อิ้ง',
-            doctor: 'นายแพทย์ธนนันท์ ตั้งธนาชัยกุล',
-            clinic: 'ทางเดินอาหารและตับ',
-            date: '13/10/2559',
-            time: '13:00 - 13:30'
-        },
-        {
-            id: 3,
-            patient: 'นายธนวัฒน์ เค้าฉลองเคียง',
-            doctor: 'นายแพทย์ธีรัช รักษ์เถา',
-            clinic: 'ทางเดินอาหารและตับ',
-            date: '13/10/2559',
-            time: '13:00 - 13:30'
-        },
-        {
-            id: 4,
-            patient: 'นายธนวัฒน์ เค้าฉลองเคียง',
-            doctor: 'นายแพทย์ธีรัช รักษ์เถา',
-            clinic: 'ทางเดินอาหารและตับ',
-            date: '13/10/2559',
-            time: '13:00 - 13:30'
-        },
-        {
-            id: 5,
-            patient: 'นายธนวัฒน์ เค้าฉลองเคียง',
-            doctor: 'นายแพทย์ธีรัช รักษ์เถา',
-            clinic: 'ทางเดินอาหารและตับ',
-            date: '13/10/2559',
-            time: '13:00 - 13:30'
-        },
-        {
-            id: 6,
-            patient: 'นายธนวัฒน์ เค้าฉลองเคียง',
-            doctor: 'นายแพทย์ธีรัช รักษ์เถา',
-            clinic: 'ทางเดินอาหารและตับ',
-            date: '13/10/2559',
-            time: '13:00 - 13:30'
-        },
-        {
-            id: 7,
-            patient: 'นายธนวัฒน์ เค้าฉลองเคียง',
-            doctor: 'นายแพทย์ธีรัช รักษ์เถา',
-            clinic: 'ทางเดินอาหารและตับ',
-            date: '13/10/2559',
-            time: '13:00 - 13:30'
-        },
-        {
-            id: 8,
-            patient: 'นายธนวัฒน์ เค้าฉลองเคียง',
-            doctor: 'นายแพทย์ธีรัช รักษ์เถา',
-            clinic: 'ทางเดินอาหารและตับ',
-            date: '13/10/2559',
-            time: '13:00 - 13:30'
-        },
-        {
-            id: 9,
-            patient: 'นายธนวัฒน์ เค้าฉลองเคียง',
-            doctor: 'นายแพทย์ธีรัช รักษ์เถา',
-            clinic: 'ทางเดินอาหารและตับ',
-            date: '13/10/2559',
-            time: '13:00 - 13:30'
-        }
-    ]
-
     postponeAppointment (id) {
         // TODO: Navigate to postpone appointment
         console.log('[AppointmentManagementComponent] postpone id = ', id);
