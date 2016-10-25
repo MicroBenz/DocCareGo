@@ -30,6 +30,7 @@ module.exports = {
             },
             {
                 test: /\.css$/,
+                exclude: './web/src/app',
                 loader: ExtractTextPlugin.extract({
                     fallbackLoader: "style-loader",
                     loader:  "css-loader"
@@ -76,6 +77,9 @@ module.exports = {
             ]
         )
     ],
+    watchOptions: {
+        aggregateTimeout: 2000
+    },
     output: {
         path: './web/dist',
         filename: '[name].bundle.js',

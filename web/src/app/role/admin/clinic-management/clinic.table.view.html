@@ -1,0 +1,26 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th>ชื่อคลินิก</th>                         
+            <th class="action-column"></th>         
+        </tr>
+    </thead>
+    <tbody *ngIf="clinics.length !== 0">
+        <tr *ngFor="let clinic of clinics;">
+            <td>{{clinic.name}}</td>
+            <td>
+                <a class="button is-primary"
+                    (click)="editClinicInfo(clinic.name)">
+                    <i class="fa fa-pencil"></i>แก้ไขข้อมูล</a>
+                <a class="button is-danger"
+                    (click)="deleteClinic(clinic.name)">
+                    <i class="fa fa-trash"></i>ลบข้อมูล</a>
+            </td>            
+        </tr>
+    </tbody>
+    <tbody *ngIf="clinics.length === 0">
+        <tr>
+            <td colspan="2">ไม่พบข้อมูลคลินิก</td>
+        </tr>
+    </tbody>
+</table>

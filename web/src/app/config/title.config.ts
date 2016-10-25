@@ -1,4 +1,4 @@
-const TITLE_POSTFIX: string = ' - DocCare GO';
+const TITLE_POSTFIX: string = ' - DocCare Go';
 // Auth Route
 export const LOGIN_TITLE: string = 'เข้าสู่ระบบ' + TITLE_POSTFIX;
 export const REGISTER_TITLE: string = 'ลงทะเบียน' + TITLE_POSTFIX;

@@ -45,6 +45,19 @@ import { PATIENT_ROLE_NAV, DOCTOR_ROLE_NAV, NURSE_ROLE_NAV, PHARMACIST_ROLE_NAV,
         .button {
             border-radius: 3px;
         }
+        .logout-modal .modal-card .modal-card-body {
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+            text-align: center;            
+        }
+        .logout-modal .modal-card .modal-card-body img {
+            width: 150px;
+            margin-bottom: 15px; 
+        }
+        .logout-modal .modal-card .modal-card-foot {
+            justify-content: center;
+            align-items: center;
+        }
     `]
 })
 export class NavComponent {
@@ -64,16 +77,6 @@ export class NavComponent {
 
 
     constructor(private authService: AuthService, private jwtHelper: JwtHelper) {
-        // console.log(PATIENT_ROLE_NAV);
-        // console.log(window.localStorage['doccareGoToken']);
-        // if (window.localStorage['doccareGoToken'] === undefined || window.localStorage['doccareGoToken'] === null) {
-        //     console.error('No row');
-        // }
-        // else {
-        //     let user = this.jwtHelper.decodeToken(window.localStorage['doccareGoToken']);
-        //     this.userRole = user.role;
-        //     this.userRoleDisplay = this.roleMapping[this.userRole];
-        // }
         this.userName = 'จอห์น';
         let role = authService.getUserRole();
         this.userRoleDisplay = this.roleMapping[role];

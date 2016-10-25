@@ -17,7 +17,7 @@
                 </div>
             </span>
             <span class="nav-item">
-                <a class="button is-danger" (click)="logout()">
+                <a class="button is-danger" (click)="showLogout=true">
                     <span class="icon">
                         <i class="fa fa-power-off"></i>
                     </span>
@@ -39,3 +39,19 @@
         </div>
     </div>
 </nav>
+
+<div class="modal logout-modal" [class.is-active]="showLogout">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+        <section class="modal-card-body">
+            <img src="../../assets/img/modal/warning.png">
+            <h1 class="title">คุณต้องการออกจากระบบหรือไม่?</h1>
+        </section>
+        <footer class="modal-card-foot">
+            <a class="button is-danger"
+                (click)="logout()">ออกจากระบบ</a>
+            <a class="button"
+                (click)="showLogout = false">กลับ</a>
+        </footer>
+    </div>
+</div>

@@ -2,7 +2,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ModuleWithProviders } from '@angular/core';
 
 // Apps Components
-import { AppComponent, AppComponentWithNavComponent } from './main/index';
+import { AppComponentWithNavComponent } from './main/index';
 import { LoginComponent, RegisterComponent } from './auth/index';
 
 // Patient Components
@@ -23,7 +23,7 @@ import { ManageWorkdayComponent } from './role/doctor/index';
 // Admin Component
 import { PersonnelManagementComponent } from './role/admin/personnel-management/index';
 import { MedicineManagementComponent } from './role/admin/medicine-management/index';
-
+import { ClinicManagementComponent } from './role/admin/clinic-management/index';
 // Auth Guard
 import { AdminOnlyRoute, PatientOnlyRoute, DoctorOnlyRoute, NurseOnlyRoute, StaffOnlyRoute, PharmacistOnlyRoute, NonLoggedInRoute } from './auth/guard/index';
 
@@ -172,7 +172,8 @@ const appRoutes: Routes = [
                 component: MedicineManagementComponent
             },
             {
-                path: 'clinic-management'
+                path: 'clinic-management',
+                component: ClinicManagementComponent
             }
         ]
     }

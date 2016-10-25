@@ -6,6 +6,7 @@ import { SharedModule } from './shared.module';
 import { AdminOnlyRoute } from './../auth/guard/admin.guard';
 import { PersonnelManagementComponent, PersonnelTableComponent } from '../role/admin/personnel-management/index';
 import { MedicineManagementComponent, MedicineTableComponent } from '../role/admin/medicine-management/index';
+import { ClinicManagementComponent, ClinicTableComponent } from '../role/admin/clinic-management/index';
 
 @NgModule({
     imports: [
@@ -17,11 +18,14 @@ import { MedicineManagementComponent, MedicineTableComponent } from '../role/adm
         PersonnelManagementComponent,
         PersonnelTableComponent,
         MedicineManagementComponent,
-        MedicineTableComponent
+        MedicineTableComponent,
+        ClinicManagementComponent,
+        ClinicTableComponent
     ],
     exports: [
         PersonnelManagementComponent,
-        MedicineManagementComponent      
+        ClinicManagementComponent,
+        MedicineManagementComponent,  
     ],
     providers: [
         AdminOnlyRoute
