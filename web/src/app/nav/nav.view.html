@@ -41,6 +41,10 @@
 </nav>
 
 <modal-dialog
+    [description]="'คุณต้องการออกจากระบบหรือไม่'"
+    [confirmText]="'ออกจากระบบ'"
+    [cancelText]="'กลับ'"
     [isShowFlag]="showLogout"
-    (isShowFlagChange)="showLogout = $event">
+    (isShowFlagChange)="showLogout = $event"
+    [confirmFn]="logout()">
 </modal-dialog>

@@ -45,19 +45,6 @@ import { PATIENT_ROLE_NAV, DOCTOR_ROLE_NAV, NURSE_ROLE_NAV, PHARMACIST_ROLE_NAV,
         .button {
             border-radius: 3px;
         }
-        .logout-modal .modal-card .modal-card-body {
-            border-top-left-radius: 5px;
-            border-top-right-radius: 5px;
-            text-align: center;            
-        }
-        .logout-modal .modal-card .modal-card-body img {
-            width: 150px;
-            margin-bottom: 15px; 
-        }
-        .logout-modal .modal-card .modal-card-foot {
-            justify-content: center;
-            align-items: center;
-        }
     `]
 })
 export class NavComponent implements OnInit {
@@ -108,6 +95,9 @@ export class NavComponent implements OnInit {
     }
 
     logout () {
-        this.authService.makeLogout();
+        return () => {
+            console.log('hello world');
+            this.authService.makeLogout();
+        }
     }
 }
