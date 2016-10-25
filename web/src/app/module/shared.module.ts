@@ -7,6 +7,8 @@ import { AppointmentTableSelectionComponent, AppointmentAccordionComponent } fro
 import { MakeAppointmentFormComponent, AppointmentTableCompactComponent } from './../shared/appointment/index';
 import { PatientListComponent, MiniCalendarComponent, SearchBoxComponent } from './../shared/component/index';
 import { FullCalendarComponent } from './../shared/calendar/full.calendar.component';
+import { ModalComponent } from './../shared/modal/modal.component';
+
 @NgModule({
     imports: [
         CommonModule,
@@ -23,7 +25,8 @@ import { FullCalendarComponent } from './../shared/calendar/full.calendar.compon
         MiniCalendarComponent,
         SearchBoxComponent,
         PatientListComponent,
-        FullCalendarComponent
+        FullCalendarComponent,
+        ModalComponent
     ],
     exports: [
         MakeAppointmentFormComponent,
@@ -33,7 +36,8 @@ import { FullCalendarComponent } from './../shared/calendar/full.calendar.compon
         MiniCalendarComponent,
         SearchBoxComponent,
         PatientListComponent,
-        FullCalendarComponent        
+        FullCalendarComponent,
+        ModalComponent      
     ]
 })
 export class SharedModule {}

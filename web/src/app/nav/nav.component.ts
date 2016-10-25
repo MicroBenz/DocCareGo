@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from './../shared/service/auth.service';
 import { JwtHelper } from 'angular2-jwt';
 import { PATIENT_ROLE_NAV, DOCTOR_ROLE_NAV, NURSE_ROLE_NAV, PHARMACIST_ROLE_NAV, STAFF_ROLE_NAV, ADMIN_ROLE_NAV } from './../config/nav.config';
@@ -60,7 +60,7 @@ import { PATIENT_ROLE_NAV, DOCTOR_ROLE_NAV, NURSE_ROLE_NAV, PHARMACIST_ROLE_NAV,
         }
     `]
 })
-export class NavComponent {
+export class NavComponent implements OnInit {
     public userRole: string;
     public userRoleDisplay: string;
     public userName: string;
@@ -76,9 +76,11 @@ export class NavComponent {
     }
 
 
-    constructor(private authService: AuthService, private jwtHelper: JwtHelper) {
+    constructor(private authService: AuthService, private jwtHelper: JwtHelper) {}
+
+    ngOnInit () {
         this.userName = 'จอห์น';
-        let role = authService.getUserRole();
+        let role = this.authService.getUserRole();
         this.userRoleDisplay = this.roleMapping[role];
         switch (role) {
             case 'patient':
