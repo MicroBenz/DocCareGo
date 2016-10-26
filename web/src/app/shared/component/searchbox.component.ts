@@ -11,7 +11,9 @@ import 'rxjs/add/operator/distinctUntilChanged';
         <p class="control has-icon has-icon-right">
             <input class="input" type="text" placeholder=""
                 [formControl]="searchKeyControl">
-            <i class="fa fa-spinner"></i>
+            <i class="fa" *ngIf="isSearching">
+                <img src="assets/img/loading.gif">
+            </i>
         </p>
     `,
     styles: [`
@@ -26,19 +28,25 @@ export class SearchBoxComponent implements OnInit {
     @Output('onSearchResult') onSearchResult = new EventEmitter();
 
     public searchKeyControl = new FormControl();
+    public isSearching = false;
     ngOnInit () {
         this.searchKeyControl.valueChanges
             .debounceTime(500)
             .distinctUntilChanged()
             .flatMap(
                 (searchKey) => {
+                    this.isSearching = true;
                     return this.serviceFn(searchKey);
                 }
             )
             .subscribe(
                 (searchResult) => {
+                    this.isSearching = false;
                     console.log('RES ', searchResult);
                     this.onSearchResult.emit(searchResult);
+                },
+                (error) => {
+                    console.log('Search Error: ', error);
                 }
             )
     }

@@ -31,14 +31,7 @@ export class PersonnelManagementComponent implements OnInit {
 
     ngOnInit () {
         this.title.setTitle(PERSONNEL_MANAGEMENT_TITLE);
-        this.personnelList = [
-            {
-                id: 555,
-                name: 'ธนนันท์',
-                surname: 'ตั้งธนาชัยกุล',
-                role: 'patient'
-            }
-        ]
+        this.personnelList = [];
     }
 
     searchFunction () {

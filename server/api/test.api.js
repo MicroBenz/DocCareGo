@@ -27,29 +27,33 @@ function getTestError (req, res) {
 
 function getSearch (req, res) {
     setTimeout(function () {
+        var personnelArr = [];
+        if (req.query.search !== '') {
+            personnelArr = [
+                {
+                    id: req.query.search,
+                    name: 'ธนนันท์',
+                    surname: 'ตั้งธนาชัยกุล',
+                    role: 'staff'
+                },
+                {
+                    id: req.query.search + '1',
+                    name: 'ธีรัช',
+                    surname: 'รักษ์เถา',
+                    role: 'doctor'
+                },
+                {
+                    id: req.query.search + '2',
+                    name: 'ธนวัฒน์',
+                    surname: 'เค้าฉลองเคียง',
+                    role: 'patient'
+                }
+            ]
+        }
         res.json({
             success: true,
             result: {
-                personnel: [
-                    {
-                        id: req.query.search,
-                        name: 'ธนนันท์',
-                        surname: 'ตั้งธนาชัยกุล',
-                        role: 'staff'
-                    },
-                    {
-                        id: req.query.search + '1',
-                        name: 'ธีรัช',
-                        surname: 'รักษ์เถา',
-                        role: 'doctor'
-                    },
-                    {
-                        id: req.query.search + '2',
-                        name: 'ธนวัฒน์',
-                        surname: 'เค้าฉลองเคียง',
-                        role: 'patient'
-                    }
-                ]
+                personnel: personnelArr
             }
         })
     }, 1000);
