@@ -30,6 +30,8 @@ export class SearchBoxComponent implements OnInit {
     public searchKeyControl = new FormControl();
     public isSearching = false;
     ngOnInit () {
+        if (this.serviceFn === undefined)
+            return;
         this.searchKeyControl.valueChanges
             .debounceTime(500)
             .distinctUntilChanged()
