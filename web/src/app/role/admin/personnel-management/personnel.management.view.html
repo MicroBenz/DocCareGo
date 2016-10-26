@@ -2,7 +2,9 @@
     <div class="box">
         <div class="search-box-wrapper">
             <search-box
-                [searchBoxLabel]="'ค้นหาบุคลากร โดยพิมพ์ชื่อ-นามสกุล หรือรหัสประจำตัวบุคลากร'">
+                [searchBoxLabel]="'ค้นหาบุคลากร โดยพิมพ์ชื่อ-นามสกุล หรือรหัสประจำตัวบุคลากร'"
+                [serviceFn]="searchFunction()"
+                (onSearchResult)="onSearchResult($event)">
             </search-box>
         </div>
         <div class="add-button-wrapper">

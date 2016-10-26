@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { PERSONNEL_MANAGEMENT_TITLE } from '../../../config/title.config';
+import { Http } from '@angular/http';
+import { Observable } from 'rxjs/Rx';
+import { TestService } from '../../../shared/service/test.service';
 
 @Component({
     selector: 'personnel-management',
@@ -24,7 +27,8 @@ import { PERSONNEL_MANAGEMENT_TITLE } from '../../../config/title.config';
 })
 export class PersonnelManagementComponent implements OnInit {
     public personnelList;
-    constructor (private title: Title) {}
+    constructor (private title: Title, private http: Http, private testService: TestService) {}
+
     ngOnInit () {
         this.title.setTitle(PERSONNEL_MANAGEMENT_TITLE);
         this.personnelList = [
@@ -35,6 +39,15 @@ export class PersonnelManagementComponent implements OnInit {
                 role: 'patient'
             }
         ]
-        console.log(this.personnelList);
+    }
+
+    searchFunction () {
+        return (key) => {
+            return this.testService.getSearchByKey(key);
+        }
+    }
+
+    onSearchResult (searchResult) {
+        this.personnelList = searchResult.result.personnel;
     }
 }

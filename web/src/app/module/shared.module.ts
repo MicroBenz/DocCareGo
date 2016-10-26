@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 import { AppointmentTableSelectionComponent, AppointmentAccordionComponent } from './../role/patient/index';
@@ -12,7 +12,8 @@ import { ModalComponent } from './../shared/modal/modal.component';
 @NgModule({
     imports: [
         CommonModule,
-        FormsModule
+        FormsModule,
+        ReactiveFormsModule
     ],
     declarations: [
         // Appointment Related
