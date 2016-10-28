@@ -32,6 +32,11 @@ export const DOCTOR_ROLE_NAV = {
             text: 'จัดการวันออกตรวจ'
         },
         {
+            url: rootPath.doctor + 'add-workday',
+            iconClass: 'fa fa-calendar-plus-o',
+            text: 'เพิ่มวันออกตรวจ'
+        },
+        {
             url: rootPath.doctor + 'start-working',
             iconClass: 'fa fa-stethoscope',
             text: 'ตรวจผู้ป่วย'

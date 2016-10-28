@@ -86,6 +86,9 @@ const appRoutes: Routes = [
                 component: ManageWorkdayComponent
             },
             {
+                path: 'add-workday'
+            },
+            {
                 path: 'start-working'
             }
         ]
