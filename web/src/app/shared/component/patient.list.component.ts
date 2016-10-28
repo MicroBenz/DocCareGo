@@ -10,7 +10,6 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
         .patient-item {
             border-bottom: 1px solid #c8c7cc;
             margin-left: -20px;
-            margin-right: -20px;
             padding: 12px 20px 12px 20px;
         }
         .patient-item .time-circle {

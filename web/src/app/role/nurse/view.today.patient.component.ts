@@ -24,7 +24,8 @@ import { VIEW_TODAY_PATIENT_TITLE } from '../../config/title.config';
             border-top-right-radius: 0px;
             border-bottom-right-radius: 0px; 
             border-right: 1px solid #c8c7cc;  
-            padding-bottom: 0px;                     
+            padding-bottom: 0px;   
+            padding-right: 0px;                  
         }
         .patient-list-wrapper .patient-list-header, .patient-recorder-wrapper .patient-recorder-header {
             margin-left: -20px;
@@ -43,7 +44,7 @@ import { VIEW_TODAY_PATIENT_TITLE } from '../../config/title.config';
             height: 490px;
             overflow-y: scroll;
             margin-left: -20px;
-            margin-right: -35px;
+            margin-right: -20px;
             padding-left: 20px;
             padding-right: 20px;
         }

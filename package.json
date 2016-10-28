@@ -60,6 +60,7 @@
     "gulp": "^3.9.1",
     "gulp-develop-server": "^0.5.2",
     "html-webpack-plugin": "^2.22.0",
+    "less": "^2.7.1",
     "less-loader": "^2.2.3",
     "raw-loader": "^0.5.1",
     "style-loader": "^0.13.1",

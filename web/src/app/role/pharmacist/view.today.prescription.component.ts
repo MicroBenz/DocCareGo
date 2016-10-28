@@ -24,7 +24,8 @@ import { VIEW_PATIENT_PRESCRIPTION } from './../../config/title.config';
             border-top-right-radius: 0px;
             border-bottom-right-radius: 0px; 
             border-right: 1px solid #c8c7cc;  
-            padding-bottom: 0px;                     
+            padding-bottom: 0px;       
+            padding-right: 0px;              
         }
         .patient-list-wrapper .patient-list-header, .patient-prescription-wrapper .patient-prescription-header {
             margin-left: -20px;
