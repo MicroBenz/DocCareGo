@@ -26,7 +26,8 @@ export class ModalComponent {
     @Input('cancelText') cancelText = 'ยกเลิก';
     @Input('isShowFlag') isShowFlag = false;    
     @Output('isShowFlagChange') isShowFlagChange = new EventEmitter<boolean>();
-
+    @Output('onFunctionSucceed') onFunctionSucceed = new EventEmitter<any>();
+    
     hideModal () {
         this.isShowFlagChange.emit(false);
         this.isShowFlag = false;

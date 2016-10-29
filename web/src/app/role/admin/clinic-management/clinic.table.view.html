@@ -1,7 +1,7 @@
 <table class="table">
     <thead>
         <tr>
-            <th>ชื่อคลินิก</th>                         
+            <th>ชื่อแผนก</th>                         
             <th class="action-column"></th>         
         </tr>
     </thead>
@@ -13,7 +13,7 @@
                     (click)="editClinicInfo(clinic.name)">
                     <i class="fa fa-pencil"></i>แก้ไขข้อมูล</a>
                 <a class="button is-danger"
-                    (click)="deleteClinic(clinic.name)">
+                    (click)="showConfirmDelete = true; currentClinic = clinic.name">
                     <i class="fa fa-trash"></i>ลบข้อมูล</a>
             </td>            
         </tr>
@@ -24,3 +24,13 @@
         </tr>
     </tbody>
 </table>
+
+<modal-dialog
+    [description]="'คุณต้องการลบแผนก' + currentClinic + 'ออกจากระบบหรือไม่?'"
+    [confirmText]="'ลบแผนก'"
+    [cancelText]="'กลับ'"
+    [isShowFlag]="showConfirmDelete"
+    (isShowFlagChange)="showConfirmDelete = $event"
+    [confirmFn]="deleteClinicInfo(currentClinic)"
+    (onFunctionSucceed)="onDeleteSucceed($event)">
+</modal-dialog>

@@ -1,7 +1,10 @@
 import { Component, Input } from '@angular/core';
 @Component({
     selector: 'patient-prescription',
-    templateUrl: './patient.prescription.view.html'
+    templateUrl: './patient.prescription.view.html',
+    styles: [`
+
+    `]
 })
 export class PatientPrescriptionComponent {
     @Input('patient') patient;

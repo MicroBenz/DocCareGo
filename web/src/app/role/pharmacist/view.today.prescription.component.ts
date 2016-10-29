@@ -55,13 +55,21 @@ import { VIEW_PATIENT_PRESCRIPTION } from './../../config/title.config';
         }
         .patient-prescription-content {
             height: 490px;
+            margin-left: -20px;
+            margin-right: -20px;
+            padding-left: 20px;
+            padding-right: 20px;
             padding-top: 15px;
+            overflow-y: scroll;
         }
         .title {
             text-align: center;
             font-size: 20px;
             font-weight: 600;
             color: #ffffff;
+        }
+        .level {
+            margin-bottom: 0px;
         }
     `]
 })
@@ -129,15 +137,8 @@ export class ViewTodayPrescriptionComponent {
     public prescription = [
         {
             name: 'พาราเซตตามอล',
-            quantity: '3 เม็ด'
-        },
-        {
-            name: 'พาราเซตตามอล',
-            quantity: '1 เม็ด'
-        },
-        {
-            name: 'ยาน้ำตราโป๊ยเซียน 200ml',
-            quantity: '1 ขวด'
+            quantity: '3 เม็ด',
+            howto: 'รับประทานหลังอาหารเช้า/กลางวัน/เย็น ครั้งละ 1 เม็ด'
         }
     ]
     private selectedPatient = {};

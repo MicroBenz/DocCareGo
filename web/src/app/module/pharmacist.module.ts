@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 
 import { SharedModule } from './shared.module';
 import { PharmacistOnlyRoute } from './../auth/guard/pharmacist.guard';
-import { ViewTodayPrescriptionComponent, PatientPrescriptionComponent } from './../role/pharmacist/index';
+import { ViewTodayPrescriptionComponent, PatientPrescriptionComponent, PatientAllergyComponent } from './../role/pharmacist/index';
 
 @NgModule({
     imports: [
@@ -14,11 +14,13 @@ import { ViewTodayPrescriptionComponent, PatientPrescriptionComponent } from './
     ],
     declarations: [
         ViewTodayPrescriptionComponent,
-        PatientPrescriptionComponent
+        PatientPrescriptionComponent,
+        PatientAllergyComponent,
     ],
     exports: [
         ViewTodayPrescriptionComponent,
-        PatientPrescriptionComponent
+        PatientPrescriptionComponent,
+        PatientAllergyComponent
     ],
     providers: [
         PharmacistOnlyRoute

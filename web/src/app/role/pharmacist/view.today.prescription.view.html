@@ -19,10 +19,52 @@
                     <h1 class="title">ข้อมูลการจ่ายยา</h1>
                 </div>
                 <div class="patient-prescription-content">
-                    <patient-prescription
-                        [patient]="selectedPatient"
-                        [prescription]="prescription">
-                    </patient-prescription>
+                    <article class="message is-danger">
+                        <div class="message-header">
+                            <h1>รายการการแพ้ยา</h1>
+                        </div>
+                        <div class="message-body">
+                            <patient-allergy></patient-allergy>            
+                        </div>
+                    </article>
+                    <article class="message is-info">
+                        <div class="message-header">
+                            <div class="level">
+                                <div class="level-left">
+                                    <div class="level-item">
+                                        <h1>ประวัติการจ่ายยา</h1>
+                                    </div>
+                                </div>
+                                <div class="level-right">
+                                    <span>
+                                        <a class="button">
+                                            <i class="fa fa-chevron-left"></i>
+                                        </a>
+                                        <a class="button">
+                                            <i class="fa fa-chevron-right"></i>
+                                        </a>
+                                    </span>  
+                                </div>
+                            </div>
+                        </div>
+                        <div class="message-body">
+                            <patient-prescription
+                                [patient]="selectedPatient"
+                                [prescription]="prescription">
+                            </patient-prescription>
+                        </div>
+                    </article>
+                    <article class="message is-info">
+                        <div class="message-header">
+                            <h1>การจ่ายยาวันนี้</h1>                            
+                        </div>
+                        <div class="message-body">
+                            <patient-prescription
+                                [patient]="selectedPatient"
+                                [prescription]="prescription">
+                            </patient-prescription>
+                        </div>
+                    </article>
                 </div>
             </div>
         </div>
