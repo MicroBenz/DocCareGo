@@ -1,7 +1,7 @@
 module.exports = function (apiRoutes, express) {
     var doctorRoutes = express.Router();    
-    var Doctor = require('../models/Doctor.js');
-    var Address = require('../models/Address.js');
+    var Doctor = require('../model/Doctor.js');
+    var Address = require('../model/Clinic.js');
     var utils = require('../utils.js');
 
     doctorRoutes.use(function (req, res, next) {
