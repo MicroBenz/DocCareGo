@@ -360,18 +360,9 @@ module.exports = function (apiRoutes, express) {
         );
     }
 
-    //----------------- 405 METHOD NOT ALLOWED -----------------        
-    // function methodNotAllowed (req, res) {
-    //     res.status(405).send({
-    //         success: false,
-    //         status: 'Method Not Allowed',
-    //         message: 'This method is not allowed for this API.'
-    //     });
-    // }
-
     //----------------- ADDITIONAL FUNCTION ----------------- 
     function validateField (res, body) {
-        if (!req.body.personalID) {
+        if (!body.personalID) {
             utils.responseMissingField(res, 'personalID');
         }
 

@@ -6,7 +6,7 @@ var Schema = mongoose.Schema;
 var workdaySchema = new Schema({
     doctor: {type: ObjectId, ref: 'Doctor'},
     clinic: {type: ObjectId, ref: 'Clinic'},
-    data: Date,
+    date: Date,
     Time: String
 },{
     timestamps: true,
