@@ -9,6 +9,7 @@ var doctorSchema = new Schema({
     preName: String,
     name: String,
     surname: String,
+    clinic: {type: ObjectId, ref: 'Clinic'}
 },{
     timestamps: true,
     collection: 'doctors'

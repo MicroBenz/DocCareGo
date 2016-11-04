@@ -7,7 +7,6 @@ var appointmentSchema = new Schema({
     description: String,
     patient: {type: ObjectId, ref: 'Patient'},
     doctor: {type: ObjectId, ref: 'Doctor'},
-    clinic: {type: ObjectId, ref: 'Clinic'},
     workday: {type: ObjectId, ref: 'Workday'}
 },{
     timestamps: true,
