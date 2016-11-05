@@ -40,12 +40,7 @@ module.exports = function (apiRoutes, express) {
         if (req.query.search) {
             Medicine.find({
                 $or: [
-                    {   
-                        ID: {
-                            $regex: req.query.search,
-                            $options: 'i'
-                        }
-                    },{
+                    {
                         name: {
                             $regex: req.query.search,
                             $options: 'i'
@@ -94,7 +89,7 @@ module.exports = function (apiRoutes, express) {
 
     function getMedicineById (req, res) {
         Medicine.findOne({
-            ID: req.params.ID
+            Name: req.params.Name
         })
         .then(
             function (medicine) {
@@ -132,7 +127,7 @@ module.exports = function (apiRoutes, express) {
         validateField(res, req.body);
         Medicine.findOneWithDeleted({
             $or: [
-                { ID: req.body.ID }
+                { Name: req.body.name }
             ]
         })
         .then(
@@ -178,11 +173,10 @@ module.exports = function (apiRoutes, express) {
         validateField(res, req.body);
         var medicineRef;
         Medicine.findOne({
-            ID: req.params.ID
+            Name: req.params.name
         })
         .then(
             function (data) {
-                medicineRef.ID = data.ID;
                 medicineRef.name = data.name;
                 medicineRef.description = data.description;
                 return medicineRef.save();
@@ -209,7 +203,7 @@ module.exports = function (apiRoutes, express) {
     //----------------- DELETE -----------------    
     function deleteMedicineById (req, res) {
         Medicine.findOne({
-            ID: req.params.ID
+            Name: req.params.name
         })
         .then(
             function (medicine) {
@@ -251,10 +245,6 @@ module.exports = function (apiRoutes, express) {
 
     //----------------- ADDITIONAL FUNCTION ----------------- 
     function validateField (res, body) {
-        if (!body.ID) {
-            utils.responseMissingField(res, 'ID');
-        }
-
         if (!body.name) {
             utils.responseMissingField(res, 'name');
         }
