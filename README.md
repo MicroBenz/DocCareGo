@@ -21,6 +21,11 @@ DocCare Go เป็นระบบจัดการการนัดหมา
 - ติดตั้ง Library ที่ต้องใช้ โดยคำสั่ง `npm install`
 - สั่ง `gulp dev` เพื่อสั่งเปิด Web Server และรัน Web Apps
 
+# Project Seeder API
+- POST /seed/default/data
+- POST /seed/default/user
+- POST /seed/admin
+
 # For Front-End Developer
 ในช่วงของการ Development นั้น หากพัฒนาในส่วนของ Front-End ต้องสั่ง
 
