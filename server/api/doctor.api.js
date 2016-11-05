@@ -20,11 +20,11 @@ module.exports = function (apiRoutes, express) {
         .put(utils.methodNotAllowed)
         .delete(utils.methodNotAllowed);
     
-    doctorRoutes.route('/:id')
-        .get(getDoctorById)
+    doctorRoutes.route('/:HN')
+        .get(getDoctorByHN)
         .post(utils.methodNotAllowed)
-        .put(updateDoctorById)
-        .delete(deleteDoctorById);
+        .put(updateDoctorByHN)
+        .delete(deleteDoctorByHN);
 
     apiRoutes.use('/doctors', doctorRoutes);
 
@@ -101,7 +101,7 @@ module.exports = function (apiRoutes, express) {
         }
     }
 
-    function getDoctorById (req, res) {
+    function getDoctorByHN (req, res) {
         Doctor.findOne({
             HN: req.params.HN
         })
@@ -228,7 +228,7 @@ module.exports = function (apiRoutes, express) {
     }
 
     //----------------- PUT (UPDATE) -----------------
-    function updateDoctorById (req, res) {
+    function updateDoctorByHN (req, res) {
         validateField(res, req.body);
         var doctorRef;
         Doctor.findOne({
@@ -318,7 +318,7 @@ module.exports = function (apiRoutes, express) {
     }
 
     //----------------- DELETE -----------------    
-    function deleteDoctorById (req, res) {
+    function deleteDoctorByHN (req, res) {
         Doctor.findOne({
             HN: req.params.HN
         })
