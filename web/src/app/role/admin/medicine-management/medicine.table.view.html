@@ -1,21 +1,21 @@
 <table class="table">
     <thead>
         <tr>
-            <th>รหัสยา</th>
-            <th>ชื่อยา</th>                     
+            <th>ชื่อยา</th>
+            <th>รายละเอียด</th>
             <th class="action-column"></th>         
         </tr>
     </thead>
     <tbody *ngIf="medicineList.length !== 0">
         <tr *ngFor="let medicine of medicineList;">
-            <td>{{medicine.id}}</td>
             <td>{{medicine.name}}</td>
+            <td>{{medicine.description}}</td>
             <td>
                 <a class="button is-primary"
-                    (click)="editInfo(medicine.id)">
+                    (click)="editInfo(medicine.name)">
                     <i class="fa fa-pencil"></i>แก้ไขข้อมูล</a>
                 <a class="button is-danger"
-                    (click)="deleteItem(medicine.id)">
+                    (click)="deleteItem(medicine.name)">
                     <i class="fa fa-trash"></i>ลบข้อมูล</a>
             </td>            
         </tr>

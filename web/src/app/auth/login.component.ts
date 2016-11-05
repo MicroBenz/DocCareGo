@@ -29,7 +29,6 @@ export class LoginComponent implements OnInit {
     public login () {
         this.isLoginFail = false;
         if (this.usr === undefined || this.usr === '' || this.pwd === undefined || this.pwd === '') {
-            console.log('please fill form');
             this.isLoginFail = true;
             this.loginFailMessage = 'โปรดกรอกชื่อผู้ใช้ และรหัสผ่าน';
             return;
@@ -39,7 +38,6 @@ export class LoginComponent implements OnInit {
     }
 
     private loginSuccess = (data) => {
-        console.log('login success');
         this.authService.setToken(data.token);
         this.router.navigateByUrl('/' + data.role);        
     }

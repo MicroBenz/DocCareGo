@@ -52,12 +52,10 @@ export class NavComponent implements OnInit {
             default:
                 console.error('[NavComponent] Wrong Role: ', role);
         }
-        console.log(this.navMenu);
     }
 
     logout () {
         return () => {
-            console.log('hello world');
             this.authService.makeLogout();
         }
     }

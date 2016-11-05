@@ -3,27 +3,27 @@ module.exports = function (apiRoutes, express) {
     var Medicine = require('../model/Medicine.js');
     var utils = require('../utils.js');
 
-    medicineRoutes.use(function (req, res, next) {
-        if (req.decoded.role !== 'admin') {
-            res.status(400).send({
-                status: 'Bad Request',
-                message: 'This API is not allowed for your role.'
-            });
-        }
-        next();
-    });
+    // medicineRoutes.use(function (req, res, next) {
+    //     if (req.decoded.role !== 'admin') {
+    //         res.status(400).send({
+    //             status: 'Bad Request',
+    //             message: 'This API is not allowed for your role.'
+    //         });
+    //     }
+    //     next();
+    // });
 
     medicineRoutes.route('/')
-        .get(getmedicines)
-        .post(createmedicine)
+        .get(getMedicines)
+        .post(createMedicine)
         .put(utils.methodNotAllowed)
         .delete(utils.methodNotAllowed);
     
     medicineRoutes.route('/:id')
-        .get(getmedicineById)
+        .get(getMedicineById)
         .post(utils.methodNotAllowed)
-        .put(updatemedicineById)
-        .delete(deletemedicineById);
+        .put(updateMedicineById)
+        .delete(deleteMedicineById);
 
     apiRoutes.use('/medicines', medicineRoutes);
 

@@ -2,14 +2,12 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Http, Response } from '@angular/http';
 import { AuthHttp, JwtHelper } from 'angular2-jwt';
-import { Observable } from 'rxjs/Rx';
 import { LOGIN_ENDPOINT } from './../../config/api.config';
 
 @Injectable()
 export class AuthService {
     constructor(private router: Router, private authHttp: AuthHttp, private http: Http, private jwtHelper: JwtHelper) {}
 
-    // Authenticate with Server-Side
     public makeLogin (usr: string, pwd: string) {
         return this.http.post(LOGIN_ENDPOINT, {
             username: usr,

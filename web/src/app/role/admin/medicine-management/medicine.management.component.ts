@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { MEDICINE_MANAGEMENT_TITLE } from '../../../config/title.config';
+import { MedicineService } from '../../../shared/service/medicine.service';
 
 @Component({
     selector: 'medicine-management',
@@ -23,8 +24,30 @@ import { MEDICINE_MANAGEMENT_TITLE } from '../../../config/title.config';
     `]
 })
 export class MedicineManagementComponent implements OnInit {
-    constructor(private title: Title) {}
+    public medicineList;
+    constructor(private title: Title, private medicineService: MedicineService) {}
+
     ngOnInit () {
+        this.medicineList = [];
         this.title.setTitle(MEDICINE_MANAGEMENT_TITLE);
+        this.medicineService.getMedicine()
+            .subscribe(this.displayMedicines, this.errorHandler);
     }
+
+    public displayMedicines = (medicines) => {
+        console.log(medicines);
+        this.medicineList = medicines;
+    }
+
+    private errorHandler = (error) => {
+        console.error('MedicineManagementError: ', error);
+    }
+
+    public searchFunction () {
+        return (key) => {
+            return this.medicineService.searchMedicine(key);
+        }
+    }
+
+    
 }

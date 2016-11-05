@@ -14,16 +14,16 @@ module.exports = function (apiRoutes, express) {
     });
 
     clinicRoutes.route('/')
-        .get(getclinics)
+        .get(getClinics)
         .post(createclinic)
         .put(utils.methodNotAllowed)
         .delete(utils.methodNotAllowed);
     
     clinicRoutes.route('/:id')
-        .get(getclinicById)
+        .get(getClinicById)
         .post(utils.methodNotAllowed)
-        .put(updateclinicById)
-        .delete(deleteclinicById);
+        .put(updateClinicById)
+        .delete(deleteClinicById);
 
     apiRoutes.use('/clinics', clinicRoutes);
 
