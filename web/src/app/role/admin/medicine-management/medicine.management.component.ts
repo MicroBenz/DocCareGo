@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { MEDICINE_MANAGEMENT_TITLE } from '../../../config/title.config';
+
 import { DataService } from '../../../shared/service/data.service';
+import { MEDICINE_MANAGEMENT_TITLE } from '../../../config/title.config';
 import { MEDICINE_ENDPOINT } from '../../../config/api.config';
 
 @Component({

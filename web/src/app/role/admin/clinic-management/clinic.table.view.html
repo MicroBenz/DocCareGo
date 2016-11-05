@@ -1,13 +1,15 @@
 <table class="table">
     <thead>
         <tr>
-            <th>ชื่อแผนก</th>                         
+            <th>ชื่อแผนก</th>  
+            <th>รายละเอียดแผนก</th>                                   
             <th class="action-column"></th>         
         </tr>
     </thead>
     <tbody *ngIf="clinics.length !== 0">
         <tr *ngFor="let clinic of clinics;">
             <td>{{clinic.name}}</td>
+            <td>{{clinic.description}}</td>            
             <td>
                 <a class="button is-primary"
                     (click)="editClinicInfo(clinic.name)">

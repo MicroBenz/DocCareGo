@@ -16,15 +16,8 @@ export class ClinicTableComponent implements OnInit {
     @Input('clinics') clinics;
     public currentClinic;
     public showConfirmDelete: boolean;
+    
     ngOnInit () {
-        this.clinics = [
-            {
-                name: 'ทางเดินอาหารและตับ'
-            },
-            {
-                name: 'ศัลยกรรม'
-            }
-        ]
         this.currentClinic = '';
         this.showConfirmDelete = false;
     }
