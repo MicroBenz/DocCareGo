@@ -30,11 +30,16 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                exclude: './web/src/app',
+                exclude: __dirname + '/web/src/app',
                 loader: ExtractTextPlugin.extract({
                     fallbackLoader: "style-loader",
                     loader:  "css-loader"
                 })
+            },
+            {
+                test: /\.css$/,
+                include: __dirname + '/web/src/app',
+                loader: 'raw'
             },
             {
                 test: /\.less$/,

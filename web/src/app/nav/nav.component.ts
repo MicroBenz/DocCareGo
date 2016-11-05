@@ -6,46 +6,7 @@ import { PATIENT_ROLE_NAV, DOCTOR_ROLE_NAV, NURSE_ROLE_NAV, PHARMACIST_ROLE_NAV,
 @Component({
     selector: 'apps-nav',
     templateUrl: './nav.view.html',
-    styles: [`
-        :host {
-            position: fixed;
-            right: 0;
-            left: 0;
-            top: 0;
-            z-index: 555;
-        }
-        .top-nav > .container{
-            border-bottom: 1px solid #f3f3f3;
-        }
-        .menu-nav > .container a {
-            line-height: 34px;
-        }
-        .menu-nav .nav-item {
-            border-top: none;
-        }
-        .menu-nav .nav-item i {
-            line-height: 34px;
-        }
-        .profile-circle {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            font-size: 24px;
-            color: #fff;
-            line-height: 40px;
-            text-align: center;
-        }
-        .profile-circle a {
-            color: #ffffff;
-            cursor: default;
-        }
-        .profile-name, .profile-circle{
-            display: inline-block;
-        }
-        .button {
-            border-radius: 3px;
-        }
-    `]
+    styleUrls: ['nav.style.css']
 })
 export class NavComponent implements OnInit {
     public userRole: string;

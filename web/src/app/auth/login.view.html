@@ -2,7 +2,7 @@
     <img id="web-logo" src="assets/img/logo_vertical.png">
     <div id="login-box">
         <div class="notification is-danger" *ngIf="isLoginFail">
-            ล็อคอินล้มเหลว กรุณาลองใหม่
+            {{loginFailMessage}}
         </div>
         <p class="control has-icon">
             <input class="input is-medium" type="text"

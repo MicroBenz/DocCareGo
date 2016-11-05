@@ -11,16 +11,26 @@ export class AuthService {
 
     // Authenticate with Server-Side
     public makeLogin (usr: string, pwd: string) {
-        //TODO: Call API for make login and get/set JWT Token
-        if (usr === 'patient' || usr === 'doctor' || usr === 'staff' || usr ==='nurse' || usr === 'pharmacist' || usr === 'admin') {
-            return this.http.post(LOGIN_ENDPOINT, {
-                username: 'John',
-                role: usr
-            })
-            .map((res: Response) => {
-                return res.json();
-            })
-        }
+        return this.http.post(LOGIN_ENDPOINT, {
+            username: usr,
+            password: pwd
+        })
+        .map(
+            (res: Response) => {
+                // return res.json();
+                let result = res.json();
+                if (result.success) {
+                    return result.data;
+                }
+                else {
+                    throw new Error(result.clientMessage);
+                }
+            },
+            (error) => {
+                console.error('AuthService Error: ', error);
+                throw new Error(error);
+            }
+        )
     }
 
     public makeLogout () {
