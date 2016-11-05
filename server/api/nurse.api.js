@@ -38,6 +38,12 @@ module.exports = function (apiRoutes, express) {
                         }
                     },
                     {
+                        personalID: {
+                            $regex: req.query.search,
+                            $options: 'i'
+                        }
+                    },
+                    {
                         name: {
                             $regex: req.query.search,
                             $options: 'i'
@@ -193,7 +199,6 @@ module.exports = function (apiRoutes, express) {
     function updateNurseByHN (req, res) {
         utils.checkRole(req, res, ['admin']);
         validateField(res, req.body);
-        var nurseRef;
         Nurse.findOne({
             HN: req.params.HN
         })
@@ -221,18 +226,8 @@ module.exports = function (apiRoutes, express) {
                 res.status(500).send({
                     success: false,
                     message: error,
-                    clientMessage: 'Cannot get nurse data.'
+                    clientMessage: 'Cannot update nurse data.'
                 });
-            }
-        )
-        .then(
-            function (data) {
-                nurseRef.personalID = data.personalID;
-                nurseRef.preName = data.preName;
-                nurseRef.name = data.name;
-                nurseRef.surname = data.surname;
-                nurseRef.clinic = data.clinic;
-                return nurseRef.save();
             }
         )
         .then(
@@ -299,6 +294,10 @@ module.exports = function (apiRoutes, express) {
 
     //----------------- ADDITIONAL FUNCTION ----------------- 
     function validateField (res, body) {
+        if (!body.HN) {
+            utils.responseMissingField(res, 'HN');
+        }
+        
         if (!body.personalID) {
             utils.responseMissingField(res, 'personalID');
         }
