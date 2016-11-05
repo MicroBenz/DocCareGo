@@ -196,7 +196,7 @@ function createAdmin (req, res) {
     var User = require('./model/User.js');
     var bcrypt = require('bcrypt-nodejs');
     let data = {
-        HN: 'admin',
+        username: 'admin',
         role: 'admin',
         email: 'admin@doccare.go.th',
         password: bcrypt.hashSync('admin')
@@ -227,7 +227,7 @@ function createUsersPatients (req, res) {
     var bcrypt = require('bcrypt-nodejs');
     for(let i=1; i<=10; i++){
         let data = {
-            HN: 'patient'+i,
+            username: 'patient'+i,
             role: 'patient',
             email: 'patient'+i+'@doccare.go.th',
             password: bcrypt.hashSync('patient'+i)
@@ -255,7 +255,7 @@ function createUsersDoctors (req, res) {
     var bcrypt = require('bcrypt-nodejs');
     for(let i=1; i<=10; i++){
         let data = {
-            HN: 'doctor'+i,
+            username: 'doctor'+i,
             role: 'doctor',
             email: 'doctor'+i+'@doccare.go.th',
             password: bcrypt.hashSync('doctor'+i)
@@ -283,7 +283,7 @@ function createUsersStaffs (req, res) {
     var bcrypt = require('bcrypt-nodejs');
     for(let i=1; i<=10; i++){
         let data = {
-            HN: 'staff'+i,
+            username: 'staff'+i,
             role: 'staff',
             email: 'staff'+i+'@doccare.go.th',
             password: bcrypt.hashSync('staff'+i)
@@ -311,7 +311,7 @@ function createUsersNurses (req, res) {
     var bcrypt = require('bcrypt-nodejs');
     for(let i=1; i<=10; i++){
         let data = {
-            HN: 'nurse'+i,
+            username: 'nurse'+i,
             role: 'nurse',
             email: 'nurse'+i+'@doccare.go.th',
             password: bcrypt.hashSync('nurse'+i)
@@ -339,7 +339,7 @@ function createUsersPharmacists (req, res) {
     var bcrypt = require('bcrypt-nodejs');
     for(let i=1; i<=10; i++){
         let data = {
-            HN: 'pharmacist'+i,
+            username: 'pharmacist'+i,
             role: 'pharmacist',
             email: 'pharmacist'+i+'@doccare.go.th',
             password: bcrypt.hashSync('pharmacist'+i)
