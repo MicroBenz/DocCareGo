@@ -5,9 +5,9 @@ var Schema = mongoose.Schema;
 
 var appointmentSchema = new Schema({
     description: String,
-    patient: {type: ObjectId, ref: 'Patient'},
-    doctor: {type: ObjectId, ref: 'Doctor'},
-    workday: {type: ObjectId, ref: 'Workday'}
+    patient: {type: Schema.Types.ObjectId, ref: 'Patient'},
+    doctor: {type: Schema.Types.ObjectId, ref: 'Doctor'},
+    workday: {type: Schema.Types.ObjectId, ref: 'Workday'}
 },{
     timestamps: true,
     collection: 'appointments'

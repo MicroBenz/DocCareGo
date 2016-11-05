@@ -4,8 +4,8 @@ var mongoose_delete = require('mongoose-delete');
 var Schema = mongoose.Schema;
 
 var workdaySchema = new Schema({
-    doctor: {type: ObjectId, ref: 'Doctor'},
-    clinic: {type: ObjectId, ref: 'Clinic'},
+    doctor: {type: Schema.Types.ObjectId, ref: 'Doctor'},
+    clinic: {type: Schema.Types.ObjectId, ref: 'Clinic'},
     date: Date,
     Time: String
 },{

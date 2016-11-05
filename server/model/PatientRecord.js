@@ -4,7 +4,7 @@ var mongoose_delete = require('mongoose-delete');
 var Schema = mongoose.Schema;
 
 var patientRecordSchema = new Schema({
-    appointment: {type: ObjectId, ref: 'Appointment'},
+    appointment: {type: Schema.Types.ObjectId, ref: 'Appointment'},
     weight: String,
     height: String,
     temperature: String,
