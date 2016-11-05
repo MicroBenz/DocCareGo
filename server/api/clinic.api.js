@@ -9,11 +9,11 @@ module.exports = function (apiRoutes, express) {
         .put(utils.methodNotAllowed)
         .delete(utils.methodNotAllowed);
     
-    clinicRoutes.route('/:id')
-        .get(getClinicById)
+    clinicRoutes.route('/:name')
+        .get(getClinicByName)
         .post(utils.methodNotAllowed)
-        .put(updateClinicById)
-        .delete(deleteClinicById);
+        .put(updateClinicByName)
+        .delete(deleteClinicByName);
 
     apiRoutes.use('/clinics', clinicRoutes);
 
@@ -78,7 +78,7 @@ module.exports = function (apiRoutes, express) {
         }
     }
 
-    function getClinicById (req, res) {
+    function getClinicByName (req, res) {
         utils.checkRole(req, res, ['doctor','admin']);
         Clinic.findOne({
             name: req.params.name
@@ -162,7 +162,7 @@ module.exports = function (apiRoutes, express) {
     }
 
     //----------------- PUT (UPDATE) -----------------
-    function updateClinicById (req, res) {
+    function updateClinicByName (req, res) {
         utils.checkRole(req, res, ['admin']);
         validateField(res, req.body);
         var clinicRef;
@@ -195,7 +195,7 @@ module.exports = function (apiRoutes, express) {
     }
 
     //----------------- DELETE -----------------    
-    function deleteClinicById (req, res) {
+    function deleteClinicByName (req, res) {
         utils.checkRole(req, res, ['admin']);
         Clinic.findOne({
             name: req.params.name

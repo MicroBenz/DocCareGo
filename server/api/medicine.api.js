@@ -3,27 +3,17 @@ module.exports = function (apiRoutes, express) {
     var Medicine = require('../model/Medicine.js');
     var utils = require('../utils.js');
 
-    // medicineRoutes.use(function (req, res, next) {
-    //     if (req.decoded.role !== 'admin') {
-    //         res.status(400).send({
-    //             status: 'Bad Request',
-    //             message: 'This API is not allowed for your role.'
-    //         });
-    //     }
-    //     next();
-    // });
-
     medicineRoutes.route('/')
         .get(getMedicines)
         .post(createMedicine)
         .put(utils.methodNotAllowed)
         .delete(utils.methodNotAllowed);
     
-    medicineRoutes.route('/:id')
-        .get(getMedicineById)
+    medicineRoutes.route('/:name')
+        .get(getMedicineByName)
         .post(utils.methodNotAllowed)
-        .put(updateMedicineById)
-        .delete(deleteMedicineById);
+        .put(updateMedicineByName)
+        .delete(deleteMedicineByName);
 
     apiRoutes.use('/medicines', medicineRoutes);
 
@@ -88,7 +78,7 @@ module.exports = function (apiRoutes, express) {
         }
     }
 
-    function getMedicineById (req, res) {
+    function getMedicineByName (req, res) {
         utils.checkRole(req, res, ['doctor','pharmacist','admin']);
         Medicine.findOne({
             Name: req.params.Name
@@ -172,7 +162,7 @@ module.exports = function (apiRoutes, express) {
     }
 
     //----------------- PUT (UPDATE) -----------------
-    function updateMedicineById (req, res) {
+    function updateMedicineByName (req, res) {
         utils.checkRole(req, res, ['admin']);
         validateField(res, req.body);
         var medicineRef;
@@ -205,7 +195,7 @@ module.exports = function (apiRoutes, express) {
     }
 
     //----------------- DELETE -----------------    
-    function deleteMedicineById (req, res) {
+    function deleteMedicineByName (req, res) {
         utils.checkRole(req, res, ['admin']);
         Medicine.findOne({
             Name: req.params.name
