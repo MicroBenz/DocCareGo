@@ -5,16 +5,6 @@ module.exports = function (apiRoutes, express) {
     var utils = require('../utils.js');
     var moment = require('moment');
 
-    patientRecordRoutes.use(function (req, res, next) {
-        if (req.decoded.role !== 'nurse') {
-            res.status(400).send({
-                status: 'Bad Request',
-                message: 'This API is not allowed for your role.'
-            });
-        }
-        next();
-    });
-
     patientRecordRoutes.route('/')
         .get(getPatientRecords)
         .post(createPatientRecord)
@@ -32,6 +22,7 @@ module.exports = function (apiRoutes, express) {
     // Implementation of CRUD are below.
     //----------------- GET -----------------
     function getPatientRecords (req, res) {
+        checkRole(req, res, ['nurse']);
         var appointmentsRef;
         Workday.find({
             date: moment().toDate()
@@ -105,6 +96,7 @@ module.exports = function (apiRoutes, express) {
     }
 
     function getPatientRecordByAppointment (req, res) {
+        checkRole(req, res, ['nurse','doctor']);
         PatientRecord.findOne({
             appointment: req.params.appointment
         })
@@ -138,6 +130,7 @@ module.exports = function (apiRoutes, express) {
 
     //----------------- POST (CREATE) -----------------
     function createPatientRecord (req, res) {
+        checkRole(req, res, ['nurse']);
         if (!body.appointment) {
             utils.responseMissingField(res, 'appointment');
         }
@@ -204,6 +197,7 @@ module.exports = function (apiRoutes, express) {
 
     //----------------- PUT (UPDATE) -----------------
     function updatePatientRecordByAppointment (req, res) {
+        checkRole(req, res, ['nurse']);
         validateField(res, req.body);
         PatientRecord.findOne({
             appointment: req.params.appointment
