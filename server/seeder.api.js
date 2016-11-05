@@ -1,8 +1,15 @@
 module.exports = function (app, express) {
     var seederRoutes = express.Router();
+    seederRoutes.post('/all', createAll);
+    
+    seederRoutes.post('/default/facility', createDefaultFacility);
     seederRoutes.post('/default/data', createDefaultData);
     seederRoutes.post('/default/user', createDefaultUser);
     seederRoutes.post('/admin', createAdmin);
+
+    seederRoutes.post('/clinics',createClinics);
+    seederRoutes.post('/diseases',createDiseases);
+    seederRoutes.post('/medicines',createMedicines);
 
     seederRoutes.post('/patients', createPatients);
     seederRoutes.post('/doctors', createDoctors);
@@ -17,6 +24,37 @@ module.exports = function (app, express) {
     seederRoutes.post('/users/pharmacists', createUsersPharmacists);
 
     app.use('/seed', seederRoutes);
+}
+
+function createAll (req, res) {
+    createClinics(req, res);
+    createDiseases(req, res);
+    createMedicines(req, res);
+    createPatients(req, res);
+    createDoctors(req, res);
+    createStaffs(req, res);
+    createNurses(req, res);
+    createPharmacists(req, res);
+    createAdmin(req, res);
+    createUsersPatients(req, res);
+    createUsersDoctors(req, res);
+    createUsersStaffs(req, res);
+    createUsersNurses(req, res);
+    createUsersPharmacists(req, res);
+    res.json({
+        success: true,
+        clientMessage: 'Created all completed.'
+    });
+}
+
+function createDefaultFacility (req, res) {
+    createClinics(req, res);
+    createDiseases(req, res);
+    createMedicines(req, res);
+    res.json({
+        success: true,
+        clientMessage: 'Created data of clinics, diseases and medicines.'
+    });
 }
 
 function createDefaultData (req, res) {
@@ -41,6 +79,84 @@ function createDefaultUser (req, res) {
         success: true,
         clientMessage: 'Created user of patients, doctors, staffs, nurses and pharmacists.'
     });
+}
+
+function createClinics (req, res) {
+    "use strict";
+    var Clinic = require('./model/Clinic.js');
+    for(let i=1; i<=10; i++){
+        let data = {
+            name: 'clinic'+i,
+            description: 'คลินิก'+i
+        };
+        let clinic = new Clinic(data);
+        clinic.save()
+        .then(
+            function (clinic) {
+            },
+            function (error) {
+                console.log(error);
+                res.status(500).send({
+                    success: false,
+                    message: error,
+                    clientMessage: 'Cannot create clinic:'+i+' data.'
+                });
+            }
+        );
+    }
+}
+
+function createDiseases (req, res) {
+    "use strict";
+    var Disease = require('./model/Disease.js');
+    for(let i=1; i<=10; i++){
+        let data = {
+            name: 'disease'+i,
+            icd10: 'icd'+i,
+            snowmed: 'snowmed'+i,
+            drg: 'drg'+i,
+            description: 'โรค'+i
+        };
+        let disease = new Disease(data);
+        disease.save()
+        .then(
+            function (disease) {
+            },
+            function (error) {
+                console.log(error);
+                res.status(500).send({
+                    success: false,
+                    message: error,
+                    clientMessage: 'Cannot create disease:'+i+' data.'
+                });
+            }
+        );
+    }
+}
+
+function createMedicines (req, res) {
+    "use strict";
+    var Medicine = require('./model/Medicine.js');
+    for(let i=1; i<=10; i++){
+        let data = {
+            name: 'medicine'+i,
+            description: 'ยา'+i
+        };
+        let medicine = new Medicine(data);
+        medicine.save()
+        .then(
+            function (medicine) {
+            },
+            function (error) {
+                console.log(error);
+                res.status(500).send({
+                    success: false,
+                    message: error,
+                    clientMessage: 'Cannot create medicine:'+i+' data.'
+                });
+            }
+        );
+    }
 }
 
 function createPatients (req, res) {
@@ -82,16 +198,33 @@ function createPatients (req, res) {
 function createDoctors (req, res) {
     "use strict";
     var Doctor = require('./model/Doctor.js');
+    var Clinic = require('./model/Clinic.js');
     for(let i=1; i<=10; i++){
-        let data = {
-            HN: 'doctor'+i,
-            personalID: 'doctor'+i,
-            preName: 'นาย',
-            name: 'หมอ'+i,
-            surname: 'สมมติหมอ'+i
-        };
-        let doctor = new Doctor(data);
-        doctor.save()
+        Clinic.findOne({
+            name: 'clinic'+i
+        })
+        .then(
+            function (clinic) {
+                let data = {
+                    HN: 'doctor'+i,
+                    personalID: 'doctor'+i,
+                    preName: 'นาย',
+                    name: 'หมอ'+i,
+                    surname: 'สมมติหมอ'+i,
+                    clinic: clinic
+                };
+                let doctor = new Doctor(data);
+                return doctor.save();
+            },
+            function (error) {
+                console.log(error);
+                res.status(500).send({
+                    success: false,
+                    message: error,
+                    clientMessage: 'Cannot find clinic:'+i
+                });
+            }
+        )
         .then(
             function (doctor) {
             },
