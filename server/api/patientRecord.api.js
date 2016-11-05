@@ -3,6 +3,7 @@ module.exports = function (apiRoutes, express) {
     var PatientRecord = require('../model/PatientRecord.js');
     var Appointment = require('../model/Appointment.js');
     var utils = require('../utils.js');
+    var moment = require('moment');
 
     patientRecordRoutes.use(function (req, res, next) {
         if (req.decoded.role !== 'nurse') {
@@ -20,10 +21,10 @@ module.exports = function (apiRoutes, express) {
         .put(utils.methodNotAllowed)
         .delete(utils.methodNotAllowed);
     
-    patientRecordRoutes.route('/:id')
-        .get(getPatientRecordById)
+    patientRecordRoutes.route('/:appointment')
+        .get(getPatientRecordByAppointment)
         .post(utils.methodNotAllowed)
-        .put(updatePatientRecordById)
+        .put(updatePatientRecordByAppointment)
         .delete(utils.methodNotAllowed);
 
     patientRecordRoutes.use('/patientRecords', doctorRoutes);
@@ -33,7 +34,7 @@ module.exports = function (apiRoutes, express) {
     function getPatientRecords (req, res) {
         var appointmentsRef;
         Workday.find({
-            date: moment().toDate();
+            date: moment().toDate()
         })
         .then(
             function (workdays) {
@@ -72,16 +73,16 @@ module.exports = function (apiRoutes, express) {
         )
         .then(
             function (patientRecords) {
-                for each (appointment in appointmentsRef) {
-                    for each (patientRecord in patientRecords) {
+                appointmentsRef.forEach(function(appointment){ 
+                    patientRecords.forEach(function(patientRecord) {
                         if( appointment._id === patientRecord.appointment) {
                             appointment.patientRecord = patientRecord;
                         }
                         else {
                             appointment.patientRecord = {};
                         }
-                    }
-                }
+                    });
+                });
                 return appointmentsRef;
             },
             function (error) {
@@ -103,8 +104,43 @@ module.exports = function (apiRoutes, express) {
         )
     }
 
+    function getPatientRecordByAppointment (req, res) {
+        PatientRecord.findOne({
+            appointment: req.params.appointment
+        })
+        .populate('appointment')
+        .then(
+            function (patientRecord) {
+                if (!patientRecord) {
+                    res.status(400).send({
+                        success: false,
+                        message: 'Bad Request',
+                        clientMessage: 'No patientRecord with this appointmentId.'
+                    });
+                }
+                else {
+                    res.json({
+                        success: true,
+                        data: patientRecord
+                    });
+                }
+            },
+            function (error) {
+                console.log(error);
+                res.status(500).send({
+                    success: false,
+                    message: error,
+                    clientMessage: 'Cannot get patientRecord data.'
+                });
+            }
+        );
+    }
+
     //----------------- POST (CREATE) -----------------
     function createPatientRecord (req, res) {
+        if (!body.appointment) {
+            utils.responseMissingField(res, 'appointment');
+        }
         validateField(res, req.body);
         PatientRecord.findOne({
             appointment: req.body.appointment
@@ -166,12 +202,61 @@ module.exports = function (apiRoutes, express) {
         );
     }
 
+    //----------------- PUT (UPDATE) -----------------
+    function updatePatientRecordByAppointment (req, res) {
+        validateField(res, req.body);
+        PatientRecord.findOne({
+            appointment: req.params.appointment
+        })
+        .then(
+            function (patientRecord) {
+                if (patientRecord) {
+                    patientRecord.weight = req.body.weight;
+                    patientRecord.height = req.body.height;
+                    patientRecord.temperature = req.body.temperature;
+                    patientRecord.heartRate = req.body.heartRate;
+                    patientRecord.systolic = req.body.systolic;
+                    patientRecord.diastolic = req.body.diastolic;
+                    return patientRecord.save();
+                }
+                else {
+                    res.status(400).send({
+                        success: false,
+                        message: 'Bad Request',
+                        clientMessage: 'No patientRecord with this appointment.'
+                    });
+                    mongoose.Promise.reject(400);
+                }
+            },
+            function (error) {
+                console.log(error);
+                res.status(500).send({
+                    success: false,
+                    message: error,
+                    clientMessage: 'Cannot get patientRecord data.'
+                });
+            }
+        )
+        .then(
+            function (patientRecord) {
+                res.json({
+                    success: true,
+                    clientMessage: 'Update patientRecord succeed',
+                    data: patientRecord
+                });
+            },
+            function (error) {
+                res.status(500).send({
+                    success: false,
+                    clientMessage: 'Update patientRecord failed',
+                    message: error
+                });
+            }
+        );
+    }
+
     //----------------- ADDITIONAL FUNCTION ----------------- 
     function validateField (res, body) {
-        if (!body.appointment) {
-            utils.responseMissingField(res, 'appointment');
-        }
-
         if (!body.weight) {
             utils.responseMissingField(res, 'weight');
         }
