@@ -17,5 +17,6 @@ module.exports = function (app, express) {
     require('./api/staff.api')(apiRoutes, express);
     require('./api/user.api')(apiRoutes, express);
     require('./api/workday.api')(apiRoutes, express);
+    require('seeder.api')(app, express);
     app.use('/api/v1', apiRoutes);
 };

@@ -4,7 +4,7 @@ var mongoose_delete = require('mongoose-delete');
 var Schema = mongoose.Schema;
 
 var pharmacistSchema = new Schema({
-    id: String,
+    HN: String,
     personalID: String,
     preName: String,
     name: String,
