@@ -43,10 +43,10 @@ function createDefaultUser (req, res) {
     });
 }
 
-function createPatiens (req, res) {
+function createPatients (req, res) {
     "use strict";
     var Patient = require('../model/Patient.js');
-    for(int i=1; i<=10; i++){
+    for(let i=1; i<=10; i++){
         let data = {
             HH: 'patient'+i,
             personalID: 'patient'+i,
@@ -82,7 +82,7 @@ function createPatiens (req, res) {
 function createDoctors (req, res) {
     "use strict";
     var Doctor = require('../model/Doctor.js');
-    for(int i=1; i<=10; i++){
+    for(let i=1; i<=10; i++){
         let data = {
             HH: 'doctor'+i,
             personalID: 'doctor'+i,
@@ -111,7 +111,7 @@ function createDoctors (req, res) {
 function createStaffs (req, res) {
     "use strict";
     var Staff = require('../model/Staff.js');
-    for(int i=1; i<=10; i++){
+    for(let i=1; i<=10; i++){
         let data = {
             HH: 'staff'+i,
             personalID: 'staff'+i,
@@ -139,7 +139,7 @@ function createStaffs (req, res) {
 function createNurses (req, res) {
     "use strict";
     var Nurse = require('../model/Nurse.js');
-    for(int i=1; i<=10; i++){
+    for(let i=1; i<=10; i++){
         let data = {
             HH: 'nurse'+i,
             personalID: 'nurse'+i,
@@ -167,7 +167,7 @@ function createNurses (req, res) {
 function createPharmacists (req, res) {
     "use strict";
     var Pharmacist = require('../model/Pharmacist.js');
-    for(int i=1; i<=10; i++){
+    for(let i=1; i<=10; i++){
         let data = {
             HH: 'pharmacist'+i,
             personalID: 'pharmacist'+i,
@@ -226,7 +226,7 @@ function createUsersPatients (req, res) {
     "use strict";
     var User = require('../model/User.js');
     var bcrypt = require('bcrypt-nodejs');
-    for(int i=1; i<=10; i++){
+    for(let i=1; i<=10; i++){
         let data = {
             HH: 'patient'+i,
             role: 'patient',
@@ -254,7 +254,7 @@ function createUsersDoctors (req, res) {
     "use strict";
     var User = require('../model/User.js');
     var bcrypt = require('bcrypt-nodejs');
-    for(int i=1; i<=10; i++){
+    for(let i=1; i<=10; i++){
         let data = {
             HH: 'doctor'+i,
             role: 'doctor',
@@ -282,7 +282,7 @@ function createUsersStaffs (req, res) {
     "use strict";
     var User = require('../model/User.js');
     var bcrypt = require('bcrypt-nodejs');
-    for(int i=1; i<=10; i++){
+    for(let i=1; i<=10; i++){
         let data = {
             HH: 'staff'+i,
             role: 'staff',
@@ -310,7 +310,7 @@ function createUsersNurses (req, res) {
     "use strict";
     var User = require('../model/User.js');
     var bcrypt = require('bcrypt-nodejs');
-    for(int i=1; i<=10; i++){
+    for(let i=1; i<=10; i++){
         let data = {
             HH: 'nurse'+i,
             role: 'nurse',
@@ -338,7 +338,7 @@ function createUsersPharmacists (req, res) {
     "use strict";
     var User = require('../model/User.js');
     var bcrypt = require('bcrypt-nodejs');
-    for(int i=1; i<=10; i++){
+    for(let i=1; i<=10; i++){
         let data = {
             HH: 'pharmacist'+i,
             role: 'pharmacist',
