@@ -2,7 +2,9 @@
     <div class="box">
         <div class="search-box-wrapper">
             <search-box
-                [searchBoxLabel]="'ค้นหาข้อมูลยา โดยพิมพ์ชื่อยา หรือรหัสยา'">
+                [searchBoxLabel]="'ค้นหาข้อมูลยา โดยพิมพ์ชื่อยา หรือรหัสยา'"
+                [serviceFn]="searchFunction()"
+                (onSearchResult)="displayMedicines($event)">
             </search-box>
         </div>
         <div class="add-button-wrapper">
@@ -10,6 +12,7 @@
         </div>
     </div>
     <div class="box">
-        <medicine-table></medicine-table>
+        <medicine-table
+            [medicineList]="medicineList"></medicine-table>
     </div>
 </div>

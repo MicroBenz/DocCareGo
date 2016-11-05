@@ -3,27 +3,27 @@ module.exports = function (apiRoutes, express) {
     var Clinic = require('../model/Clinic.js');
     var utils = require('../utils.js');
 
-    clinicRoutes.use(function (req, res, next) {
-        if (req.decoded.role !== 'admin') {
-            res.status(400).send({
-                status: 'Bad Request',
-                message: 'This API is not allowed for your role.'
-            });
-        }
-        next();
-    });
+    // clinicRoutes.use(function (req, res, next) {
+    //     if (req.decoded.role !== 'admin') {
+    //         res.status(400).send({
+    //             status: 'Bad Request',
+    //             message: 'This API is not allowed for your role.'
+    //         });
+    //     }
+    //     next();
+    // });
 
     clinicRoutes.route('/')
-        .get(getclinics)
+        .get(getClinics)
         .post(createclinic)
         .put(utils.methodNotAllowed)
         .delete(utils.methodNotAllowed);
     
     clinicRoutes.route('/:id')
-        .get(getclinicById)
+        .get(getClinicById)
         .post(utils.methodNotAllowed)
-        .put(updateclinicById)
-        .delete(deleteclinicById);
+        .put(updateClinicById)
+        .delete(deleteClinicById);
 
     apiRoutes.use('/clinics', clinicRoutes);
 

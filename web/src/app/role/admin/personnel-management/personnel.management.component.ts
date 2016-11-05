@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { PERSONNEL_MANAGEMENT_TITLE } from '../../../config/title.config';
 import { Http } from '@angular/http';
-import { Observable } from 'rxjs/Rx';
-import { TestService } from '../../../shared/service/test.service';
 
 @Component({
     selector: 'personnel-management',
@@ -27,7 +25,7 @@ import { TestService } from '../../../shared/service/test.service';
 })
 export class PersonnelManagementComponent implements OnInit {
     public personnelList;
-    constructor (private title: Title, private http: Http, private testService: TestService) {}
+    constructor (private title: Title, private http: Http) {}
 
     ngOnInit () {
         this.title.setTitle(PERSONNEL_MANAGEMENT_TITLE);
@@ -36,7 +34,7 @@ export class PersonnelManagementComponent implements OnInit {
 
     searchFunction () {
         return (key) => {
-            return this.testService.getSearchByKey(key);
+            // return this.testService.getSearchByKey(key);
         }
     }
 
