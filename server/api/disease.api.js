@@ -133,6 +133,15 @@ module.exports = function (apiRoutes, express) {
                     });
                     mongoose.Promise.reject(400);
                 }
+                else {
+                    return {
+                        name: req.body.name,
+                        icd10: req.body.icd10,
+                        snowmed: req.body.snowmed,
+                        drg: req.body.drg,
+                        description: req.body.description
+                    };
+                }
             },
             function (error) {
                 console.log(error);
@@ -141,6 +150,12 @@ module.exports = function (apiRoutes, express) {
                     message: error,
                     clientMessage: 'Cannot get disease data.'
                 });
+            }
+        )
+        .then(
+            function (data) {
+                var disease = new Disease(data);
+                return disease.save();
             }
         )
         .then(
@@ -165,18 +180,25 @@ module.exports = function (apiRoutes, express) {
     function updateDiseaseByName (req, res) {
         utils.checkRole(req, res, ['admin']);
         valNameateField(res, req.body);
-        var diseaseRef;
         Disease.findOne({
             name: req.params.name
         })
         .then(
-            function (data) {
-                diseaseRef.name = data.name;
-                diseaseRef.icd10 = data.icd10;
-                diseaseRef.snowmed = data.snowmed;
-                diseaseRef.drg = data.drg;
-                diseaseRef.description = data.description;
-                return diseaseRef.save();
+            function (disease) {
+                disease.name = req.body.name;
+                disease.icd10 = req.body.icd10;
+                disease.snowmed = req.body.snowmed;
+                disease.drg = req.body.drg;
+                disease.description = req.body.description;
+                return disease.save();
+            },
+            function (error) {
+                console.log(error);
+                res.status(500).send({
+                    success: false,
+                    message: error,
+                    clientMessage: 'Cannot get disease data.'
+                });
             }
         )
         .then(

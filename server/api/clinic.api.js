@@ -133,6 +133,12 @@ module.exports = function (apiRoutes, express) {
                     });
                     mongoose.Promise.reject(400);
                 }
+                else {
+                    return {
+                        name: req.body.name,
+                        description: req.body.description
+                    };
+                }
             },
             function (error) {
                 console.log(error);
@@ -141,6 +147,12 @@ module.exports = function (apiRoutes, express) {
                     message: error,
                     clientMessage: 'Cannot get clinic data.'
                 });
+            }
+        )
+        .then(
+            function (data) {
+                var clinic = new Clinic(data);
+                return clinic.save();
             }
         )
         .then(
@@ -165,15 +177,22 @@ module.exports = function (apiRoutes, express) {
     function updateClinicByName (req, res) {
         utils.checkRole(req, res, ['admin']);
         validateField(res, req.body);
-        var clinicRef;
         Clinic.findOne({
             name: req.params.name
         })
         .then(
-            function (data) {
-                clinicRef.name = data.name;
-                clinicRef.description = data.description;
-                return clinicRef.save();
+            function (clinic) {
+                clinic.name = data.name;
+                clinic.description = data.description;
+                return clinic.save();
+            },
+            function (error) {
+                console.log(error);
+                res.status(500).send({
+                    success: false,
+                    message: error,
+                    clientMessage: 'Cannot update clinic data.'
+                });
             }
         )
         .then(
