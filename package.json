@@ -42,6 +42,7 @@
     "method-override": "~2.0.2",
     "moment": "^2.15.1",
     "mongoose": "^4.5.9",
+    "mongoose-delete": "^0.3.4",
     "morgan": "^1.7.0",
     "rxjs": "5.0.0-beta.12",
     "zone.js": "^0.6.23"
