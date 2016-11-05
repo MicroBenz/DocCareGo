@@ -1,26 +1,25 @@
 import { Injectable } from '@angular/core';
 import { Response, URLSearchParams } from '@angular/http';
 import { AuthHttp } from 'angular2-jwt';
-import { MEDICINE_ENDPOINT } from '../../config/api.config';
 
 @Injectable()
-export class MedicineService {
+export class DataService {
     constructor(private http: AuthHttp) {}
 
-    public getMedicine () {
-        return this.http.get(MEDICINE_ENDPOINT)
+    public getData(apiEndpoint: string) {
+        return this.http.get(apiEndpoint)
             .map(this.handleResponse, this.handleError);
     }
 
-    public searchMedicine (query: string) {
+    public searchData(apiEndpoint: string, query: string = '') {
         let params = new URLSearchParams();
         params.set('search', query);
-        return this.http.get(MEDICINE_ENDPOINT, {
+        return this.http.get(apiEndpoint, {
             search: params
         })
         .map(this.handleResponse, this.handleError)
     }
-
+    
     private handleResponse = (res: Response) => {
         let result = res.json();
         if (result.success)
@@ -30,6 +29,6 @@ export class MedicineService {
     }
 
     private handleError = (error) => {
-        console.error('Medicine Service Error: ', error);        
+        console.error('DataService Error: ', error);        
     }
 }

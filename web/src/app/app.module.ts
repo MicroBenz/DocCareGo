@@ -25,7 +25,7 @@ import { routing, appRoutingProviders } from './app.routing';
 
 // Service
 import { AuthService } from './shared/service/auth.service';
-import { MedicineService } from './shared/service/medicine.service';
+import { DataService } from './shared/service/data.service';
 
 @NgModule({
     bootstrap: [
@@ -65,7 +65,7 @@ import { MedicineService } from './shared/service/medicine.service';
             useClass: HashLocationStrategy
         },
         AuthService,
-        MedicineService
+        DataService
     ]
 })
 export class AppModule {

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { MEDICINE_MANAGEMENT_TITLE } from '../../../config/title.config';
-import { MedicineService } from '../../../shared/service/medicine.service';
+import { DataService } from '../../../shared/service/data.service';
+import { MEDICINE_ENDPOINT } from '../../../config/api.config';
 
 @Component({
     selector: 'medicine-management',
@@ -25,13 +26,13 @@ import { MedicineService } from '../../../shared/service/medicine.service';
 })
 export class MedicineManagementComponent implements OnInit {
     public medicineList;
-    constructor(private title: Title, private medicineService: MedicineService) {}
+    constructor(private title: Title, private dataService: DataService) {}
 
     ngOnInit () {
         this.medicineList = [];
         this.title.setTitle(MEDICINE_MANAGEMENT_TITLE);
-        this.medicineService.getMedicine()
-            .subscribe(this.displayMedicines, this.errorHandler);
+        this.dataService.getData(MEDICINE_ENDPOINT)
+            .subscribe(this.displayMedicines, this.errorHandler);            
     }
 
     public displayMedicines = (medicines) => {
@@ -44,8 +45,8 @@ export class MedicineManagementComponent implements OnInit {
     }
 
     public searchFunction () {
-        return (key) => {
-            return this.medicineService.searchMedicine(key);
+        return (searchKey) => {
+            return this.dataService.searchData(MEDICINE_ENDPOINT, searchKey);
         }
     }
 
