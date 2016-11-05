@@ -22,7 +22,7 @@ module.exports = function (apiRoutes, express) {
     // Implementation of CRUD are below.
     //----------------- GET -----------------
     function getPatientRecords (req, res) {
-        checkRole(req, res, ['nurse']);
+        utils.checkRole(req, res, ['nurse']);
         var appointmentsRef;
         Workday.find({
             date: moment().toDate()
@@ -96,7 +96,7 @@ module.exports = function (apiRoutes, express) {
     }
 
     function getPatientRecordByAppointment (req, res) {
-        checkRole(req, res, ['nurse','doctor']);
+        utils.checkRole(req, res, ['nurse','doctor']);
         PatientRecord.findOne({
             appointment: req.params.appointment
         })
@@ -130,7 +130,7 @@ module.exports = function (apiRoutes, express) {
 
     //----------------- POST (CREATE) -----------------
     function createPatientRecord (req, res) {
-        checkRole(req, res, ['nurse']);
+        utils.checkRole(req, res, ['nurse']);
         if (!body.appointment) {
             utils.responseMissingField(res, 'appointment');
         }
@@ -197,7 +197,7 @@ module.exports = function (apiRoutes, express) {
 
     //----------------- PUT (UPDATE) -----------------
     function updatePatientRecordByAppointment (req, res) {
-        checkRole(req, res, ['nurse']);
+        utils.checkRole(req, res, ['nurse']);
         validateField(res, req.body);
         PatientRecord.findOne({
             appointment: req.params.appointment

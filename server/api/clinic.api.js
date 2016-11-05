@@ -3,19 +3,9 @@ module.exports = function (apiRoutes, express) {
     var Clinic = require('../model/Clinic.js');
     var utils = require('../utils.js');
 
-    // clinicRoutes.use(function (req, res, next) {
-    //     if (req.decoded.role !== 'admin') {
-    //         res.status(400).send({
-    //             status: 'Bad Request',
-    //             message: 'This API is not allowed for your role.'
-    //         });
-    //     }
-    //     next();
-    // });
-
     clinicRoutes.route('/')
         .get(getClinics)
-        .post(createclinic)
+        .post(createClinic)
         .put(utils.methodNotAllowed)
         .delete(utils.methodNotAllowed);
     
@@ -30,6 +20,7 @@ module.exports = function (apiRoutes, express) {
     // Implementation of CRUD are below.
     //----------------- GET -----------------
     function getClinics (req, res) {
+        utils.checkRole(req, res, ['admin']);
         var filterField = req.query.filters;
         if (filterField) {
             filterField = filterField.split(',').join(' ');
@@ -88,6 +79,7 @@ module.exports = function (apiRoutes, express) {
     }
 
     function getClinicById (req, res) {
+        utils.checkRole(req, res, ['doctor','admin']);
         Clinic.findOne({
             name: req.params.name
         })
@@ -119,7 +111,8 @@ module.exports = function (apiRoutes, express) {
     }
 
     //----------------- POST (CREATE) -----------------
-    function createclinic (req, res) {
+    function createClinic (req, res) {
+        utils.checkRole(req, res, ['admin']);
         if (!req.body.name) {
             utils.responseMissingField(res, 'name');
         }
@@ -170,6 +163,7 @@ module.exports = function (apiRoutes, express) {
 
     //----------------- PUT (UPDATE) -----------------
     function updateClinicById (req, res) {
+        utils.checkRole(req, res, ['admin']);
         validateField(res, req.body);
         var clinicRef;
         Clinic.findOne({
@@ -202,6 +196,7 @@ module.exports = function (apiRoutes, express) {
 
     //----------------- DELETE -----------------    
     function deleteClinicById (req, res) {
+        utils.checkRole(req, res, ['admin']);
         Clinic.findOne({
             name: req.params.name
         })

@@ -21,7 +21,7 @@ module.exports = function (apiRoutes, express) {
     // Implementation of CRUD are below.
     //----------------- GET -----------------
     function getDoctors (req, res) {
-        checkRole(req, res, ['staff','admin']);
+        utils.checkRole(req, res, ['staff','admin']);
         var filterField = req.query.filters;
         if (filterField) {
             filterField = filterField.split(',').join(' ');
@@ -93,7 +93,7 @@ module.exports = function (apiRoutes, express) {
     }
 
     function getDoctorByHN (req, res) {
-        checkRole(req, res, ['staff','admin']);
+        utils.checkRole(req, res, ['staff','admin']);
         Doctor.findOne({
             HN: req.params.HN
         })
@@ -127,7 +127,7 @@ module.exports = function (apiRoutes, express) {
 
     //----------------- POST (CREATE) -----------------
     function createDoctor (req, res) {
-        checkRole(req, res, ['admin']);
+        utils.checkRole(req, res, ['admin']);
         if (!req.body.HN) {
             utils.responseMissingField(res, 'HN');
         }
@@ -222,7 +222,7 @@ module.exports = function (apiRoutes, express) {
 
     //----------------- PUT (UPDATE) -----------------
     function updateDoctorByHN (req, res) {
-        checkRole(req, res, ['admin']);
+        utils.checkRole(req, res, ['admin']);
         validateField(res, req.body);
         var doctorRef;
         Doctor.findOne({
@@ -313,7 +313,7 @@ module.exports = function (apiRoutes, express) {
 
     //----------------- DELETE -----------------    
     function deleteDoctorByHN (req, res) {
-        checkRole(req, res, ['admin']);
+        utils.checkRole(req, res, ['admin']);
         Doctor.findOne({
             HN: req.params.HN
         })

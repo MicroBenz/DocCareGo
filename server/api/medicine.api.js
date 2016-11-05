@@ -30,6 +30,7 @@ module.exports = function (apiRoutes, express) {
     // Implementation of CRUD are below.
     //----------------- GET -----------------
     function getMedicines (req, res) {
+        utils.checkRole(req, res, ['admin']);
         var filterField = req.query.filters;
         if (filterField) {
             filterField = filterField.split(',').join(' ');
@@ -88,6 +89,7 @@ module.exports = function (apiRoutes, express) {
     }
 
     function getMedicineById (req, res) {
+        utils.checkRole(req, res, ['doctor','pharmacist','admin']);
         Medicine.findOne({
             Name: req.params.Name
         })
@@ -120,6 +122,7 @@ module.exports = function (apiRoutes, express) {
 
     //----------------- POST (CREATE) -----------------
     function createMedicine (req, res) {
+        utils.checkRole(req, res, ['admin']);
         if (!req.body.name) {
             utils.responseMissingField(res, 'name');
         }
@@ -170,6 +173,7 @@ module.exports = function (apiRoutes, express) {
 
     //----------------- PUT (UPDATE) -----------------
     function updateMedicineById (req, res) {
+        utils.checkRole(req, res, ['admin']);
         validateField(res, req.body);
         var medicineRef;
         Medicine.findOne({
@@ -202,6 +206,7 @@ module.exports = function (apiRoutes, express) {
 
     //----------------- DELETE -----------------    
     function deleteMedicineById (req, res) {
+        utils.checkRole(req, res, ['admin']);
         Medicine.findOne({
             Name: req.params.name
         })
