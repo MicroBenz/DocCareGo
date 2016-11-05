@@ -158,7 +158,7 @@ module.exports = function (apiRoutes, express) {
                         personalID: req.body.personalID,
                         preName: req.body.preName,
                         name: req.body.name,
-                        surname: req.body.surname,
+                        surname: req.body.surname
                     };
                 }
             },

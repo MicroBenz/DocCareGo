@@ -263,8 +263,5 @@ module.exports = function (apiRoutes, express) {
             utils.responseMissingField(res, 'name');
         }
 
-        if (!body.description) {
-            utils.responseMissingField(res, 'description');
-        }
     }
 };
