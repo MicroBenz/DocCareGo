@@ -27,7 +27,7 @@ module.exports = function (apiRoutes, express) {
         .put(updatePatientRecordByAppointment)
         .delete(utils.methodNotAllowed);
 
-    patientRecordRoutes.use('/patientRecords', doctorRoutes);
+    patientRecordRoutes.use('/patientRecords', patientRecordRoutes);
 
     // Implementation of CRUD are below.
     //----------------- GET -----------------
