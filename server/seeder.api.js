@@ -45,10 +45,10 @@ function createDefaultUser (req, res) {
 
 function createPatients (req, res) {
     "use strict";
-    var Patient = require('../model/Patient.js');
+    var Patient = require('./model/Patient.js');
     for(let i=1; i<=10; i++){
         let data = {
-            HH: 'patient'+i,
+            HN: 'patient'+i,
             personalID: 'patient'+i,
             preName: 'นาย',
             name: 'ผู้ป่วย'+i,
@@ -81,15 +81,14 @@ function createPatients (req, res) {
 
 function createDoctors (req, res) {
     "use strict";
-    var Doctor = require('../model/Doctor.js');
+    var Doctor = require('./model/Doctor.js');
     for(let i=1; i<=10; i++){
         let data = {
-            HH: 'doctor'+i,
+            HN: 'doctor'+i,
             personalID: 'doctor'+i,
             preName: 'นาย',
             name: 'หมอ'+i,
-            surname: 'สมมติหมอ'+i,
-            clinic: {}
+            surname: 'สมมติหมอ'+i
         };
         let doctor = new Doctor(data);
         doctor.save()
@@ -110,10 +109,10 @@ function createDoctors (req, res) {
 
 function createStaffs (req, res) {
     "use strict";
-    var Staff = require('../model/Staff.js');
+    var Staff = require('./model/Staff.js');
     for(let i=1; i<=10; i++){
         let data = {
-            HH: 'staff'+i,
+            HN: 'staff'+i,
             personalID: 'staff'+i,
             preName: 'นาย',
             name: 'เจ้าหน้าที่'+i,
@@ -138,10 +137,10 @@ function createStaffs (req, res) {
 
 function createNurses (req, res) {
     "use strict";
-    var Nurse = require('../model/Nurse.js');
+    var Nurse = require('./model/Nurse.js');
     for(let i=1; i<=10; i++){
         let data = {
-            HH: 'nurse'+i,
+            HN: 'nurse'+i,
             personalID: 'nurse'+i,
             preName: 'นาย',
             name: 'พยาบาล'+i,
@@ -166,10 +165,10 @@ function createNurses (req, res) {
 
 function createPharmacists (req, res) {
     "use strict";
-    var Pharmacist = require('../model/Pharmacist.js');
+    var Pharmacist = require('./model/Pharmacist.js');
     for(let i=1; i<=10; i++){
         let data = {
-            HH: 'pharmacist'+i,
+            HN: 'pharmacist'+i,
             personalID: 'pharmacist'+i,
             preName: 'นาย',
             name: 'เภสัช'+i,
@@ -194,10 +193,10 @@ function createPharmacists (req, res) {
 
 function createAdmin (req, res) {
     "use strict";
-    var User = require('../model/User.js');
+    var User = require('./model/User.js');
     var bcrypt = require('bcrypt-nodejs');
     let data = {
-        HH: 'admin',
+        HN: 'admin',
         role: 'admin',
         email: 'admin@doccare.go.th',
         password: bcrypt.hashSync('admin')
@@ -224,11 +223,11 @@ function createAdmin (req, res) {
 
 function createUsersPatients (req, res) {
     "use strict";
-    var User = require('../model/User.js');
+    var User = require('./model/User.js');
     var bcrypt = require('bcrypt-nodejs');
     for(let i=1; i<=10; i++){
         let data = {
-            HH: 'patient'+i,
+            HN: 'patient'+i,
             role: 'patient',
             email: 'patient'+i+'@doccare.go.th',
             password: bcrypt.hashSync('patient'+i)
@@ -252,11 +251,11 @@ function createUsersPatients (req, res) {
 
 function createUsersDoctors (req, res) {
     "use strict";
-    var User = require('../model/User.js');
+    var User = require('./model/User.js');
     var bcrypt = require('bcrypt-nodejs');
     for(let i=1; i<=10; i++){
         let data = {
-            HH: 'doctor'+i,
+            HN: 'doctor'+i,
             role: 'doctor',
             email: 'doctor'+i+'@doccare.go.th',
             password: bcrypt.hashSync('doctor'+i)
@@ -280,11 +279,11 @@ function createUsersDoctors (req, res) {
 
 function createUsersStaffs (req, res) {
     "use strict";
-    var User = require('../model/User.js');
+    var User = require('./model/User.js');
     var bcrypt = require('bcrypt-nodejs');
     for(let i=1; i<=10; i++){
         let data = {
-            HH: 'staff'+i,
+            HN: 'staff'+i,
             role: 'staff',
             email: 'staff'+i+'@doccare.go.th',
             password: bcrypt.hashSync('staff'+i)
@@ -308,11 +307,11 @@ function createUsersStaffs (req, res) {
 
 function createUsersNurses (req, res) {
     "use strict";
-    var User = require('../model/User.js');
+    var User = require('./model/User.js');
     var bcrypt = require('bcrypt-nodejs');
     for(let i=1; i<=10; i++){
         let data = {
-            HH: 'nurse'+i,
+            HN: 'nurse'+i,
             role: 'nurse',
             email: 'nurse'+i+'@doccare.go.th',
             password: bcrypt.hashSync('nurse'+i)
@@ -336,11 +335,11 @@ function createUsersNurses (req, res) {
 
 function createUsersPharmacists (req, res) {
     "use strict";
-    var User = require('../model/User.js');
+    var User = require('./model/User.js');
     var bcrypt = require('bcrypt-nodejs');
     for(let i=1; i<=10; i++){
         let data = {
-            HH: 'pharmacist'+i,
+            HN: 'pharmacist'+i,
             role: 'pharmacist',
             email: 'pharmacist'+i+'@doccare.go.th',
             password: bcrypt.hashSync('pharmacist'+i)
