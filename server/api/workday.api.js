@@ -173,10 +173,10 @@ module.exports = (apiRoutes, express) => {
         )
         .then(
             function(workdays) {
-                res.json({
-                    success: true,
-                    clientMessage: 'Delete Doctor succeed.',
-                    data: workdays
+                return Appointment.find({
+                    workday: {
+                        $in: workdays
+                    }
                 });
             },
             function(error) {
@@ -184,6 +184,60 @@ module.exports = (apiRoutes, express) => {
                 res.status(500).send({
                     success: false,
                     status: 'Delete Workday failed.',
+                    message: error
+                });
+            }
+        )
+        .then(
+            function(appointments) {
+                let arr = [];
+                appointments.forEach(
+                    function(appointment){
+                        let p = new Promise(
+                            function(resolve, reject){
+                                appointment.delete(req.decoded._id, 
+                                    function () {
+                                        resolve(appointment);
+                                    },
+                                    function (error) {
+                                        console.log(error);
+                                        res.status(500).send({
+                                            success: false,
+                                            clientMessage: 'Delete Doctor failed.',
+                                            message: error
+                                        });
+                                        reject();
+                                    }
+                                );
+                            }
+                        );
+                        arr.push(p);
+                    }
+                );
+                return Promise.all(arr);
+            },
+            function(error){
+                console.log(error);
+                res.status(500).send({
+                    success: false,
+                    status: 'Cannot find apppointment.',
+                    message: error
+                });
+            }
+        )
+        .then(
+            function(appointments){
+                // send SMS and Email to all of appointments
+                res.json({
+                    success: true,
+                    clientMessage: 'Delete Workday succeed.',
+                });
+            },
+            function(error){
+                console.log(error);
+                res.status(500).send({
+                    success: false,
+                    status: 'Delete Apppointment failed.',
                     message: error
                 });
             }
@@ -213,21 +267,21 @@ module.exports = (apiRoutes, express) => {
                     });
                 }
                 else {
-                    workday.delete(req.decoded._id, 
-                        function () {
-                            res.json({
-                                success: true,
-                                clientMessage: 'Delete workday succeed.',
-                                data: workday
-                            });
-                        },
-                        function (error) {
-                            console.log(error);
-                            res.status(500).send({
-                                success: false,
-                                clientMessage: 'Delete workday failed.',
-                                message: error
-                            });
+                    return new Promise(
+                        function(resolve, reject){
+                            workday.delete(req.decoded._id, 
+                                function () {
+                                    resolve(workday);
+                                },
+                                function (error) {
+                                    console.log(error);
+                                    res.status(500).send({
+                                        success: false,
+                                        clientMessage: 'Delete workday failed.',
+                                        message: error
+                                    });
+                                }
+                            );
                         }
                     );
                 }
@@ -237,6 +291,74 @@ module.exports = (apiRoutes, express) => {
                 res.status(500).send({
                     success: false,
                     status: 'Delete workday failed.',
+                    message: error
+                });
+            }
+        )
+        .then(
+            function(workday){
+                return Appointment.find({
+                    workday: workday
+                });
+            },
+            function(error) {
+                console.log(error);
+                res.status(500).send({
+                    success: false,
+                    status: 'Delete workday failed.',
+                    message: error
+                });
+            }
+        )
+        .then(
+            function(appointments){
+                let arr = [];
+                appointments.forEach(
+                    function(appointment){
+                        let p = new Promise(
+                            function(resolve, reject){
+                                appointment.delete(req.decoded._id, 
+                                    function () {
+                                        resolve(appointment);
+                                    },
+                                    function (error) {
+                                        console.log(error);
+                                        res.status(500).send({
+                                            success: false,
+                                            clientMessage: 'Delete Doctor failed.',
+                                            message: error
+                                        });
+                                        reject();
+                                    }
+                                );
+                            }
+                        );
+                        arr.push(p);
+                    }
+                );
+                return Promise.all(arr);
+            },function(error){
+                console.log(error);
+                res.status(500).send({
+                    success: false,
+                    status: 'Cannot find appointment',
+                    message: error
+                });
+            }
+        )
+        .then(
+            function(appointments){
+                // send SMS and Email to all of appointments
+                res.json({
+                    success: true,
+                    clientMessage: 'Delete Workday succeed.',
+                });
+            },
+            function(error){
+                console.log(error);
+                res.status(500).send({
+                    success: false,
+                    status: 'Delete Apppointment failed.',
                     message: error
                 });
             }
