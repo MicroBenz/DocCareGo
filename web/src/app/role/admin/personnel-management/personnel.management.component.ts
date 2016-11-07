@@ -46,7 +46,7 @@ export class PersonnelManagementComponent implements OnInit {
     switchRole (role) {
         this.personnelList = [];
         this.selectedRole = role;
-        this.searchBoxComponent.searchKeyControl.setValue('');
+        this.searchBoxComponent.searchKeyControl.setValue(undefined);
         console.log('SWTICH ROLE: ', this.selectedRole);        
     }
 

@@ -15,38 +15,23 @@
             <ul>
                 <li [ngClass]="{'is-active': selectedRole === 'patient'}"
                     (click)="switchRole('patient')">
-                    <a>
-                        <span class="icon is-small"><i class="fa fa-image"></i></span>
-                        <span>ผู้ป่วย</span>
-                    </a>
+                    <a>ผู้ป่วย</a>
                 </li>
                 <li [ngClass]="{'is-active': selectedRole === 'doctor'}"
                     (click)="switchRole('doctor')">
-                    <a>
-                        <span class="icon is-small"><i class="fa fa-music"></i></span>
-                        แพทย์
-                    </a>
+                    <a>แพทย์</a>
                 </li>
                 <li [ngClass]="{'is-active': selectedRole === 'nurse'}"
                     (click)="switchRole('nurse')">
-                    <a>
-                        <span class="icon is-small"><i class="fa fa-film"></i></span>
-                        พยาบาล
-                    </a>
+                    <a>พยาบาล</a>
                 </li>
                 <li [ngClass]="{'is-active': selectedRole === 'staff'}"
                     (click)="switchRole('staff')">
-                    <a>
-                        <span class="icon is-small"><i class="fa fa-file-text-o"></i></span>
-                        เจ้าหน้าที่
-                    </a>
+                    <a>เจ้าหน้าที่</a>
                 </li>
                 <li [ngClass]="{'is-active': selectedRole === 'pharmacist'}"
                     (click)="switchRole('pharmacist')">
-                    <a>
-                        <span class="icon is-small"><i class="fa fa-file-text-o"></i></span>
-                        เภสัชกร
-                    </a>
+                    <a>เภสัชกร</a>
                 </li>
             </ul>
         </div>

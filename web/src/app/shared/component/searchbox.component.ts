@@ -48,6 +48,7 @@ export class SearchBoxComponent implements OnInit {
                     this.onSearchResult.emit(searchResult);
                 },
                 (error) => {
+                    this.isSearching = false;                    
                     console.log('Search Error: ', error);
                 }
             )
