@@ -16,21 +16,14 @@ import { Component, Input } from '@angular/core';
     `]
 })
 export class PersonnelTableComponent {
-    @Input('personnelList') personnelList = [];
+    @Input('personnelList') personnelList;
+    @Input('role') role;
 
-    public roleMapping = {
-        patient: 'ผู้ป่วย',
-        doctor: 'แพทย์',
-        nurse: 'พยาบาล',
-        pharmacist: 'เภสัชกร',
-        staff: 'เจ้าหน้าที่'
-    };
-
-    public editInfo (id, role) {
-
+    public editInfo (id) {
+        console.log('EDIT ', this.role);
     }
 
-    public deleteItem (id, role) {
-
+    public deleteItem (id) {
+        console.log('EDIT ', this.role);        
     }
 }
