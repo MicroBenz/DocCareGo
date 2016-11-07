@@ -143,7 +143,7 @@ module.exports = (apiRoutes, express) => {
                                 function(resolve, reject){
                                     workday.delete(req.decoded._id, 
                                         function () {
-                                            resolve();
+                                            resolve(workday);
                                         },
                                         function (error) {
                                             console.log(error);
@@ -172,10 +172,11 @@ module.exports = (apiRoutes, express) => {
             }
         )
         .then(
-            function() {
+            function(workdays) {
                 res.json({
                     success: true,
-                    clientMessage: 'Delete Doctor succeed.'
+                    clientMessage: 'Delete Doctor succeed.',
+                    data: workdays
                 });
             },
             function(error) {
@@ -217,7 +218,7 @@ module.exports = (apiRoutes, express) => {
                             res.json({
                                 success: true,
                                 clientMessage: 'Delete workday succeed.',
-                                message: 'Delete workday succeed.'
+                                data: workday
                             });
                         },
                         function (error) {
