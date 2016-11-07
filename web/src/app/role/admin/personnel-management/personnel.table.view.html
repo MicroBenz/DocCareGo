@@ -2,16 +2,14 @@
     <thead>
         <tr>
             <th class="id-column">รหัสประจำตัว</th>
-            <th>ชื่อ-นามสกุล</th>
-            <th>บทบาท</th>                           
+            <th>ชื่อ-นามสกุล</th>                          
             <th class="action-column"></th>         
         </tr>
     </thead>
     <tbody *ngIf="personnelList.length !== 0">
         <tr *ngFor="let personnel of personnelList;">
-            <td>{{personnel.id}}</td>
+            <td>{{personnel.HN}}</td>
             <td>{{personnel.name}} {{personnel.surname}}</td>
-            <td>{{roleMapping[personnel.role]}}</td>
             <td>
                 <a class="button is-primary"
                     (click)="editInfo(personnel.id, personnel.role)">

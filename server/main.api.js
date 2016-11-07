@@ -13,6 +13,7 @@ module.exports = function (app, express) {
     require('./api/medicine.api')(apiRoutes, express);
     require('./api/nurse.api')(apiRoutes, express);
     require('./api/patient.api')(apiRoutes, express);
+    require('./api/doctor.api')(apiRoutes, express);    
     require('./api/patientRecord.api')(apiRoutes, express);
     require('./api/pharmacist.api')(apiRoutes, express);
     require('./api/staff.api')(apiRoutes, express);

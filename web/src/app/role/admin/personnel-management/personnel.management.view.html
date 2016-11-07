@@ -1,14 +1,54 @@
 <div class="container">
     <div class="box">
+        
         <div class="search-box-wrapper">
             <search-box
-                [searchBoxLabel]="'ค้นหาบุคลากร โดยพิมพ์ชื่อ-นามสกุล หรือรหัสประจำตัวบุคลากร'"
-                [serviceFn]="searchFunction()"
+                [searchBoxLabel]="'ค้นหาบุคลากร โดยเลือกประเภทบุคลากร แล้วพิมพ์ชื่อ-นามสกุลเพื่อทำการค้นหา'"
+                [serviceFn]="searchFunction(selectedRole)"
                 (onSearchResult)="onSearchResult($event)">
             </search-box>
         </div>
         <div class="add-button-wrapper">
             <a class="button is-info"><i class="fa fa-plus-circle"></i> เพิ่มบุคลากรโรงพยาบาล</a>            
+        </div>
+        <div class="tabs is-toggle">
+            <ul>
+                <li [ngClass]="{'is-active': selectedRole === 'patient'}"
+                    (click)="switchRole('patient')">
+                    <a>
+                        <span class="icon is-small"><i class="fa fa-image"></i></span>
+                        <span>ผู้ป่วย</span>
+                    </a>
+                </li>
+                <li [ngClass]="{'is-active': selectedRole === 'doctor'}"
+                    (click)="switchRole('doctor')">
+                    <a>
+                        <span class="icon is-small"><i class="fa fa-music"></i></span>
+                        แพทย์
+                    </a>
+                </li>
+                <li [ngClass]="{'is-active': selectedRole === 'nurse'}"
+                    (click)="switchRole('nurse')">
+                    <a>
+                        <span class="icon is-small"><i class="fa fa-film"></i></span>
+                        พยาบาล
+                    </a>
+                </li>
+                <li [ngClass]="{'is-active': selectedRole === 'staff'}"
+                    (click)="switchRole('staff')">
+                    <a>
+                        <span class="icon is-small"><i class="fa fa-file-text-o"></i></span>
+                        เจ้าหน้าที่
+                    </a>
+                </li>
+                <li [ngClass]="{'is-active': selectedRole === 'pharmacist'}"
+                    (click)="switchRole('pharmacist')">
+                    <a>
+                        <span class="icon is-small"><i class="fa fa-file-text-o"></i></span>
+                        เภสัชกร
+                    </a>
+                </li>
+            </ul>
         </div>
     </div>
     <div class="box">

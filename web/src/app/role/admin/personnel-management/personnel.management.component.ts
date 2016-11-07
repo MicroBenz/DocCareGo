@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+
 import { PERSONNEL_MANAGEMENT_TITLE } from '../../../config/title.config';
-import { Http } from '@angular/http';
+import { DataService } from '../../../shared/service/data.service';
+import { PATIENT_ENDPOINT, DOCTOR_ENDPOINT, NURSE_ENDPOINT, STAFF_ENDPOINT, PHARMACIST_ENDPOINT } from '../../../config/api.config';
+import { SearchBoxComponent } from '../../../shared/component/searchbox.component';
 
 @Component({
     selector: 'personnel-management',
@@ -21,24 +24,55 @@ import { Http } from '@angular/http';
         .add-button-wrapper .fa {
             padding-right: 5px;
         }
+        .tabs ul li a {
+            border-top-left-radius: 0px;
+            border-top-right-radius: 0px;
+        }
     `]
 })
 export class PersonnelManagementComponent implements OnInit {
+    @ViewChild(SearchBoxComponent)
+    private searchBoxComponent: SearchBoxComponent;
+
     public personnelList;
-    constructor (private title: Title, private http: Http) {}
+    public selectedRole;
+    constructor (private title: Title, private dataService: DataService) {}
 
     ngOnInit () {
         this.title.setTitle(PERSONNEL_MANAGEMENT_TITLE);
-        this.personnelList = [];
+        this.switchRole('patient');
     }
 
-    searchFunction () {
+    switchRole (role) {
+        this.personnelList = [];
+        this.selectedRole = role;
+        this.searchBoxComponent.searchKeyControl.setValue('');
+    }
+
+    searchFunction (role) {
+        let searchEndpoint = '';
+        switch(role) {
+            case 'patient':
+                searchEndpoint = PATIENT_ENDPOINT;
+                break;
+            case 'doctor':
+                searchEndpoint = DOCTOR_ENDPOINT;
+                break;
+            case 'nurse':
+                searchEndpoint = NURSE_ENDPOINT;
+                break;
+            case 'staff':
+                searchEndpoint = STAFF_ENDPOINT;
+                break;
+            case 'pharmacist':
+                searchEndpoint = PHARMACIST_ENDPOINT;
+        }
         return (key) => {
-            // return this.testService.getSearchByKey(key);
+            return this.dataService.searchData(searchEndpoint, key);
         }
     }
 
     onSearchResult (searchResult) {
-        this.personnelList = searchResult.result.personnel;
+        this.personnelList = searchResult;
     }
 }
