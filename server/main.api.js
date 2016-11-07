@@ -4,6 +4,7 @@ module.exports = function (app, express) {
     // Require other API Here by using apiRoutes
     // See example in test.api.js
     require('./api/auth.api')(app, express);
+    require('./middleware/auth.middleware')(app, express);    
     require('./api/test.api')(apiRoutes, express);
     require('./api/appointment.api')(apiRoutes, express);
     require('./api/clinic.api')(apiRoutes, express);

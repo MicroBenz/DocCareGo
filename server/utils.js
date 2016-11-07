@@ -12,7 +12,7 @@ function checkRole (req, res, arrayOfRole) {
                 isCorrectedRole = true;
         }
     );
-    if(!isCorectedRole) {
+    if(!isCorrectedRole) {
         res.status(400).send({
             status: 'Bad Request',
             message: 'This API is not allowed for your role.'
