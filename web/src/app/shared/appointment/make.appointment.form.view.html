@@ -1,4 +1,4 @@
-<p class="control appointment-choice-wrapper">
+<!--<p class="control appointment-choice-wrapper">
     <a class="button is-info is-medium"
         (click)="appointmentChoice = 'byDoctor'; isFirstSelect = false"
         [class.is-disabled]="!isFirstSelect && appointmentChoice !== 'byDoctor'">
@@ -15,7 +15,33 @@
         </span>
         <span>นัดหมายโดยเลือกแผนก</span>
     </a>
-</p>
+</p>-->
+
+<div>
+    <label class="label">แผนกที่ต้องการนัด</label>
+    <p class="control">
+        <span class="select">
+            <select [(ngModel)]="selectClinic.id">
+                <option value="0" disabled selected>ชื่อแผนก</option>
+                <option *ngFor="let clinic of clinics" value= {{clinic.id}}
+                (click)="onSelect(clinic)">
+                    {{clinic.name}}
+                </option>
+            </select>
+        </span>
+    </p>
+    
+</div>
+
+<div *ngIf="selectClinic.id">
+    <p>Sax</p>
+    <h2>{{selectClinic.name}} details!</h2>
+    <div><label>id: </label>{{selectClinic.id}}</div>
+    <div>
+        <label>name: </label>
+        <input [(ngModel)]="selectClinic.name" placeholder="name"/>
+    </div>
+</div>
 
 <!-- Appointment Form by select doctor -->
 <div *ngIf="appointmentChoice === 'byDoctor'">

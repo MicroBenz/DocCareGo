@@ -1,6 +1,14 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { Clinic } from './clinic.component';
+
+const CLINICS: Clinic[] = [
+    {id:1 ,name: "คลินิกทางเดินอาหาร"},
+    {id:2 ,name: "คลินิกหัวใจ"},
+    {id:3 ,name: "คลินิกทางผ่าน"}
+];
+
 @Component({
     selector: 'make-appointment-form',
     templateUrl: './make.appointment.form.view.html',
@@ -109,6 +117,18 @@ export class MakeAppointmentFormComponent {
             this.isNoSelection.push(true);
         }
     }
+
+    //Sax Edit 
+    clinics = CLINICS;
+    // selectClinic: Clinic;
+    selectClinic: Clinic = new Clinic(0,'none');
+    // public onSelect(selectClinic) {
+    //     this.selectClinic = selectClinic;
+    // }
+    onSelect(clinic: Clinic): void {
+        this.selectClinic = clinic;
+    }
+
 
     onSelectTime(time , i) {
         this.setClearSelection(i);
