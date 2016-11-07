@@ -205,7 +205,7 @@ module.exports = function (apiRoutes, express) {
     }
 
     //----------------- PUT (UPDATE) -----------------
-    function updatepatientByHN (req, res) {
+    function updatePatientByHN (req, res) {
         utils.checkRole(req, res, ['admin']);
         validateField(res, req.body);
         Patient.findOne({

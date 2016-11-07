@@ -129,7 +129,7 @@ module.exports = function (apiRoutes, express) {
     }
 
     //----------------- POST (CREATE) -----------------
-    function createnurse (req, res) {
+    function createNurse (req, res) {
         utils.checkRole(req, res, ['admin']);
         if (!req.body.HN) {
             utils.responseMissingField(res, 'HN');
@@ -249,7 +249,7 @@ module.exports = function (apiRoutes, express) {
     }
 
     //----------------- DELETE -----------------    
-    function deletenurseByHN (req, res) {
+    function deleteNurseByHN (req, res) {
         utils.checkRole(req, res, ['admin']);
         nurse.findOne({
             HN: req.params.HN
