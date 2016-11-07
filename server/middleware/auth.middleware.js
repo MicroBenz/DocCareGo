@@ -4,7 +4,6 @@ module.exports = function (app, express) {
 
     app.use('/api/v1', function (req, res, next) {
         var token = req.body.token || req.query.token || req.headers['x-access-token'] || req.headers.authorization;
-        console.log('TOKEN: ', token);
         if (token) {
             token = token.split(' ');
             token = token[token.length - 1];
