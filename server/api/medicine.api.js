@@ -81,7 +81,7 @@ module.exports = function (apiRoutes, express) {
     function getMedicineByName (req, res) {
         utils.checkRole(req, res, ['doctor','pharmacist','admin']);
         Medicine.findOne({
-            Name: req.params.Name
+            name: req.params.name
         })
         .then(
             function (medicine) {

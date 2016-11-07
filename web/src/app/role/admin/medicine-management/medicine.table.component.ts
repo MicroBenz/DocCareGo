@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'medicine-table',
@@ -16,4 +17,13 @@ import { Component, Input } from '@angular/core';
 export class MedicineTableComponent {
     @Input('medicineList') medicineList = [];
 
+    constructor(private router: Router) {}
+
+    editInfo (name) {
+        this.router.navigate(['/admin/medicine-management/edit-medicine', name]);
+    }
+
+    deleteItem (name) {
+
+    }
 }
