@@ -178,12 +178,12 @@ module.exports = function (apiRoutes, express) {
         utils.checkRole(req, res, ['admin']);
         validateField(res, req.body);
         Medicine.findOne({
-            Name: req.params.name
+            name: req.params.name
         })
         .then(
             function (medicine) {
-                medicine.name = data.name;
-                medicine.description = data.description;
+                medicine.name = req.body.name;
+                medicine.description = req.body.description;
                 return medicine.save();
             },
             function (error) {

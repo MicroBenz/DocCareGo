@@ -20,6 +20,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 })
 export class ModalComponent {
     @Input('description') description = '';
+    @Input('modalType') modalType = 'warning';
     @Input('confirmFn') confirmFn;
     @Input('cancelFn') cancelFn;
     @Input('confirmText') confirmText = 'ยืนยัน';

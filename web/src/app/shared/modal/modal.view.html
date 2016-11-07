@@ -2,12 +2,14 @@
     <div class="modal-background"></div>
     <div class="modal-card">
         <section class="modal-card-body">
-            <img src="../../assets/img/modal/warning.png">
-            <h1 class="title">{{description}}</h1>
+            <img *ngIf="modalType === 'warning'" src="../../assets/img/modal/warning.png">
+            <img *ngIf="modalType === 'revise'" src="../../assets/img/modal/revise.png">       
+            <img *ngIf="modalType === 'fail'" src="../../assets/img/modal/fail.png">      
+            <div [innerHtml]="description"></div>
         </section>
         <footer class="modal-card-foot">
             <a class="button is-danger is-medium" (click)="confirmFn(); onFunctionSucceed.emit(true)">{{confirmText}}</a>
-            <a class="button is-medium" (click)="hideModal()">{{cancelText}}</a>
+            <a *ngIf="modalType !== 'fail'" class="button is-medium" (click)="hideModal()">{{cancelText}}</a>
         </footer>
     </div>
 </div>
