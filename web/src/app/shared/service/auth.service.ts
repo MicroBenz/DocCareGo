@@ -51,4 +51,11 @@ export class AuthService {
         }
         return '';
     }
+
+    public getUsername () {
+        if (this.hasLogin()) {
+            return this.jwtHelper.decodeToken(window.localStorage.getItem('doccareGoToken')).name;
+        }
+        return '';
+    }
 }

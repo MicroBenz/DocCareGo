@@ -27,7 +27,7 @@ export class NavComponent implements OnInit {
     constructor(private authService: AuthService, private jwtHelper: JwtHelper) {}
 
     ngOnInit () {
-        this.userName = 'จอห์น';
+        this.userName = this.authService.getUsername();
         let role = this.authService.getUserRole();
         this.userRoleDisplay = this.roleMapping[role];
         switch (role) {
