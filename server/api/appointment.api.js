@@ -43,7 +43,7 @@ module.exports = (apiRoutes, express) => {
                         userRef = user;
                         return Workday.find({
                             date: {
-                                $gt: moment()
+                                $gte: moment().toDate()
                             }
                         });
                     }
@@ -231,8 +231,8 @@ module.exports = (apiRoutes, express) => {
                         patient: patientRef,
                         doctor: doctor,
                         workday: req.body.workday
-                    }
-                    let app = New Appointment(data)
+                    };
+                    let app = New Appointment(data);
                     return app.save();
                 }
                 else{
