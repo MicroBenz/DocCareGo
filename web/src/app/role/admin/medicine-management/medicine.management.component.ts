@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 
 import { DataService } from '../../../shared/service/data.service';
 import { MEDICINE_MANAGEMENT_TITLE } from '../../../config/title.config';
@@ -27,7 +28,7 @@ import { MEDICINE_ENDPOINT } from '../../../config/api.config';
 })
 export class MedicineManagementComponent implements OnInit {
     public medicineList;
-    constructor(private title: Title, private dataService: DataService) {}
+    constructor(private title: Title, private dataService: DataService, private router: Router) {}
 
     ngOnInit () {
         this.medicineList = [];
@@ -51,5 +52,8 @@ export class MedicineManagementComponent implements OnInit {
         }
     }
 
+    navigateToAddMedicine () {
+        this.router.navigateByUrl('/admin/medicine-management/add-medicine');
+    }
     
 }
