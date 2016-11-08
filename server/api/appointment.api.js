@@ -232,7 +232,7 @@ module.exports = (apiRoutes, express) => {
                         doctor: doctor,
                         workday: req.body.workday
                     };
-                    let app = New Appointment(data);
+                    let app = new Appointment(data);
                     return app.save();
                 }
                 else{
@@ -286,8 +286,8 @@ module.exports = (apiRoutes, express) => {
                             });
                         },
                         function (error) {
+                            console.log(error);
                             res.status(500).send({
-                                console.log(error);
                                 success: false,
                                 clientMessage: 'Delete appointment failed.',
                                 message: error
@@ -297,8 +297,8 @@ module.exports = (apiRoutes, express) => {
                 }
             },
             function (error) {
+                console.log(error);
                 res.status(500).send({
-                    console.log(error);
                     success: false,
                     status: 'Delete appointment failed.',
                     message: error
