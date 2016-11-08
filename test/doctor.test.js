@@ -18,6 +18,12 @@ describe("Doctors", function(){
             .end(
                 function(err, res){
                     res.should.have.status(200);
+                    res.should.be.json; 
+                    res.body.should.be.a('object');
+                    res.body.should.have.property('success',true);
+                    res.body.should.have.property('data');
+                    res.body.data.should.be.a('array');
+                    console.log(res.body.data);
                     done();
                 }
             )
