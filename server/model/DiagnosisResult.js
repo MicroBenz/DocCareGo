@@ -22,4 +22,4 @@ diagnosisResultSchema.plugin(mongoose_delete, {
 
 var DiagnosisResult = mongoose.model('DiagnosisResult', diagnosisResultSchema);
 
-module.exports = DiagnosisResult;H
+module.exports = DiagnosisResult;
