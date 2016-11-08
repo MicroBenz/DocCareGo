@@ -25,7 +25,7 @@ module.exports = function (apiRoutes, express) {
         utils.checkRole(req, res, ['nurse']);
         var appointmentsRef;
         Workday.find({
-            date: moment().toDate()
+            date: moment()
         })
         .then(
             function (workdays) {
@@ -46,7 +46,7 @@ module.exports = function (apiRoutes, express) {
         )
         .then(
             function (appointments) {
-                appointmentsRef = appointments;
+                appointmentsRef = appointments.toObject();
                 return PatientRecord.find({
                     appointment: {
                         $in: appointments
@@ -70,7 +70,7 @@ module.exports = function (apiRoutes, express) {
                             appointment.patientRecord = patientRecord;
                         }
                         else {
-                            appointment.patientRecord = {};
+                            appointment.patientRecord = null;
                         }
                     });
                 });
