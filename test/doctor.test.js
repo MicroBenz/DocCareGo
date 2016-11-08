@@ -21,9 +21,11 @@ describe("Doctors", function(){
                     res.should.be.json; 
                     res.body.should.be.a('object');
                     res.body.should.have.property('success',true);
+                    res.body.should.have.property('limit',10);
                     res.body.should.have.property('data');
                     res.body.data.should.be.a('array');
-                    console.log(res.body.data);
+                    res.body.data.should.have.length(10);
+                    // console.log(res.body.data);
                     done();
                 }
             )
