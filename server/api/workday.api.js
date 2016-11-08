@@ -63,7 +63,7 @@ module.exports = (apiRoutes, express) => {
         for(let i=0; i<100; i++, d.add(7,'day')){
             let data = {
                 doctor: req.body.doctor,
-                date: d.get('date'),
+                date: d.toDate(),
                 time: req.body.time
             };
             let p = new Promise(

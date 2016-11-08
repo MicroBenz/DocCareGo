@@ -25,7 +25,7 @@ module.exports = function (apiRoutes, express) {
         utils.checkRole(req, res, ['nurse']);
         var appointmentsRef;
         Workday.find({
-            date: moment()
+            date: moment().toDate()
         })
         .then(
             function (workdays) {
