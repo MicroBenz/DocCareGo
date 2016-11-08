@@ -40,7 +40,7 @@ describe("Workdays", function(){
                     doctor: doctor,
                     day: 'Monday',
                     time: 'AM'
-                }
+                };
                 chai.request(server)
                 .post('/api/v1/workdays')
                 .set("x-access-token","eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ODFkN2RjOGIzMGMxNjFhYjBmMGU5YjciLCJ1cGRhdGVkQXQiOiIyMDE2LTExLTA1VDA2OjM2OjAwLjYzMloiLCJjcmVhdGVkQXQiOiIyMDE2LTExLTA1VDA2OjM2OjAwLjYzMloiLCJ1c2VybmFtZSI6InN0YWZmMSIsInJvbGUiOiJzdGFmZiIsImVtYWlsIjoic3RhZmYxQGRvY2NhcmUuZ28udGgiLCJfX3YiOjAsImRlbGV0ZWQiOmZhbHNlLCJuYW1lIjoi4LmA4LiI4LmJ4Liy4Lir4LiZ4LmJ4Liy4LiX4Li14LmIMSIsImlhdCI6MTQ3ODU5MDg3MiwiZXhwIjoxNDc4Njc3MjcyfQ.H44nwNQ9f8dK6ji_6RiPVDGwvBjFmV7UtFL1iDbyph8")
@@ -55,6 +55,39 @@ describe("Workdays", function(){
                         res.body.should.have.property('data');
                         res.body.data.should.be.a('array');
                         res.body.data.should.have.length(100);
+                        done();
+                    }
+                );
+            });
+        });
+    });
+    describe("/DELETE delete workdays", function(){
+        it("it should DELETE all workdays", function(done){
+            let Doctor = require('../server/model/Doctor');
+            Doctor.findOne({HN:'doctor1'})
+            .then(function(doctor){
+                let data = {
+                    doctor: doctor,
+                    day: 'Monday',
+                    time: 'AM'
+                };
+                chai.request(server)
+                .delete('/api/v1/workdays')
+                .set("x-access-token","eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ODFkN2RjOGIzMGMxNjFhYjBmMGU5YjciLCJ1cGRhdGVkQXQiOiIyMDE2LTExLTA1VDA2OjM2OjAwLjYzMloiLCJjcmVhdGVkQXQiOiIyMDE2LTExLTA1VDA2OjM2OjAwLjYzMloiLCJ1c2VybmFtZSI6InN0YWZmMSIsInJvbGUiOiJzdGFmZiIsImVtYWlsIjoic3RhZmYxQGRvY2NhcmUuZ28udGgiLCJfX3YiOjAsImRlbGV0ZWQiOmZhbHNlLCJuYW1lIjoi4LmA4LiI4LmJ4Liy4Lir4LiZ4LmJ4Liy4LiX4Li14LmIMSIsImlhdCI6MTQ3ODU5MDg3MiwiZXhwIjoxNDc4Njc3MjcyfQ.H44nwNQ9f8dK6ji_6RiPVDGwvBjFmV7UtFL1iDbyph8")
+                .send(data)
+                .end(
+                    function(err, res){
+                        res.should.have.status(200);
+                        res.should.be.json; 
+                        res.body.should.be.a('object');
+                        res.body.should.have.property('success',true);
+                        res.body.should.have.property('clientMessage','Delete Workday succeed.');
+                        res.body.should.have.property('workdaysDeleted');
+                        res.body.should.have.property('appointmentsDeleted');
+                        res.body.workdaysDeleted.should.be.a('array');
+                        res.body.appointmentsDeleted.should.be.a('array');
+                        res.body.workdaysDeleted.should.have.length(100);
+                        res.body.appointmentsDeleted.should.be.length(0);
                         done();
                     }
                 );
