@@ -58,7 +58,7 @@ module.exports = (apiRoutes, express) => {
     function createWorkday (req, res) {
         utils.checkRole(req, res, ['doctor','staff']);
         validateField(res, req.body);
-        let d = moment.day(req.body.day);
+        let d = moment().day(req.body.day);
         let arr = [];
         for(let i=0; i<100; i++, d.add(7,'day')){
             let data = {
@@ -76,7 +76,7 @@ module.exports = (apiRoutes, express) => {
                                 return w.save();
                             }
                             else{
-                                resolve();
+                                resolve(workday);
                             }
                         },function(error){
                             console.log(error);
@@ -90,7 +90,7 @@ module.exports = (apiRoutes, express) => {
                     )
                     .then(
                         function(workday){
-                            resolve();
+                            resolve(workday);
                         },
                         function(error){
                             console.log(error);
@@ -108,10 +108,11 @@ module.exports = (apiRoutes, express) => {
         }
         Promise.all(arr)
         .then(
-            function(){
+            function(workdays){
                 res.json({
                     success: true,
                     clientMessage: 'Create workday succeed',
+                    data: workdays
                 });
             },
             function(error){
