@@ -1,7 +1,6 @@
 process.env.NODE_ENV = 'test';
 
 var mongoose = require('mongoose');
-var Workday = require('../server/model/Workday');
 
 var chai = require('chai');
 var chaiHttp = require('chai-http');
