@@ -58,7 +58,7 @@ module.exports = (apiRoutes, express) => {
     function createWorkday (req, res) {
         utils.checkRole(req, res, ['doctor','staff']);
         validateField(res, req.body);
-        let d = moment().day(req.body.day);
+        let d = moment().day(req.body.day).startOf('day');
         let arr = [];
         for(let i=0; i<100; i++, d.add(7,'day')){
             let data = {
@@ -258,9 +258,10 @@ module.exports = (apiRoutes, express) => {
         if (!req.body.time) {
             utils.responseMissingField(res, 'time');
         }
+        let workdayDeleted;
         Workday.findOne({
             doctor: req.params.doctor,
-            data: req.body.date,
+            date: moment(req.body.date).startOf('day'),
             time: req.body.time
         })
         .then(
@@ -303,6 +304,7 @@ module.exports = (apiRoutes, express) => {
         )
         .then(
             function(workday){
+                workdayDeleted = workday;
                 return Appointment.find({
                     workday: workday
                 });
@@ -358,6 +360,8 @@ module.exports = (apiRoutes, express) => {
                 res.json({
                     success: true,
                     clientMessage: 'Delete Workday succeed.',
+                    workdayDeleted: workdayDeleted,
+                    appointmentsDeleted: appointments
                 });
             },
             function(error){
