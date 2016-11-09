@@ -57,56 +57,81 @@ module.exports = (apiRoutes, express) => {
     //----------------- POST -----------------
     function createWorkday (req, res) {
         utils.checkRole(req, res, ['doctor','staff']);
-        validateField(res, req.body);
-        let d = moment().day(req.body.day).startOf('day');
-        let arr = [];
-        for(let i=0; i<100; i++, d.add(7,'day')){
-            let data = {
-                doctor: req.body.doctor,
-                date: d.toDate(),
-                time: req.body.time
-            };
-            let p = new Promise(
-                function(resolve, reject){
-                    Workday.findOne(data)
-                    .then(
-                        function(workday){
-                            if(!workday){
-                                let w = new Workday(data);
-                                return w.save();
-                            }
-                            else{
-                                resolve(workday);
-                            }
-                        },function(error){
-                            console.log(error);
-                            res.status(500).send({
-                                success: false,
-                                message: error,
-                                clientMessage: 'Cannot find workday data.'
-                            });
-                            reject();
-                        }
-                    )
-                    .then(
-                        function(workday){
-                            resolve(workday);
-                        },
-                        function(error){
-                            console.log(error);
-                            res.status(500).send({
-                                success: false,
-                                message: error,
-                                clientMessage: 'Cannot create workday data.'
-                            });
-                            reject();
-                        }
-                    );
-                }
-            );
-            arr.push(p);
+        if (!req.body.doctor) {
+            utils.responseMissingField(res, 'doctor');
         }
-        Promise.all(arr)
+        if (!req.body.workdays) {
+            utils.responseMissingField(res, 'workdays');
+        }
+        let arrp = [];
+        req.body.workdays.forEach(
+            function(wd){
+                let pp = new Promise(
+                    function(sol,ject){
+                        let d = moment().day(wd.day).startOf('day');
+                        let arr = [];
+                        for(let i=0; i<100; i++, d.add(7,'day')){
+                            let data = {
+                                doctor: req.body.doctor,
+                                date: d.toDate(),
+                                time: wd.time
+                            };
+                            let p = new Promise(
+                                function(resolve, reject){
+                                    Workday.findOne(data)
+                                    .then(
+                                        function(workday){
+                                            if(!workday){
+                                                let w = new Workday(data);
+                                                return w.save();
+                                            }
+                                            else{
+                                                resolve(workday);
+                                            }
+                                        },function(error){
+                                            console.log(error);
+                                            res.status(500).send({
+                                                success: false,
+                                                message: error,
+                                                clientMessage: 'Cannot find workday data.'
+                                            });
+                                            reject();
+                                        }
+                                    )
+                                    .then(
+                                        function(workday){
+                                            resolve(workday);
+                                        },
+                                        function(error){
+                                            console.log(error);
+                                            res.status(500).send({
+                                                success: false,
+                                                message: error,
+                                                clientMessage: 'Cannot create workday data.'
+                                            });
+                                            reject();
+                                        }
+                                    );
+                                }
+                            );
+                            arr.push(p);
+                        }
+                        Promise.all(arr)
+                        .then(
+                            function(workdays){
+                                sol(workdays);
+                            },
+                            function(error){
+                                console.log(error);
+                                ject();
+                            }
+                        );             
+                    }
+                );   
+                arrp.push(pp);
+            }
+        );
+        Promise.all(arrp)
         .then(
             function(workdays){
                 res.json({
