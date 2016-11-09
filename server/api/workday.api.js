@@ -9,7 +9,8 @@ module.exports = (apiRoutes, express) => {
         .get(utils.methodNotAllowed)
         .post(createWorkday)
         .put(utils.methodNotAllowed)
-        .delete(deleteWorkdays);
+        .delete(utils.methodNotAllowed);
+        // .delete(deleteWorkdays);
     
     workdayRoutes.route('/:doctor')
         .get(getWorkdayByDoctor)
