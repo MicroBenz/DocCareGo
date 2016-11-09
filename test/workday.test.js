@@ -11,7 +11,7 @@ chai.use(chaiHttp);
 
 var doctorToken = "";
 describe("Workdays", function(){
-    beforeEach(function(done){
+    before(function(done){
         chai.request(server)
         .post('/auth/login')
         .send({

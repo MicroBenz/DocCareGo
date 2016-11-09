@@ -12,7 +12,7 @@ chai.use(chaiHttp);
 var adminToken = "";
 var staffToken = "";
 describe("Doctors", function(){
-    beforeEach(function(done){
+    before(function(done){
         let p = new Promise(
             function(resolve,reject){
                 chai.request(server)
