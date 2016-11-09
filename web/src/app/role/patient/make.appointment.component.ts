@@ -4,6 +4,36 @@ import { MakeAppointmentFormComponent } from './../../shared/appointment/make.ap
 import { Title } from '@angular/platform-browser';
 import { MAKE_APPOINTMENT_TITLE } from './../../config/title.config';
 
+import { Clinic } from '../../shared/appointment/clinic.component';
+import { Doctor } from '../../shared/appointment/doctor.component';
+import { Workday } from '../../shared/appointment/workday.component';
+
+const CLINICS: Clinic[] = [
+    {id:1 ,name: "คลินิกทางเดินอาหาร"},
+    {id:2 ,name: "คลินิกหัวใจ"},
+    {id:3 ,name: "คลินิกทางผ่าน"}
+];
+
+const DOCTORS: Doctor[] = [
+    new Doctor(1, 'นายแพทย์ธีรัช รักษ์เถา'),
+    new Doctor(2, 'นายแพทย์ธนนันท์ ตั้งธนาชัยกุล'),
+    new Doctor(3, 'นายแพทย์ธนวัฒน์ เค้าฉลองเคียง')
+];
+
+const WORKDAYS: Workday[] = [
+    new Workday(1, 1, 1, '10/11/2559', '13:00 - 13:30'),
+    new Workday(2, 1, 1, '10/11/2559', '13:30 - 14:00'),
+    new Workday(3, 1, 1, '10/11/2559', '14:00 - 14:30'),
+    new Workday(4, 1, 1, '10/11/2559', '14:30 - 15:00'),
+    new Workday(5, 2, 1, '10/11/2559', '13:00 - 13:30'),
+    new Workday(6, 2, 1, '10/11/2559', '13:30 - 14:00'),
+    new Workday(7, 2, 1, '10/11/2559', '14:00 - 14:30'),
+    new Workday(8, 3, 2, '10/11/2559', '15:00 - 15:30'),
+    new Workday(9, 3, 2, '10/11/2559', '15:30 - 16:00'),
+    new Workday(10, 3, 2, '10/11/2559', '16:00 - 16:30'),
+    new Workday(11, 3, 2, '10/11/2559', '16:30 - 17:00')
+];
+
 @Component({
     selector: 'make-appointment',
     templateUrl: './make.appointment.view.html',
@@ -22,6 +52,35 @@ export class MakeAppointmentComponent {
 
     constructor(private router: Router, private title: Title) {
         title.setTitle(MAKE_APPOINTMENT_TITLE);
+    }
+
+    clinics = CLINICS;
+    selectClinic: Clinic;
+    // selectClinic: Clinic = new Clinic(0,'none');
+    doctors: Doctor[];
+    // doctors = DOCTORS;
+    selectDoctor: Workday;
+    workdays: Workday[];
+    // workdays = WORKDAYS;
+    doctor: Doctor[];
+
+
+    onSelectClinic(clinic_id): void {
+        this.workdays = WORKDAYS.filter((item) => item.clinic_id == clinic_id);
+        this.doctors = Array<Doctor>();
+        for (var obj of this.workdays) {
+            this.doctor = DOCTORS.filter((item) => item.id == obj.doctor_id);
+            this.doctors.push(this.doctor[0]);
+            // this.doctors. 
+            // this.doctors = this.doctor;
+            // for (var _i = 0; _i < doctor.length; _i++) {
+            // }
+        }
+        // this.doctors.push(DOCTORS[0]);
+        this.doctors = this.doctors.filter(function(elem, index, self) {
+            return index == self.indexOf(elem);
+        });
+        
     }
 
     makeAppointment() {
