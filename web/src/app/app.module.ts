@@ -70,6 +70,6 @@ import { DataService } from './shared/service/data.service';
 })
 export class AppModule {
     constructor() {
-        console.log('[AppModule] user token: ', window.localStorage.getItem('doccareGoToken'));
+        console.log('[AppModule] user token: ', window.localStorage.getItem('doccareGoToken'));     
     }
 }

@@ -18,7 +18,7 @@ import { ViewTodayPatientComponent } from './role/nurse/index';
 import { ViewTodayPrescriptionComponent } from './role/pharmacist/index';
 
 // Doctor Components
-import { ManageWorkdayComponent } from './role/doctor/index';
+import { ManageWorkdayComponent, AddWorkdayComponent } from './role/doctor/index';
 
 // Admin Component
 import { PersonnelManagementComponent } from './role/admin/personnel-management/index';
@@ -86,7 +86,8 @@ const appRoutes: Routes = [
                 component: ManageWorkdayComponent
             },
             {
-                path: 'add-workday'
+                path: 'add-workday',
+                component: AddWorkdayComponent
             },
             {
                 path: 'start-working'

@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 
 import { SharedModule } from './shared.module';
 import { DoctorOnlyRoute } from './../auth/guard/index';
-import { ManageWorkdayComponent } from './../role/doctor/index';
+import { ManageWorkdayComponent, AddWorkdayComponent } from './../role/doctor/index';
 
 @NgModule({
     imports: [
@@ -13,10 +13,12 @@ import { ManageWorkdayComponent } from './../role/doctor/index';
         SharedModule
     ],
     declarations: [
-        ManageWorkdayComponent
+        ManageWorkdayComponent,
+        AddWorkdayComponent
     ],
     exports: [
-        ManageWorkdayComponent
+        ManageWorkdayComponent,
+        AddWorkdayComponent
     ],
     providers: [
         DoctorOnlyRoute

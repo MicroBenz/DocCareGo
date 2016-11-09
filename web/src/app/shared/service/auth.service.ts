@@ -58,4 +58,12 @@ export class AuthService {
         }
         return '';
     }
+
+    // THIS FUNCTION IS ON DEBUG ONLY (REMOVE WHEN GONE PROD)
+    public getUserID () {
+        if (this.hasLogin()) {
+            return this.jwtHelper.decodeToken(window.localStorage.getItem('doccareGoToken'))['_id'];
+        }
+        return '';
+    }
 }
