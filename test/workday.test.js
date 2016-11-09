@@ -26,7 +26,7 @@ describe("Workdays", function(){
         );
     });
     describe("/GET workdays by doctor _id", function(){
-        it("it should GET workday by using staff role", function(done){
+        it("it should GET workday by using doctor role", function(done){
             let Doctor = require('../server/model/Doctor');
             Doctor.findOne({HN:'doctor1'})
             .then(function(doctor){
@@ -40,48 +40,6 @@ describe("Workdays", function(){
                         res.body.should.be.a('object');
                         res.body.should.have.property('success',true);
                         res.body.should.have.property('data');
-                        done();
-                    }
-                );
-            });
-        });
-    });
-    describe("/POST create workday", function(){
-        it("it should POST create workday", function(done){
-            let Doctor = require('../server/model/Doctor');
-            Doctor.findOne({HN:'doctor1'})
-            .then(function(doctor){
-                let data = {
-                    doctor: doctor,
-                    workdays: [
-                        {
-                            "day": "Tuesday",
-                            "time": "AM"
-                        },
-                        {
-                            "day": "Tuesday",
-                            "time": "PM"
-                        },
-                        {
-                            "day": "Thursday",
-                            "time": "AM"
-                        }
-                    ]
-                };
-                chai.request(server)
-                .post('/api/v1/workdays')
-                .set("x-access-token",doctorToken)
-                .send(data)
-                .end(
-                    function(err, res){
-                        res.should.have.status(200);
-                        res.should.be.json; 
-                        res.body.should.be.a('object');
-                        res.body.should.have.property('success',true);
-                        res.body.should.have.property('clientMessage','Create workday succeed');
-                        res.body.should.have.property('data');
-                        res.body.data.should.be.a('array');
-                        res.body.data.should.have.length(3);
                         done();
                     }
                 );
@@ -120,6 +78,48 @@ describe("Workdays", function(){
             });
         });
     });
+    // describe("/POST create workday", function(){
+    //     it("it should POST create workday", function(done){
+    //         let Doctor = require('../server/model/Doctor');
+    //         Doctor.findOne({HN:'doctor1'})
+    //         .then(function(doctor){
+    //             let data = {
+    //                 doctor: doctor,
+    //                 workdays: [
+    //                     {
+    //                         "day": "Tuesday",
+    //                         "time": "AM"
+    //                     },
+    //                     {
+    //                         "day": "Tuesday",
+    //                         "time": "PM"
+    //                     },
+    //                     {
+    //                         "day": "Thursday",
+    //                         "time": "AM"
+    //                     }
+    //                 ]
+    //             };
+    //             chai.request(server)
+    //             .post('/api/v1/workdays')
+    //             .set("x-access-token",doctorToken)
+    //             .send(data)
+    //             .end(
+    //                 function(err, res){
+    //                     res.should.have.status(200);
+    //                     res.should.be.json; 
+    //                     res.body.should.be.a('object');
+    //                     res.body.should.have.property('success',true);
+    //                     res.body.should.have.property('clientMessage','Create workday succeed');
+    //                     res.body.should.have.property('data');
+    //                     res.body.data.should.be.a('array');
+    //                     res.body.data.should.have.length(3);
+    //                     done();
+    //                 }
+    //             );
+    //         });
+    //     });
+    // });
     // describe("/DELETE delete workdays", function(){
     //     it("it should DELETE all workdays", function(done){
     //         let Doctor = require('../server/model/Doctor');
