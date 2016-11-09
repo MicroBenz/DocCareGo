@@ -3,15 +3,19 @@
         <h1 class="title">เลือกวันและช่วงเวลาที่ต้องการออกตรวจ</h1>
         <div class="columns" *ngFor="let row of allTimeSlot; let isLast = last;">
             <div class="column" [ngClass]="{'is-3': isLast}" *ngFor="let slot of row;">
-                <div class="workday-box {{slot.class}} notification no-text-selection"
+                <div *ngIf="!slot.isDisable" class="workday-box {{slot.class}} notification no-text-selection"
                     (click)="toggleSelect(slot.dayIdx, slot.timeIdx)">
                     <h1>{{slot.dayLabel}}</h1>
                     <p class="subtitle no-text-selection">{{slot.timeSlot}}</p>
-                    <i *ngIf="!selectedSlot[slot.dayIdx][slot.timeIdx]" class="icon is-medium fa fa-square-o"></i>
-                    <i *ngIf="selectedSlot[slot.dayIdx][slot.timeIdx]" class="icon is-medium fa fa-check-square"></i>
+                    <i *ngIf="!selectedState[slot.dayIdx][slot.timeIdx]" class="icon is-medium fa fa-square-o"></i>
+                    <i *ngIf="selectedState[slot.dayIdx][slot.timeIdx]" class="icon is-medium fa fa-check-square"></i>
+                </div>
+                <div *ngIf="slot.isDisable" class="workday-box {{slot.class}} disabled notification no-text-selection">
+                    <h1>{{slot.dayLabel}}</h1>
+                    <p class="subtitle no-text-selection">{{slot.timeSlot}}</p>
                 </div>
             </div>
         </div>
-        <a class="button is-info">เพิ่มวันออกตรวจ</a>
+        <a class="button is-info" (click)="debugSelection()">เพิ่มวันออกตรวจ</a>
     </div>
 </div>
