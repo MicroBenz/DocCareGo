@@ -25,7 +25,7 @@ describe("Workdays", function(){
             }
         );
     });
-    describe("/GET workdays by doctor HN", function(){
+    describe("/GET workdays by doctor _id", function(){
         it("it should GET workday by using staff role", function(done){
             let Doctor = require('../server/model/Doctor');
             Doctor.findOne({HN:'doctor1'})
@@ -88,7 +88,7 @@ describe("Workdays", function(){
             });
         });
     });
-    describe("/DELETE delete workday by doctor HN", function(){
+    describe("/DELETE delete workday by doctor _id", function(){
         it("it should DELETE all workday of this doctor", function(done){
             let Doctor = require('../server/model/Doctor');
             let moment = require('moment');
