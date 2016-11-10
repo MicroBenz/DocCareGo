@@ -10,3 +10,5 @@ export const DOCTOR_ENDPOINT: string = API_PREFIX + '/doctors';
 export const NURSE_ENDPOINT: string = API_PREFIX + '/nurses';
 export const STAFF_ENDPOINT: string = API_PREFIX + '/staffs';
 export const PHARMACIST_ENDPOINT: string = API_PREFIX + '/pharmacists';
+
+export const SCHEDULE_ENDPOINT: string = API_PREFIX + '/schedules';

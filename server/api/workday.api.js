@@ -7,9 +7,10 @@ module.exports = (apiRoutes, express) => {
 
     workdayRoutes.route('/')
         .get(utils.methodNotAllowed)
-        .post(createWorkday)
+        .post(utils.methodNotAllowed)
         .put(utils.methodNotAllowed)
-        .delete(deleteWorkdays);
+        .delete(utils.methodNotAllowed);
+        // .delete(deleteWorkdays);
     
     workdayRoutes.route('/:doctor')
         .get(getWorkdayByDoctor)
@@ -57,61 +58,87 @@ module.exports = (apiRoutes, express) => {
     //----------------- POST -----------------
     function createWorkday (req, res) {
         utils.checkRole(req, res, ['doctor','staff']);
-        validateField(res, req.body);
-        let d = moment.day(req.body.day);
-        let arr = [];
-        for(let i=0; i<100; i++, d.add(7,'day')){
-            let data = {
-                doctor: req.body.doctor,
-                date: d.toDate(),
-                time: req.body.time
-            };
-            let p = new Promise(
-                function(resolve, reject){
-                    Workday.findOne(data)
-                    .then(
-                        function(workday){
-                            if(!workday){
-                                let w = new Workday(data);
-                                return w.save();
-                            }
-                            else{
-                                resolve();
-                            }
-                        },function(error){
-                            console.log(error);
-                            res.status(500).send({
-                                success: false,
-                                message: error,
-                                clientMessage: 'Cannot find workday data.'
-                            });
-                            reject();
-                        }
-                    )
-                    .then(
-                        function(workday){
-                            resolve();
-                        },
-                        function(error){
-                            console.log(error);
-                            res.status(500).send({
-                                success: false,
-                                message: error,
-                                clientMessage: 'Cannot create workday data.'
-                            });
-                            reject();
-                        }
-                    );
-                }
-            );
-            arr.push(p);
+        if (!req.body.doctor) {
+            utils.responseMissingField(res, 'doctor');
         }
-        Promise.all(arr)
+        if (!req.body.workdays) {
+            utils.responseMissingField(res, 'workdays');
+        }
+        let arrp = [];
+        req.body.workdays.forEach(
+            function(wd){
+                let pp = new Promise(
+                    function(sol,ject){
+                        let d = moment().day(wd.day).startOf('day');
+                        let arr = [];
+                        for(let i=0; i<100; i++, d.add(7,'day')){
+                            let data = {
+                                doctor: req.body.doctor,
+                                date: d.toDate(),
+                                time: wd.time
+                            };
+                            let p = new Promise(
+                                function(resolve, reject){
+                                    Workday.findOne(data)
+                                    .then(
+                                        function(workday){
+                                            if(!workday){
+                                                let w = new Workday(data);
+                                                return w.save();
+                                            }
+                                            else{
+                                                resolve(workday);
+                                            }
+                                        },function(error){
+                                            console.log(error);
+                                            res.status(500).send({
+                                                success: false,
+                                                message: error,
+                                                clientMessage: 'Cannot find workday data.'
+                                            });
+                                            reject();
+                                        }
+                                    )
+                                    .then(
+                                        function(workday){
+                                            resolve(workday);
+                                        },
+                                        function(error){
+                                            console.log(error);
+                                            res.status(500).send({
+                                                success: false,
+                                                message: error,
+                                                clientMessage: 'Cannot create workday data.'
+                                            });
+                                            reject();
+                                        }
+                                    );
+                                }
+                            );
+                            arr.push(p);
+                        }
+                        Promise.all(arr)
+                        .then(
+                            function(workdays){
+                                sol(workdays);
+                            },
+                            function(error){
+                                console.log(error);
+                                ject();
+                            }
+                        );             
+                    }
+                );   
+                arrp.push(pp);
+            }
+        );
+        Promise.all(arrp)
         .then(
-            function(){
+            function(workdays){
                 res.json({
                     success: true,
                     clientMessage: 'Create workday succeed',
+                    data: workdays
                 });
             },
             function(error){
@@ -129,7 +156,8 @@ module.exports = (apiRoutes, express) => {
     function deleteWorkdays (req, res) {
         utils.checkRole(req, res, ['doctor','staff']);
         validateField(res, req.body);
-        Workdays.find({
+        let workdaysDeleted;
+        Workday.find({
             doctor: req.body.doctor,
             time: req.body.time
         })
@@ -138,8 +166,8 @@ module.exports = (apiRoutes, express) => {
                 let arr = [];
                 workdays.forEach(
                     function(workday){
-                        let d = moment().date(workday.date);
-                        if(d.day() === req.body.day){
+                        let d = moment(workday.date);
+                        if(d.day() === moment().day(req.body.day).day()){
                             let p = new Promise(
                                 function(resolve, reject){
                                     workday.delete(req.decoded._id, 
@@ -174,6 +202,7 @@ module.exports = (apiRoutes, express) => {
         )
         .then(
             function(workdays) {
+                workdaysDeleted = workdays;
                 return Appointment.find({
                     workday: {
                         $in: workdays
@@ -232,6 +261,8 @@ module.exports = (apiRoutes, express) => {
                 res.json({
                     success: true,
                     clientMessage: 'Delete Workday succeed.',
+                    workdaysDeleted: workdaysDeleted,
+                    appointmentsDeleted: appointments
                 });
             },
             function(error){
@@ -253,9 +284,10 @@ module.exports = (apiRoutes, express) => {
         if (!req.body.time) {
             utils.responseMissingField(res, 'time');
         }
+        let workdayDeleted;
         Workday.findOne({
             doctor: req.params.doctor,
-            data: req.body.date,
+            date: moment(req.body.date).startOf('day'),
             time: req.body.time
         })
         .then(
@@ -298,6 +330,7 @@ module.exports = (apiRoutes, express) => {
         )
         .then(
             function(workday){
+                workdayDeleted = workday;
                 return Appointment.find({
                     workday: workday
                 });
@@ -353,6 +386,8 @@ module.exports = (apiRoutes, express) => {
                 res.json({
                     success: true,
                     clientMessage: 'Delete Workday succeed.',
+                    workdayDeleted: workdayDeleted,
+                    appointmentsDeleted: appointments
                 });
             },
             function(error){

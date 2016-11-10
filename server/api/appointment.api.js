@@ -3,6 +3,7 @@ module.exports = (apiRoutes, express) => {
     var Appointment = require('../model/Appointment');
     var Patient = require('../model/Patient');
     var Doctor = require('../model/Doctor');
+    var User = require('../model/User');
     var Workday = require('../model/Workday');
     var utils = require('../utils');
     var moment = require('moment');
@@ -35,7 +36,7 @@ module.exports = (apiRoutes, express) => {
         let userRef, workdaysRef;
         if(req.query.search){    
             User.findOne({
-                HN: req.query.search
+                username: req.query.search
             })
             .then(
                 function(user){
@@ -53,7 +54,7 @@ module.exports = (apiRoutes, express) => {
                             message: 'Bad Request',
                             clientMessage: 'No user with this HN.'
                         });
-                        mongoose.Promise.reject(400);
+                        Promise.reject(400);
                     }
                 },
                 function (error) {
@@ -70,12 +71,12 @@ module.exports = (apiRoutes, express) => {
                     workdaysRef = workdays;
                     if(userRef.role === 'patient'){
                         return Patient.findOne({
-                            HN: user.username
+                            HN: userRef.username
                         });
                     }
                     else if(userRef.role === 'doctor'){
                         return Doctor.findOne({
-                            HN: doctor.username
+                            HN: userRef.username
                         });
                     }
                     else{
@@ -84,7 +85,7 @@ module.exports = (apiRoutes, express) => {
                             message: 'Bad Request',
                             clientMessage: 'No patient or doctor with this HN.'
                         });
-                        mongoose.Promise.reject(400);
+                        Promise.reject(400);
                     }
                 },
                 function (error) {
@@ -128,7 +129,7 @@ module.exports = (apiRoutes, express) => {
                             message: 'Bad Request',
                             clientMessage: 'No patient or doctor with this HN.'
                         });
-                        mongoose.Promise.reject(400);
+                        Promise.reject(400);
                     }
                 },
                 function (error) {
@@ -309,24 +310,20 @@ module.exports = (apiRoutes, express) => {
 
     //----------------- ADDITIONAL FUNCTION ----------------- 
     function validateField (res, body) {
-        if (!body.personalID) {
-            utils.responseMissingField(res, 'personalID');
+        if (!body.description) {
+            utils.responseMissingField(res, 'description');
         }
 
-        if (!body.preName) {
-            utils.responseMissingField(res, 'preName');
+        if (!body.patient) {
+            utils.responseMissingField(res, 'patient');
         }
             
-        if (!body.name) {
-            utils.responseMissingField(res, 'name');
+        if (!body.doctor) {
+            utils.responseMissingField(res, 'doctor');
         }
             
-        if (!body.surname) {
-            utils.responseMissingField(res, 'surname');
-        }
-
-        if (!body.clinic) {
-            utils.responseMissingField(res, 'clinic');
+        if (!body.workday) {
+            utils.responseMissingField(res, 'workday');
         }
     }
 };

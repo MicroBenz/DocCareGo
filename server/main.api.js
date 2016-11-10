@@ -16,6 +16,7 @@ module.exports = function (app, express) {
     require('./api/doctor.api')(apiRoutes, express);    
     require('./api/patientRecord.api')(apiRoutes, express);
     require('./api/pharmacist.api')(apiRoutes, express);
+    require('./api/schedule.api')(apiRoutes, express);
     require('./api/staff.api')(apiRoutes, express);
     require('./api/user.api')(apiRoutes, express);
     require('./api/workday.api')(apiRoutes, express);

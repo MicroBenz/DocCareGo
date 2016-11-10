@@ -131,7 +131,7 @@ module.exports = function (apiRoutes, express) {
                         message: 'Bad Request',
                         clientMessage: 'This name has already in the system'
                     });
-                    mongoose.Promise.reject(400);
+                    Promise.reject(400);
                 }
                 else {
                     return {

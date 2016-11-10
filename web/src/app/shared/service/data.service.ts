@@ -20,10 +20,21 @@ export class DataService {
         .map(this.handleResponse, this.handleError)
     }
     
+    public saveData(apiEndpoint: string, body) {
+        return this.http.post(apiEndpoint, body)
+            .map(this.handleResponse, this.handleError);
+    }
+
     public updateData(apiEndpoint: string, body) {
         return this.http.put(apiEndpoint, body)
             .map(this.handleResponse, this.handleError);
     }
+
+    public deleteData(apiEndpoint: string, body) {
+        return this.http.delete(apiEndpoint, body)
+            .map(this.handleResponse, this.handleError);
+    }
+    
     private handleResponse = (res: Response) => {
         let result = res.json();
         if (result.success)

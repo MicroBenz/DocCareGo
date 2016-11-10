@@ -6,7 +6,7 @@ var Schema = mongoose.Schema;
 var diagnosisResultSchema = new Schema({
     appointment: {type: Schema.Types.ObjectId, ref: 'Appointment'},
     description: String,
-    diseases: [{type: Schema.Types.ObjectId, ref: 'disease'}],
+    diseases: [{type: Schema.Types.ObjectId, ref: 'Disease'}],
     medicines: [{type: Schema.Types.ObjectId, ref: 'Medicine'}],
     numberOfMedicines: [Number]
 },{

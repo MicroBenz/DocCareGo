@@ -12,6 +12,9 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
             width: 150px;
             margin-bottom: 15px; 
         }
+        :host /deep/ .modal-card .modal-card-body .subtitle {
+            margin-bottom: 5px !important;
+        }
         .modal-card .modal-card-foot {
             justify-content: center;
             align-items: center;
@@ -29,6 +32,11 @@ export class ModalComponent {
     @Output('isShowFlagChange') isShowFlagChange = new EventEmitter<boolean>();
     @Output('onFunctionSucceed') onFunctionSucceed = new EventEmitter<any>();
     
+    public isLoading = false;
+    triggerLoading () {
+        this.isLoading = true;
+    }
+
     hideModal () {
         this.isShowFlagChange.emit(false);
         this.isShowFlag = false;

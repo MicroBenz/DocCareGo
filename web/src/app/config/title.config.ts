@@ -9,6 +9,7 @@ export const MAKE_APPOINTMENT_TITLE: string = 'นัดหมายแพทย
 
 // Doctor Route
 export const MANAGE_WORKDAY_TITLE: string = 'จัดการวันออกตรวจ' + TITLE_POSTFIX;
+export const ADD_WORKDAY_TITLE: string = 'เพิ่มวันออกตรวจ' + TITLE_POSTFIX;
 export const START_WORKING_TITLE: string = 'ตรวจผู้ป่วย' + TITLE_POSTFIX ;
 
 // Nurse Route
