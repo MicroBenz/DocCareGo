@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
+
 import { AuthService } from '../../shared/service/auth.service';
 import { DataService } from '../../shared/service/data.service';
 import { SCHEDULE_ENDPOINT } from '../../config/api.config';
+import { ADD_WORKDAY_TITLE } from '../../config/title.config';
+
 @Component({
     selector: 'add-workday',
     templateUrl: './add.workday.view.html',
@@ -25,9 +29,10 @@ export class AddWorkdayComponent implements OnInit {
         'Friday': 'ศุกร์',
         'Saturday': 'เสาร์',        
     };
-    constructor(private authService: AuthService, private dataService: DataService) {}
+    constructor(private authService: AuthService, private dataService: DataService, private title: Title) {}
 
     ngOnInit () { 
+        this.title.setTitle(ADD_WORKDAY_TITLE);
         this.isShowConfirm = false;
         this.selectedTime = [];        
         this.createSelectedState();    
