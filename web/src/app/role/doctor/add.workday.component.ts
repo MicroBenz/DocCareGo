@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 
 import { AuthService } from '../../shared/service/auth.service';
 import { DataService } from '../../shared/service/data.service';
@@ -29,7 +30,7 @@ export class AddWorkdayComponent implements OnInit {
         'Friday': 'ศุกร์',
         'Saturday': 'เสาร์',        
     };
-    constructor(private authService: AuthService, private dataService: DataService, private title: Title) {}
+    constructor(private authService: AuthService, private dataService: DataService, private title: Title, private router: Router) {}
 
     ngOnInit () { 
         this.title.setTitle(ADD_WORKDAY_TITLE);
@@ -75,7 +76,7 @@ export class AddWorkdayComponent implements OnInit {
             [
                 {dayLabel: 'พฤหัสบดีเช้า', timeSlot: this.timeSlot[0], class: 'thursday', dayIdx: 4, timeIdx: 0, isDisable: disabledSlot[4][0]},
                 {dayLabel: 'พฤหัสบดีบ่าย', timeSlot: this.timeSlot[1], class: 'thursday', dayIdx: 4, timeIdx: 1, isDisable: disabledSlot[4][1]},
-                {dayLabel: 'ศุกร์เช้า', timeSlot: this.timeSlot[0], class: 'friday', dayIdx: 5, timeIdx: 0, isDisable: disabledSlot[5][1]},
+                {dayLabel: 'ศุกร์เช้า', timeSlot: this.timeSlot[0], class: 'friday', dayIdx: 5, timeIdx: 0, isDisable: disabledSlot[5][0]},
                 {dayLabel: 'ศุกร์บ่าย', timeSlot: this.timeSlot[1], class: 'friday', dayIdx: 5, timeIdx: 1, isDisable: disabledSlot[5][1]}
             ],
             [
@@ -92,6 +93,7 @@ export class AddWorkdayComponent implements OnInit {
             this.selectedState[i] = [false, false];
         }
     }
+
     toggleSelect (day, slot) {
         this.selectedState[day][slot] = !this.selectedState[day][slot];
         this.updateSelection();
@@ -133,5 +135,27 @@ export class AddWorkdayComponent implements OnInit {
             <h1 class="title">ตรวจสอบวันออกตรวจที่ต้องการเพิ่มอีกครั้ง</h1>
             ${selectedTimeHTML}
         `;
+    }
+
+    addWorkday = () => {
+        let requestBody = {
+            doctor: this.authService.getUserID(),
+            schedules: this.selectedTime
+        };
+        this.dataService.saveData(SCHEDULE_ENDPOINT, requestBody)
+            .subscribe(
+                (success) => {
+                    console.log('ADD SCHEDULE SUCCESS');
+                    this.navigateToMainDoctor();
+                }
+            )
+    }
+
+    dismissModal = () => {
+        this.isShowConfirm = false;
+    }
+
+    navigateToMainDoctor = () => {
+        this.router.navigateByUrl('/doctor');
     }
 }

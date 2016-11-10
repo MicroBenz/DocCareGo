@@ -25,5 +25,7 @@
     [modalType]="'revise'"
     [confirmText]="'เพิ่มวันออกตรวจ'"
     [isShowFlag]="isShowConfirm"
-    (isShowFlagChange)="isShowConfirm = $event">
+    (isShowFlagChange)="isShowConfirm = $event"
+    [confirmFn]="addWorkday"
+    [cancelFn]="dismissModal">
 </modal-dialog>

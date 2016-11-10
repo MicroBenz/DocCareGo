@@ -32,6 +32,11 @@ export class ModalComponent {
     @Output('isShowFlagChange') isShowFlagChange = new EventEmitter<boolean>();
     @Output('onFunctionSucceed') onFunctionSucceed = new EventEmitter<any>();
     
+    public isLoading = false;
+    triggerLoading () {
+        this.isLoading = true;
+    }
+
     hideModal () {
         this.isShowFlagChange.emit(false);
         this.isShowFlag = false;

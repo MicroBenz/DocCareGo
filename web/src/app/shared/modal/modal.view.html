@@ -8,7 +8,10 @@
             <div [innerHtml]="description"></div>
         </section>
         <footer class="modal-card-foot">
-            <a class="button is-danger is-medium" (click)="confirmFn(); onFunctionSucceed.emit(true)">{{confirmText}}</a>
+            <a class="button is-danger is-medium" [ngClass]="{'is-loading': isLoading}"
+                (click)="triggerLoading(); confirmFn(); onFunctionSucceed.emit(true)">
+                {{confirmText}}
+            </a>
             <a *ngIf="modalType !== 'fail'" class="button is-medium" (click)="hideModal()">{{cancelText}}</a>
         </footer>
     </div>
