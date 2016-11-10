@@ -54,7 +54,7 @@ module.exports = (apiRoutes, express) => {
                             message: 'Bad Request',
                             clientMessage: 'No user with this HN.'
                         });
-                        mongoose.Promise.reject(400);
+                        Promise.reject(400);
                     }
                 },
                 function (error) {
@@ -85,7 +85,7 @@ module.exports = (apiRoutes, express) => {
                             message: 'Bad Request',
                             clientMessage: 'No patient or doctor with this HN.'
                         });
-                        mongoose.Promise.reject(400);
+                        Promise.reject(400);
                     }
                 },
                 function (error) {
@@ -129,7 +129,7 @@ module.exports = (apiRoutes, express) => {
                             message: 'Bad Request',
                             clientMessage: 'No patient or doctor with this HN.'
                         });
-                        mongoose.Promise.reject(400);
+                        Promise.reject(400);
                     }
                 },
                 function (error) {

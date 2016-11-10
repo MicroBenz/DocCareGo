@@ -146,7 +146,7 @@ module.exports = function (apiRoutes, express) {
                         message: 'Bad Request',
                         clientMessage: 'This patientRecord has already in the system'
                     });
-                    mongoose.Promise.reject(400);
+                    Promise.reject(400);
                 }
             },
             function (error) {
@@ -219,7 +219,7 @@ module.exports = function (apiRoutes, express) {
                         message: 'Bad Request',
                         clientMessage: 'No patientRecord with this appointment.'
                     });
-                    mongoose.Promise.reject(400);
+                    Promise.reject(400);
                 }
             },
             function (error) {
