@@ -1,9 +1,68 @@
 <div class="container">
-    <div class="box">
-        <make-appointment-form></make-appointment-form>
-        <p class="control appointment-button">
-            <a class="button is-success" (click)="makeAppointment()">นัดหมายแพทย์</a>
-            <a class="button" (click)="cancelAppointment()">ยกเลิก</a>
-        </p>
+    <div class="tile is-ancestor"> 
+        <div class="tile is-parent is-5">
+            <div class="tile is-child box">
+                <div class="selectClinic">
+                    <label class="label">แผนกที่ต้องการนัด</label>
+                    <p class="control">
+                        <span class="select">
+                            <select [(ngModel)]="selectClinic" (change)="onSelectClinic($event.target.value)">
+                                <option value="0" disabled selected>ชื่อแผนก</option>
+                                <option *ngFor="let clinic of clinics" value= {{clinic.id}}
+                                [ngValue]="clinic"
+                                >
+                                    {{clinic.name}}
+                                </option>
+                            </select>
+                        </span>
+                    </p>
+                </div><br>
+                <div class="selectDoctor">
+                    <label class="label"> แพทย์ที่ต้องการนัด</label>
+                    <p class="control">
+                        <span class="select">
+                            <select [(ngModel)]="selectDoctor">
+                                <option value="0" disabled selected>ชื่อแพทย์</option>
+                                <option *ngFor="let doctor of doctors" value= {{doctor.id}}>
+                                    {{doctor.name}}
+                                </option>
+                            </select>
+                        </span>
+                    </p>
+                </div><br>
+                <!--<div class="box">-->
+                    <!--<make-appointment-form></make-appointment-form>-->
+                    <p class="control appointment-button">
+                        <a class="button is-success" (click)="makeAppointment()">นัดหมายแพทย์</a>
+                        <a class="button" (click)="cancelAppointment()">ยกเลิก</a>
+                    </p>
+                <!--</div>-->
+            </div>
+        </div>
+        <div class="tile is-parent is-7">
+            <div class="tile is-child box">
+                <h1 class="title">วันและเวลาของการนัดหมาย</h1>
+                <div class="tile is-ancestor">
+                    <div class="tile is-parent is-4">
+                        <div class="tile is-child box">
+                            <div *ngIf="selectClinic">
+                                <label class="day">{{workdays[0].id}}</label>
+                                <label class="day">{{doctors[0].name}}</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tile is-parent is-4">
+                        <div class="tile is-child box">
+                            <label class="month"></label>
+                        </div>
+                    </div>
+                    <div class="tile is-parent is-4">
+                        <div class="tile is-child box">
+                            <label class="year"></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

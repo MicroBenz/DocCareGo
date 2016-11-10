@@ -4,6 +4,9 @@
 .workday-box {
     color: #ffffff;
 }
+.workday-box.disabled {
+    opacity: 0.5;
+}
 .workday-box.sunday {
     background-color: #e03333;
 }

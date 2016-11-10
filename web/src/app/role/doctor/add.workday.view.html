@@ -1,140 +1,21 @@
 <div class="container">
     <div class="box">
         <h1 class="title">เลือกวันและช่วงเวลาที่ต้องการออกตรวจ</h1>
-        <div class="columns">
-            <div class="column">
-                <div class="workday-box sunday notification no-text-selection"
-                    (click)="toggleSelect(0,0)">
-                    <h1>อาทิตย์เช้า</h1>
-                    <p class="subtitle no-text-selection">{{timeSlot[0]}}</p>
-                    <i *ngIf="!selectedSlot[0][0]" class="icon is-medium fa fa-square-o"></i>
-                    <i *ngIf="selectedSlot[0][0]" class="icon is-medium fa fa-check-square"></i>
+        <div class="columns" *ngFor="let row of allTimeSlot; let isLast = last;">
+            <div class="column" [ngClass]="{'is-3': isLast}" *ngFor="let slot of row;">
+                <div *ngIf="!slot.isDisable" class="workday-box {{slot.class}} notification no-text-selection"
+                    (click)="toggleSelect(slot.dayIdx, slot.timeIdx)">
+                    <h1>{{slot.dayLabel}}</h1>
+                    <p class="subtitle no-text-selection">{{slot.timeSlot}}</p>
+                    <i *ngIf="!selectedState[slot.dayIdx][slot.timeIdx]" class="icon is-medium fa fa-square-o"></i>
+                    <i *ngIf="selectedState[slot.dayIdx][slot.timeIdx]" class="icon is-medium fa fa-check-square"></i>
                 </div>
-            </div>
-            <div class="column">
-                <div class="workday-box sunday notification no-text-selection"
-                    (click)="toggleSelect(0,1)">
-                    <h1>อาทิตย์บ่าย</h1>
-                    <p class="subtitle no-text-selection">{{timeSlot[1]}}</p>
-                    <i *ngIf="!selectedSlot[0][1]" class="icon is-medium fa fa-square-o"></i>
-                    <i *ngIf="selectedSlot[0][1]" class="icon is-medium fa fa-check-square"></i>
-                </div>
-            </div>
-            <div class="column">
-                <div class="workday-box monday notification no-text-selection"
-                    (click)="toggleSelect(1,0)">
-                    <h1>จันทร์เช้า</h1>
-                    <p class="subtitle no-text-selection">{{timeSlot[0]}}</p>
-                    <i *ngIf="!selectedSlot[1][0]" class="icon is-medium fa fa-square-o"></i>
-                    <i *ngIf="selectedSlot[1][0]" class="icon is-medium fa fa-check-square"></i>
-                </div>
-            </div>
-            <div class="column">
-                <div class="workday-box monday notification no-text-selection"
-                    (click)="toggleSelect(1,1)">
-                    <h1>จันทร์บ่าย</h1>
-                    <p class="subtitle">{{timeSlot[1]}}</p>
-                    <i *ngIf="!selectedSlot[1][1]" class="icon is-medium fa fa-square-o"></i>
-                    <i *ngIf="selectedSlot[1][1]" class="icon is-medium fa fa-check-square"></i>
+                <div *ngIf="slot.isDisable" class="workday-box {{slot.class}} disabled notification no-text-selection">
+                    <h1>{{slot.dayLabel}}</h1>
+                    <p class="subtitle no-text-selection">{{slot.timeSlot}}</p>
                 </div>
             </div>
         </div>
-        <div class="columns">
-            <div class="column">
-                <div class="workday-box tuesday notification no-text-selection"
-                    (click)="toggleSelect(2,0)">
-                    <h1>อังคารเช้า</h1>
-                    <p class="subtitle no-text-selection">{{timeSlot[0]}}</p>
-                    <i *ngIf="!selectedSlot[2][0]" class="icon is-medium fa fa-square-o"></i>
-                    <i *ngIf="selectedSlot[2][0]" class="icon is-medium fa fa-check-square"></i>
-                </div>
-            </div>
-            <div class="column">
-                <div class="workday-box tuesday notification no-text-selection"
-                    (click)="toggleSelect(2,1)">
-                    <h1>อังคารบ่าย</h1>
-                    <p class="subtitle no-text-selection">{{timeSlot[1]}}</p>
-                    <i *ngIf="!selectedSlot[2][1]" class="icon is-medium fa fa-square-o"></i>
-                    <i *ngIf="selectedSlot[2][1]" class="icon is-medium fa fa-check-square"></i>
-                </div>
-            </div>
-            <div class="column">
-                <div class="workday-box wednesday notification no-text-selection"
-                    (click)="toggleSelect(3,0)">
-                    <h1>พุธเช้า</h1>
-                    <p class="subtitle no-text-selection">{{timeSlot[0]}}</p>
-                    <i *ngIf="!selectedSlot[3][0]" class="icon is-medium fa fa-square-o"></i>
-                    <i *ngIf="selectedSlot[3][0]" class="icon is-medium fa fa-check-square"></i>
-                </div>
-            </div>
-            <div class="column">
-                <div class="workday-box wednesday notification no-text-selection"
-                    (click)="toggleSelect(3,1)">
-                    <h1>พุธบ่าย</h1>
-                    <p class="subtitle">{{timeSlot[1]}}</p>
-                    <i *ngIf="!selectedSlot[3][1]" class="icon is-medium fa fa-square-o"></i>
-                    <i *ngIf="selectedSlot[3][1]" class="icon is-medium fa fa-check-square"></i>
-                </div>
-            </div>
-        </div>
-        <div class="columns">
-            <div class="column">
-                <div class="workday-box thursday notification no-text-selection"
-                    (click)="toggleSelect(4,0)">
-                    <h1>พฤหัสบดีเช้า</h1>
-                    <p class="subtitle no-text-selection">{{timeSlot[0]}}</p>
-                    <i *ngIf="!selectedSlot[4][0]" class="icon is-medium fa fa-square-o"></i>
-                    <i *ngIf="selectedSlot[4][0]" class="icon is-medium fa fa-check-square"></i>
-                </div>
-            </div>
-            <div class="column">
-                <div class="workday-box thursday notification no-text-selection"
-                    (click)="toggleSelect(4,1)">
-                    <h1>พฤหัสบดีบ่าย</h1>
-                    <p class="subtitle no-text-selection">{{timeSlot[1]}}</p>
-                    <i *ngIf="!selectedSlot[4][1]" class="icon is-medium fa fa-square-o"></i>
-                    <i *ngIf="selectedSlot[4][1]" class="icon is-medium fa fa-check-square"></i>
-                </div>
-            </div>
-            <div class="column">
-                <div class="workday-box friday notification no-text-selection"
-                    (click)="toggleSelect(5,0)">
-                    <h1>ศุกร์เช้า</h1>
-                    <p class="subtitle no-text-selection">{{timeSlot[0]}}</p>
-                    <i *ngIf="!selectedSlot[5][0]" class="icon is-medium fa fa-square-o"></i>
-                    <i *ngIf="selectedSlot[5][0]" class="icon is-medium fa fa-check-square"></i>
-                </div>
-            </div>
-            <div class="column">
-                <div class="workday-box friday notification no-text-selection"
-                    (click)="toggleSelect(5,1)">
-                    <h1>ศุกร์บ่าย</h1>
-                    <p class="subtitle">{{timeSlot[1]}}</p>
-                    <i *ngIf="!selectedSlot[5][1]" class="icon is-medium fa fa-square-o"></i>
-                    <i *ngIf="selectedSlot[5][1]" class="icon is-medium fa fa-check-square"></i>
-                </div>
-            </div>
-        </div>
-        <div class="columns">
-            <div class="column is-3">
-                <div class="workday-box saturday notification no-text-selection"
-                    (click)="toggleSelect(6,0)">
-                    <h1>เสาร์เช้า</h1>
-                    <p class="subtitle no-text-selection">{{timeSlot[0]}}</p>
-                    <i *ngIf="!selectedSlot[6][0]" class="icon is-medium fa fa-square-o"></i>
-                    <i *ngIf="selectedSlot[6][0]" class="icon is-medium fa fa-check-square"></i>
-                </div>
-            </div>
-            <div class="column is-3">
-                <div class="workday-box saturday notification no-text-selection"
-                    (click)="toggleSelect(6,1)">
-                    <h1>เสาร์บ่าย</h1>
-                    <p class="subtitle no-text-selection">{{timeSlot[1]}}</p>
-                    <i *ngIf="!selectedSlot[6][1]" class="icon is-medium fa fa-square-o"></i>
-                    <i *ngIf="selectedSlot[6][1]" class="icon is-medium fa fa-check-square"></i>
-                </div>
-            </div>
-        </div>
-        <a class="button is-info">เพิ่มวันออกตรวจ</a>
+        <a class="button is-info" (click)="debugSelection()">เพิ่มวันออกตรวจ</a>
     </div>
 </div>
