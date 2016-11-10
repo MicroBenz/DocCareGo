@@ -29,6 +29,7 @@ describe("DiagnosisResult", function(){
             let Appointment = require('../server/model/Appointment');
             let Disease = require('../server/model/Disease');
             let Medicine = require('../server/model/Medicine');
+            let diagnosisResult = require('../server/model/diagnosisResult');
             let diseasesRef = [], medicinesRef = [];
             Disease.find()
             .then(function(diseases){
@@ -64,7 +65,10 @@ describe("DiagnosisResult", function(){
                         res.body.should.have.property('clientMessage','Create diagnosisResult succeed');
                         res.body.should.have.property('data');
                         res.body.data.should.be.a('object');
-                        console.log(res.body);
+                        diagnosisResult.findById(data._id)
+                        .then(function(diagnosisResult){
+                            diagnosisResult.delete();
+                        });
                         done();
                     }
                 );
