@@ -16,6 +16,14 @@
                 </div>
             </div>
         </div>
-        <a class="button is-info" (click)="debugSelection()">เพิ่มวันออกตรวจ</a>
+        <a class="button is-info" [ngClass]="{'is-disabled': selectedTime.length === 0}" (click)="isShowConfirm = true">เพิ่มวันออกตรวจ</a>
     </div>
 </div>
+
+<modal-dialog
+    [description]="confirmDialogText"
+    [modalType]="'revise'"
+    [confirmText]="'เพิ่มวันออกตรวจ'"
+    [isShowFlag]="isShowConfirm"
+    (isShowFlagChange)="isShowConfirm = $event">
+</modal-dialog>
