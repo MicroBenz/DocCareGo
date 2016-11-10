@@ -22,7 +22,7 @@ export class NavComponent implements OnInit {
         'staff': 'เจ้าหน้าที่',
         'pharmacist': 'เภสัชกร'
     }
-
+    public logoutTitle = `<h1 class="title">คุณต้องการออกจากระบบหรือไม่</h1>`
 
     constructor(private authService: AuthService, private jwtHelper: JwtHelper) {}
 
