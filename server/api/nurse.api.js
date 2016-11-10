@@ -150,7 +150,7 @@ module.exports = function (apiRoutes, express) {
                         message: 'Bad Request',
                         clientMessage: 'This HN or personalID has already in the system'
                     });
-                    mongoose.Promise.reject(400);
+                    Promise.reject(400);
                 }
                 else {
                     return {
@@ -218,7 +218,7 @@ module.exports = function (apiRoutes, express) {
                         message: 'Bad Request',
                         clientMessage: 'No nurse with this HN.'
                     });
-                    mongoose.Promise.reject(400);
+                    Promise.reject(400);
                 }
             },
             function (error) {

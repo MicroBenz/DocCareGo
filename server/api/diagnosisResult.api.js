@@ -19,7 +19,7 @@ module.exports = function (apiRoutes, express) {
         .put(updateDiagnosisResultByAppointment)
         .delete(utils.methodNotAllowed);
 
-    diagnosisResultRoutes.use('/diagnosisResults', diagnosisResultRoutes);
+    apiRoutes.use('/diagnosisResults', diagnosisResultRoutes);
 
     // Implementation of CRUD are below.
     //----------------- GET -----------------
@@ -77,7 +77,7 @@ module.exports = function (apiRoutes, express) {
                         message: 'Bad Request',
                         clientMessage: 'This diagnosisResult has already in the system'
                     });
-                    mongoose.Promise.reject(400);
+                    Promise.reject(400);
                 }
             },
             function (error) {
@@ -107,7 +107,7 @@ module.exports = function (apiRoutes, express) {
                         message: 'Bad Request',
                         clientMessage: 'No some name of diseases in database.'
                     });
-                    mongoose.Promise.reject(400);
+                    Promise.reject(400);
                 }
                 else{
                     return Medicine.find({
@@ -134,13 +134,13 @@ module.exports = function (apiRoutes, express) {
                         message: 'Bad Request',
                         clientMessage: 'No some name of medicines in database.'
                     });
-                    mongoose.Promise.reject(400);
+                    Promise.reject(400);
                 }
                 else{
                     let nom = [];
-                    medicines.forEach(function(medecine){
+                    medicines.forEach(function(medicine){
                         req.body.medicines.forEach(function(med,idx){
-                            if(medicine.name === med.name){
+                            if(medicine.name === med){
                                 nom.push(req.body.numberOfMedicines[idx]);
                             }
                         });
@@ -165,7 +165,7 @@ module.exports = function (apiRoutes, express) {
         )
         .then(
             function (diagnosisResultData) {
-                var diagnosisResult = new diagnosisResult(diagnosisResultData);
+                var diagnosisResult = new DiagnosisResult(diagnosisResultData);
                 return diagnosisResult.save();
             }
         )
@@ -211,7 +211,7 @@ module.exports = function (apiRoutes, express) {
                         message: 'Bad Request',
                         clientMessage: 'No diagnosisResult with this appointment.'
                     });
-                    mongoose.Promise.reject(400);
+                    Promise.reject(400);
                 }
             },
             function (error) {
@@ -232,7 +232,7 @@ module.exports = function (apiRoutes, express) {
                         message: 'Bad Request',
                         clientMessage: 'No some name of diseases in database.'
                     });
-                    mongoose.Promise.reject(400);
+                    Promise.reject(400);
                 }
                 else{
                     return Medicine.find({
@@ -259,7 +259,7 @@ module.exports = function (apiRoutes, express) {
                         message: 'Bad Request',
                         clientMessage: 'No some name of medicines in database.'
                     });
-                    mongoose.Promise.reject(400);
+                    Promise.reject(400);
                 }
                 else{
                     let nom = [];
