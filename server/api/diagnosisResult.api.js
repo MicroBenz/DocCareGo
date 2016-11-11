@@ -1,6 +1,6 @@
 module.exports = function (apiRoutes, express) {
     var diagnosisResultRoutes = express.Router();    
-    var DiagnosisResult = require('../model/diagnosisResult.js');
+    var DiagnosisResult = require('../model/DiagnosisResult.js');
     var Appointment = require('../model/Appointment.js');
     var Disease = require('../model/Disease.js');
     var Medicine = require('../model/Medicine.js');
