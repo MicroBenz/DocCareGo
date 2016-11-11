@@ -192,7 +192,7 @@ module.exports = function (apiRoutes, express) {
         utils.checkRole(req, res, ['doctor']);
         validateField(res, req.body);
         let diagnosisResultRef, diseasesRef;
-        diagnosisResult.findOne({
+        DiagnosisResult.findOne({
             appointment: req.params.appointment
         })
         .then(
@@ -263,9 +263,9 @@ module.exports = function (apiRoutes, express) {
                 }
                 else{
                     let nom = [];
-                    medicines.forEach(function(medecine){
+                    medicines.forEach(function(medicine){
                         req.body.medicines.forEach(function(med,idx){
-                            if(medicine.name === med.name){
+                            if(medicine.name === med){
                                 nom.push(req.body.numberOfMedicines[idx]);
                             }
                         });
@@ -293,7 +293,7 @@ module.exports = function (apiRoutes, express) {
                 diagnosisResultRef.diseases = data.diseases;
                 diagnosisResultRef.medicines = data.medicines;
                 diagnosisResultRef.numberOfMedicines = data.numberOfMedicines;
-                return diagnosisResult.save();
+                return diagnosisResultRef.save();
             }
         )
         .then(
