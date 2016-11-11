@@ -29,6 +29,7 @@ describe("Appointment", function(){
             let Patient = require('../server/model/Patient');
             let Doctor = require('../server/model/Doctor');
             let Workday = require('../server/model/Workday');
+            let moment = require('moment');
             let patientRef, doctorRef;
             Patient.findOne({HN:'patient1'})
             .then(function(patient){
@@ -38,7 +39,8 @@ describe("Appointment", function(){
             .then(function(doctor){
                 doctorRef = doctor;
                 return Workday.findOne({
-                    doctor: doctor
+                    doctor: doctor,
+                    date: moment().startOf('day').toDate()
                 });
             })
             .then(function(workday){
