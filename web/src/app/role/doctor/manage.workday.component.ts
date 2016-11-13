@@ -1,4 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
+
+import { MANAGE_WORKDAY_TITLE } from '../../config/title.config';
+
 @Component({
     selector: 'manage-doctor-workday',
     templateUrl: './manage.workday.view.html',
@@ -8,6 +12,10 @@ import { Component } from '@angular/core';
         }
     `]
 })
-export class ManageWorkdayComponent {
-
+export class ManageWorkdayComponent implements OnInit {
+    
+    constructor (private title: Title) {}
+    ngOnInit () {
+        this.title.setTitle(MANAGE_WORKDAY_TITLE);
+    }
 }
