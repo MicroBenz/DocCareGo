@@ -1,5 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 
 import { PERSONNEL_MANAGEMENT_TITLE } from '../../../config/title.config';
 import { DataService } from '../../../shared/service/data.service';
@@ -30,17 +31,21 @@ import { SearchBoxComponent } from '../../../shared/component/searchbox.componen
         }
     `]
 })
-export class PersonnelManagementComponent implements OnInit {
+export class PersonnelManagementComponent implements OnInit, AfterViewInit {
     @ViewChild(SearchBoxComponent)
     private searchBoxComponent: SearchBoxComponent;
 
     public personnelList;
     public selectedRole;
-    constructor (private title: Title, private dataService: DataService) {}
+    constructor (private router: Router,private title: Title, private dataService: DataService) {}
 
     ngOnInit () {
         this.title.setTitle(PERSONNEL_MANAGEMENT_TITLE);
         this.switchRole('patient');
+    }
+
+    ngAfterViewInit () {
+        this.searchBoxComponent.searchKeyControl.setValue(undefined);              
     }
 
     switchRole (role) {
@@ -75,5 +80,9 @@ export class PersonnelManagementComponent implements OnInit {
 
     onSearchResult (searchResult) {
         this.personnelList = searchResult;
+    }
+
+    addPersonnel () {
+        this.router.navigateByUrl(`/admin/personnel-management/add-${this.selectedRole}`);
     }
 }
