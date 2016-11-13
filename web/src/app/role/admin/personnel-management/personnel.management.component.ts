@@ -82,7 +82,7 @@ export class PersonnelManagementComponent implements OnInit, AfterViewInit {
         this.personnelList = searchResult;
     }
 
-    addPersonnel () {
-        this.router.navigateByUrl(`/admin/personnel-management/add-${this.selectedRole}`);
+    navigateToAddPersonnel () {
+        this.router.navigateByUrl(`/admin/personnel-management/add-personnel`);
     }
 }
