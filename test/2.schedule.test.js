@@ -39,6 +39,7 @@ describe("Schedule", function(){
                         res.body.should.be.a('object');
                         res.body.should.have.property('success',true);
                         res.body.should.have.property('data');
+                        res.body.data.should.be.a('array');
                         done();
                     }
                 );
@@ -48,21 +49,22 @@ describe("Schedule", function(){
     describe("/POST create schedule", function(){
         it("it should POST create schedule", function(done){
             let Doctor = require('../server/model/Doctor');
+            let moment = require('moment');
             Doctor.findOne({HN:'doctor1'})
             .then(function(doctor){
                 let data = {
                     doctor: doctor,
                     schedules: [
                         {
-                            "day": "Tuesday",
+                            "day": moment().day(),
                             "time": "AM"
                         },
                         {
-                            "day": "Tuesday",
+                            "day": moment().day(),
                             "time": "PM"
                         },
                         {
-                            "day": "Thursday",
+                            "day": moment().add(1,'day').day(),
                             "time": "AM"
                         }
                     ]

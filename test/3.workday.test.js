@@ -52,7 +52,7 @@ describe("Workdays", function(){
             Doctor.findOne({HN:'doctor1'})
             .then(function(doctor){
                 let data = {
-                    date: moment().day(2).toDate(),
+                    date: moment().startOf('day').toDate(),
                     time: 'AM'
                 };
                 chai.request(server)

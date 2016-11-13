@@ -29,6 +29,7 @@ describe("Appointment", function(){
             let Patient = require('../server/model/Patient');
             let Doctor = require('../server/model/Doctor');
             let Workday = require('../server/model/Workday');
+            let moment = require('moment');
             let patientRef, doctorRef;
             Patient.findOne({HN:'patient1'})
             .then(function(patient){
@@ -38,7 +39,8 @@ describe("Appointment", function(){
             .then(function(doctor){
                 doctorRef = doctor;
                 return Workday.findOne({
-                    doctor: doctor
+                    doctor: doctor,
+                    date: moment().startOf('day').toDate()
                 });
             })
             .then(function(workday){
@@ -105,27 +107,6 @@ describe("Appointment", function(){
                         res.body.should.have.property('success',true);
                         res.body.should.have.property('data');
                         res.body.data.should.be.a('object');
-                        done();
-                    }
-                );
-            });
-        });
-    });
-    describe("/DELETE appointment by id", function(){
-        it("it should DELETE appointment by using staff role", function(done){
-            let Appointment = require('../server/model/Appointment');
-            Appointment.findOne()
-            .then(function(appointment){
-                chai.request(server)
-                .delete('/api/v1/appointments/'+appointment._id)
-                .set("x-access-token",staffToken)
-                .end(
-                    function(err, res){
-                        res.should.have.status(200);
-                        res.should.be.json; 
-                        res.body.should.be.a('object');
-                        res.body.should.have.property('success',true);
-                        res.body.should.have.property('clientMessage','Delete appointment succeed.');
                         done();
                     }
                 );

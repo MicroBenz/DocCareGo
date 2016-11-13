@@ -1,8 +1,9 @@
 module.exports = function (apiRoutes, express) {
     var patientRecordRoutes = express.Router();    
-    var PatientRecord = require('../model/PatientRecord.js');
-    var Appointment = require('../model/Appointment.js');
-    var utils = require('../utils.js');
+    var PatientRecord = require('../model/PatientRecord');
+    var Appointment = require('../model/Appointment');
+    var Workday = require('../model/Workday');
+    var utils = require('../utils');
     var moment = require('moment');
 
     patientRecordRoutes.route('/')
@@ -17,15 +18,15 @@ module.exports = function (apiRoutes, express) {
         .put(updatePatientRecordByAppointment)
         .delete(utils.methodNotAllowed);
 
-    patientRecordRoutes.use('/patientRecords', patientRecordRoutes);
+    apiRoutes.use('/patientRecords', patientRecordRoutes);
 
     // Implementation of CRUD are below.
     //----------------- GET -----------------
     function getPatientRecords (req, res) {
         utils.checkRole(req, res, ['nurse']);
-        var appointmentsRef;
+        var appointmentsRef = [];
         Workday.find({
-            date: moment().toDate()
+            date: moment().startOf('day').toDate()
         })
         .then(
             function (workdays) {
@@ -46,7 +47,11 @@ module.exports = function (apiRoutes, express) {
         )
         .then(
             function (appointments) {
-                appointmentsRef = appointments.toObject();
+                appointments.forEach(
+                    function(appointment){
+                        appointmentsRef.push(appointment.toObject());
+                    }
+                );
                 return PatientRecord.find({
                     appointment: {
                         $in: appointments
@@ -66,7 +71,7 @@ module.exports = function (apiRoutes, express) {
             function (patientRecords) {
                 appointmentsRef.forEach(function(appointment){ 
                     patientRecords.forEach(function(patientRecord) {
-                        if( appointment._id === patientRecord.appointment) {
+                        if( appointment._id === patientRecord.appointment._id) {
                             appointment.patientRecord = patientRecord;
                         }
                         else {
@@ -131,7 +136,7 @@ module.exports = function (apiRoutes, express) {
     //----------------- POST (CREATE) -----------------
     function createPatientRecord (req, res) {
         utils.checkRole(req, res, ['nurse']);
-        if (!body.appointment) {
+        if (!req.body.appointment) {
             utils.responseMissingField(res, 'appointment');
         }
         validateField(res, req.body);
