@@ -30,8 +30,8 @@ export class DataService {
             .map(this.handleResponse, this.handleError);
     }
 
-    public deleteData(apiEndpoint: string, body) {
-        return this.http.delete(apiEndpoint, body)
+    public deleteData(apiEndpoint: string) {
+        return this.http.delete(apiEndpoint)
             .map(this.handleResponse, this.handleError);
     }
     

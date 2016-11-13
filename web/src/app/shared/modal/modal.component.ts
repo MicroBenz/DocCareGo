@@ -33,8 +33,20 @@ export class ModalComponent {
     @Output('onFunctionSucceed') onFunctionSucceed = new EventEmitter<any>();
     
     public isLoading = false;
+
     triggerLoading () {
         this.isLoading = true;
+    }
+
+    onClickConfirm () {
+        this.isLoading = true;
+        this.confirmFn();
+        this.onFunctionSucceed.emit(true);
+        window.setTimeout(
+            () => {
+                this.isLoading = false;                
+            }
+        )
     }
 
     hideModal () {

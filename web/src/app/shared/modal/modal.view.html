@@ -14,7 +14,7 @@
                     'is-danger': modalType === 'warning' || modalType === 'fail',
                     'is-info': modalType === 'revise'
                 }"
-                (click)="triggerLoading(); confirmFn(); onFunctionSucceed.emit(true)">
+                (click)="onClickConfirm()">
                 {{confirmText}}
             </a>
             <a *ngIf="modalType !== 'fail'" class="button is-medium" (click)="hideModal()">{{cancelText}}</a>
