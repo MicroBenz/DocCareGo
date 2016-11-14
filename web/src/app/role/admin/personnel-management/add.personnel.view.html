@@ -1,0 +1,85 @@
+<div class="container">
+    <div class="box">
+        <h1>เลือกประเภทบุคลากรที่ต้องการจะเพิ่ม</h1>
+        <div class="role-select-wrapper">
+            <a class="button is-medium" 
+                (click)="selectedRole = 'patient'; isSelected = true"
+                [ngClass]="{
+                    'is-info': selectedRole === 'patient',
+                    'is-disabled': isSelected && selectedRole !== 'patient'
+                }">ผู้ป่วย</a>
+            <a class="button is-medium" 
+                (click)="selectedRole = 'doctor'; isSelected = true"
+                [ngClass]="{
+                    'is-info': selectedRole === 'doctor',
+                    'is-disabled': isSelected && selectedRole !== 'doctor'
+                }">แพทย์</a>
+            <a class="button is-medium" 
+                (click)="selectedRole = 'nurse'; isSelected = true"
+                [ngClass]="{
+                    'is-info': selectedRole === 'nurse',
+                    'is-disabled': isSelected && selectedRole !== 'nurse'
+                }">พยาบาล</a>
+            <a class="button is-medium" 
+                (click)="selectedRole = 'staff'; isSelected = true"
+                [ngClass]="{
+                    'is-info': selectedRole === 'staff',
+                    'is-disabled': isSelected && selectedRole !== 'staff'
+                }">เจ้าหน้าที่</a>
+            <a class="button is-medium" 
+                (click)="selectedRole = 'pharmacist'; isSelected = true"
+                [ngClass]="{
+                    'is-info': selectedRole === 'pharmacist',
+                    'is-disabled': isSelected && selectedRole !== 'pharmacist'
+                }">เภสัชกร</a>
+        </div>
+        <patient-form 
+            *ngIf="selectedRole === 'patient' && isSelected"
+            [formData]="formData"></patient-form>
+        <doctor-form 
+            *ngIf="selectedRole === 'doctor' && isSelected"
+            [formData]="formData"></doctor-form>
+        <nurse-form 
+            *ngIf="selectedRole === 'nurse' && isSelected"
+            [formData]="formData"></nurse-form>
+        <staff-form 
+            *ngIf="selectedRole === 'staff' && isSelected"
+            [formData]="formData"></staff-form>
+        <pharmacist-form 
+            *ngIf="selectedRole === 'pharmacist' && isSelected"
+            [formData]="formData"></pharmacist-form>
+        {{formData | json}}    
+        <a class="button is-success" (click)="addNewPersonnel()">เพิ่มบุคลากรใหม่</a>    
+        <a class="button is-danger" (click)="isShowCancelConfirm = true">กลับ</a>    
+    </div>
+</div>
+
+<modal-dialog
+    [description]="confirmModalContent"
+    [modalType]="'revise'"
+    [confirmText]="'เพิ่มบุคลากรใหม่'"
+    [cancelText]="'กลับ'"
+    [confirmFn]="dataServiceFunction(selectedRole, formData)"
+    [cancelFn]="dismissModal"
+    [isShowFlag]="isShowConfirm"
+    (isShowFlagChange)="isShowConfirm = $event">
+</modal-dialog>
+
+<modal-dialog
+    [description]="'คุณต้องการยกเลิกการเพิ่มบุคลากรใหม่หรือไม่?'"
+    [confirmText]="'ยกเลิกการเพิ่มข้อมูล'"
+    [cancelText]="'กลับ'"
+    [confirmFn]="navigateToPersonnelManagement"
+    [cancelFn]="dismissModal"
+    [isShowFlag]="isShowCancelConfirm"
+    (isShowFlagChange)="isShowCancelConfirm = $event">
+</modal-dialog>
+
+<modal-dialog
+    [description]="'โปรดกรอกข้อมูลให้ครบถ้วน'"
+    [modalType]="'fail'"
+    [confirmText]="'กรอกข้อมูลต่อ'"
+    [confirmFn]="dismissModal"
+    [isShowFlag]="isShowInvalidate"
+    (isShowFlagChange)="isShowInvalidate = $event">
+</modal-dialog>

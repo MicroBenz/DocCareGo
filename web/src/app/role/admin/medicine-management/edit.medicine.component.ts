@@ -17,8 +17,8 @@ import { MEDICINE_ENDPOINT } from '../../../config/api.config';
 })
 export class EditMedicineComponent implements OnInit {
     public medicineData;
-    public isShowConfirm: boolean;
     public confirmModalContent: string;
+    public isShowConfirm: boolean;    
     public isShowCancelConfirm: boolean;
     public isShowInvalidate: boolean;
 

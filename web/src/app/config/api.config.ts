@@ -1,7 +1,10 @@
-const API_PREFIX: string = '/api/v1';
+// AUTH ENDPOINT
 const AUTH_PREFIX: string = '/auth';
 export const LOGIN_ENDPOINT: string = AUTH_PREFIX + '/login';
 
+const API_PREFIX: string = '/api/v1';
+
+// ADMIN ENDPOINT
 export const MEDICINE_ENDPOINT: string = API_PREFIX + '/medicines';
 export const CLINIC_ENDPOINT: string = API_PREFIX + '/clinics';
 
@@ -11,4 +14,9 @@ export const NURSE_ENDPOINT: string = API_PREFIX + '/nurses';
 export const STAFF_ENDPOINT: string = API_PREFIX + '/staffs';
 export const PHARMACIST_ENDPOINT: string = API_PREFIX + '/pharmacists';
 
+// DOCTOR ENDPOINT
 export const SCHEDULE_ENDPOINT: string = API_PREFIX + '/schedules';
+export const WORKDAY_ENDPOINT: string = API_PREFIX + '/workdays';
+
+// NURSE ENDPOINT
+export const PATIENT_RECORD_ENDPOINT: string = API_PREFIX + '/patientRecords';

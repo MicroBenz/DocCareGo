@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { VIEW_TODAY_PATIENT_TITLE } from '../../config/title.config';
+import { DataService } from '../../shared/service/data.service';
 
 @Component({
     selector: 'view-today-patient',
@@ -11,7 +12,7 @@ export class ViewTodayPatientComponent implements OnInit {
     public patientList;
     private selectedPatient;
 
-    constructor (private title: Title) {}
+    constructor (private title: Title, private dataService: DataService) {}
 
     ngOnInit () {
         this.patientList = [

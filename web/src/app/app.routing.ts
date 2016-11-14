@@ -21,12 +21,11 @@ import { ViewTodayPrescriptionComponent } from './role/pharmacist/index';
 import { ManageWorkdayComponent, AddWorkdayComponent } from './role/doctor/index';
 
 // Admin Component
-import { PersonnelManagementComponent } from './role/admin/personnel-management/index';
+import { PersonnelManagementComponent, AddPersonnelComponent } from './role/admin/personnel-management/index';
 import { MedicineManagementComponent, AddMedicineComponent, EditMedicineComponent } from './role/admin/medicine-management/index';
 import { ClinicManagementComponent } from './role/admin/clinic-management/index';
 // Auth Guard
 import { AdminOnlyRoute, PatientOnlyRoute, DoctorOnlyRoute, NurseOnlyRoute, StaffOnlyRoute, PharmacistOnlyRoute, NonLoggedInRoute } from './auth/guard/index';
-
 const appRoutes: Routes = [
     {
         path: '',
@@ -170,6 +169,10 @@ const appRoutes: Routes = [
             {
                 path: 'personnel-management',
                 component: PersonnelManagementComponent
+            },
+            {
+                path: 'personnel-management/add-personnel',
+                component: AddPersonnelComponent
             },
             {
                 path: 'medicine-management',

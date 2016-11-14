@@ -217,7 +217,7 @@ module.exports = function (apiRoutes, express) {
     function deleteMedicineByName (req, res) {
         utils.checkRole(req, res, ['admin']);
         Medicine.findOne({
-            Name: req.params.name
+            name: req.params.name
         })
         .then(
             function (medicine) {

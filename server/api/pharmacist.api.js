@@ -173,7 +173,7 @@ module.exports = function (apiRoutes, express) {
         )
         .then(
             function (pharmacistData) {
-                var pharmacist = new pharmacist(pharmacistData);
+                var pharmacist = new Pharmacist(pharmacistData);
                 return pharmacist.save();
             }
         )
@@ -186,6 +186,7 @@ module.exports = function (apiRoutes, express) {
                 });
             },
             function (error) {
+                console.log(error);
                 res.status(500).send({
                     success: false,
                     clientMessage: 'Create pharmacist failed',
