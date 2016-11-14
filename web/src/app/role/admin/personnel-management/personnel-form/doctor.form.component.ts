@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 import { DataService } from '../../../../shared/service/data.service';
 import { CLINIC_ENDPOINT } from '../../../../config/api.config';
@@ -8,7 +8,9 @@ import { CLINIC_ENDPOINT } from '../../../../config/api.config';
     templateUrl: './doctor.form.view.html'
 })
 export class DoctorFormComponent implements OnInit {
+    @Input('formData') formData;
     public clinicList;
+    
     constructor(private dataService: DataService) {}
 
     ngOnInit () {

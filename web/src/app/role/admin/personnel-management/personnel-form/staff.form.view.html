@@ -1,1 +1,34 @@
-<h1>STAFF FORM</h1>
+<div class="control is-horizontal">
+    <div class="control columns">
+        <p class="control column is-3">
+            <label class="label">รหัสโรงพยาบาล (HN)</label>
+            <input class="input" type="text" [(ngModel)]="formData.HN">
+        </p>
+        <p class="control column is-3">
+            <label class="label">รหัสบัตรประจำตัวประชาชน</label>
+            <input class="input" type="text" [(ngModel)]="formData.personalID">
+        </p>
+    </div>
+</div>
+<div class="control is-horizontal">
+    <div class="control columns">
+        <p class="control column is-2">
+            <label class="label">คำนำหน้าชื่อ</label>
+            <span class="select">
+                <select [(ngModel)]="formData.preName">
+                    <option>นาย</option>
+                    <option>นาง</option>
+                    <option>นางสาว</option>                    
+                </select>
+            </span>
+        </p>
+        <p class="control column is-3">
+            <label class="label">ชื่อ</label>
+            <input class="input" type="text" [(ngModel)]="formData.name">
+        </p>
+        <p class="control column is-3">
+            <label class="label">นามสกุล</label>
+            <input class="input" type="text" [(ngModel)]="formData.surname">
+        </p>
+    </div>
+</div>

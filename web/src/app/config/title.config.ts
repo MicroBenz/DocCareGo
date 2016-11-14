@@ -23,5 +23,6 @@ export const VIEW_PATIENT_PRESCRIPTION: string = 'ดูรายการสั
 
 // Admin Role
 export const PERSONNEL_MANAGEMENT_TITLE: string = 'จัดการข้อมูลบุคลากร' + TITLE_POSTFIX;
+export const ADD_PERSONNEL_TITLE: string = 'เพิ่มบุคลากรใหม่' + TITLE_POSTFIX;
 export const MEDICINE_MANAGEMENT_TITLE: string = 'จัดการข้อมูลยา' + TITLE_POSTFIX;
 export const CLINIC_MANAGEMENT_TITLE: string = 'จัดการข้อมูลแผนก' + TITLE_POSTFIX;
