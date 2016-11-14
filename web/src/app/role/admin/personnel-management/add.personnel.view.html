@@ -1,5 +1,42 @@
 <div class="container">
     <div class="box">
         <h1>เลือกประเภทบุคลากรที่ต้องการจะเพิ่ม</h1>
+        <div class="role-select-wrapper">
+            <a class="button is-medium" 
+                (click)="selectedRole = 'patient'; isSelected = true"
+                [ngClass]="{
+                    'is-primary': selectedRole === 'patient',
+                    'is-disabled': isSelected && selectedRole !== 'patient'
+                }">ผู้ป่วย</a>
+            <a class="button is-medium" 
+                (click)="selectedRole = 'doctor'; isSelected = true"
+                [ngClass]="{
+                    'is-primary': selectedRole === 'doctor',
+                    'is-disabled': isSelected && selectedRole !== 'doctor'
+                }">แพทย์</a>
+            <a class="button is-medium" 
+                (click)="selectedRole = 'nurse'; isSelected = true"
+                [ngClass]="{
+                    'is-primary': selectedRole === 'nurse',
+                    'is-disabled': isSelected && selectedRole !== 'nurse'
+                }">พยาบาล</a>
+            <a class="button is-medium" 
+                (click)="selectedRole = 'staff'; isSelected = true"
+                [ngClass]="{
+                    'is-primary': selectedRole === 'staff',
+                    'is-disabled': isSelected && selectedRole !== 'staff'
+                }">เจ้าหน้าที่</a>
+            <a class="button is-medium" 
+                (click)="selectedRole = 'pharmacist'; isSelected = true"
+                [ngClass]="{
+                    'is-primary': selectedRole === 'pharmacist',
+                    'is-disabled': isSelected && selectedRole !== 'pharmacist'
+                }">เภสัชกร</a>
+        </div>
+        <patient-form *ngIf="selectedRole === 'patient' && isSelected"></patient-form>
+        <doctor-form *ngIf="selectedRole === 'doctor' && isSelected"></doctor-form>
+        <nurse-form *ngIf="selectedRole === 'nurse' && isSelected"></nurse-form>
+        <staff-form *ngIf="selectedRole === 'staff' && isSelected"></staff-form>
+        <pharmacist-form *ngIf="selectedRole === 'pharmacist' && isSelected"></pharmacist-form>        
     </div>
 </div>
