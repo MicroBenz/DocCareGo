@@ -40,8 +40,8 @@ export class AddPersonnelComponent implements OnInit {
         // this.selectedRole = '';
         // this.isSelected = false;
         this.title.setTitle(ADD_PERSONNEL_TITLE);
-        this.selectedRole = 'pharmacist';
-        this.isSelected = true;
+        this.selectedRole = '';
+        this.isSelected = false;
         this.formData = {};
         this.confirmModalContent = '';
         this.isShowConfirm = false;
@@ -127,13 +127,16 @@ export class AddPersonnelComponent implements OnInit {
             case 'pharmacist':
                 endPoint = PHARMACIST_ENDPOINT;
         }
-        console.log('DATA SERVICE');
+        console.log('DATA SERVICE', role, formData);
         return () => {         
             return this.dataService.saveData(endPoint, formData)
                 .subscribe(
                     (success) => {
                         console.log(success);
                         this.navigateToPersonnelManagement();
+                    },
+                    (error) => {
+                        console.error(error);
                     }
                 )
         }
