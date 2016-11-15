@@ -173,7 +173,7 @@ module.exports = function (apiRoutes, express) {
         )
         .then(
             function (nurseData) {
-                var nurse = new nurse(nurseData);
+                var nurse = new Nurse(nurseData);
                 return nurse.save();
             }
         )
