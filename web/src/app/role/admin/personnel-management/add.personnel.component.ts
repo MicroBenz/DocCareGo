@@ -101,7 +101,7 @@ export class AddPersonnelComponent implements OnInit {
             <p><b>ชื่อ-นามสกุล</b>: ${this.formData['preName']}${this.formData['name']} ${this.formData['surname']}</p>
         `
         if (this.selectedRole === 'doctor') {
-            let clinic = `<p><b>คลินิค: </b>${this.formData['clinic']}</p>`;
+            let clinic = `<p><b>คลินิก: </b>${this.formData['clinic']}</p>`;
             this.confirmModalContent = headerTemplate + hnAndPersonalID + name + clinic;
         }
         else {
@@ -127,12 +127,10 @@ export class AddPersonnelComponent implements OnInit {
             case 'pharmacist':
                 endPoint = PHARMACIST_ENDPOINT;
         }
-        console.log('DATA SERVICE', role, formData);
         return () => {         
             return this.dataService.saveData(endPoint, formData)
                 .subscribe(
                     (success) => {
-                        console.log(success);
                         this.navigateToPersonnelManagement();
                     },
                     (error) => {

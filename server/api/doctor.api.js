@@ -1,7 +1,7 @@
 module.exports = function (apiRoutes, express) {
     var doctorRoutes = express.Router();    
     var Doctor = require('../model/Doctor.js');
-    var Address = require('../model/Clinic.js');
+    var Clinic = require('../model/Clinic.js');
     var utils = require('../utils.js');
 
     doctorRoutes.route('/')
