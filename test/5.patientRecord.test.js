@@ -67,7 +67,6 @@ describe("PatientRecord", function(){
                 .set("x-access-token",nurseToken)
                 .end(
                     function(err, res){
-                        console.log(res.body);
                         res.should.have.status(200);
                         res.should.be.json; 
                         res.body.should.be.a('object');

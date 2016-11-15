@@ -24,8 +24,18 @@ module.exports = (apiRoutes, express) => {
     //----------------- GET -----------------
     function getWorkdayByDoctor (req, res) {
         utils.checkRole(req, res, ['doctor','staff']);
+        if (!req.query.month) {
+            utils.responseMissingField(res, 'month');
+        }
+        if (!req.query.year) {
+            utils.responseMissingField(res, 'year');
+        }
         Workday.find({
-            doctor: req.params.doctor
+            doctor: req.params.doctor,
+            date: {
+                $gte: moment({year: req.query.year, month: req.query.month, day: 1}).startOf('day'),
+                $lte: moment({year: req.query.year, month: req.query.month, day: 1}).add(1,'month').startOf('day')
+            }
         })
         .populate('doctor')
         .then(
