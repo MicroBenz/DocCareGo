@@ -27,10 +27,10 @@ describe("Workdays", function(){
     describe("/GET workdays by doctor _id", function(){
         it("it should GET workday by using doctor role", function(done){
             let Doctor = require('../server/model/Doctor');
-            Doctor.findOne({HN:'doctor1'})
+            Doctor.findOne({HN: 'doctor1'})
             .then(function(doctor){
                 chai.request(server)
-                .get('/api/v1/workdays/'+doctor._id)
+                .get('/api/v1/workdays/'+doctor._id+'?year=2016&month=10')
                 .set("x-access-token",doctorToken)
                 .end(
                     function(err, res){
@@ -39,6 +39,7 @@ describe("Workdays", function(){
                         res.body.should.be.a('object');
                         res.body.should.have.property('success',true);
                         res.body.should.have.property('data');
+                        res.body.data.should.be.a('array');
                         done();
                     }
                 );

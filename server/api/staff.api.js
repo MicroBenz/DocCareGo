@@ -173,7 +173,7 @@ module.exports = function (apiRoutes, express) {
         )
         .then(
             function (staffData) {
-                var staff = new staff(staffData);
+                var staff = new Staff(staffData);
                 return staff.save();
             }
         )
@@ -186,6 +186,7 @@ module.exports = function (apiRoutes, express) {
                 });
             },
             function (error) {
+                console.error(error);
                 res.status(500).send({
                     success: false,
                     clientMessage: 'Create staff failed',

@@ -30,7 +30,7 @@ describe("Schedule", function(){
             Doctor.findOne({HN:'doctor1'})
             .then(function(doctor){
                 chai.request(server)
-                .get('/api/v1/workdays/'+doctor._id)
+                .get('/api/v1/schedules/'+doctor._id)
                 .set("x-access-token",doctorToken)
                 .end(
                     function(err, res){

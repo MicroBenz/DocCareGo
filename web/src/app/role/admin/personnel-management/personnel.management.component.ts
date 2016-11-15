@@ -52,6 +52,11 @@ export class PersonnelManagementComponent implements OnInit, AfterViewInit {
         this.personnelList = [];
         this.selectedRole = role;
         this.searchBoxComponent.searchKeyControl.setValue(undefined);
+        window.setTimeout(
+            () => {
+                this.searchBoxComponent.searchKeyControl.setValue('');
+            }, 501
+        )
         console.log('SWTICH ROLE: ', this.selectedRole);        
     }
 
