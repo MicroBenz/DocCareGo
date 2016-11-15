@@ -11,6 +11,7 @@ chai.use(chaiHttp);
 
 var adminToken = "";
 var staffToken = "";
+var patientToken = "";
 describe("Doctors", function(){
     before(function(done){
         let p = new Promise(
@@ -44,14 +45,86 @@ describe("Doctors", function(){
                     }
                 );
             }
+        );
+        let r = new Promise(
+            function(resolve,reject){
+                chai.request(server)
+                .post('/auth/login')
+                .send({
+                    username: "patient1",
+                    password: "patient1"
+                })
+                .end(
+                    function(err, res){
+                        patientToken = res.body.data.token;
+                        resolve();
+                    }
+                );
+            }
         )
-        Promise.all([p,q])
+        Promise.all([p,q,r])
         .then(
             function(){
                 done();
             }
         );
     });
+
+
+    describe("/POST create doctor", function(){
+        it("it should POST create doctor", function(done){
+            let data = {
+                HN: 'newdoctor3',
+                personalID: '003',
+                preName: 'Mr.',
+                name: 'Benz',
+                surname: 'Thananan',
+                clinic: 'clinic1'
+            };
+            chai.request(server)
+            .post('/api/v1/doctors')
+            .set("x-access-token",adminToken)
+            .send(data)
+            .end(
+                function(err, res){
+                    res.should.have.status(200);
+                    res.should.be.json; 
+                    res.body.should.be.a('object');
+                    res.body.should.have.property('success',true);
+                    res.body.should.have.property('clientMessage','Create Doctor succeed');
+                    res.body.should.have.property('data');
+                    res.body.data.should.be.a('object');
+                    done();
+                }
+            );
+        });
+
+        it("it should POST create doctor with same HN, so it will be fail.", function(done){
+            let data = {
+                HN: 'newdoctor',
+                personalID: '002',
+                preName: 'Miss',
+                name: 'Eve',
+                surname: 'Wantanee',
+                clinic: 'clinic1'
+            };
+            chai.request(server)
+            .post('/api/v1/doctors')
+            .set("x-access-token",adminToken)
+            .send(data)
+            .end(
+                function(err, res){
+                    res.should.have.status(400);
+                    res.should.be.json; 
+                    res.body.should.be.a('object');
+                    res.body.should.have.property('message','Bad Request');
+                    res.body.should.have.property('clientMessage', 'This HN or personalID has already in the system');
+                    done();
+                }
+            );
+        });
+    });
+
     describe("/GET doctors", function(){
         it("it should GET all doctors by using admin role", function(done){
             chai.request(server)
@@ -96,7 +169,7 @@ describe("Doctors", function(){
         it("Using patient role, so it should show error", function(done){
             chai.request(server)
             .get('/api/v1/doctors')
-            .set("x-access-token","eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ODIxODM1MmExMTczYTE1MDQzZjk0YjkiLCJ1cGRhdGVkQXQiOiIyMDE2LTExLTA4VDA3OjQ4OjQ3LjQ0M1oiLCJjcmVhdGVkQXQiOiIyMDE2LTExLTA4VDA3OjQ4OjQ3LjQ0M1oiLCJ1c2VybmFtZSI6InBhdGllbnQxIiwicm9sZSI6InBhdGllbnQiLCJlbWFpbCI6InBhdGllbnQxQGRvY2NhcmUuZ28udGgiLCJfX3YiOjAsImRlbGV0ZWQiOmZhbHNlLCJuYW1lIjoi4Lic4Li54LmJ4Lib4LmI4Lin4LiiMSIsImlhdCI6MTQ3ODU5NDE0MiwiZXhwIjoxNDc4NjgwNTQyfQ.Qxmoz2mHT-Uqx_XDPL_PovXcWUSosU_BDXmELdPS7yU")
+            .set("x-access-token",patientToken)
             .end(
                 function(err, res){
                     res.should.have.status(400);
@@ -111,29 +184,12 @@ describe("Doctors", function(){
         });
     });
 
-    describe("/GET/:HN doctors", function(){
+    describe("/GET doctors by HN", function(){
         it("it should GET doctors by HN using admin role", function(done){
+            let HN = 'newdoctor';
             chai.request(server)
-            .get('/api/v1/doctors')
-            .set("x-access-token","eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ODFkN2RjMmIzMGMxNjFhYjBmMGU5YTIiLCJ1cGRhdGVkQXQiOiIyMDE2LTExLTA1VDA2OjM2OjAwLjYxNFoiLCJjcmVhdGVkQXQiOiIyMDE2LTExLTA1VDA2OjM2OjAwLjYxNFoiLCJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBkb2NjYXJlLmdvLnRoIiwiX192IjowLCJkZWxldGVkIjpmYWxzZSwibmFtZSI6IuC4nOC4ueC5ieC4lOC4ueC5geC4peC4o-C4sOC4muC4miIsImlhdCI6MTQ3ODU4OTY4MiwiZXhwIjoxNDc4Njc2MDgyfQ.gs2ZX7leY8GcyHDV0mc1aWNOOUns-1NppoDNpEo4DcE")
-            .end(
-                function(err, res){
-                    res.should.have.status(200);
-                    res.should.be.json; 
-                    res.body.should.be.a('object');
-                    res.body.should.have.property('success',true);
-                    res.body.should.have.property('data');
-                    res.body.data.should.be.a('object');
-                    // console.log(res.body.data);
-                    done();
-                }
-            )
-        });
-
-        it("it should GET all doctors by HN using staff role", function(done){
-            chai.request(server)
-            .get('/api/v1/doctors')
-            .set("x-access-token","eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ODFkN2RjOGIzMGMxNjFhYjBmMGU5YjciLCJ1cGRhdGVkQXQiOiIyMDE2LTExLTA1VDA2OjM2OjAwLjYzMloiLCJjcmVhdGVkQXQiOiIyMDE2LTExLTA1VDA2OjM2OjAwLjYzMloiLCJ1c2VybmFtZSI6InN0YWZmMSIsInJvbGUiOiJzdGFmZiIsImVtYWlsIjoic3RhZmYxQGRvY2NhcmUuZ28udGgiLCJfX3YiOjAsImRlbGV0ZWQiOmZhbHNlLCJuYW1lIjoi4LmA4LiI4LmJ4Liy4Lir4LiZ4LmJ4Liy4LiX4Li14LmIMSIsImlhdCI6MTQ3ODU5MDg3MiwiZXhwIjoxNDc4Njc3MjcyfQ.H44nwNQ9f8dK6ji_6RiPVDGwvBjFmV7UtFL1iDbyph8")
+            .get('/api/v1/doctors/'+HN)
+            .set("x-access-token",adminToken)
             .end(
                 function(err, res){
                     res.should.have.status(200);
@@ -148,21 +204,74 @@ describe("Doctors", function(){
             )
         });
         
-        it("Using patient role to GET/:HN, so it should show error", function(done){
+        it("Using wrong HN to GET/:HN, so it should show error", function(done){
+            let HN = '000000';
             chai.request(server)
-            .get('/api/v1/doctors')
-            .set("x-access-token","eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ODIxODM1MmExMTczYTE1MDQzZjk0YjkiLCJ1cGRhdGVkQXQiOiIyMDE2LTExLTA4VDA3OjQ4OjQ3LjQ0M1oiLCJjcmVhdGVkQXQiOiIyMDE2LTExLTA4VDA3OjQ4OjQ3LjQ0M1oiLCJ1c2VybmFtZSI6InBhdGllbnQxIiwicm9sZSI6InBhdGllbnQiLCJlbWFpbCI6InBhdGllbnQxQGRvY2NhcmUuZ28udGgiLCJfX3YiOjAsImRlbGV0ZWQiOmZhbHNlLCJuYW1lIjoi4Lic4Li54LmJ4Lib4LmI4Lin4LiiMSIsImlhdCI6MTQ3ODU5NDE0MiwiZXhwIjoxNDc4NjgwNTQyfQ.Qxmoz2mHT-Uqx_XDPL_PovXcWUSosU_BDXmELdPS7yU")
+            .get('/api/v1/doctors/'+HN)
+            .set("x-access-token",adminToken)
             .end(
                 function(err, res){
                     res.should.have.status(400);
                     res.should.be.json; 
                     res.body.should.be.a('object');
-                    res.body.should.have.property('status','Bad Request');
-                    res.body.should.have.property('message', 'This API is not allowed for your role.');
+                    res.body.should.have.property('message','Bad Request');
+                    res.body.should.have.property('clientMessage', 'No doctor with this HN.');
                     // console.log(res.body.data);
                     done();
                 }
             )
         });
     });
+
+    describe("/PUT update doctor by HN", function(){
+        it("it should PUT create doctor", function(done){
+            let HN = 'newdoctor';
+            let data = {
+                HN: 'newdoctor',
+                personalID: '001',
+                preName: 'Mr.',
+                name: 'BenzUpdate',
+                surname: 'ThanananUpdate',
+                clinic: 'clinic1'
+            };
+            chai.request(server)
+            .put('/api/v1/doctors/'+HN)
+            .set("x-access-token",adminToken)
+            .send(data)
+            .end(
+                function(err, res){
+                    res.should.have.status(200);
+                    res.should.be.json; 
+                    res.body.should.be.a('object');
+                    res.body.should.have.property('success',true);
+                    res.body.should.have.property('clientMessage','Update Doctor succeed');
+                    res.body.should.have.property('data');
+                    res.body.data.should.be.a('object');
+                    done();
+                }
+            );
+        });
+    });
+
+    describe("/DELETE delete doctor by HN", function(){
+        it("it should Delete create doctor", function(done){
+            let HN = 'newdoctor';
+            chai.request(server)
+            .delete('/api/v1/doctors/'+HN)
+            .set("x-access-token",adminToken)
+            .end(
+                function(err, res){
+                    res.should.have.status(200);
+                    // res.should.be.json; 
+                    // res.body.should.be.a('object');
+                    res.body.should.have.property('success',true);
+                    res.body.should.have.property('clientMessage','Delete Doctor succeed.');
+                    res.body.should.have.property('message','Delete Doctor succeed.');
+                    done();
+                }
+            );
+        });
+    });
+
+
 });
