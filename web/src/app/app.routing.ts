@@ -3,7 +3,9 @@ import { ModuleWithProviders } from '@angular/core';
 
 // Apps Components
 import { AppComponentWithNavComponent } from './main/index';
-import { LoginComponent, RegisterComponent } from './auth/index';
+
+// Auth Components
+import { LoginComponent, RegisterComponent, NewPatientRegisterComponent } from './auth/index';
 
 // Patient Components
 import { MakeAppointmentComponent, ViewAppointmentComponent } from './role/patient/index';
@@ -26,6 +28,7 @@ import { MedicineManagementComponent, AddMedicineComponent, EditMedicineComponen
 import { ClinicManagementComponent } from './role/admin/clinic-management/index';
 // Auth Guard
 import { AdminOnlyRoute, PatientOnlyRoute, DoctorOnlyRoute, NurseOnlyRoute, StaffOnlyRoute, PharmacistOnlyRoute, NonLoggedInRoute } from './auth/guard/index';
+
 const appRoutes: Routes = [
     {
         path: '',
@@ -42,6 +45,13 @@ const appRoutes: Routes = [
     {
         path: 'register',
         component: RegisterComponent,
+        canActivate: [
+            NonLoggedInRoute
+        ]
+    },
+    {
+        path: 'register/new-patient',
+        component: NewPatientRegisterComponent,
         canActivate: [
             NonLoggedInRoute
         ]

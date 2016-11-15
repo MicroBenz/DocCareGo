@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { REGISTER_TITLE } from '../config/title.config';
 
+import { NEW_PATIENT_REGISTER_TITLE } from '../config/title.config';
 @Component({
-    selector: 'auth-register',
-    templateUrl: './register.view.html',
+    selector: 'new-patient-register',
+    templateUrl: './new.patient.register.view.html',
     styles: [`
         :host {
             display: table-cell;
@@ -31,11 +31,10 @@ import { REGISTER_TITLE } from '../config/title.config';
         }
     `]
 })
-export class RegisterComponent implements OnInit {
+export class NewPatientRegisterComponent implements OnInit {
     constructor(private title: Title, private router: Router) {}
 
     ngOnInit () {
-        this.title.setTitle(REGISTER_TITLE);
-        
+        this.title.setTitle(NEW_PATIENT_REGISTER_TITLE);
     }
 }

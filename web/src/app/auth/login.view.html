@@ -18,6 +18,10 @@
                 (keyup.enter)="login()">
             <i class="fa fa-lock"></i>
         </p>
-        <a class="button is-success" (click)="login()">เข้าสู่ระบบ</a>
+        <div class="button-wrapper">
+            <a class="button is-success" [class.is-loading]="isWaitForLogin" (click)="login()">เข้าสู่ระบบ</a>
+            <a class="button is-info" (click)="navigateToNewPatientRegister()">ผู้ป่วยใหม่สมัครสมาชิก</a>    
+        </div>
+        <p>สำหรับผู้ป่วยเดิมและบุคลากร <a (click)="navigateToRegister()">สมัครตรงนี้</a></p>
     </div>
 </div>

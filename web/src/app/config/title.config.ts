@@ -2,6 +2,7 @@ const TITLE_POSTFIX: string = ' - DocCare Go';
 // Auth Route
 export const LOGIN_TITLE: string = 'เข้าสู่ระบบ' + TITLE_POSTFIX;
 export const REGISTER_TITLE: string = 'ลงทะเบียน' + TITLE_POSTFIX;
+export const NEW_PATIENT_REGISTER_TITLE: string = 'ลงทะเบียนสำหรับผู้ป่วยใหม่' + TITLE_POSTFIX;
 
 // Patient Route
 export const VIEW_APPOINTMENT_TITLE: string = 'ดูการนัดหมาย' + TITLE_POSTFIX;
