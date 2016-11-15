@@ -1,10 +1,44 @@
-module.exports = function (apiRoutes, express) {
-    var testRoutes = express.Router();
-    testRoutes.get('/', getTest);
-    testRoutes.get('/error', getTestError);
-    testRoutes.get('/searchPersonnel', getSearch);
+let smsService = require('../sms.service');
 
-    apiRoutes.use('/test', testRoutes);
+function getRemainCredit (req, res) {
+    smsService.checkSMSCredit()
+        .subscribe(
+            (creditStatus) => {
+                res.json({
+                    success: true,
+                    result: creditStatus
+                });
+            },
+            (error) => {
+                res.status(500).send({
+                    success: false,
+                    status: 500,
+                    developerMessage: error,
+                    userMessage: 'Can not get remaining credit'
+                });
+            }
+        );
+}
+
+function sendSMS (req, res) {
+    smsService.sendSMS('0813541423', 'เทส SMS')
+        .subscribe(
+            (success) => {
+                console.log(success);
+                res.json({
+                    success: true,
+                    result: success
+                });
+            },
+            (error) => {
+                res.status(500).send({
+                    success: false,
+                    status: 500,
+                    developerMessage: error,
+                    userMessage: 'Can not send SMS'
+                });
+            }
+        )
 }
 
 function getTest (req, res) {
@@ -57,4 +91,14 @@ function getSearch (req, res) {
             }
         })
     }, 1000);
+}
+
+module.exports = function (apiRoutes, express) {
+    var testRoutes = express.Router();
+    testRoutes.get('/', getTest);
+    testRoutes.get('/error', getTestError);
+    testRoutes.get('/searchPersonnel', getSearch);
+    testRoutes.get('/sms/checkCredit', getRemainCredit);
+    testRoutes.post('/sms/sendSMS', sendSMS);    
+    apiRoutes.use('/test', testRoutes);
 }
