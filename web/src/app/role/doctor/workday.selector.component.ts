@@ -28,6 +28,10 @@ import { WORKDAY_ENDPOINT } from '../../config/api.config';
             max-height: 500px;
             overflow: scroll;
         }
+        .workday-wrapper .panel-block.is-active {
+            background-color: #4ca2ff;
+            color: #ffffff;
+        }
     `]
 })
 export class WorkdaySelectorComponent implements OnInit {
@@ -37,6 +41,7 @@ export class WorkdaySelectorComponent implements OnInit {
     public currentYear: number;
     public currentMonthDisplay: string;
     public isDiabledPreviousSelection: boolean;
+    public selectedDate;
 
     constructor(private dataService: DataService, private authService: AuthService) {}
 
@@ -45,6 +50,7 @@ export class WorkdaySelectorComponent implements OnInit {
         this.currentMonthDisplay = this.getMonthText(this.currentMonth);
         this.currentYear = moment().year();
         this.isDiabledPreviousSelection = true;
+        this.selectedDate = '';
         this.getDataService();
     }
 
@@ -97,6 +103,7 @@ export class WorkdaySelectorComponent implements OnInit {
     public selectWorkday (day) {
         let splittedDate = day.split(' ');
         let date = moment().set('date', splittedDate[0]).set('month', splittedDate[1]).set('year', splittedDate[2]);
+        this.selectedDate = day;
         this.onSelectWorkday.emit(date);
     }
 

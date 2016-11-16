@@ -6,6 +6,10 @@
         <a (click)="clickNextMonth()" class="no-text-selection"><i class="fa fa-chevron-right"></i></a>
     </div>
     <div class="workday-wrapper">
-        <a class="panel-block" *ngFor="let day of workdayList" (click)="selectWorkday(day)">{{day}}</a>    
+        <a class="panel-block" 
+            *ngFor="let day of workdayList"
+            (click)="selectWorkday(day)"
+            [class.is-active]="day === selectedDate"
+        >{{day}}</a>    
     </div>
 </nav>
