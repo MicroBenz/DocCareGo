@@ -13,9 +13,16 @@ import { MANAGE_WORKDAY_TITLE } from '../../config/title.config';
     `]
 })
 export class ManageWorkdayComponent implements OnInit {
-    
+    public selectedWorkday;
+
     constructor (private title: Title) {}
+
     ngOnInit () {
         this.title.setTitle(MANAGE_WORKDAY_TITLE);
+        this.selectedWorkday = '';
+    }
+
+    public onSelectWorkday (date) {
+        this.selectedWorkday = date;
     }
 }

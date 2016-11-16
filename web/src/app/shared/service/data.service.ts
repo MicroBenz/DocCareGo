@@ -11,9 +11,23 @@ export class DataService {
             .map(this.handleResponse, this.handleError);
     }
 
+    public getDataWithParams(apiEndpoint: string, params: Object) {
+        let urlParams = new URLSearchParams();
+        for (let item in params) {
+            console.log(item, params[item]);
+            urlParams.set(item, params[item]);
+        }
+        console.log(urlParams);
+        return this.http.get(apiEndpoint, {
+            search: urlParams
+        })
+        .map(this.handleResponse, this.handleError);
+    }
+
     public searchData(apiEndpoint: string, query: string = '') {
         let params = new URLSearchParams();
         params.set('search', query);
+        console.log(params);
         return this.http.get(apiEndpoint, {
             search: params
         })

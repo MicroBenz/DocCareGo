@@ -1,10 +1,11 @@
-
 <nav class="panel">
     <p class="panel-heading">วันที่มีการออกตรวจ</p>
     <div class="panel-block month-selection">
-        <a><i class="fa fa-chevron-left"></i></a>
-        <p class="month-text">{{thisMonth}}</p>
-        <a><i class="fa fa-chevron-right"></i></a>              
+        <a [class.is-disabled]="isDiabledPreviousSelection" (click)="clickPreviousMonth()" class="no-text-selection"><i class="fa fa-chevron-left"></i></a>
+        <p class="month-text no-text-selection">{{currentMonthDisplay}} {{currentYear}}</p>
+        <a (click)="clickNextMonth()" class="no-text-selection"><i class="fa fa-chevron-right"></i></a>
     </div>
-    <a class="panel-block">วันที่ 11 นะจ๊ะ</a>
+    <div class="workday-wrapper">
+        <a class="panel-block" *ngFor="let day of workdayList" (click)="selectWorkday(day)">{{day}}</a>    
+    </div>
 </nav>
