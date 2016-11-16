@@ -6,6 +6,7 @@ import { SharedModule } from './shared.module';
 import { AdminOnlyRoute } from './../auth/guard/admin.guard';
 import { PersonnelManagementComponent, PersonnelTableComponent, AddPersonnelComponent } from '../role/admin/personnel-management/index';
 import { DoctorFormComponent, NurseFormComponent, PatientFormComponent, PharmacistFormComponent, StaffFormComponent } from '../role/admin/personnel-management/personnel-form/index';
+import { EditDoctorComponent, EditNurseComponent, EditPatientComponent, EditPharmacistComponent, EditStaffComponent } from '../role/admin/personnel-management/edit/index';
 import { MedicineManagementComponent, MedicineTableComponent, AddMedicineComponent, EditMedicineComponent, MedicineFormComponent } from '../role/admin/medicine-management/index';
 import { ClinicManagementComponent, ClinicTableComponent } from '../role/admin/clinic-management/index';
 
@@ -24,6 +25,12 @@ import { ClinicManagementComponent, ClinicTableComponent } from '../role/admin/c
         PatientFormComponent,
         PharmacistFormComponent,
         StaffFormComponent,
+
+        EditDoctorComponent,
+        EditNurseComponent,
+        EditPatientComponent,
+        EditPharmacistComponent,
+        EditStaffComponent,
 
         MedicineManagementComponent,
         MedicineTableComponent,
