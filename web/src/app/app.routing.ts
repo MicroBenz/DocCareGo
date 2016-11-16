@@ -186,23 +186,23 @@ const appRoutes: Routes = [
                 component: AddPersonnelComponent
             },
             {
-                path: 'personnel-management/edit-patient',
+                path: 'personnel-management/edit-patient/:HN',
                 component: EditPatientComponent
             },
             {
-                path: 'personnel-management/edit-doctor',
+                path: 'personnel-management/edit-doctor/:HN',
                 component: EditDoctorComponent
             },
             {
-                path: 'personnel-management/edit-nurse',
+                path: 'personnel-management/edit-nurse/:HN',
                 component: EditNurseComponent
             },
             {
-                path: 'personnel-management/edit-staff',
+                path: 'personnel-management/edit-staff/:HN',
                 component: EditStaffComponent
             },
             {
-                path: 'personnel-management/edit-pharmacist',
+                path: 'personnel-management/edit-pharmacist/:HN',
                 component: EditPharmacistComponent
             },
             {

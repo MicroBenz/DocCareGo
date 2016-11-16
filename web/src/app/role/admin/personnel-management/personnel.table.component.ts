@@ -1,4 +1,6 @@
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 @Component({
     selector: 'personnel-table',
     templateUrl: './personnel.table.view.html',
@@ -19,11 +21,16 @@ export class PersonnelTableComponent {
     @Input('personnelList') personnelList;
     @Input('role') role;
 
-    public editInfo (id) {
-        console.log('EDIT ', this.role);
+    constructor(private router: Router, private title: Title) {}
+
+    public editInfo (hn) {
+        console.log('EDIT ', this.role, hn);
+        let editRoute = `/admin/personnel-management/edit-${this.role}/${hn}`;
+        console.log(editRoute);
+        this.router.navigateByUrl(editRoute);
     }
 
-    public deleteItem (id) {
+    public deleteItem (hn) {
         console.log('EDIT ', this.role);        
     }
 }
