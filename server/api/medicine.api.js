@@ -129,7 +129,7 @@ module.exports = function (apiRoutes, express) {
                     res.status(400).send({
                         success: false,
                         message: 'Bad Request',
-                        clientMessage: 'This ID has already in the system'
+                        clientMessage: 'This name has already in the system'
                     });
                     Promise.reject(400);
                 }
@@ -145,7 +145,7 @@ module.exports = function (apiRoutes, express) {
                 res.status(500).send({
                     success: false,
                     message: error,
-                    clientMessage: 'Cannot get medicine data.'
+                    clientMessage: 'Cannot create medicine data.'
                 });
             }
         )
