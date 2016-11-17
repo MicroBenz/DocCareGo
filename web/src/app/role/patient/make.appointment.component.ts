@@ -22,10 +22,10 @@ const DOCTORS: Doctor[] = [
 
 const WORKDAYS: Workday[] = [
     new Workday(1, 1, 1, '10/11/2559', '13:00 - 13:30'),
-    new Workday(2, 1, 1, '10/11/2559', '13:30 - 14:00'),
+    new Workday(2, 1, 1, '11/11/2559', '13:30 - 14:00'),
     new Workday(3, 1, 1, '10/11/2559', '14:00 - 14:30'),
     new Workday(4, 1, 1, '10/11/2559', '14:30 - 15:00'),
-    new Workday(5, 2, 1, '10/11/2559', '13:00 - 13:30'),
+    new Workday(5, 2, 1, '10/11/2559', '12:00 - 12:30'),
     new Workday(6, 2, 1, '10/11/2559', '13:30 - 14:00'),
     new Workday(7, 2, 1, '10/11/2559', '14:00 - 14:30'),
     new Workday(8, 3, 2, '10/11/2559', '15:00 - 15:30'),
@@ -44,6 +44,35 @@ const WORKDAYS: Workday[] = [
         .box {
             margin-bottom: 25px;           
         }
+        tile is-child box{
+            background-color: green;
+        }
+        .none {
+            display: block;
+            font-size: 50px;
+            text-align: center;
+        }
+        .day {
+            display: block;
+            font-size: 48px;
+            text-align: center;
+            
+        }
+        .month {
+            display: block;
+            font-size: 48px;
+            text-align: center;
+        }
+        .year {
+            display: block;
+            font-size: 48px;
+            text-align: center;
+        }
+        .time {
+            display: block;
+            font-size: 48px;
+            text-align: center;
+        }
     `]
 })
 export class MakeAppointmentComponent {
@@ -58,29 +87,66 @@ export class MakeAppointmentComponent {
     selectClinic: Clinic;
     // selectClinic: Clinic = new Clinic(0,'none');
     doctors: Doctor[];
-    // doctors = DOCTORS;
-    selectDoctor: Workday;
+    // doctor: Doctor[];
+    selectDoctor: Doctor;
     workdays: Workday[];
-    // workdays = WORKDAYS;
-    doctor: Doctor[];
+    workday: Workday[];
+    selectWorkday: Workday;
+    workdayIndex: number;
+    day: number;
+    month: string;
+    year: number;
+    time: string;
+    adfs: number;
+
+
+    getDayFromDate(date: string): number {
+        return Number(date.substring(0, 2));
+    }
+
+    getMonthFromDate(date: string): string {
+        return date.substring(3,5);
+    }
+
+    getYearFromDate(date: string): number {
+        return Number(date.substring(6,10));
+    }
+
+    // getTimeFromWorkday(time: ): string {
+
+    // }
 
 
     onSelectClinic(clinic_id): void {
+        this.selectClinic = null;
+        this.selectDoctor = null;
         this.workdays = WORKDAYS.filter((item) => item.clinic_id == clinic_id);
         this.doctors = Array<Doctor>();
+        this.workdayIndex = 0;
         for (var obj of this.workdays) {
-            this.doctor = DOCTORS.filter((item) => item.id == obj.doctor_id);
-            this.doctors.push(this.doctor[0]);
-            // this.doctors. 
-            // this.doctors = this.doctor;
-            // for (var _i = 0; _i < doctor.length; _i++) {
-            // }
+            var doctor = DOCTORS.filter((item) => item.id == obj.doctor_id);
+            this.doctors.push(doctor[0]);
         }
         // this.doctors.push(DOCTORS[0]);
         this.doctors = this.doctors.filter(function(elem, index, self) {
             return index == self.indexOf(elem);
         });
         
+    }
+
+    onSelectDoctor(doctor_id): void {
+        this.workday = this.workdays.filter((item) => item.doctor_id == doctor_id);
+        this.adfs = doctor_id;
+        this.workdayIndex = 0;
+        this.selectWorkday = this.workday[this.workdayIndex];
+        this.day = this.getDayFromDate(this.selectWorkday.date);
+        this.month = this.getMonthFromDate(this.selectWorkday.date);
+        this.year = this.getYearFromDate(this.selectWorkday.date);
+        this.time = this.selectWorkday.time;
+    }
+
+    onSelectWorkDay(clinic_id, doctor_id): void {
+        // this.selectWorkday = this.workdays.find()
     }
 
     makeAppointment() {
@@ -102,6 +168,18 @@ export class MakeAppointmentComponent {
         };
         console.log(this.appointmentData);
         // this.router.navigateByUrl('/patient/view-appointment');    
+    }
+
+    changeDate() {
+        if(this.workdayIndex+1 < this.workday.length) {
+            this.workdayIndex += 1;
+            this.selectWorkday = this.workday[this.workdayIndex];
+            this.day = this.getDayFromDate(this.selectWorkday.date);
+            this.month = this.getMonthFromDate(this.selectWorkday.date);
+            this.year = this.getYearFromDate(this.selectWorkday.date);
+            this.time = this.selectWorkday.time;    
+        }
+        
     }
 
     cancelAppointment() {
