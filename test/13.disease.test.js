@@ -99,7 +99,7 @@ describe("Diseases", function(){
                     res.should.be.json; 
                     res.body.should.be.a('object');
                     res.body.should.have.property('message','Bad Request');
-                    res.body.should.have.property('clientMessage', 'This name or description has already in the system');
+                    res.body.should.have.property('clientMessage', 'This name has already in the system');
                     done();
                 }
             );
