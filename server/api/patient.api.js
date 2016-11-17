@@ -129,7 +129,8 @@ module.exports = function (apiRoutes, express) {
     }
 
     //----------------- POST (CREATE) -----------------
-    function createPatient (req, res) {
+
+function createPatient (req, res) {
         utils.checkRole(req, res, ['admin']);
         if (!req.body.HN) {
             utils.responseMissingField(res, 'HN');
@@ -182,7 +183,7 @@ module.exports = function (apiRoutes, express) {
         )
         .then(
             function (patientData) {
-                var patient = new patient(patientData);
+                var patient = new Patient(patientData);
                 return patient.save();
             }
         )
