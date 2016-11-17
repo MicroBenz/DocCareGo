@@ -295,9 +295,6 @@ module.exports = function (apiRoutes, express) {
 
     //----------------- ADDITIONAL FUNCTION ----------------- 
     function validateField (res, body) {
-        if (!body.HN) {
-            utils.responseMissingField(res, 'HN');
-        }
 
         if (!body.personalID) {
             utils.responseMissingField(res, 'personalID');
