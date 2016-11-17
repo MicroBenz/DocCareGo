@@ -113,4 +113,26 @@ describe("Appointment", function(){
             });
         });
     });
+    describe("/GET appointment by workday", function(){
+        it("it should GET appointment by workday", function(done){
+            let Workday = require('../server/model/Workday');
+            Workday.findOne()
+            .then(function(workday){
+                chai.request(server)
+                .get('/api/v1/appointments/workday/'+workday._id)
+                .set("x-access-token",staffToken)
+                .end(
+                    function(err, res){
+                        res.should.have.status(200);
+                        res.should.be.json; 
+                        res.body.should.be.a('object');
+                        res.body.should.have.property('success',true);
+                        res.body.should.have.property('data');
+                        res.body.data.should.be.a('array');
+                        done();
+                    }
+                );
+            });
+        });
+    });
 });
