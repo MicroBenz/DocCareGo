@@ -120,7 +120,7 @@ module.exports = function (apiRoutes, express) {
         validateField(res, req.body);
         Medicine.findOneWithDeleted({
             $or: [
-                { Name: req.body.name }
+                { name: req.body.name }
             ]
         })
         .then(
