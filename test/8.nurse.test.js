@@ -58,7 +58,7 @@ describe("Nurses", function(){
         it("it should POST create nurse", function(done){
             let data = {
                 HN: 'newnurse',
-                personalID: '001',
+                personalID: 'newnurse',
                 preName: 'Mr.',
                 name: 'Benz',
                 surname: 'Thananan',
@@ -84,11 +84,10 @@ describe("Nurses", function(){
         it("it should POST create nurse with same HN, so it will be fail.", function(done){
             let data = {
                 HN: 'newnurse',
-                personalID: '001',
+                personalID: 'newnurse',
                 preName: 'Miss',
                 name: 'Eve',
                 surname: 'Wantanee',
-                clinic: 'clinic1'
             };
             chai.request(server)
             .post('/api/v1/nurses')
@@ -190,11 +189,10 @@ describe("Nurses", function(){
             let HN = 'newnurse';
             let data = {
                 HN: 'newnurse',
-                personalID: '001',
+                personalID: 'newnurse',
                 preName: 'Mr.',
                 name: 'BenzUpdate',
                 surname: 'ThanananUpdate',
-                clinic: 'clinic1'
             };
             chai.request(server)
             .put('/api/v1/nurses/'+HN)

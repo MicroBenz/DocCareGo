@@ -75,7 +75,7 @@ describe("Doctors", function(){
         it("it should POST create doctor", function(done){
             let data = {
                 HN: 'newdoctor',
-                personalID: '001',
+                personalID: 'newdoctor',
                 preName: 'Mr.',
                 name: 'Benz',
                 surname: 'Thananan',
@@ -102,7 +102,7 @@ describe("Doctors", function(){
         it("it should POST create doctor with same HN, so it will be fail.", function(done){
             let data = {
                 HN: 'newdoctor',
-                personalID: '002',
+                personalID: 'newdoctor',
                 preName: 'Miss',
                 name: 'Eve',
                 surname: 'Wantanee',
@@ -228,7 +228,7 @@ describe("Doctors", function(){
             let HN = 'newdoctor';
             let data = {
                 HN: 'newdoctor',
-                personalID: '001',
+                personalID: 'newdoctor',
                 preName: 'Mr.',
                 name: 'BenzUpdate',
                 surname: 'ThanananUpdate',
