@@ -54,17 +54,17 @@ describe("Pharmacists", function(){
     });
 
 
-    describe("/POST create phamacist", function(){
-        it("it should POST create phamacist", function(done){
+    describe("/POST create pharmacist", function(){
+        it("it should POST create pharmacist", function(done){
             let data = {
-                HN: 'newphamacist',
-                personalID: 'newphamacist',
+                HN: 'newpharmacist',
+                personalID: 'newpharmacist',
                 preName: 'Mr.',
                 name: 'Benz',
                 surname: 'Thananan',
             };
             chai.request(server)
-            .post('/api/v1/phamacists')
+            .post('/api/v1/pharmacists')
             .set("x-access-token",adminToken)
             .send(data)
             .end(
@@ -73,7 +73,7 @@ describe("Pharmacists", function(){
                     res.should.be.json; 
                     res.body.should.be.a('object');
                     res.body.should.have.property('success',true);
-                    res.body.should.have.property('clientMessage','Create phamacist succeed');
+                    res.body.should.have.property('clientMessage','Create pharmacist succeed');
                     res.body.should.have.property('data');
                     res.body.data.should.be.a('object');
                     done();
@@ -81,16 +81,16 @@ describe("Pharmacists", function(){
             );
         });
 
-        it("it should POST create phamacist with same HN, so it will be fail.", function(done){
+        it("it should POST create pharmacist with same HN, so it will be fail.", function(done){
             let data = {
-                HN: 'newphamacist',
-                personalID: 'newphamacist',
+                HN: 'newpharmacist',
+                personalID: 'newpharmacist',
                 preName: 'Miss',
                 name: 'Eve',
                 surname: 'Wantanee',
             };
             chai.request(server)
-            .post('/api/v1/phamacists')
+            .post('/api/v1/pharmacists')
             .set("x-access-token",adminToken)
             .send(data)
             .end(
@@ -106,10 +106,10 @@ describe("Pharmacists", function(){
         });
     });
 
-    describe("/GET phamacists", function(){
-        it("it should GET all phamacists by using admin role", function(done){
+    describe("/GET pharmacists", function(){
+        it("it should GET all pharmacists by using admin role", function(done){
             chai.request(server)
-            .get('/api/v1/phamacists')
+            .get('/api/v1/pharmacists')
             .set("x-access-token",adminToken)
             .end(
                 function(err, res){
@@ -129,7 +129,7 @@ describe("Pharmacists", function(){
 
         it("Using patient role, so it should show error", function(done){
             chai.request(server)
-            .get('/api/v1/phamacists')
+            .get('/api/v1/pharmacists')
             .set("x-access-token",patientToken)
             .end(
                 function(err, res){
@@ -145,11 +145,11 @@ describe("Pharmacists", function(){
         });
     });
 
-    describe("/GET phamacists by HN", function(){
-        it("it should GET phamacists by HN using admin role", function(done){
-            let HN = 'newphamacist';
+    describe("/GET pharmacists by HN", function(){
+        it("it should GET pharmacists by HN using admin role", function(done){
+            let HN = 'newpharmacist';
             chai.request(server)
-            .get('/api/v1/phamacists/'+HN)
+            .get('/api/v1/pharmacists/'+HN)
             .set("x-access-token",adminToken)
             .end(
                 function(err, res){
@@ -168,7 +168,7 @@ describe("Pharmacists", function(){
         it("Using wrong HN to GET/:HN, so it should show error", function(done){
             let HN = '000000';
             chai.request(server)
-            .get('/api/v1/phamacists/'+HN)
+            .get('/api/v1/pharmacists/'+HN)
             .set("x-access-token",adminToken)
             .end(
                 function(err, res){
@@ -176,7 +176,7 @@ describe("Pharmacists", function(){
                     res.should.be.json; 
                     res.body.should.be.a('object');
                     res.body.should.have.property('message','Bad Request');
-                    res.body.should.have.property('clientMessage', 'No phamacist with this HN.');
+                    res.body.should.have.property('clientMessage', 'No pharmacist with this HN.');
                     // console.log(res.body.data);
                     done();
                 }
@@ -184,18 +184,18 @@ describe("Pharmacists", function(){
         });
     });
 
-    describe("/PUT update phamacist by HN", function(){
-        it("it should PUT create phamacist", function(done){
-            let HN = 'newphamacist';
+    describe("/PUT update pharmacist by HN", function(){
+        it("it should PUT create pharmacist", function(done){
+            let HN = 'newpharmacist';
             let data = {
-                HN: 'newphamacist',
-                personalID: 'newphamacist',
+                HN: 'newpharmacist',
+                personalID: 'newpharmacist',
                 preName: 'Mr.',
                 name: 'BenzUpdate',
                 surname: 'ThanananUpdate',
             };
             chai.request(server)
-            .put('/api/v1/phamacists/'+HN)
+            .put('/api/v1/pharmacists/'+HN)
             .set("x-access-token",adminToken)
             .send(data)
             .end(
@@ -204,7 +204,7 @@ describe("Pharmacists", function(){
                     res.should.be.json; 
                     res.body.should.be.a('object');
                     res.body.should.have.property('success',true);
-                    res.body.should.have.property('clientMessage','Update phamacist succeed');
+                    res.body.should.have.property('clientMessage','Update pharmacist succeed');
                     res.body.should.have.property('data');
                     res.body.data.should.be.a('object');
                     done();
@@ -213,11 +213,11 @@ describe("Pharmacists", function(){
         });
     });
 
-    describe("/DELETE delete phamacist by HN", function(){
-        it("it should Delete create phamacist", function(done){
-            let HN = 'newphamacist';
+    describe("/DELETE delete pharmacist by HN", function(){
+        it("it should Delete create pharmacist", function(done){
+            let HN = 'newpharmacist';
             chai.request(server)
-            .delete('/api/v1/phamacists/'+HN)
+            .delete('/api/v1/pharmacists/'+HN)
             .set("x-access-token",adminToken)
             .end(
                 function(err, res){
@@ -225,8 +225,8 @@ describe("Pharmacists", function(){
                     // res.should.be.json; 
                     // res.body.should.be.a('object');
                     res.body.should.have.property('success',true);
-                    res.body.should.have.property('clientMessage','Delete phamacist succeed.');
-                    res.body.should.have.property('message','Delete phamacist succeed.');
+                    res.body.should.have.property('clientMessage','Delete pharmacist succeed.');
+                    res.body.should.have.property('message','Delete pharmacist succeed.');
                     done();
                 }
             );
