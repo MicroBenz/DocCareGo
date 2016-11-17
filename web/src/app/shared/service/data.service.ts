@@ -46,13 +46,21 @@ export class DataService {
 
     public deleteData(apiEndpoint: string) {
         return this.http.delete(apiEndpoint)
-            .map(this.handleResponse, this.handleError);
+            .map(this.handleDeleteResponse, this.handleError);
     }
     
     private handleResponse = (res: Response) => {
         let result = res.json();
         if (result.success)
             return result.data;
+        else
+            throw new Error(result.clientMessage);
+    }
+
+    private handleDeleteResponse = (res: Response) => {
+        let result = res.json();
+        if (result.success)
+            return result.message;
         else
             throw new Error(result.clientMessage);
     }

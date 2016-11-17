@@ -7,7 +7,7 @@
         </tr>
     </thead>
     <tbody *ngIf="personnelList.length !== 0">
-        <tr *ngFor="let personnel of personnelList;">
+        <tr *ngFor="let personnel of personnelList; let i = index;">
             <td>{{personnel.HN}}</td>
             <td>{{personnel.name}} {{personnel.surname}}</td>
             <td>
@@ -15,7 +15,7 @@
                     (click)="editInfo(personnel.HN)">
                     <i class="fa fa-pencil"></i>แก้ไขข้อมูล</a>
                 <a class="button is-danger"
-                    (click)="deleteItem(personnel.HN)">
+                    (click)="deleteItem(i)">
                     <i class="fa fa-trash"></i>ลบข้อมูล</a>
             </td>            
         </tr>
@@ -26,3 +26,14 @@
         </tr>
     </tbody>
 </table>
+
+<modal-dialog
+    [description]="deleteDialog"
+    [modalType]="'warning'"
+    [confirmText]="'ลบคนนี้ออกจากระบบ'"
+    [cancelText]="'กลับ'"
+    [confirmFn]="deleteDataService"
+    [cancelFn]="dismissModal"
+    [isShowFlag]="isShowConfirmDelete"
+    (isShowFlagChange)="isShowConfirmDelete = $event">
+</modal-dialog>
