@@ -24,6 +24,7 @@ import { ManageWorkdayComponent, AddWorkdayComponent } from './role/doctor/index
 
 // Admin Component
 import { PersonnelManagementComponent, AddPersonnelComponent } from './role/admin/personnel-management/index';
+import { EditDoctorComponent, EditNurseComponent, EditPatientComponent, EditPharmacistComponent, EditStaffComponent } from './role/admin/personnel-management/edit/index';
 import { MedicineManagementComponent, AddMedicineComponent, EditMedicineComponent } from './role/admin/medicine-management/index';
 import { ClinicManagementComponent } from './role/admin/clinic-management/index';
 // Auth Guard
@@ -183,6 +184,26 @@ const appRoutes: Routes = [
             {
                 path: 'personnel-management/add-personnel',
                 component: AddPersonnelComponent
+            },
+            {
+                path: 'personnel-management/edit-patient/:HN',
+                component: EditPatientComponent
+            },
+            {
+                path: 'personnel-management/edit-doctor/:HN',
+                component: EditDoctorComponent
+            },
+            {
+                path: 'personnel-management/edit-nurse/:HN',
+                component: EditNurseComponent
+            },
+            {
+                path: 'personnel-management/edit-staff/:HN',
+                component: EditStaffComponent
+            },
+            {
+                path: 'personnel-management/edit-pharmacist/:HN',
+                component: EditPharmacistComponent
             },
             {
                 path: 'medicine-management',

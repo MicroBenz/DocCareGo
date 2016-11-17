@@ -1,0 +1,12 @@
+<div class="container">
+    <div class="box">
+        <pharmacist-form
+            [formData]="formData">
+        </pharmacist-form>
+        <div class="button-wrapper">
+            <a class="button is-success" (click)="validateForm()">แก้ไขข้อมูลเภสัชกร</a>
+            <a class="button is-danger" (click)="isShowCancelConfirm = true">ยกเลิก</a>
+        </div>
+    </div>
+    
+</div>

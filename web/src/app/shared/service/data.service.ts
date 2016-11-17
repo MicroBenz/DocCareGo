@@ -11,9 +11,23 @@ export class DataService {
             .map(this.handleResponse, this.handleError);
     }
 
+    public getDataWithParams(apiEndpoint: string, params: Object) {
+        let urlParams = new URLSearchParams();
+        for (let item in params) {
+            console.log(item, params[item]);
+            urlParams.set(item, params[item]);
+        }
+        console.log(urlParams);
+        return this.http.get(apiEndpoint, {
+            search: urlParams
+        })
+        .map(this.handleResponse, this.handleError);
+    }
+
     public searchData(apiEndpoint: string, query: string = '') {
         let params = new URLSearchParams();
         params.set('search', query);
+        console.log(params);
         return this.http.get(apiEndpoint, {
             search: params
         })
@@ -32,13 +46,21 @@ export class DataService {
 
     public deleteData(apiEndpoint: string) {
         return this.http.delete(apiEndpoint)
-            .map(this.handleResponse, this.handleError);
+            .map(this.handleDeleteResponse, this.handleError);
     }
     
     private handleResponse = (res: Response) => {
         let result = res.json();
         if (result.success)
             return result.data;
+        else
+            throw new Error(result.clientMessage);
+    }
+
+    private handleDeleteResponse = (res: Response) => {
+        let result = res.json();
+        if (result.success)
+            return result.message;
         else
             throw new Error(result.clientMessage);
     }

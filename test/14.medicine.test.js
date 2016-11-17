@@ -1,7 +1,7 @@
 process.env.NODE_ENV = 'test';
 
 var mongoose = require('mongoose');
-var Doctor = require('../server/model/Doctor');
+var Medicine = require('../server/model/Medicine');
 
 var chai = require('chai');
 var chaiHttp = require('chai-http');
@@ -10,9 +10,8 @@ var should = chai.should();
 chai.use(chaiHttp);
 
 var adminToken = "";
-var staffToken = "";
 var patientToken = "";
-describe("Doctors", function(){
+describe("Medicines", function(){
     before(function(done){
         let p = new Promise(
             function(resolve,reject){
@@ -35,22 +34,6 @@ describe("Doctors", function(){
                 chai.request(server)
                 .post('/auth/login')
                 .send({
-                    username: "staff1",
-                    password: "staff1"
-                })
-                .end(
-                    function(err, res){
-                        staffToken = res.body.data.token;
-                        resolve();
-                    }
-                );
-            }
-        );
-        let r = new Promise(
-            function(resolve,reject){
-                chai.request(server)
-                .post('/auth/login')
-                .send({
                     username: "patient1",
                     password: "patient1"
                 })
@@ -61,8 +44,8 @@ describe("Doctors", function(){
                     }
                 );
             }
-        )
-        Promise.all([p,q,r])
+        );
+        Promise.all([p,q])
         .then(
             function(){
                 done();
@@ -71,18 +54,14 @@ describe("Doctors", function(){
     });
 
 
-    describe("/POST create doctor", function(){
-        it("it should POST create doctor", function(done){
+    describe("/POST create medicine", function(){
+        it("it should POST create medicine", function(done){
             let data = {
-                HN: 'newdoctor',
-                personalID: 'newdoctor',
-                preName: 'Mr.',
-                name: 'Benz',
-                surname: 'Thananan',
-                clinic: 'clinic1'
+                name: 'newmedicine',
+                description: 'newmedicine'
             };
             chai.request(server)
-            .post('/api/v1/doctors')
+            .post('/api/v1/medicines')
             .set("x-access-token",adminToken)
             .send(data)
             .end(
@@ -91,7 +70,7 @@ describe("Doctors", function(){
                     res.should.be.json; 
                     res.body.should.be.a('object');
                     res.body.should.have.property('success',true);
-                    res.body.should.have.property('clientMessage','Create Doctor succeed');
+                    res.body.should.have.property('clientMessage','Create medicine succeed');
                     res.body.should.have.property('data');
                     res.body.data.should.be.a('object');
                     done();
@@ -99,17 +78,13 @@ describe("Doctors", function(){
             );
         });
 
-        it("it should POST create doctor with same HN, so it will be fail.", function(done){
+        it("it should POST create medicine with same name, so it will be fail.", function(done){
             let data = {
-                HN: 'newdoctor',
-                personalID: 'newdoctor',
-                preName: 'Miss',
-                name: 'Eve',
-                surname: 'Wantanee',
-                clinic: 'clinic1'
+                name: 'newmedicine',
+                description: 'newmedicine',
             };
             chai.request(server)
-            .post('/api/v1/doctors')
+            .post('/api/v1/medicines')
             .set("x-access-token",adminToken)
             .send(data)
             .end(
@@ -118,38 +93,18 @@ describe("Doctors", function(){
                     res.should.be.json; 
                     res.body.should.be.a('object');
                     res.body.should.have.property('message','Bad Request');
-                    res.body.should.have.property('clientMessage', 'This HN or personalID has already in the system');
+                    res.body.should.have.property('clientMessage', 'This name has already in the system');
                     done();
                 }
             );
         });
     });
 
-    describe("/GET doctors", function(){
-        it("it should GET all doctors by using admin role", function(done){
+    describe("/GET medicines", function(){
+        it("it should GET all medicines by using admin role", function(done){
             chai.request(server)
-            .get('/api/v1/doctors')
+            .get('/api/v1/medicines')
             .set("x-access-token",adminToken)
-            .end(
-                function(err, res){
-                    res.should.have.status(200);
-                    res.should.be.json; 
-                    res.body.should.be.a('object');
-                    res.body.should.have.property('success',true);
-                    res.body.should.have.property('limit',10);
-                    res.body.should.have.property('data');
-                    res.body.data.should.be.a('array');
-                    res.body.data.should.have.length(10);
-                    // console.log(res.body.data);
-                    done();
-                }
-            )
-        });
-
-        it("it should GET all doctors by using staff role", function(done){
-            chai.request(server)
-            .get('/api/v1/doctors')
-            .set("x-access-token",staffToken)
             .end(
                 function(err, res){
                     res.should.have.status(200);
@@ -168,7 +123,7 @@ describe("Doctors", function(){
 
         it("Using patient role, so it should show error", function(done){
             chai.request(server)
-            .get('/api/v1/doctors')
+            .get('/api/v1/medicines')
             .set("x-access-token",patientToken)
             .end(
                 function(err, res){
@@ -184,11 +139,11 @@ describe("Doctors", function(){
         });
     });
 
-    describe("/GET doctors by HN", function(){
-        it("it should GET doctors by HN using admin role", function(done){
-            let HN = 'newdoctor';
+    describe("/GET medicines by name", function(){
+        it("it should GET medicines by name using admin role", function(done){
+            let name = 'newmedicine';
             chai.request(server)
-            .get('/api/v1/doctors/'+HN)
+            .get('/api/v1/medicines/'+name)
             .set("x-access-token",adminToken)
             .end(
                 function(err, res){
@@ -204,10 +159,10 @@ describe("Doctors", function(){
             )
         });
         
-        it("Using wrong HN to GET/:HN, so it should show error", function(done){
-            let HN = '000000';
+        it("Using wrong name to GET/:name, so it should show error", function(done){
+            let name = '000000';
             chai.request(server)
-            .get('/api/v1/doctors/'+HN)
+            .get('/api/v1/medicines/'+name)
             .set("x-access-token",adminToken)
             .end(
                 function(err, res){
@@ -215,7 +170,7 @@ describe("Doctors", function(){
                     res.should.be.json; 
                     res.body.should.be.a('object');
                     res.body.should.have.property('message','Bad Request');
-                    res.body.should.have.property('clientMessage', 'No doctor with this HN.');
+                    res.body.should.have.property('clientMessage', 'No medicine with this name.');
                     // console.log(res.body.data);
                     done();
                 }
@@ -223,19 +178,15 @@ describe("Doctors", function(){
         });
     });
 
-    describe("/PUT update doctor by HN", function(){
-        it("it should PUT create doctor", function(done){
-            let HN = 'newdoctor';
+    describe("/PUT update medicine by name", function(){
+        it("it should PUT create medicine", function(done){
+            let name = 'newmedicine';
             let data = {
-                HN: 'newdoctor',
-                personalID: 'newdoctor',
-                preName: 'Mr.',
-                name: 'BenzUpdate',
-                surname: 'ThanananUpdate',
-                clinic: 'clinic1'
+                name: 'newmedicine',
+                description: 'newmedicine'
             };
             chai.request(server)
-            .put('/api/v1/doctors/'+HN)
+            .put('/api/v1/medicines/'+name)
             .set("x-access-token",adminToken)
             .send(data)
             .end(
@@ -244,7 +195,7 @@ describe("Doctors", function(){
                     res.should.be.json; 
                     res.body.should.be.a('object');
                     res.body.should.have.property('success',true);
-                    res.body.should.have.property('clientMessage','Update Doctor succeed');
+                    res.body.should.have.property('clientMessage','Update medicine succeed');
                     res.body.should.have.property('data');
                     res.body.data.should.be.a('object');
                     done();
@@ -253,11 +204,11 @@ describe("Doctors", function(){
         });
     });
 
-    describe("/DELETE delete doctor by HN", function(){
-        it("it should Delete create doctor", function(done){
-            let HN = 'newdoctor';
+    describe("/DELETE delete medicine by name", function(){
+        it("it should Delete create medicine", function(done){
+            let name = 'newmedicine';
             chai.request(server)
-            .delete('/api/v1/doctors/'+HN)
+            .delete('/api/v1/medicines/'+name)
             .set("x-access-token",adminToken)
             .end(
                 function(err, res){
@@ -265,8 +216,8 @@ describe("Doctors", function(){
                     // res.should.be.json; 
                     // res.body.should.be.a('object');
                     res.body.should.have.property('success',true);
-                    res.body.should.have.property('clientMessage','Delete Doctor succeed.');
-                    res.body.should.have.property('message','Delete Doctor succeed.');
+                    res.body.should.have.property('clientMessage','Delete medicine succeed.');
+                    res.body.should.have.property('message','Delete medicine succeed.');
                     done();
                 }
             );
