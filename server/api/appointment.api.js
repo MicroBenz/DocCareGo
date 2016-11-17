@@ -20,6 +20,9 @@ module.exports = (apiRoutes, express) => {
         .put(utils.methodNotAllowed)
         .delete(deleteAppointmentById);
 
+    AppointmentRoutes.route('/workday/:workday')
+        .get(getAppointmentByWorkday);
+
     apiRoutes.use('/appointments', AppointmentRoutes);
 
     // Implementation of CRUD are below.
@@ -302,6 +305,32 @@ module.exports = (apiRoutes, express) => {
                 res.status(500).send({
                     success: false,
                     status: 'Delete appointment failed.',
+                    message: error
+                });
+            }
+        );
+    }
+
+    function getAppointmentByWorkday (req, res) {
+        utils.checkRole(req, res, ['doctor','staff']);
+        Appointment.find({
+            workday: req.params.workday
+        })
+        .populate('patient')
+        .populate('doctor')
+        .populate('workday')
+        .then(
+            function(appointments){
+                res.json({
+                    success: true,
+                    data: appointemnts
+                });
+            },
+            function(error){
+                console.log(error);
+                res.status(500).send({
+                    success: false,
+                    status: 'Cannot get appointments',
                     message: error
                 });
             }

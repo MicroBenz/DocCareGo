@@ -26,7 +26,7 @@ import { ManageWorkdayComponent, AddWorkdayComponent } from './role/doctor/index
 import { PersonnelManagementComponent, AddPersonnelComponent } from './role/admin/personnel-management/index';
 import { EditDoctorComponent, EditNurseComponent, EditPatientComponent, EditPharmacistComponent, EditStaffComponent } from './role/admin/personnel-management/edit/index';
 import { MedicineManagementComponent, AddMedicineComponent, EditMedicineComponent } from './role/admin/medicine-management/index';
-import { ClinicManagementComponent } from './role/admin/clinic-management/index';
+import { ClinicManagementComponent, AddClinicComponent } from './role/admin/clinic-management/index';
 // Auth Guard
 import { AdminOnlyRoute, PatientOnlyRoute, DoctorOnlyRoute, NurseOnlyRoute, StaffOnlyRoute, PharmacistOnlyRoute, NonLoggedInRoute } from './auth/guard/index';
 
@@ -220,6 +220,10 @@ const appRoutes: Routes = [
             {
                 path: 'clinic-management',
                 component: ClinicManagementComponent
+            },
+            {
+                path: 'clinic-management/add-clinic',
+                component: AddClinicComponent
             }
         ]
     }
