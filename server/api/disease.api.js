@@ -265,8 +265,6 @@ module.exports = function (apiRoutes, express) {
 
     //----------------- ADDITIONAL FUNCTION ----------------- 
     function valNameateField (res, body) {
-        if (!body.name) {
-            utils.responseMissingField(res, 'name');
-        }
+        
     }
 };
