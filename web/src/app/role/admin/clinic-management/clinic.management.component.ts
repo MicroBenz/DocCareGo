@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 
 import { DataService } from '../../../shared/service/data.service';
 import { CLINIC_MANAGEMENT_TITLE } from '../../../config/title.config';
@@ -27,7 +28,7 @@ import { CLINIC_ENDPOINT } from '../../../config/api.config';
 })
 export class ClinicManagementComponent implements OnInit {
     public clinicList;
-    constructor(private title: Title, private dataService: DataService) {}
+    constructor(private title: Title, private dataService: DataService, private router: Router) {}
 
     ngOnInit () {
         this.clinicList = [];
@@ -49,5 +50,9 @@ export class ClinicManagementComponent implements OnInit {
         return (searchKey) => {
             return this.dataService.searchData(CLINIC_ENDPOINT, searchKey);
         }
+    }
+
+    navigateToAddClinic () {
+        this.router.navigateByUrl('/admin/clinic-management/add-clinic');
     }
 }
