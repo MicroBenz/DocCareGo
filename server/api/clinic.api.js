@@ -182,8 +182,8 @@ module.exports = function (apiRoutes, express) {
         })
         .then(
             function (clinic) {
-                clinic.name = data.name;
-                clinic.description = data.description;
+                clinic.name = req.body.name;
+                clinic.description = req.body.description;
                 return clinic.save();
             },
             function (error) {
