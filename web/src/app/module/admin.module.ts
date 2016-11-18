@@ -8,7 +8,7 @@ import { PersonnelManagementComponent, PersonnelTableComponent, AddPersonnelComp
 import { DoctorFormComponent, NurseFormComponent, PatientFormComponent, PharmacistFormComponent, StaffFormComponent } from '../role/admin/personnel-management/personnel-form/index';
 import { EditDoctorComponent, EditNurseComponent, EditPatientComponent, EditPharmacistComponent, EditStaffComponent } from '../role/admin/personnel-management/edit/index';
 import { MedicineManagementComponent, MedicineTableComponent, AddMedicineComponent, EditMedicineComponent, MedicineFormComponent } from '../role/admin/medicine-management/index';
-import { ClinicManagementComponent, ClinicTableComponent, AddClinicComponent, ClinicFormComponent } from '../role/admin/clinic-management/index';
+import { ClinicManagementComponent, ClinicTableComponent, AddClinicComponent, EditClinicComponent, ClinicFormComponent } from '../role/admin/clinic-management/index';
 
 @NgModule({
     imports: [
@@ -41,6 +41,7 @@ import { ClinicManagementComponent, ClinicTableComponent, AddClinicComponent, Cl
         ClinicManagementComponent,
         ClinicTableComponent,
         AddClinicComponent,
+        EditClinicComponent,
         ClinicFormComponent
     ],
     exports: [
