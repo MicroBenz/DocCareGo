@@ -56,7 +56,7 @@ export class AddClinicComponent implements OnInit {
         this.confirmModalContent = `
             <h1 class="title">ตรวจสอบข้อมูลก่อนทำเพิ่มแผนก</h1>
             <p><b>ชื่อแผนก:</b> ${this.clinicData['name']}</p>
-            <p><b>รายละเอียดแผนกs:</b> ${this.clinicData['description']}</p>
+            <p><b>รายละเอียดแผนก:</b> ${this.clinicData['description']}</p>
             `;
     }
 
