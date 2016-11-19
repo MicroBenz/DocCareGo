@@ -3,7 +3,7 @@
         <clinic-form [formData]="clinicData">
         </clinic-form>
         <div class="button-wrapper">
-            <a class="button is-success" (click)="validateForm()">เพิ่มแผนกใหม่</a>
+            <a class="button is-success" (click)="addNewClinic()">เพิ่มแผนกใหม่</a>
             <a class="button is-danger" (click)="isShowCancelConfirm = true">ยกเลิก</a>
         </div>
     </div>
@@ -14,7 +14,7 @@
     [modalType]="'revise'"
     [confirmText]="'เพิ่มแผนก'"
     [cancelText]="'กลับ'"
-    [confirmFn]="addClinic"
+    [confirmFn]="addClinicDataService"
     [cancelFn]="dismissModal"
     [isShowFlag]="isShowConfirm"
     (isShowFlagChange)="isShowConfirm = $event">
