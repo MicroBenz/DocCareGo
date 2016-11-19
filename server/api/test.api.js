@@ -1,4 +1,5 @@
 let smsService = require('../sms.service');
+let mailService = require('../mail.service');
 
 function getRemainCredit (req, res) {
     smsService.checkSMSCredit()
@@ -39,6 +40,17 @@ function sendSMS (req, res) {
                 });
             }
         )
+}
+function sendEmail (req, res) {
+    mailService.sendEmail(
+        'first852456@gmail.com',
+        'เทส email',
+        'ข้อความ naja'
+    );
+    res.json({
+        success: true,
+        clientMessage: 'send email completed'
+    });
 }
 
 function getTest (req, res) {
@@ -93,12 +105,13 @@ function getSearch (req, res) {
     }, 1000);
 }
 
-module.exports = function (apiRoutes, express) {
+module.exports = function (app, express) {
     var testRoutes = express.Router();
     testRoutes.get('/', getTest);
     testRoutes.get('/error', getTestError);
     testRoutes.get('/searchPersonnel', getSearch);
     testRoutes.get('/sms/checkCredit', getRemainCredit);
     testRoutes.post('/sms/sendSMS', sendSMS);    
-    apiRoutes.use('/test', testRoutes);
+    testRoutes.post('/email/sendEmail', sendEmail);    
+    app.use('/test', testRoutes);
 }
