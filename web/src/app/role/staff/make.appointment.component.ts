@@ -26,4 +26,8 @@ export class MakeAppointmentByStaffComponent implements OnInit {
     confirmPatient () {
         this.isConfirmHN = true;
     }
+
+    onConfirmAppointment (formData) {
+        console.log(formData);
+    }
 }

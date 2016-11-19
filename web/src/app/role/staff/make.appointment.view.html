@@ -5,4 +5,6 @@
         <a (click)="confirmPatient()" class="button is-info">ยืนยันผู้ป่วย</a>
     </div>
 </div>
-<make-appointment-form *ngIf="isConfirmHN"></make-appointment-form>
+<make-appointment-form
+    *ngIf="isConfirmHN"
+    (onConfirmAppointment)="onConfirmAppointment($event)"></make-appointment-form>
