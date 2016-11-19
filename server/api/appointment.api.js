@@ -25,7 +25,7 @@ module.exports = (apiRoutes, express) => {
     // Implementation of CRUD are below.
     //----------------- GET -----------------
     function getAppointments (req, res) {
-        utils.checkRole(req, res, ['staff','admin', 'doctor']);
+        utils.checkRole(req, res, ['patient', 'staff','admin', 'doctor']);
         var filterField = req.query.filters;
         if (filterField) {
             filterField = filterField.split(',').join(' ');
