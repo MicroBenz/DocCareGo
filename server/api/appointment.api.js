@@ -3,6 +3,7 @@ module.exports = (apiRoutes, express) => {
     var Appointment = require('../model/Appointment');
     var Patient = require('../model/Patient');
     var Doctor = require('../model/Doctor');
+    var Clinic = require('../model/Clinic');
     var User = require('../model/User');
     var Workday = require('../model/Workday');
     var utils = require('../utils');
@@ -165,10 +166,10 @@ module.exports = (apiRoutes, express) => {
             )
             .then(
                 function(appointments){
-                    appointments = appointments.toObject();
                     let arr = [];
                     appointments.forEach(
                         function(appointment){
+                            appointment = appointment.toObject()
                             let p = new Promise(
                                 function(resolve, reject){
                                     Clinic.findById(appointment.doctor.clinic)
