@@ -17,7 +17,8 @@ var patientSchema = new Schema({
     province: String,
     zipCode: String,
     country: String,
-    tel: String
+    tel: String,
+    noMedicines: [String]
 },{
     timestamps: true,
     collection: 'patients'
