@@ -44,6 +44,7 @@ export class MakeAppointmentFormComponent implements OnInit {
     public allTimeSlot;
     @Output('onConfirmAppointment') onConfirmAppointment = new EventEmitter();
     @Input('isMakeAppointmentSuccess') isMakeAppointmentSuccess = false;
+    @Input('isShowLink') isShowLink = true;
 
     constructor(private router: Router, private title: Title, private dataService: DataService, private authService: AuthService) {}
 

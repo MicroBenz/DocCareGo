@@ -1,5 +1,5 @@
 <div class="container">
-    <div class="box">
+    <div class="box hn-box">
         <label class="label">รหัสบัตรประจำตัวผู้ป่วย (HN)</label>
         <input type="text">
         <a (click)="confirmPatient()" class="button is-info">ยืนยันผู้ป่วย</a>
@@ -7,4 +7,7 @@
 </div>
 <make-appointment-form
     *ngIf="isConfirmHN"
-    (onConfirmAppointment)="onConfirmAppointment($event)"></make-appointment-form>
+    (onConfirmAppointment)="onConfirmAppointment($event)"
+    [isMakeAppointmentSuccess]="isMakeAppointmentSuccess"
+    [isShowLink]="false">
+</make-appointment-form>

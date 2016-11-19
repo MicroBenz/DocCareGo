@@ -33,5 +33,5 @@
     </appointment-summary-form>
 </div>
 <div class="notification is-success" *ngIf="isMakeAppointmentSuccess">
-    นัดหมายสำเร็จแล้ว <a (click)="navigateToViewAppointment()">ดูข้อมูลการนัดหมายได้ที่นี่</a>
+    นัดหมายสำเร็จแล้ว <a *ngIf="isShowLink" (click)="navigateToViewAppointment()">ดูข้อมูลการนัดหมายได้ที่นี่</a>
 </div>

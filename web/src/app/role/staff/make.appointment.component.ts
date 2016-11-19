@@ -13,14 +13,19 @@ import { Title } from '@angular/platform-browser';
         .appointment-button {
             margin-top: 15px;
         }
+        .hn-box {
+            margin-bottom: 20px;
+        }
     `]
 })
 export class MakeAppointmentByStaffComponent implements OnInit {
     public isConfirmHN: boolean;
+    public isMakeAppointmentSuccess: boolean;
 
     constructor() {}
     ngOnInit () {
         this.isConfirmHN = false;
+        this.isMakeAppointmentSuccess = false;
     }
 
     confirmPatient () {
@@ -29,5 +34,6 @@ export class MakeAppointmentByStaffComponent implements OnInit {
 
     onConfirmAppointment (formData) {
         console.log(formData);
+        this.isMakeAppointmentSuccess = true;
     }
 }
