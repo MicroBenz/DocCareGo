@@ -9,32 +9,52 @@
         <div class="input-row-wrapper">
             <div class="input-wrapper left-side weight-wrapper">
                 <label class="label">น้ำหนัก (กิโลกรัม)</label>
-                <input class="input" type="number" placeholder="">
+                <input class="input" type="number" placeholder="" [(ngModel)]="patientRecord.weight">
             </div>
             <div class="input-wrapper height-wrapper">
                 <label class="label">ส่วนสูง (เซนติเมตร)</label>
-                <input class="input" type="number" placeholder="">
+                <input class="input" type="number" placeholder="" [(ngModel)]="patientRecord.height">
             </div>
             <div class="input-wrapper temp-wrapper">
                 <label class="label">อุณหภูมิ (องศาเซลเซียส)</label>
-                <input class="input" type="number" placeholder="">
+                <input class="input" type="number" placeholder="" [(ngModel)]="patientRecord.temperature">
             </div>
         </div>
         <div class="input-row-wrapper">
             <div class="input-wrapper left-side">
                 <label class="label">ความดันโลหิต (บีบ/คลาย)</label>
-                <input class="input systolic" type="number" placeholder="">
+                <input class="input systolic" type="number" placeholder="" [(ngModel)]="patientRecord.systolic">
                 <span class="slash">/</span>
-                <input class="input diastolic" type="number" placeholder="">        
+                <input class="input diastolic" type="number" placeholder="" [(ngModel)]="patientRecord.diastolic">        
             </div>
             <div class="input-wrapper">
                 <label class="label">อัตราการเต้นของหัวใจ (ครั้งต่อนาที)</label>
-                <input class="input" type="number" placeholder="">
+                <input class="input" type="number" placeholder="" [(ngModel)]="patientRecord.heartRate" >
             </div>
         </div>
     </div>
-    <a class="button is-success">บันทึกข้อมูล</a>
+    <a class="button is-success" (click)="addNewPatientRecord()">บันทึกข้อมูล</a>
 </div>
 <div *ngIf="(patient | json) == '{}'">
     <h1>เลือกผู้ป่วยที่ต้องการบันทึกข้อมูลทางด้านซ้าย</h1>
 </div>
+
+<modal-dialog
+    [description]="confirmModalContent"
+    [modalType]="'revise'"
+    [confirmText]="'บันทึกข้อมูล'"
+    [cancelText]="'กลับ'"
+    [confirmFn]="recordPatientDetailDataService"
+    [cancelFn]="dismissModal"
+    [isShowFlag]="isShowConfirm"
+    (isShowFlagChange)="isShowConfirm = $event">
+</modal-dialog>
+
+<modal-dialog
+    [description]="'โปรดกรอกข้อมูลให้ครบถ้วน'"
+    [modalType]="'fail'"
+    [confirmText]="'กรอกข้อมูลต่อ'"
+    [confirmFn]="dismissModal"
+    [isShowFlag]="isShowInvalidate"
+    (isShowFlagChange)="isShowInvalidate = $event">
+</modal-dialog>

@@ -42,7 +42,10 @@ export class AddMedicineComponent implements OnInit {
         if (this.medicineData === undefined || this.medicineData === null) {
             return false;
         }
-        else if (this.medicineData['name'] === '' || this.medicineData['description'] === '') {
+        if (this.medicineData['name'] === undefined || this.medicineData['name'] === null || this.medicineData['name'] === '') {
+            return false;
+        }
+        if (this.medicineData['description'] === undefined || this.medicineData['description'] === null || this.medicineData['description'] === '') {
             return false;
         }
         else {
