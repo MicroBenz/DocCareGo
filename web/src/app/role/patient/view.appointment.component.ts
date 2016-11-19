@@ -4,7 +4,7 @@ import * as moment from 'moment';
 
 import { VIEW_APPOINTMENT_TITLE } from './../../config/title.config';
 import { DataService } from '../../shared/service/data.service';
-import { APPOINTMENT_ENDPOINT, CLINIC_ENDPOINT } from '../../config/api.config';
+import { APPOINTMENT_ENDPOINT } from '../../config/api.config';
 import { AuthService } from '../../shared/service/auth.service';
 
 @Component({
@@ -66,12 +66,5 @@ export class ViewAppointmentComponent implements OnInit {
 
     public onSelectRow(selectedAppointment) {
         this.selectedAppointment = selectedAppointment;
-    }
-
-    private getSelectedAppointment () {
-        if (this.selectedAppointment === undefined) {
-            return null;
-        }
-        return this.selectedAppointment;
     }
 }
