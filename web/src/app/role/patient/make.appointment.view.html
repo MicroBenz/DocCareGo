@@ -61,16 +61,21 @@
         </appointment-time-selector>
     </div>
 
-    <div class="box">
+    <div class="box"
+        *ngIf="isConfirmedAppointmentDetail && isConfirmedTimeSlot">
         <h1 class="title">
-            สรุปการนัดหมาย
+            สรุปข้อมูลการนัดหมาย <i class="fa fa-check-circle" *ngIf="isAppointmentSuccess"></i>
         </h1>
         <appointment-summary-form
             [doctor]="selectedDoctor"
             [clinic]="selectedClinic"
             [causeToAppointment]="causeToAppointment"
             [timeSlot]="selectedTimeSlot"
-            (onClickMakeAppointment)="makeAppointment($event)">
+            (onClickMakeAppointment)="makeAppointment($event)"
+            *ngIf="!isAppointmentSuccess">
         </appointment-summary-form>
-    </div>    
+    </div>
+    <div class="notification is-success" *ngIf="isAppointmentSuccess">
+        นัดหมายสำเร็จแล้ว <a (click)="navigateToViewAppointment()">ดูข้อมูลการนัดหมายได้ที่นี่</a>
+    </div>
 </div>

@@ -1,7 +1,12 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 @Component({
     selector: 'appointment-summary-form',
-    templateUrl: './appointment.summary.form.view.html'
+    templateUrl: './appointment.summary.form.view.html',
+    styles: [`
+        .button {
+            margin-top: 10px;
+        }
+    `]
 })
 export class AppointmentSummaryFormComponent {
     @Input('doctor') doctor: Object;

@@ -8,6 +8,9 @@ import * as moment from 'moment';
         .display-date {
             display: inline-block;
         }
+        .button-wrapper .fa {
+            font-size: 35px;
+        }
     `]
 })
 export class AppointmentTimeSelectorComponent implements OnInit, OnChanges {

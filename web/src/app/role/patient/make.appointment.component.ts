@@ -1,43 +1,13 @@
-import { Component, Input, Output, EventEmitter, OnChanges, SimpleChange, ViewChild, OnInit } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MakeAppointmentFormComponent } from './../../shared/appointment/make.appointment.form.component';
 import { Title } from '@angular/platform-browser';
-import { MAKE_APPOINTMENT_TITLE } from './../../config/title.config';
-
-import { Clinic } from '../../shared/appointment/clinic.component';
-import { Doctor } from '../../shared/appointment/doctor.component';
-import { Workday } from '../../shared/appointment/workday.component';
-import { DataService } from '../../shared/service/data.service';
-import { CLINIC_ENDPOINT, DOCTOR_ENDPOINT, WORKDAY_ENDPOINT, APPOINTMENT_ENDPOINT } from '../../config/api.config';
-
 import * as moment from 'moment';
+
+import { MakeAppointmentFormComponent } from './../../shared/appointment/make.appointment.form.component';
+import { MAKE_APPOINTMENT_TITLE } from './../../config/title.config';
+import { DataService } from '../../shared/service/data.service';
 import { AuthService } from '../../shared/service/auth.service';
-
-const CLINICS: Clinic[] = [
-    {id:1 ,name: "คลินิกทางเดินอาหาร"},
-    {id:2 ,name: "คลินิกหัวใจ"},
-    {id:3 ,name: "คลินิกทางผ่าน"}
-];
-
-const DOCTORS: Doctor[] = [
-    new Doctor(1, 'นายแพทย์ธีรัช รักษ์เถา'),
-    new Doctor(2, 'นายแพทย์ธนนันท์ ตั้งธนาชัยกุล'),
-    new Doctor(3, 'นายแพทย์ธนวัฒน์ เค้าฉลองเคียง')
-];
-
-const WORKDAYS: Workday[] = [
-    new Workday(1, 1, 1, '10/11/2559', '13:00 - 13:30'),
-    new Workday(2, 1, 1, '11/11/2559', '13:30 - 14:00'),
-    new Workday(3, 1, 1, '10/11/2559', '14:00 - 14:30'),
-    new Workday(4, 1, 1, '10/11/2559', '14:30 - 15:00'),
-    new Workday(5, 2, 1, '10/11/2559', '12:00 - 12:30'),
-    new Workday(6, 2, 1, '10/11/2559', '13:30 - 14:00'),
-    new Workday(7, 2, 1, '10/11/2559', '14:00 - 14:30'),
-    new Workday(8, 3, 2, '10/11/2559', '15:00 - 15:30'),
-    new Workday(9, 3, 2, '10/11/2559', '15:30 - 16:00'),
-    new Workday(10, 3, 2, '10/11/2559', '16:00 - 16:30'),
-    new Workday(11, 3, 2, '10/11/2559', '16:30 - 17:00')
-];
+import { CLINIC_ENDPOINT, DOCTOR_ENDPOINT, WORKDAY_ENDPOINT, APPOINTMENT_ENDPOINT } from '../../config/api.config';
 
 @Component({
     selector: 'make-appointment',
@@ -55,14 +25,24 @@ const WORKDAYS: Workday[] = [
         .appointment-form  .columns .column .select select{
             width: 100%;
         }
+
+        .fa-check-circle {
+            color: green;
+        }
+        .notification {
+            text-align: center;
+            font-size: 26px;
+        }
+        .notification a {
+            color: #000000;
+        }
     `]
 })
 export class MakeAppointmentComponent implements OnInit {
-    @ViewChild(MakeAppointmentFormComponent) private makeAppointmentForm: MakeAppointmentFormComponent;
+    // @ViewChild(MakeAppointmentFormComponent) private makeAppointmentForm: MakeAppointmentFormComponent;
 
     public clinicList;
     public doctorList;
-    private appointmentData = {};
     public selectedClinicIndex;
     public selectedDoctorIndex;
     public selectedClinic;
@@ -70,7 +50,8 @@ export class MakeAppointmentComponent implements OnInit {
     public selectedTimeSlot;
     public causeToAppointment: string;
     public isConfirmedAppointmentDetail: boolean;
-    public isConfirmedTimeSlot: boolean;    
+    public isConfirmedTimeSlot: boolean;
+    public isAppointmentSuccess: boolean;
     public allTimeSlot;
 
     constructor(private router: Router, private title: Title, private dataService: DataService, private authService: AuthService) {}
@@ -87,6 +68,7 @@ export class MakeAppointmentComponent implements OnInit {
         this.causeToAppointment = ''; 
         this.isConfirmedAppointmentDetail = false;
         this.isConfirmedTimeSlot = false;
+        this.isAppointmentSuccess = false;
         this.allTimeSlot = []; 
         this.dataService.getData(CLINIC_ENDPOINT)
             .subscribe(
@@ -214,7 +196,6 @@ export class MakeAppointmentComponent implements OnInit {
     }
 
     makeAppointment (formData) {
-        
         formData['patient'] = this.authService.getUserHN();
         console.log(formData);    
         this.dataService.saveData(APPOINTMENT_ENDPOINT, formData)
@@ -222,8 +203,13 @@ export class MakeAppointmentComponent implements OnInit {
                 (success) => {
                     console.log('MAKE APPOINTMENT SUCCESS');
                     console.log(success);
+                    this.isAppointmentSuccess = true;                    
                 }
             )    
+    }
+
+    navigateToViewAppointment () {
+        this.router.navigateByUrl('/patient/view-appointment');
     }
     // changeDate() {
     //     if(this.workdayIndex+1 < this.workday.length) {
