@@ -106,6 +106,13 @@ module.exports = (apiRoutes, express) => {
                 }
             );
         }
+        else{
+            res.status(400).send({
+                success: false,
+                message: 'Bad Request',
+                clientMessage: 'Cannot get api without query.'
+            });
+        }
     }
 
     function getWorkdayByDoctor (req, res) {
