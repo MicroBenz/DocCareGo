@@ -1,13 +1,8 @@
 <div class="container">
     <div class="box">
-        <label class="label">ชื่อ หรือรหัสประจำตัวของผู้ป่วย</label>
-        <p class="control">
-            <input class="input "type="text" [(ngModel)]="patient">
-        </p>
-        <make-appointment-form></make-appointment-form>
-        <p class="control appointment-button">
-            <a class="button is-success" (click)="makeAppointment()">นัดหมายแพทย์</a>
-            <a class="button" (click)="cancelAppointment()">ยกเลิก</a>
-        </p>
+        <label class="label">รหัสบัตรประจำตัวผู้ป่วย (HN)</label>
+        <input type="text">
+        <a (click)="confirmPatient()" class="button is-info">ยืนยันผู้ป่วย</a>
     </div>
 </div>
+<make-appointment-form *ngIf="isConfirmHN"></make-appointment-form>

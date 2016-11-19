@@ -1,8 +1,7 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MakeAppointmentFormComponent } from './../../shared/appointment/make.appointment.form.component';
+
 import { Title } from '@angular/platform-browser';
-import { MAKE_APPOINTMENT_TITLE } from './../../config/title.config';
 
 @Component({
     selector: 'staff-make-appointment',
@@ -16,29 +15,15 @@ import { MAKE_APPOINTMENT_TITLE } from './../../config/title.config';
         }
     `]
 })
-export class MakeAppointmentByStaffComponent {
-    @ViewChild(MakeAppointmentFormComponent) private makeAppointmentForm: MakeAppointmentFormComponent;
-    private appointmentData = {};
-    private patient;
+export class MakeAppointmentByStaffComponent implements OnInit {
+    public isConfirmHN: boolean;
 
-    constructor(private router: Router, private title: Title) {
-        title.setTitle(MAKE_APPOINTMENT_TITLE);
+    constructor() {}
+    ngOnInit () {
+        this.isConfirmHN = false;
     }
 
-    makeAppointment () {
-        this.appointmentData = {
-            patient: this.patient,
-            date: this.makeAppointmentForm.appointmentData['date'],
-            time: this.makeAppointmentForm.appointmentData['time'],
-            doctor: this.makeAppointmentForm.appointmentData['doctor'],
-            cause: this.makeAppointmentForm.appointmentData['cause']
-        };     
-        console.log(this.appointmentData);
-        this.router.navigateByUrl('/staff/manage-appointment');
-    }
-
-    cancelAppointment () {
-        // TODO: Use this.appointmentData to get form data        
-        this.router.navigateByUrl('/staff/manage-appointment');
+    confirmPatient () {
+        this.isConfirmHN = true;
     }
 }
