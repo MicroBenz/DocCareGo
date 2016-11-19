@@ -1,85 +1,81 @@
 <div class="container">
-    <div class="tile is-ancestor">
-        <div class="tile is-parent is-5">
-            <div class="tile is-child box">
-                <div class="selectClinic">
+    <div class="box">
+        <h1 class="title">
+            กรอกข้อมูลสำหรับการนัดหมาย <i class="fa fa-check-circle" *ngIf="isConfirmedAppointmentDetail"></i>
+        </h1>
+        <div class="appointment-form control"
+            *ngIf="!isConfirmedAppointmentDetail">
+            <div class="control columns">
+                <p class="control column is-4">
                     <label class="label">แผนกที่ต้องการนัด</label>
-                    <p class="control">
-                        <span class="select">
-                            <select [(ngModel)]="selectClinic" (change)="onSelectClinic($event.target.value)">
-                                <option value="0" disabled selected>ชื่อแผนก</option>
-                                <option *ngFor="let clinic of clinics" value= {{clinic.id}}
-                                [ngValue]="clinic"
-                                >
-                                    {{clinic.name}}
-                                </option>
-                            </select>
-                        </span>
-                    </p>
-                </div><br>
-                <div class="selectDoctor">
-                    <label class="label"> แพทย์ที่ต้องการนัด</label>
-                    <p class="control">
-                        <span class="select">
-                            <select [(ngModel)]="selectDoctor" (change)="onSelectDoctor($event.target.value)">
-                                <option value="0" disabled selected>ชื่อแพทย์</option>
-                                <option *ngFor="let doctor of doctors" value= {{doctor.id}}>
-                                    {{doctor.name}}
-                                </option>
-                            </select>
-                        </span>
-                    </p>
-                </div><br>
-                <!--<div class="box">-->
-                <!--<make-appointment-form></make-appointment-form>-->
-                <p class="control appointment-button">
-                    <a class="button is-success" (click)="makeAppointment()">นัดหมายแพทย์</a>
-                    <a class="button is-warning" (click)="changeDate()">เปลี่ยนวันเวลา</a>
-                    <a class="button" (click)="cancelAppointment()">ยกเลิก</a>
+                    <span class="select">
+                        <select 
+                            [(ngModel)]="selectedClinicIndex"
+                            (change)="onSelectClinic($event.target.value)">
+                            <option value="-1" disabled selected>ชื่อแผนก</option>
+                            <option *ngFor="let clinic of clinicList; let i = index" value= {{i}}>
+                                {{clinic.name}} - {{clinic.description}}
+                            </option>
+                        </select>
+                    </span>
                 </p>
-                <!--</div>-->
+                <p class="control column">
+                    <label class="label">แพทย์ที่ต้องการนัด</label>
+                    <span class="select">
+                        <select 
+                            [(ngModel)]="selectedDoctorIndex"
+                            (change)="onSelectDoctor($event.target.value)"
+                            [disabled]="selectedClinicIndex === '-1'">
+                            <option value="-1" selected>ไม่ระบุแพทย์</option>
+                            <option *ngFor="let doctor of doctorList; let i = index" value= {{i}}>
+                                {{doctor.preName}}{{doctor.name}} {{doctor.surname}} [{{doctor.HN}}]
+                            </option>
+                        </select>
+                    </span>
+                </p>
             </div>
-        </div>
-        <div class="tile is-parent is-7">
-            <div class="tile is-child box">
-                <h1 class="title">วันและเวลาของการนัดหมาย</h1>
-                <div *ngIf="selectClinic && selectDoctor">
-                    <div class="tile is-vertical">
-                        <div class="tile is-ancestor">
-                            <div class="tile is-parent is-3">
-                                <div class="tile is-child box">
-                                    <!--<div *ngIf="selectClinic && selectDoctor">-->
-                                    <label class="day">{{day}}</label>
-                                    <!--</div>-->
-                                </div>
-                            </div>
-                            <div class="tile is-parent is-6">
-                                <div class="tile is-child box">
-                                    <!--<label class="month">{{month}}</label>-->
-                                    <label class="month">มกราคม</label>
-                                </div>
-                            </div>
-                            <div class="tile is-parent is-3">
-                                <div class="tile is-child box">
-                                    <label class="year">{{year}}</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tile is-child box">
-                            <label class="time">{{time}}</label>
-                        </div>
-                        <!--For Debug hahahahahahahah-->
-                        <div class="tile is-child box">
-                            <label>{{workdayIndex}}</label>
-                        </div>
-                    </div>
-                </div>
-                <div *ngIf="!selectClinic || !selectDoctor">
-                    <div class="tile is-child box">
-                        <label class="none">ยังไม่ได้เลือกแผนกและแพทย์</label>
-                    </div>
+            <div class="control columns">
+                <div class="column">
+                    <label class="label">สาเหตุที่ขอเข้าพบแพทย์</label>
+                    <textarea class="textarea" [(ngModel)]="causeToAppointment"></textarea>
                 </div>
             </div>
-        </div>
+            <p class="control appointment-button">
+                <a 
+                    class="button is-success"
+                    (click)="confirmAppointmentDetail()"
+                    [ngClass]="{
+                        'is-disabled': (selectedClinicIndex === '-1' || causeToAppointment === '')
+                    }">ยืนยันคำขอเข้าพบแพทย์</a>
+            </p> 
+        </div>    
+    </div>    
+    <div class="box" *ngIf="isConfirmedAppointmentDetail">
+        <h1 class="title">
+            วันและเวลาที่ระบบแนะนำ <i class="fa fa-check-circle" *ngIf="isConfirmedTimeSlot"></i>
+        </h1>
+        <appointment-time-selector
+            *ngIf="!isConfirmedTimeSlot"
+            [timeSlot]="allTimeSlot"
+            (onSelectedTime)="onSelectedTime($event)">
+        </appointment-time-selector>
+    </div>
+
+    <div class="box"
+        *ngIf="isConfirmedAppointmentDetail && isConfirmedTimeSlot">
+        <h1 class="title">
+            สรุปข้อมูลการนัดหมาย <i class="fa fa-check-circle" *ngIf="isAppointmentSuccess"></i>
+        </h1>
+        <appointment-summary-form
+            [doctor]="selectedDoctor"
+            [clinic]="selectedClinic"
+            [causeToAppointment]="causeToAppointment"
+            [timeSlot]="selectedTimeSlot"
+            (onClickMakeAppointment)="makeAppointment($event)"
+            *ngIf="!isAppointmentSuccess">
+        </appointment-summary-form>
+    </div>
+    <div class="notification is-success" *ngIf="isAppointmentSuccess">
+        นัดหมายสำเร็จแล้ว <a (click)="navigateToViewAppointment()">ดูข้อมูลการนัดหมายได้ที่นี่</a>
     </div>
 </div>

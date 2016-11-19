@@ -16,6 +16,7 @@
             <label class="label">คำนำหน้าชื่อ</label>
             <span class="select">
                 <select [(ngModel)]="formData.preName">
+                    <option disabled>คำนำหน้าชื่อ</option>
                     <option>นายแพทย์</option>
                     <option>แพทย์หญิง</option>                 
                 </select>
@@ -34,10 +35,11 @@
 <div class="control is-horizontal">
     <div class="control columns">
         <p class="control column is-2">
-            <label class="label">คลินิก</label>
+            <label class="label">แผนก</label>
             <span class="select">
                 <select [(ngModel)]="formData.clinic">
-                    <option *ngFor="let item of clinicList">{{item}}</option>
+                    <option value="0" disabled selected>แผนก</option>
+                    <option *ngFor="let item of clinicList" value={{item}}>{{item}}</option>
                 </select>
             </span>
         </p>

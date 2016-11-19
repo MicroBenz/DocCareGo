@@ -19,7 +19,7 @@ export class AddWorkdayComponent implements OnInit {
     public isShowConfirm;
     public confirmDialogText;
 
-    private timeSlot = ['8:00 - 11:00', '13:00 - 16:00'];
+    private timeSlot = ['9:00 - 11:30', '13:00 - 15:30'];
     private dayMapping = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     private toThaiDayMapping = {
         'Sunday': 'อาทิตย์',

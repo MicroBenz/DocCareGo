@@ -1,5 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChange } from '@angular/core';
 import * as moment from 'moment';
+import { DataService } from '../../shared/service/data.service';
+import { APPOINTMENT_ENDPOINT } from '../../config/api.config';
 
 @Component({
     selector: 'workday-patient-list',
@@ -21,10 +23,28 @@ import * as moment from 'moment';
         }
     `]
 })
-export class WorkdayPatientListComponent {
-    @Input('date') date;
+export class WorkdayPatientListComponent implements OnChanges {
+    @Input('workdayItem') workdayItem;
 
-    public displayDate(date) {
-        return moment(date).format('LL');
+    constructor(private dataService: DataService) {}
+
+    ngOnChanges (changes: {[propKey: string]: SimpleChange}) {
+        let workdayItem = changes['workdayItem']['currentValue'];
+        if (workdayItem !== '') {
+            console.log(workdayItem);  
+            this.getDataByWorkdayID(workdayItem['period'][0]['id']);          
+        }
+    }
+
+    private getDataByWorkdayID (id) {
+        console.log(id);
+        this.dataService.getDataWithParams(APPOINTMENT_ENDPOINT, {
+            workday: id
+        })
+        .subscribe(
+            (success) => {
+                console.log('SUCCESS GET WORKDAY: ', success);
+            }
+        )
     }
 }

@@ -16,6 +16,9 @@ import { DataService } from '../../../shared/service/data.service';
             margin-top: 10px;
             margin-bottom: 15px;
         }
+        .button-wrapper {
+            margin-top: 13px;
+        }
     `]
 })
 export class AddPersonnelComponent implements OnInit {
@@ -37,8 +40,6 @@ export class AddPersonnelComponent implements OnInit {
     constructor(private title: Title, private dataService: DataService, private router: Router) {}
 
     ngOnInit () {
-        // this.selectedRole = '';
-        // this.isSelected = false;
         this.title.setTitle(ADD_PERSONNEL_TITLE);
         this.selectedRole = '';
         this.isSelected = false;
@@ -67,6 +68,7 @@ export class AddPersonnelComponent implements OnInit {
         this.isShowConfirm = false;
         this.isShowCancelConfirm = false;
         this.isShowInvalidate = false;
+        this.isSelected = false;
     }
 
     private validateForm () {
@@ -86,7 +88,37 @@ export class AddPersonnelComponent implements OnInit {
             return false;
         }
         
-        if (this.selectedRole === 'doctor') {
+        if(this.selectedRole === 'patient') {
+            if (this.formData['houseNumber'] === undefined || this.formData['houseNumber'] === null || this.formData['houseNumber'] === '') {
+                return false;
+            }
+            if (this.formData['road'] === undefined || this.formData['road'] === null || this.formData['road'] === '') {
+                return false;
+            }
+            if (this.formData['soi'] === undefined || this.formData['soi'] === null || this.formData['soi'] === '') {
+                return false;
+            }
+            if (this.formData['subdistrict'] === undefined || this.formData['subdistrict'] === null || this.formData['subdistrict'] === '') {
+                return false;
+            }
+            if (this.formData['district'] === undefined || this.formData['district'] === null || this.formData['district'] === '') {
+                return false;
+            }
+            if (this.formData['province'] === undefined || this.formData['province'] === null || this.formData['province'] === '') {
+                return false;
+            }
+            if (this.formData['zipCode'] === undefined || this.formData['zipCode'] === null || this.formData['zipCode'] === '') {
+                return false;
+            }
+            if (this.formData['country'] === undefined || this.formData['country'] === null || this.formData['country'] === '') {
+                return false;
+            }
+            if (this.formData['tel'] === undefined || this.formData['tel'] === null || this.formData['tel'] === '') {
+                return false;
+            }
+            
+        }
+        else if (this.selectedRole === 'doctor') {
             if (this.formData['clinic'] === undefined || this.formData['clinic'] === null || this.formData['clinic'] === '') {
                 return false;
             }
@@ -100,7 +132,21 @@ export class AddPersonnelComponent implements OnInit {
         let name = `
             <p><b>ชื่อ-นามสกุล</b>: ${this.formData['preName']}${this.formData['name']} ${this.formData['surname']}</p>
         `
-        if (this.selectedRole === 'doctor') {
+
+        if(this.selectedRole === 'patient') {
+            let houseNumber = `<p><b>บ้านเลขที่: </b>${this.formData['houseNumber']}</p>`;
+            let road = `<p><b>ถนน: </b>${this.formData['road']}</p>`;
+            let soi = `<p><b>ซอย: </b>${this.formData['soi']}</p>`;
+            let subdistrict = `<p><b>แขวง/ตำบล: </b>${this.formData['subdistrict']}</p>`;
+            let district = `<p><b>เขต/อำเภอ: </b>${this.formData['district']}</p>`;
+            let province = `<p><b>จังหวัด: </b>${this.formData['province']}</p>`;
+            let zipCode = `<p><b>รหัสไปรษณีย์: </b>${this.formData['zipCode']}</p>`;
+            let country = `<p><b>ประเทศ: </b>${this.formData['country']}</p>`;
+            let tel = `<p><b>เบอร์โทรศัพท์เคลื่อนที่: </b>${this.formData['tel']}</p>`;
+            this.confirmModalContent = headerTemplate + hnAndPersonalID + name + houseNumber + road + soi
+                                        + subdistrict + district + province + zipCode + country + tel;
+        }
+        else if (this.selectedRole === 'doctor') {
             let clinic = `<p><b>คลินิก: </b>${this.formData['clinic']}</p>`;
             this.confirmModalContent = headerTemplate + hnAndPersonalID + name + clinic;
         }
@@ -109,7 +155,7 @@ export class AddPersonnelComponent implements OnInit {
         }
     }
 
-    dataServiceFunction (role, formData) {
+    addNewPersonnelDataService (role, formData) {
         let endPoint = '';
         switch (role) {
             case 'patient':

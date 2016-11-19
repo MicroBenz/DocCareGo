@@ -4,8 +4,7 @@ module.exports = function (app, express) {
     // Require other API Here by using apiRoutes
     // See example in test.api.js
     require('./api/auth.api')(app, express);
-    require('./middleware/auth.middleware')(app, express);    
-    require('./api/test.api')(apiRoutes, express);
+    require('./middleware/auth.middleware')(app, express);   
     require('./api/appointment.api')(apiRoutes, express);
     require('./api/clinic.api')(apiRoutes, express);
     require('./api/diagnosisResult.api')(apiRoutes, express);
@@ -19,7 +18,8 @@ module.exports = function (app, express) {
     require('./api/schedule.api')(apiRoutes, express);
     require('./api/staff.api')(apiRoutes, express);
     require('./api/user.api')(apiRoutes, express);
-    require('./api/workday.api')(apiRoutes, express);
+    require('./api/workday.api')(apiRoutes, express); 
+    require('./api/test.api')(app, express);
     require('./seeder.api')(app, express);
     app.use('/api/v1', apiRoutes);
 };

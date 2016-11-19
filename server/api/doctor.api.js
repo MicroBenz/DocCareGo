@@ -21,7 +21,7 @@ module.exports = function (apiRoutes, express) {
     // Implementation of CRUD are below.
     //----------------- GET -----------------
     function getDoctors (req, res) {
-        utils.checkRole(req, res, ['staff','admin']);
+        utils.checkRole(req, res, ['staff','admin','patient']);
         var filterField = req.query.filters;
         if (filterField) {
             filterField = filterField.split(',').join(' ');
@@ -29,7 +29,30 @@ module.exports = function (apiRoutes, express) {
         else {
             filterField = '';
         }
-        if (req.query.search) {
+        if (req.query.clinic) {
+            Doctor.find({
+                clinic: req.query.clinic
+            })
+            .populate('clinic')
+            .select(filterField)
+            .then(
+                function (results) {
+                    res.json({
+                        success: true,
+                        data: results
+                    });
+                },
+                function (error) {
+                    console.log(error);
+                    res.status(500).send({
+                        success: false,
+                        message: error,
+                        clientMessage: 'Cannot get doctor data.'
+                    });
+                }
+            );
+        }
+        else if (req.query.search) {
             Doctor.find({
                 $or: [
                     {

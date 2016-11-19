@@ -5,7 +5,7 @@
                 <h1 class="title">รายละเอียดการนัดหมาย</h1>
                 <div class="mini-calendar">
                     <mini-calendar
-                        [date]="getSelectedAppointment().date">
+                        [date]="selectedAppointment.date">
                     </mini-calendar>
                 </div>
                 <div class="appointment-detail">
@@ -13,28 +13,28 @@
                         <span class="icon"><i class="fa fa-user-md"></i></span>
                         <span class="appointment-detail-description">
                             <b>แพทย์เจ้าของนัด: </b>
-                            {{getSelectedAppointment().doctor}}
+                            {{selectedAppointment.doctor}}
                         </span>
                     </p>
                     <p>
                         <span class="icon"><i class="fa fa-building"></i></span>
                         <span class="appointment-detail-description">
                             <b>แผนก: </b>
-                            {{getSelectedAppointment().clinic}}
+                            {{selectedAppointment.clinic}}
                         </span>
                     </p>
                     <p>
                         <span class="icon"><i class="fa fa-calendar-o"></i></span>
                         <span class="appointment-detail-description">
                             <b>วันที่: </b>
-                            {{getSelectedAppointmentDate()}}
+                            {{selectedAppointment.date}}
                         </span>
                     </p>
                     <p>
                         <span class="icon"><i class="fa fa-clock-o"></i></span>
                         <span class="appointment-detail-description">
                             <b>เวลา: </b>
-                            {{getSelectedAppointment().time}}
+                            {{selectedAppointment.time}}
                         </span>
                     </p>
                 </div>

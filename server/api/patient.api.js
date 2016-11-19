@@ -168,7 +168,8 @@ function createPatient (req, res) {
                         province: req.body.province,
                         zipCode: req.body.zipCode,
                         country: req.body.country,
-                        tel: req.body.tel
+                        tel: req.body.tel,
+                        noMedicines: req.body.noMedicines,
                     };
                 }
             },
@@ -229,6 +230,7 @@ function createPatient (req, res) {
                     patient.zipCode = req.body.zipCode;
                     patient.country = req.body.country;
                     patient.tel = req.body.tel;
+                    patient.noMedicines = req.body.noMedicines;
                     return patient.save();
                 }
                 else{
@@ -344,6 +346,10 @@ function createPatient (req, res) {
 
         if (!body.country) {
             utils.responseMissingField(res, 'country');
+        }
+
+        if (!body.noMedicines) {
+            utils.responseMissingField(res, 'noMedicines');
         }
     }
 };

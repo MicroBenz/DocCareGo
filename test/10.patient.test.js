@@ -70,7 +70,8 @@ describe("Patient", function(){
                 province: 'province',
                 zipCode: 'zipCode',
                 country: 'country',
-                tel: 'tel'
+                tel: 'tel',
+                noMedicines: ['ยา1','ยา2']
             };
             chai.request(server)
             .post('/api/v1/patients')
@@ -219,7 +220,8 @@ describe("Patient", function(){
                 province: 'province',
                 zipCode: 'zipCode',
                 country: 'country',
-                tel: 'tel'
+                tel: 'tel',
+                noMedicines: ['ยา1','ยา2']
             };
             chai.request(server)
             .put('/api/v1/patients/'+HN)

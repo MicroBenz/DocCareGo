@@ -3,6 +3,7 @@ module.exports = (apiRoutes, express) => {
     var Appointment = require('../model/Appointment');
     var Patient = require('../model/Patient');
     var Doctor = require('../model/Doctor');
+    var Clinic = require('../model/Clinic');
     var User = require('../model/User');
     var Workday = require('../model/Workday');
     var utils = require('../utils');
@@ -25,7 +26,7 @@ module.exports = (apiRoutes, express) => {
     // Implementation of CRUD are below.
     //----------------- GET -----------------
     function getAppointments (req, res) {
-        utils.checkRole(req, res, ['staff','admin']);
+        utils.checkRole(req, res, ['patient', 'staff','admin', 'doctor']);
         var filterField = req.query.filters;
         if (filterField) {
             filterField = filterField.split(',').join(' ');
@@ -39,6 +40,9 @@ module.exports = (apiRoutes, express) => {
             Appointment.find({
                 workday: req.query.workday
             })
+            .populate('patient')
+            .populate('doctor')
+            .populate('workday')
             .then(
                 function(appointments){
                     res.json({
@@ -165,12 +169,46 @@ module.exports = (apiRoutes, express) => {
             )
             .then(
                 function(appointments){
+                    let arr = [];
+                    appointments.forEach(
+                        function(appointment){
+                            appointment = appointment.toObject()
+                            let p = new Promise(
+                                function(resolve, reject){
+                                    Clinic.findById(appointment.doctor.clinic)
+                                    .then(
+                                        function(clinic) {
+                                            appointment.doctor.clinic = clinic;
+                                            resolve(appointment);
+                                        },
+                                        function(error) {
+                                            reject();
+                                        }
+                                    );
+                                }
+                            );
+                            arr.push(p);
+                        }
+                    );
+                    return Promise.all(arr);
+                },
+                function (error) {
+                    console.log(error);
+                    res.status(500).send({
+                        success: false,
+                        message: error,
+                        clientMessage: 'Cannot get appointment data.'
+                    });
+                }
+            )
+            .then(
+                function(appointments){
                     res.json({
                         success: true,
                         data: appointments
                     });
                 },
-                function (error) {
+                function(error){
                     console.log(error);
                     res.status(500).send({
                         success: false,

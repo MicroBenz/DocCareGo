@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-// import { Title } from '@angular/platform-browser';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
-// import { ADD_CLINIC_TITLE } from '../../../config/title.config';
+import { ADD_CLINIC_TITLE } from '../../../config/title.config';
 import { CLINIC_ENDPOINT } from '../../../config/api.config';
 import { DataService } from '../../../shared/service/data.service';
 
@@ -26,9 +26,10 @@ export class AddClinicComponent implements OnInit {
     public isShowInvalidate: boolean;
     public confirmModalContent: string;
 
-    constructor (private router: Router, private dataService: DataService) {}
+    constructor (private title: Title, private router: Router, private dataService: DataService) {}
 
     ngOnInit () {
+        this.title.setTitle(ADD_CLINIC_TITLE);
         this.clinicData = {
             name: '',
             description: ''
@@ -39,7 +40,7 @@ export class AddClinicComponent implements OnInit {
         this.confirmModalContent = '';
     }
 
-    validateForm () {
+    private validateForm () {
         if(this.clinicData === undefined || this.clinicData === null) {
             this.isShowInvalidate = true; 
         }
@@ -52,6 +53,16 @@ export class AddClinicComponent implements OnInit {
         }
     }
 
+    addNewClinic () {
+        if(this.validateForm()) {
+            this.decorateModalContent();
+            this.isShowConfirm = true;
+        }
+        else {
+            this.isShowInvalidate = true;
+        }
+    }
+
     private decorateModalContent () {
         this.confirmModalContent = `
             <h1 class="title">ตรวจสอบข้อมูลก่อนทำเพิ่มแผนก</h1>
@@ -60,12 +71,15 @@ export class AddClinicComponent implements OnInit {
             `;
     }
 
-    addClinic = () => {
+    addClinicDataService = () => {
         this.dataService.saveData(CLINIC_ENDPOINT, this.clinicData)
             .subscribe(
                 (success) => {
                     console.log('ADD NEW CLINIC');
                     this.navigateToClinicManagement();
+                },
+                (error) => {
+                        console.error(error);
                 }
             )
     }

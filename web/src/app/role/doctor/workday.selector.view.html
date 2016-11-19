@@ -7,9 +7,9 @@
     </div>
     <div class="workday-wrapper">
         <a class="panel-block" 
-            *ngFor="let day of workdayList"
-            (click)="selectWorkday(day)"
-            [class.is-active]="day === selectedDate"
-        >{{day}}</a>    
+            *ngFor="let day of workdayList; let i = index;"
+            (click)="selectWorkday(i)"
+            [class.is-active]="day.displayDate === selectedDate"
+        >{{day.displayDate}}</a>    
     </div>
 </nav>

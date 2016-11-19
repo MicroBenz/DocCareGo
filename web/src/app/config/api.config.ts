@@ -17,6 +17,7 @@ export const PHARMACIST_ENDPOINT: string = API_PREFIX + '/pharmacists';
 // DOCTOR ENDPOINT
 export const SCHEDULE_ENDPOINT: string = API_PREFIX + '/schedules';
 export const WORKDAY_ENDPOINT: string = API_PREFIX + '/workdays';
+export const APPOINTMENT_ENDPOINT: string = API_PREFIX + '/appointments';
 
 // NURSE ENDPOINT
 export const PATIENT_RECORD_ENDPOINT: string = API_PREFIX + '/patientRecords';

@@ -1,0 +1,7 @@
+<p><b>คลินิก: </b>{{clinic.name}}</p>
+<p><b>ชื่อแพทย์: </b>{{doctor.preName}}{{doctor.name}} {{doctor.surname}}</p>
+<p><b>สาเหตุเข้าพบแพทย์: </b>{{causeToAppointment}}</p>
+<p><b>วันที่ขอนัดแพทย์: </b>{{timeSlot.displayDate}}</p>
+<p><b>เวลาที่นัด: </b>{{timeSlot.time}}</p>
+
+<a class="button is-success" (click)="makeAppointment()">นัดหมายแพทย์</a>

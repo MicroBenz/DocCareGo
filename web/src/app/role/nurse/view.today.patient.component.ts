@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { VIEW_TODAY_PATIENT_TITLE } from '../../config/title.config';
+
 import { DataService } from '../../shared/service/data.service';
+import { VIEW_TODAY_PATIENT_TITLE } from '../../config/title.config';
+import { PATIENT_RECORD_ENDPOINT } from '../../config/api.config';
 
 @Component({
     selector: 'view-today-patient',
@@ -9,13 +11,17 @@ import { DataService } from '../../shared/service/data.service';
     styleUrls: ['view.today.patient.style.css']
 })
 export class ViewTodayPatientComponent implements OnInit {
-    public patientList;
+    public patientRecordList;
     private selectedPatient;
 
     constructor (private title: Title, private dataService: DataService) {}
 
     ngOnInit () {
-        this.patientList = [
+        this.title.setTitle(VIEW_TODAY_PATIENT_TITLE);
+        this.patientRecordList = [];
+        // this.dataService.getData(PATIENT_RECORD_ENDPOINT)
+            // .subscribe(this.displayPatientRecords, this.errorHandler)
+        this.patientRecordList = [
             {
                 id: 1,
                 hn: '000022',
@@ -72,9 +78,19 @@ export class ViewTodayPatientComponent implements OnInit {
             }
         ]
         this.selectedPatient = {};
-        this.title.setTitle(VIEW_TODAY_PATIENT_TITLE);
+        
     }
+
+    public displayPatientRecords = (patientRecords) => {
+        console.log(patientRecords);
+        this.patientRecordList = patientRecords;
+    }
+
+    private errorHandler = (error) => {
+        console.error('ViewTodayPatientComponentError: ', error);
+    }
+
     onSelectPatient(idx) {
-        this.selectedPatient = this.patientList[idx];
+        this.selectedPatient = this.patientRecordList[idx];
     }
 }

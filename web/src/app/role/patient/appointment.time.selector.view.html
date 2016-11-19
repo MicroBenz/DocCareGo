@@ -1,0 +1,10 @@
+<div class="columns">
+    <div class="column is-4">
+        <p><i class="fa fa-calendar"></i> {{currentDateDisplay}}</p>
+        <p><i class="fa fa-clock-o"></i> {{currentTimeDisplay}}</p>
+    </div>
+    <div class="column button-wrapper">
+        <a (click)="chooseThisTimeSlot()"><i class="fa fa-check"></i></a>
+        <a (click)="getNextTimeSlot()"><i class="fa fa-times"></i></a>
+    </div>
+</div>

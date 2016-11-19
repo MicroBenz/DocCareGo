@@ -60,11 +60,9 @@ export class WorkdaySelectorComponent implements OnInit {
             year: this.currentYear
         }
         this.dataService.getDataWithParams(`${WORKDAY_ENDPOINT}/${this.authService.getUserID()}`, workdayParams)
-            .map(this.filterDate)
-            .map(this.sortDate)
+            .map(this.sortByDate)
             .map(this.filterBeforeToday)
-            .map(this.dateTransform)            
-            .map(this.deleteDuplicateDate)
+            .map(this.groupByDate)
             .subscribe(
                 (dayList) => {
                     this.workdayList = dayList;
@@ -100,49 +98,61 @@ export class WorkdaySelectorComponent implements OnInit {
         return moment().set('month', month).format('MMMM');
     }
 
-    public selectWorkday (day) {
-        let splittedDate = day.split(' ');
-        let date = moment().set('date', splittedDate[0]).set('month', splittedDate[1]).set('year', splittedDate[2]);
-        this.selectedDate = day;
-        this.onSelectWorkday.emit(date);
+    public selectWorkday (idx) {
+        // let splittedDate = day.split(' ');
+        // let date = moment().set('date', splittedDate[0]).set('month', splittedDate[1]).set('year', splittedDate[2]);
+        // this.selectedDate = day;
+        this.selectedDate = this.workdayList[idx]['displayDate'];
+        this.onSelectWorkday.emit(this.workdayList[idx]);
     }
 
-    // Workday Decorator
-    private filterDate = (response: Array<Object>) => {
-        return response.map(
-            (item) => {
-                return item['date'];
+    // NEW Workday Decorator
+    private sortByDate = (response: Array<Object>) => {
+        return response.sort(
+            (firstItem: Object, secondItem: Object) => {
+                if (moment(firstItem['date']).isBefore(moment(secondItem['date']))) {
+                    return -1;
+                }
+                return 1;
             }
-        )
+        );
     }
 
-    private sortDate = (dayList: Array<any>) => {
-        return dayList.sort();        
-    }
-
-    private filterBeforeToday = (dayList: Array<any>) => {
+    private filterBeforeToday = (dayList: Array<Object>) => {
         return dayList.filter(
             (date) => {
-                return moment().isBefore(date);
-            }
-        )
-    }
-    
-    private dateTransform = (dayList: Array<any>) => {
-        return dayList.map(
-            (date) => {
-                return moment(date).format('LL');
+                return moment().isBefore(date['date']);
             }
         )
     }
 
-    private deleteDuplicateDate = (dayList: Array<any>) => {
-        let arr = [];
+    private groupByDate = (dayList: Array<Object>) => {
+        let decoratedList = {};
         for (let i = 0 ; i < dayList.length ; i += 1) {
-            if (arr.indexOf(dayList[i]) === -1) {
-                arr.push(dayList[i]);                
+            let currentDate = dayList[i]['date'];
+            if (decoratedList[currentDate] === undefined || decoratedList[currentDate] === null) {
+                decoratedList[currentDate] = [dayList[i]];
+            }
+            else {
+                decoratedList[currentDate].push(dayList[i]);
             }
         }
-        return arr;
+        return Object.keys(decoratedList).map(
+            (day) => {
+                let workdaysOnThatDay = decoratedList[day];
+                let workdayObject = {
+                    date: workdaysOnThatDay[0]['date'],
+                    displayDate: moment(workdaysOnThatDay[0]['date']).format('LL'),
+                    period: []
+                };
+                for (let i = 0 ; i < workdaysOnThatDay.length ; i++) {
+                    workdayObject.period.push({
+                        id: workdaysOnThatDay[i]['_id'],
+                        slot: workdaysOnThatDay[i]['time']
+                    })
+                }
+                return workdayObject;
+            }
+        );
     }
 }

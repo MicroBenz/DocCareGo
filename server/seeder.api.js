@@ -176,7 +176,8 @@ function createPatients (req, res) {
             district: 'แขวง'+i,
             province: 'จังหวัด'+i,
             zipCode: 'รหัสไปรษณีย์'+i,
-            tel: 'เบอร์โทร'+i
+            tel: 'เบอร์โทร'+i,
+            noMedicines: ['ยา1','ยา2']
         };
         let patient = new Patient(data);
         patient.save()
