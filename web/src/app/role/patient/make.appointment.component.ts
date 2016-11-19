@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnChanges, SimpleChange, ViewChild } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnChanges, SimpleChange, ViewChild, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MakeAppointmentFormComponent } from './../../shared/appointment/make.appointment.form.component';
 import { Title } from '@angular/platform-browser';
@@ -7,6 +7,10 @@ import { MAKE_APPOINTMENT_TITLE } from './../../config/title.config';
 import { Clinic } from '../../shared/appointment/clinic.component';
 import { Doctor } from '../../shared/appointment/doctor.component';
 import { Workday } from '../../shared/appointment/workday.component';
+import { DataService } from '../../shared/service/data.service';
+import { CLINIC_ENDPOINT, DOCTOR_ENDPOINT, WORKDAY_ENDPOINT } from '../../config/api.config';
+
+import * as moment from 'moment';
 
 const CLINICS: Clinic[] = [
     {id:1 ,name: "คลินิกทางเดินอาหาร"},
@@ -44,109 +48,130 @@ const WORKDAYS: Workday[] = [
         .box {
             margin-bottom: 25px;           
         }
-        tile is-child box{
-            background-color: green;
+        .appointment-form  .columns .column .select{
+            width: 100%;
         }
-        .none {
-            display: block;
-            font-size: 50px;
-            text-align: center;
-        }
-        .day {
-            display: block;
-            font-size: 48px;
-            text-align: center;
-            
-        }
-        .month {
-            display: block;
-            font-size: 48px;
-            text-align: center;
-        }
-        .year {
-            display: block;
-            font-size: 48px;
-            text-align: center;
-        }
-        .time {
-            display: block;
-            font-size: 48px;
-            text-align: center;
+        .appointment-form  .columns .column .select select{
+            width: 100%;
         }
     `]
 })
-export class MakeAppointmentComponent {
+export class MakeAppointmentComponent implements OnInit {
     @ViewChild(MakeAppointmentFormComponent) private makeAppointmentForm: MakeAppointmentFormComponent;
+
+    public clinicList;
+    public doctorList;
     private appointmentData = {};
+    public selectedClinicIndex;
+    public selectedDoctorIndex;
+    public selectedClinic;
+    public selectedDoctor;
+    public causeToAppointment: string;
+    public isConfirmedAppointmentDetail: boolean;
+    public allTimeSlot;
 
-    constructor(private router: Router, private title: Title) {
-        title.setTitle(MAKE_APPOINTMENT_TITLE);
+    constructor(private router: Router, private title: Title, private dataService: DataService) {}
+
+    ngOnInit () {
+        this.title.setTitle(MAKE_APPOINTMENT_TITLE);
+        this.clinicList = [];
+        this.doctorList = [];  
+        this.selectedDoctorIndex = '-1';
+        this.selectedClinicIndex = '-1';
+        this.selectedClinic = {};
+        this.selectedDoctor = {};        
+        this.causeToAppointment = ''; 
+        this.isConfirmedAppointmentDetail = false;
+        this.allTimeSlot = []; 
+        this.dataService.getData(CLINIC_ENDPOINT)
+            .subscribe(
+                (success) => {
+                    this.clinicList = success;
+                }
+            )
     }
 
-    clinics = CLINICS;
-    selectClinic: Clinic;
-    // selectClinic: Clinic = new Clinic(0,'none');
-    doctors: Doctor[];
-    // doctor: Doctor[];
-    selectDoctor: Doctor;
-    workdays: Workday[];
-    workday: Workday[];
-    selectWorkday: Workday;
-    workdayIndex: number;
-    day: number;
-    month: string;
-    year: number;
-    time: string;
-    adfs: number;
+    // clinics = CLINICS;
+    // selectClinic: Clinic;
+    // // selectClinic: Clinic = new Clinic(0,'none');
+    // doctors: Doctor[];
+    // // doctor: Doctor[];
+    // selectDoctor: Doctor;
+    // workdays: Workday[];
+    // workday: Workday[];
+    // selectWorkday: Workday;
+    // workdayIndex: number;
+    // day: number;
+    // month: string;
+    // year: number;
+    // time: string;
+    // adfs: number;
 
 
-    getDayFromDate(date: string): number {
-        return Number(date.substring(0, 2));
-    }
+    // getDayFromDate(date: string): number {
+    //     return Number(date.substring(0, 2));
+    // }
 
-    getMonthFromDate(date: string): string {
-        return date.substring(3,5);
-    }
+    // getMonthFromDate(date: string): string {
+    //     return date.substring(3,5);
+    // }
 
-    getYearFromDate(date: string): number {
-        return Number(date.substring(6,10));
-    }
+    // getYearFromDate(date: string): number {
+    //     return Number(date.substring(6,10));
+    // }
 
     // getTimeFromWorkday(time: ): string {
 
     // }
 
 
-    onSelectClinic(clinic_id): void {
-        this.selectClinic = null;
-        this.selectDoctor = null;
-        this.workdays = WORKDAYS.filter((item) => item.clinic_id == clinic_id);
-        this.doctors = Array<Doctor>();
-        this.workdayIndex = 0;
-        for (var obj of this.workdays) {
-            var doctor = DOCTORS.filter((item) => item.id == obj.doctor_id);
-            this.doctors.push(doctor[0]);
-        }
-        // this.doctors.push(DOCTORS[0]);
-        this.doctors = this.doctors.filter(function(elem, index, self) {
-            return index == self.indexOf(elem);
-        });
-        
+    onSelectClinic(index) {
+        // this.selectClinic = null;
+        // this.selectDoctor = null;
+        // this.workdays = WORKDAYS.filter((item) => item.clinic_id == clinic_id);
+        // this.doctors = Array<Doctor>();
+        // this.workdayIndex = 0;
+        // for (var obj of this.workdays) {
+        //     var doctor = DOCTORS.filter((item) => item.id == obj.doctor_id);
+        //     this.doctors.push(doctor[0]);
+        // }
+        // // this.doctors.push(DOCTORS[0]);
+        // this.doctors = this.doctors.filter(function(elem, index, self) {
+        //     return index == self.indexOf(elem);
+        // });
+        this.selectedDoctorIndex = '-1';
+        this.selectedDoctor = {};
+        this.selectedClinic = this.clinicList[Number(index)];
+        this.dataService.getDataWithParams(DOCTOR_ENDPOINT, {
+            clinic: this.clinicList[Number(index)]['_id']
+        })
+        .subscribe(
+            (success) => {
+                console.log(success);
+                this.doctorList = success;
+            }
+        )
     }
 
-    onSelectDoctor(doctor_id): void {
-        this.workday = this.workdays.filter((item) => item.doctor_id == doctor_id);
-        this.adfs = doctor_id;
-        this.workdayIndex = 0;
-        this.selectWorkday = this.workday[this.workdayIndex];
-        this.day = this.getDayFromDate(this.selectWorkday.date);
-        this.month = this.getMonthFromDate(this.selectWorkday.date);
-        this.year = this.getYearFromDate(this.selectWorkday.date);
-        this.time = this.selectWorkday.time;
+    onSelectDoctor(index) {
+        // this.workday = this.workdays.filter((item) => item.doctor_id == doctor_id);
+        // this.adfs = doctor_id;
+        // this.workdayIndex = 0;
+        // this.selectWorkday = this.workday[this.workdayIndex];
+        // this.day = this.getDayFromDate(this.selectWorkday.date);
+        // this.month = this.getMonthFromDate(this.selectWorkday.date);
+        // this.year = this.getYearFromDate(this.selectWorkday.date);
+        // this.time = this.selectWorkday.time;
+        this.selectedDoctor = this.doctorList[Number(index)];        
     }
 
     onSelectWorkDay(clinic_id, doctor_id): void {
         // this.selectWorkday = this.workdays.find()
+    }
+
+    confirmAppointmentDetail () {
+        this.isConfirmedAppointmentDetail = true;
+        this.requestAvailableTime();
     }
 
     makeAppointment() {
@@ -170,26 +195,53 @@ export class MakeAppointmentComponent {
         // this.router.navigateByUrl('/patient/view-appointment');    
     }
 
-    changeDate() {
-        if(this.workdayIndex+1 < this.workday.length) {
-            this.workdayIndex += 1;
-            this.selectWorkday = this.workday[this.workdayIndex];
-            this.day = this.getDayFromDate(this.selectWorkday.date);
-            this.month = this.getMonthFromDate(this.selectWorkday.date);
-            this.year = this.getYearFromDate(this.selectWorkday.date);
-            this.time = this.selectWorkday.time;    
-        }
+private requestAvailableTime () {
+    let requestOption = {};
+    if (Object.getOwnPropertyNames(this.selectedDoctor).length === 0) {
+        requestOption['clinic'] = this.selectedClinic['_id'];
+    }
+    else {
+        requestOption['doctor'] = this.selectedDoctor['_id'];            
+    }
+    this.dataService.getDataWithParams(WORKDAY_ENDPOINT, requestOption)
+        .subscribe(
+            (workdays: Array<Object>) => {
+                this.allTimeSlot = workdays.map(
+                    (item) => {
+                        let timeToDisplay = item['time'] ===  'AM' ? '9:00 - 11:30': '13:00 - 15:00';
+                        let displayDate = moment(item['date']).format('LL');
+                        return {
+                            id: item['_id'],
+                            date: item['date'],
+                            displayDate: displayDate,
+                            doctor: item['doctor'],
+                            time: timeToDisplay
+                        }
+                    }
+                )
+            }
+        )
+}
+    // changeDate() {
+    //     if(this.workdayIndex+1 < this.workday.length) {
+    //         this.workdayIndex += 1;
+    //         this.selectWorkday = this.workday[this.workdayIndex];
+    //         this.day = this.getDayFromDate(this.selectWorkday.date);
+    //         this.month = this.getMonthFromDate(this.selectWorkday.date);
+    //         this.year = this.getYearFromDate(this.selectWorkday.date);
+    //         this.time = this.selectWorkday.time;    
+    //     }
         
-    }
+    // }
 
-    cancelAppointment() {
-        /*
-            TODO:
-            1) Bring Up SweetAlert with 2 button "ใช่" and "ไม่ใช่"
-            2) Inside SweetAlert tell user that you are about to dismiss this form, are you sure?
-            3) If user press "ใช่": navigate back to "ดูการนัดหมาย"
-            4) If user press "ไม่" dismiss SweetAlert
-        */
-        this.router.navigateByUrl('/patient/view-appointment');
-    }
+    // cancelAppointment() {
+    //     /*
+    //         TODO:
+    //         1) Bring Up SweetAlert with 2 button "ใช่" and "ไม่ใช่"
+    //         2) Inside SweetAlert tell user that you are about to dismiss this form, are you sure?
+    //         3) If user press "ใช่": navigate back to "ดูการนัดหมาย"
+    //         4) If user press "ไม่" dismiss SweetAlert
+    //     */
+    //     this.router.navigateByUrl('/patient/view-appointment');
+    // }
 }
