@@ -20,9 +20,6 @@ module.exports = (apiRoutes, express) => {
         .put(utils.methodNotAllowed)
         .delete(deleteAppointmentById);
 
-    AppointmentRoutes.route('/workday/:workday')
-        .get(getAppointmentByWorkday);
-
     apiRoutes.use('/appointments', AppointmentRoutes);
 
     // Implementation of CRUD are below.
@@ -37,9 +34,31 @@ module.exports = (apiRoutes, express) => {
             filterField = '';
         }
         let userRef, workdaysRef;
-        if(req.query.search){    
+        if(req.query.workday){
+            console.log(req.query.workday);
+            Appointment.find({
+                workday: req.query.workday
+            })
+            .then(
+                function(appointments){
+                    res.json({
+                        success: true,
+                        data: appointments
+                    });
+                },
+                function(error){
+                    console.log(error);
+                    res.status(500).send({
+                        success: false,
+                        status: 'Cannot get appointments by this workday',
+                        message: error
+                    });
+                }
+            );
+        }
+        else if(req.query.user){    
             User.findOne({
-                username: req.query.search
+                username: req.query.user
             })
             .then(
                 function(user){
@@ -165,7 +184,7 @@ module.exports = (apiRoutes, express) => {
             res.status(400).send({
                 success: false,
                 message: 'Bad Request',
-                clientMessage: 'No patient or doctor with this HN.'
+                clientMessage: 'Please tell me which appointment do you want?'
             });
         }
     }
@@ -305,32 +324,6 @@ module.exports = (apiRoutes, express) => {
                 res.status(500).send({
                     success: false,
                     status: 'Delete appointment failed.',
-                    message: error
-                });
-            }
-        );
-    }
-
-    function getAppointmentByWorkday (req, res) {
-        utils.checkRole(req, res, ['doctor','staff']);
-        Appointment.find({
-            workday: req.params.workday
-        })
-        .populate('patient')
-        .populate('doctor')
-        .populate('workday')
-        .then(
-            function(appointments){
-                res.json({
-                    success: true,
-                    data: appointemnts
-                });
-            },
-            function(error){
-                console.log(error);
-                res.status(500).send({
-                    success: false,
-                    status: 'Cannot get appointments',
                     message: error
                 });
             }

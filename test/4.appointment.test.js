@@ -70,12 +70,40 @@ describe("Appointment", function(){
         });
     });
     describe("/GET appointments", function(){
-        it("it should GET appointment by using staff role", function(done){
-            let Patient = require('../server/model/Patient');
-            Patient.findOne({HN:'patient1'})
-            .then(function(patient){
+        it("it should GET appointment query by user", function(done){
+            chai.request(server)
+            .get('/api/v1/appointments?user=patient1')
+            .set("x-access-token",staffToken)
+            .end(
+                function(err, res){
+                    res.should.have.status(200);
+                    res.should.be.json; 
+                    res.body.should.be.a('object');
+                    res.body.should.have.property('success',true);
+                    res.body.should.have.property('data');
+                    res.body.data.should.be.a('array');
+                    done();
+                }
+            );
+        });
+        it("it should GET appointment query by user", function(done){
+            let Doctor = require('../server/model/Doctor');
+            let Workday = require('../server/model/Workday');
+            let moment = require('moment');
+            Doctor.findOne({
+                HN: 'doctor1'
+            })
+            .then(
+                function(doctor){
+                    return Workday.findOne({
+                        doctor: doctor,
+                        date: moment().startOf('day').toDate()
+                    });
+                }
+            )
+            .then(function(workday){
                 chai.request(server)
-                .get('/api/v1/appointments?search=patient1')
+                .get('/api/v1/appointments?workday='+workday._id)
                 .set("x-access-token",staffToken)
                 .end(
                     function(err, res){
@@ -107,28 +135,6 @@ describe("Appointment", function(){
                         res.body.should.have.property('success',true);
                         res.body.should.have.property('data');
                         res.body.data.should.be.a('object');
-                        done();
-                    }
-                );
-            });
-        });
-    });
-    describe("/GET appointment by workday", function(){
-        it("it should GET appointment by workday", function(done){
-            let Workday = require('../server/model/Workday');
-            Workday.findOne()
-            .then(function(workday){
-                chai.request(server)
-                .get('/api/v1/appointments/workday/'+workday._id)
-                .set("x-access-token",staffToken)
-                .end(
-                    function(err, res){
-                        res.should.have.status(200);
-                        res.should.be.json; 
-                        res.body.should.be.a('object');
-                        res.body.should.have.property('success',true);
-                        res.body.should.have.property('data');
-                        res.body.data.should.be.a('array');
                         done();
                     }
                 );
