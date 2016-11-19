@@ -34,7 +34,7 @@ module.exports = (apiRoutes, express) => {
             doctor: req.params.doctor,
             date: {
                 $gte: moment({year: req.query.year, month: req.query.month, day: 1}).startOf('day'),
-                $lte: moment({year: req.query.year, month: req.query.month, day: 1}).add(1,'month').startOf('day')
+                $lt: moment({year: req.query.year, month: req.query.month, day: 1}).add(1,'month').startOf('day')
             }
         })
         .populate('doctor')
