@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { SharedModule } from './shared.module';
+import { PatientModule } from './patient.module';
 import { StaffOnlyRoute } from './../auth/guard/staff.guard';
 import { AppointmentManagementComponent, MakeAppointmentByStaffComponent } from './../role/staff/index';
 import { AppointmentTableComponent } from './../shared/appointment/appointment.table.component';
@@ -11,7 +12,8 @@ import { AppointmentTableComponent } from './../shared/appointment/appointment.t
     imports: [
         CommonModule,
         FormsModule,
-        SharedModule
+        SharedModule,
+        PatientModule
     ],
     declarations: [
         AppointmentManagementComponent,

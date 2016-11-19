@@ -1,74 +1,22 @@
-{{workdayItem | json}}
-<div *ngIf="date !== ''">
+<div *ngIf="!isFirstLoad" class="box">
     <p class="title is-5">รายการผู้ป่วยในวันที่ {{workdayItem.displayDate}}</p>
-    <div class="tabs is-boxed">
-        <ul>
-            <li (click)="selectedPeriod = 0"
-            [class.is-active]="selectedPeriod === 0">
-                <a>รอบเช้า</a>
-            </li>
-            <li (click)="selectedPeriod = 1"
-            [class.is-active]="selectedPeriod === 1">
-                <a>รอบบ่าย</a>
-            </li>
-        </ul>
-    </div>
     <div class="patient-list">
         <table class="table">
             <thead>
                 <tr>
-                    <th>HN</th>
+                    <th class="hn-column">HN</th>
                     <th>ชื่อ-นามสกุล</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <th>1111</th>
-                    <th>ธนนันท์ ตั้งธนาชัยกุล</th>
+            <tbody *ngIf="patientList.length !== 0">
+                <tr *ngFor="let patient of patientList">
+                    <td>{{patient.HN}}</td>
+                    <td>{{patient.name}} {{patient.surname}}</td>
                 </tr>
+            </tbody>
+            <tbody *ngIf="patientList.length === 0">
                 <tr>
-                    <th>1111</th>
-                    <th>ธนนันท์ ตั้งธนาชัยกุล</th>
-                </tr>
-                <tr>
-                    <th>1111</th>
-                    <th>ธนนันท์ ตั้งธนาชัยกุล</th>
-                </tr>
-                <tr>
-                    <th>1111</th>
-                    <th>ธนนันท์ ตั้งธนาชัยกุล</th>
-                </tr>
-                <tr>
-                    <th>1111</th>
-                    <th>ธนนันท์ ตั้งธนาชัยกุล</th>
-                </tr>
-                <tr>
-                    <th>1111</th>
-                    <th>ธนนันท์ ตั้งธนาชัยกุล</th>
-                </tr>
-                <tr>
-                    <th>1111</th>
-                    <th>ธนนันท์ ตั้งธนาชัยกุล</th>
-                </tr>
-                <tr>
-                    <th>1111</th>
-                    <th>ธนนันท์ ตั้งธนาชัยกุล</th>
-                </tr>
-                <tr>
-                    <th>1111</th>
-                    <th>ธนนันท์ ตั้งธนาชัยกุล</th>
-                </tr>
-                <tr>
-                    <th>1111</th>
-                    <th>ธนนันท์ ตั้งธนาชัยกุล</th>
-                </tr>
-                <tr>
-                    <th>1111</th>
-                    <th>ธนนันท์ ตั้งธนาชัยกุล</th>
-                </tr>
-                <tr>
-                    <th>1111</th>
-                    <th>ธนนันท์ ตั้งธนาชัยกุล</th>
+                    <td colspan="2">ไม่มีผู้ป่วยทำการนัดหมายกับท่านในรอบนี้</td>
                 </tr>
             </tbody>
         </table>

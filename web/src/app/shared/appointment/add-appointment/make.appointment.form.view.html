@@ -1,0 +1,37 @@
+<div class="box">
+    <h1 class="title">
+        กรอกข้อมูลสำหรับการนัดหมาย <i class="fa fa-check-circle" *ngIf="isConfirmedAppointmentDetail"></i>
+    </h1>
+    <appointment-request-form
+        *ngIf="!isConfirmedAppointmentDetail"
+        (onConfirmAppointmentDetail)="onConfirmAppointmentDetail($event)">
+    </appointment-request-form>
+</div>    
+<div class="box" *ngIf="isConfirmedAppointmentDetail">
+    <h1 class="title">
+        วันและเวลาที่ระบบแนะนำ <i class="fa fa-check-circle" *ngIf="isConfirmedTimeSlot"></i>
+    </h1>
+    <appointment-time-selector
+        *ngIf="!isConfirmedTimeSlot"
+        [timeSlot]="allTimeSlot"
+        (onSelectedTime)="onSelectedTime($event)">
+    </appointment-time-selector>
+</div>
+
+<div class="box"
+    *ngIf="isConfirmedAppointmentDetail && isConfirmedTimeSlot">
+    <h1 class="title">
+        สรุปข้อมูลการนัดหมาย <i class="fa fa-check-circle" *ngIf="isAppointmentSuccess"></i>
+    </h1>
+    <appointment-summary-form
+        [doctor]="selectedDoctor"
+        [clinic]="selectedClinic"
+        [causeToAppointment]="causeToAppointment"
+        [timeSlot]="selectedTimeSlot"
+        (onClickMakeAppointment)="makeAppointment($event)"
+        *ngIf="!isAppointmentSuccess">
+    </appointment-summary-form>
+</div>
+<div class="notification is-success" *ngIf="isMakeAppointmentSuccess">
+    นัดหมายสำเร็จแล้ว <a *ngIf="isShowLink" (click)="navigateToViewAppointment()">ดูข้อมูลการนัดหมายได้ที่นี่</a>
+</div>

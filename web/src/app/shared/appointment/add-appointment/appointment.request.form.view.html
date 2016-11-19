@@ -1,0 +1,45 @@
+<div class="appointment-form control">
+    <div class="control columns">
+        <p class="control column is-4">
+            <label class="label">แผนกที่ต้องการนัด</label>
+            <span class="select">
+                <select 
+                    [(ngModel)]="selectedClinicIndex"
+                    (change)="onSelectClinic($event.target.value)">
+                    <option value="-1" disabled selected>ชื่อแผนก</option>
+                    <option *ngFor="let clinic of clinicList; let i = index" value= {{i}}>
+                        {{clinic.name}} - {{clinic.description}}
+                    </option>
+                </select>
+            </span>
+        </p>
+        <p class="control column">
+            <label class="label">แพทย์ที่ต้องการนัด</label>
+            <span class="select">
+                <select 
+                    [(ngModel)]="selectedDoctorIndex"
+                    (change)="onSelectDoctor($event.target.value)"
+                    [disabled]="selectedClinicIndex === '-1'">
+                    <option value="-1" selected>ไม่ระบุแพทย์</option>
+                    <option *ngFor="let doctor of doctorList; let i = index" value= {{i}}>
+                        {{doctor.preName}}{{doctor.name}} {{doctor.surname}} [{{doctor.HN}}]
+                    </option>
+                </select>
+            </span>
+        </p>
+    </div>
+    <div class="control columns">
+        <div class="column">
+            <label class="label">สาเหตุที่ขอเข้าพบแพทย์</label>
+            <textarea class="textarea" [(ngModel)]="causeToAppointment"></textarea>
+        </div>
+    </div>
+    <p class="control appointment-button">
+        <a 
+            class="button is-success"
+            (click)="confirmAppointmentDetail()"
+            [ngClass]="{
+                'is-disabled': (selectedClinicIndex === '-1' || causeToAppointment === '')
+            }">ยืนยันคำขอเข้าพบแพทย์</a>
+    </p> 
+</div>  
