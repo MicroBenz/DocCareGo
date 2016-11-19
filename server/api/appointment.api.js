@@ -165,12 +165,46 @@ module.exports = (apiRoutes, express) => {
             )
             .then(
                 function(appointments){
+                    appointments = appointments.toObject();
+                    let arr = [];
+                    appointments.forEach(
+                        function(appointment){
+                            let p = new Promise(
+                                function(resolve, reject){
+                                    Clinic.findById(appointment.doctor.clinic)
+                                    .then(
+                                        function(clinic) {
+                                            appointment.doctor.clinic = clinic;
+                                            resolve(appointment);
+                                        },
+                                        function(error) {
+                                            reject();
+                                        }
+                                    );
+                                }
+                            );
+                            arr.push(p);
+                        }
+                    );
+                    return Promise.all(arr);
+                },
+                function (error) {
+                    console.log(error);
+                    res.status(500).send({
+                        success: false,
+                        message: error,
+                        clientMessage: 'Cannot get appointment data.'
+                    });
+                }
+            )
+            .then(
+                function(appointments){
                     res.json({
                         success: true,
                         data: appointments
                     });
                 },
-                function (error) {
+                function(error){
                     console.log(error);
                     res.status(500).send({
                         success: false,
