@@ -20,7 +20,7 @@ module.exports = function (apiRoutes, express) {
     // Implementation of CRUD are below.
     //----------------- GET -----------------
     function getClinics (req, res) {
-        utils.checkRole(req, res, ['admin']);
+        utils.checkRole(req, res, ['admin', 'patient']);
         var filterField = req.query.filters;
         if (filterField) {
             filterField = filterField.split(',').join(' ');

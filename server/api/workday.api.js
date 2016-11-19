@@ -1,6 +1,8 @@
 module.exports = (apiRoutes, express) => {
     var workdayRoutes = express.Router();    
     var Workday = require('../model/Workday');
+    var Clinic = require('../model/Clinic');
+    var Doctor = require('../model/Doctor');    
     var Appointment = require('../model/Appointment');
     var utils = require('../utils');
     var moment = require('moment');

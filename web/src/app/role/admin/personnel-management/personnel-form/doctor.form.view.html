@@ -39,7 +39,7 @@
             <span class="select">
                 <select [(ngModel)]="formData.clinic">
                     <option value="0" disabled selected>แผนก</option>
-                    <option *ngFor="let item of clinicList" value="1">{{item}}</option>
+                    <option *ngFor="let item of clinicList" value={{item}}>{{item}}</option>
                 </select>
             </span>
         </p>
