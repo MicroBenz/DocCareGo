@@ -101,12 +101,63 @@ module.exports = function (apiRoutes, express) {
             )
             .then(
                 function (diagnosisResults) {
+                    let arr = [];
+                    diagnosisResults.forEach(
+                        function(diagnosisResult){
+                            diagnosisResult = diagnosisResult.toObject();
+                            let p = new Promise(
+                                function(resolve, reject){
+                                    Patient.findById(diagnosisResult.appointment.patient)
+                                    .then(
+                                        function(patient){
+                                            diagnosisResult.appointment.patient = patient;
+                                            return Doctor.findById(diagnosisResult.appointment.doctor)
+                                            .populate('clinic');
+                                        },
+                                        function(error){
+                                            reject();
+                                        }
+                                    ).then(
+                                        function(doctor){
+                                            diagnosisResult.appointment.doctor = doctor;
+                                            return Workday.findById(diagnosisResult.appointment.workday);
+                                        },
+                                        function(error){
+                                            reject();
+                                        }
+                                    ).then(
+                                        function(workday){
+                                            diagnosisResult.appointment.workday = workday;
+                                            resolve(diagnosisResult);
+                                        },
+                                        function(error){
+                                            reject();
+                                        }
+                                    );
+                                }
+                            );
+                            arr.push(p);
+                        }
+                    );
+                    return Promise.all(arr);
+                },
+                function (error) {
+                    console.log(error);
+                    res.status(500).send({
+                        success: false,
+                        message: error,
+                        clientMessage: 'Cannot get diagnosisResult data.'
+                    });
+                }
+            )
+            .then(
+                function(diagnosisResults){
                     res.json({
                         success: true,
                         data: diagnosisResults
                     });
                 },
-                function (error) {
+                function(error){
                     console.log(error);
                     res.status(500).send({
                         success: false,
