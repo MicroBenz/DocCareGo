@@ -54,7 +54,7 @@ export class ViewAppointmentComponent implements OnInit {
                         return {
                             'date': date,
                             'time': item['workday']['time'] === 'AM'? '9:00 - 11:30': '13:00 - 15:30',
-                            'clinic': item['doctor']['clinic'],
+                            'clinic': item['doctor']['clinic']['name'],
                             'doctor': doctorName
                         }
                     }
