@@ -1,5 +1,6 @@
+{{workdayItem | json}}
 <div *ngIf="date !== ''">
-    <p class="title is-5">รายการผู้ป่วยในวันที่ {{displayDate(date)}}</p>
+    <p class="title is-5">รายการผู้ป่วยในวันที่ {{workdayItem.displayDate}}</p>
     <div class="tabs is-boxed">
         <ul>
             <li class="is-active">
