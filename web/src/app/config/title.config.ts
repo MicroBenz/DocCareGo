@@ -26,4 +26,6 @@ export const VIEW_PATIENT_PRESCRIPTION: string = 'ดูรายการสั
 export const PERSONNEL_MANAGEMENT_TITLE: string = 'จัดการข้อมูลบุคลากร' + TITLE_POSTFIX;
 export const ADD_PERSONNEL_TITLE: string = 'เพิ่มบุคลากรใหม่' + TITLE_POSTFIX;
 export const MEDICINE_MANAGEMENT_TITLE: string = 'จัดการข้อมูลยา' + TITLE_POSTFIX;
+export const ADD_MEDICINE_TITLE: string = 'เพิ่มยาใหม่' + TITLE_POSTFIX;
 export const CLINIC_MANAGEMENT_TITLE: string = 'จัดการข้อมูลแผนก' + TITLE_POSTFIX;
+export const ADD_CLINIC_TITLE: string = 'เพิ่มแผนกใหม่' + TITLE_POSTFIX;

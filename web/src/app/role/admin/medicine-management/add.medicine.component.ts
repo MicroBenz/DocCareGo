@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+
 import { DataService } from '../../../shared/service/data.service';
+import { ADD_MEDICINE_TITLE } from '../../../config/title.config'
 import { MEDICINE_ENDPOINT } from '../../../config/api.config';
 @Component({
     selector: 'add-medicine',
@@ -21,9 +24,10 @@ export class AddMedicineComponent implements OnInit {
     public isShowInvalidate: boolean;
     public isShowCancelConfirm: boolean;
 
-    constructor (private router: Router, private dataService: DataService) {}
+    constructor (private title: Title, private router: Router, private dataService: DataService) {}
 
     ngOnInit () {
+        this.title.setTitle(ADD_MEDICINE_TITLE);
         this.isShowConfirm = false;
         this.isShowCancelConfirm = false;
         this.isShowInvalidate = false;
@@ -34,17 +38,26 @@ export class AddMedicineComponent implements OnInit {
         }
     }
 
-    validateForm () {
+    private validateForm () {
         if (this.medicineData === undefined || this.medicineData === null) {
-            this.isShowInvalidate = true;
+            return false;
         }
         else if (this.medicineData['name'] === '' || this.medicineData['description'] === '') {
-            this.isShowInvalidate = true;
+            return false;
         }
         else {
-            this.isShowConfirm = true;
-            this.decorateModalContent();
+            return true;
         }
+     }
+
+     addNewMedicine () {
+         if(this.validateForm()) {
+             this.decorateModalContent();
+             this.isShowConfirm = true;
+         }
+         else {
+             this.isShowInvalidate = true;
+         }
      }
 
      private decorateModalContent () {
@@ -55,12 +68,15 @@ export class AddMedicineComponent implements OnInit {
         `;
      }
 
-     addMedicine = () => {
+     addMedicineDataService = () => {
          this.dataService.saveData(MEDICINE_ENDPOINT, this.medicineData)
             .subscribe(
                 (success) => {
                     console.log('ADD NEW MEDICINE');
                     this.navigateToMedicineManagement();
+                },
+                (error) => {
+                        console.error(error);
                 }
             )
      }

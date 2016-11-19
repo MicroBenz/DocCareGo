@@ -48,9 +48,11 @@
         <pharmacist-form 
             *ngIf="selectedRole === 'pharmacist' && isSelected"
             [formData]="formData"></pharmacist-form>
-        {{formData | json}}    
-        <a class="button is-success" (click)="addNewPersonnel()">เพิ่มบุคลากรใหม่</a>    
-        <a class="button is-danger" (click)="isShowCancelConfirm = true">กลับ</a>    
+        {{formData | json}}
+        <div class="button-wrapper">    
+            <a class="button is-success" (click)="addNewPersonnel()">เพิ่มบุคลากรใหม่</a>    
+            <a class="button is-danger" (click)="isShowCancelConfirm = true">กลับ</a>    
+        </div>
     </div>
 </div>
 
@@ -59,7 +61,7 @@
     [modalType]="'revise'"
     [confirmText]="'เพิ่มบุคลากรใหม่'"
     [cancelText]="'กลับ'"
-    [confirmFn]="dataServiceFunction(selectedRole, formData)"
+    [confirmFn]="addNewPersonnelDataService(selectedRole, formData)"
     [cancelFn]="dismissModal"
     [isShowFlag]="isShowConfirm"
     (isShowFlagChange)="isShowConfirm = $event">
