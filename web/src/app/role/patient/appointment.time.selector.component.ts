@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnChanges } from '@angular/core';
+import { Component, Input, Output, OnInit, OnChanges, EventEmitter } from '@angular/core';
 import * as moment from 'moment';
 
 @Component({
@@ -12,6 +12,8 @@ import * as moment from 'moment';
 })
 export class AppointmentTimeSelectorComponent implements OnInit, OnChanges {
     @Input('timeSlot') timeSlot;
+    @Output('onSelectedTime') onSelectedTime = new EventEmitter();
+
     public currentIndex: number;
     public currentDateDisplay: string;
     public currentTimeDisplay: string;
@@ -34,7 +36,7 @@ export class AppointmentTimeSelectorComponent implements OnInit, OnChanges {
         this.currentTimeDisplay = this.timeSlot[index]['time'];        
     }
     chooseThisTimeSlot () {
-
+        this.onSelectedTime.emit(this.timeSlot[this.currentIndex]);
     }
 
     getNextTimeSlot () {

@@ -49,12 +49,28 @@
                     }">ยืนยันคำขอเข้าพบแพทย์</a>
             </p> 
         </div>    
+    </div>    
+    <div class="box" *ngIf="isConfirmedAppointmentDetail">
+        <h1 class="title">
+            วันและเวลาที่ระบบแนะนำ <i class="fa fa-check-circle" *ngIf="isConfirmedTimeSlot"></i>
+        </h1>
+        <appointment-time-selector
+            *ngIf="!isConfirmedTimeSlot"
+            [timeSlot]="allTimeSlot"
+            (onSelectedTime)="onSelectedTime($event)">
+        </appointment-time-selector>
     </div>
-    {{selectedDoctor | json}}
-    {{selectedClinic | json}}  
-    {{causeToAppointment === ''}}      
-    <appointment-time-selector
-        *ngIf="isConfirmedAppointmentDetail"
-        [timeSlot]="allTimeSlot">
-    </appointment-time-selector>
+
+    <div class="box">
+        <h1 class="title">
+            สรุปการนัดหมาย
+        </h1>
+        <appointment-summary-form
+            [doctor]="selectedDoctor"
+            [clinic]="selectedClinic"
+            [causeToAppointment]="causeToAppointment"
+            [timeSlot]="selectedTimeSlot"
+            (onClickMakeAppointment)="makeAppointment($event)">
+        </appointment-summary-form>
+    </div>    
 </div>

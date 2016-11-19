@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 
 import { SharedModule } from './shared.module';
 import { PatientOnlyRoute } from './../auth/guard/patient.guard';
-import { MakeAppointmentComponent, ViewAppointmentComponent, AppointmentTimeSelectorComponent } from './../role/patient/index';
+import { MakeAppointmentComponent, ViewAppointmentComponent, AppointmentTimeSelectorComponent, AppointmentSummaryFormComponent } from './../role/patient/index';
 
 @NgModule({
     imports: [
@@ -15,12 +15,14 @@ import { MakeAppointmentComponent, ViewAppointmentComponent, AppointmentTimeSele
     declarations: [
         MakeAppointmentComponent,
         ViewAppointmentComponent,
-        AppointmentTimeSelectorComponent
+        AppointmentTimeSelectorComponent,
+        AppointmentSummaryFormComponent
     ],
     exports: [
         MakeAppointmentComponent,
         ViewAppointmentComponent,
-        AppointmentTimeSelectorComponent
+        AppointmentTimeSelectorComponent,
+        AppointmentSummaryFormComponent
     ],
     providers: [
         PatientOnlyRoute
