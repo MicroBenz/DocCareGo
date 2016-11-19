@@ -40,6 +40,9 @@ module.exports = (apiRoutes, express) => {
             Appointment.find({
                 workday: req.query.workday
             })
+            .populate('patient')
+            .populate('doctor')
+            .populate('workday')
             .then(
                 function(appointments){
                     res.json({
