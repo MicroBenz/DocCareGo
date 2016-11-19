@@ -1,9 +1,8 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import * as moment from 'moment';
 
-import { MakeAppointmentFormComponent } from './../../shared/appointment/make.appointment.form.component';
 import { MAKE_APPOINTMENT_TITLE } from './../../config/title.config';
 import { DataService } from '../../shared/service/data.service';
 import { AuthService } from '../../shared/service/auth.service';
@@ -39,8 +38,6 @@ import { CLINIC_ENDPOINT, DOCTOR_ENDPOINT, WORKDAY_ENDPOINT, APPOINTMENT_ENDPOIN
     `]
 })
 export class MakeAppointmentComponent implements OnInit {
-    // @ViewChild(MakeAppointmentFormComponent) private makeAppointmentForm: MakeAppointmentFormComponent;
-
     public clinicList;
     public doctorList;
     public selectedClinicIndex;
@@ -78,54 +75,7 @@ export class MakeAppointmentComponent implements OnInit {
             )
     }
 
-    // clinics = CLINICS;
-    // selectClinic: Clinic;
-    // // selectClinic: Clinic = new Clinic(0,'none');
-    // doctors: Doctor[];
-    // // doctor: Doctor[];
-    // selectDoctor: Doctor;
-    // workdays: Workday[];
-    // workday: Workday[];
-    // selectWorkday: Workday;
-    // workdayIndex: number;
-    // day: number;
-    // month: string;
-    // year: number;
-    // time: string;
-    // adfs: number;
-
-
-    // getDayFromDate(date: string): number {
-    //     return Number(date.substring(0, 2));
-    // }
-
-    // getMonthFromDate(date: string): string {
-    //     return date.substring(3,5);
-    // }
-
-    // getYearFromDate(date: string): number {
-    //     return Number(date.substring(6,10));
-    // }
-
-    // getTimeFromWorkday(time: ): string {
-
-    // }
-
-
     onSelectClinic(index) {
-        // this.selectClinic = null;
-        // this.selectDoctor = null;
-        // this.workdays = WORKDAYS.filter((item) => item.clinic_id == clinic_id);
-        // this.doctors = Array<Doctor>();
-        // this.workdayIndex = 0;
-        // for (var obj of this.workdays) {
-        //     var doctor = DOCTORS.filter((item) => item.id == obj.doctor_id);
-        //     this.doctors.push(doctor[0]);
-        // }
-        // // this.doctors.push(DOCTORS[0]);
-        // this.doctors = this.doctors.filter(function(elem, index, self) {
-        //     return index == self.indexOf(elem);
-        // });
         this.selectedDoctorIndex = '-1';
         this.selectedDoctor = {};
         this.selectedClinic = this.clinicList[Number(index)];
@@ -141,19 +91,7 @@ export class MakeAppointmentComponent implements OnInit {
     }
 
     onSelectDoctor(index) {
-        // this.workday = this.workdays.filter((item) => item.doctor_id == doctor_id);
-        // this.adfs = doctor_id;
-        // this.workdayIndex = 0;
-        // this.selectWorkday = this.workday[this.workdayIndex];
-        // this.day = this.getDayFromDate(this.selectWorkday.date);
-        // this.month = this.getMonthFromDate(this.selectWorkday.date);
-        // this.year = this.getYearFromDate(this.selectWorkday.date);
-        // this.time = this.selectWorkday.time;
         this.selectedDoctor = this.doctorList[Number(index)];        
-    }
-
-    onSelectWorkDay(clinic_id, doctor_id): void {
-        // this.selectWorkday = this.workdays.find()
     }
 
     confirmAppointmentDetail () {
@@ -190,14 +128,12 @@ export class MakeAppointmentComponent implements OnInit {
     }
 
     public onSelectedTime (timeSlot) {
-        console.log(timeSlot);
         this.isConfirmedTimeSlot = true;
         this.selectedTimeSlot = timeSlot;
     }
 
     makeAppointment (formData) {
         formData['patient'] = this.authService.getUserHN();
-        console.log(formData);    
         this.dataService.saveData(APPOINTMENT_ENDPOINT, formData)
             .subscribe(
                 (success) => {
@@ -211,26 +147,4 @@ export class MakeAppointmentComponent implements OnInit {
     navigateToViewAppointment () {
         this.router.navigateByUrl('/patient/view-appointment');
     }
-    // changeDate() {
-    //     if(this.workdayIndex+1 < this.workday.length) {
-    //         this.workdayIndex += 1;
-    //         this.selectWorkday = this.workday[this.workdayIndex];
-    //         this.day = this.getDayFromDate(this.selectWorkday.date);
-    //         this.month = this.getMonthFromDate(this.selectWorkday.date);
-    //         this.year = this.getYearFromDate(this.selectWorkday.date);
-    //         this.time = this.selectWorkday.time;    
-    //     }
-        
-    // }
-
-    // cancelAppointment() {
-    //     /*
-    //         TODO:
-    //         1) Bring Up SweetAlert with 2 button "ใช่" and "ไม่ใช่"
-    //         2) Inside SweetAlert tell user that you are about to dismiss this form, are you sure?
-    //         3) If user press "ใช่": navigate back to "ดูการนัดหมาย"
-    //         4) If user press "ไม่" dismiss SweetAlert
-    //     */
-    //     this.router.navigateByUrl('/patient/view-appointment');
-    // }
 }

@@ -63,7 +63,6 @@ export class WorkdaySelectorComponent implements OnInit {
             .map(this.sortByDate)
             .map(this.filterBeforeToday)
             .map(this.setDisplayDate)
-            // .map(this.groupByDate)
             .subscribe(
                 (dayList) => {
                     console.log(dayList);
@@ -105,6 +104,7 @@ export class WorkdaySelectorComponent implements OnInit {
         // let date = moment().set('date', splittedDate[0]).set('month', splittedDate[1]).set('year', splittedDate[2]);
         // this.selectedDate = day;
         this.selectedDate = this.workdayList[idx]['displayDate'];
+        console.log('SELECTED:', this.workdayList[idx]);
         this.onSelectWorkday.emit(this.workdayList[idx]);
     }
 
@@ -112,8 +112,7 @@ export class WorkdaySelectorComponent implements OnInit {
     private sortByDate = (response: Array<Object>) => {
         return response.sort(
             (firstItem: Object, secondItem: Object) => {
-                if (moment(firstItem['date']).isSame(moment(secondItem['date']), 'day')) {
-                    console.log('SAME DAY');                    
+                if (moment(firstItem['date']).isSame(moment(secondItem['date']), 'day')) {                  
                     if (firstItem['time'] === 'AM') {
                         return -1;
                     }
@@ -147,34 +146,5 @@ export class WorkdaySelectorComponent implements OnInit {
                 return day;
             }
         )
-    }
-    private groupByDate = (dayList: Array<Object>) => {
-        let decoratedList = {};
-        for (let i = 0 ; i < dayList.length ; i += 1) {
-            let currentDate = dayList[i]['date'];
-            if (decoratedList[currentDate] === undefined || decoratedList[currentDate] === null) {
-                decoratedList[currentDate] = [dayList[i]];
-            }
-            else {
-                decoratedList[currentDate].push(dayList[i]);
-            }
-        }
-        return Object.keys(decoratedList).map(
-            (day) => {
-                let workdaysOnThatDay = decoratedList[day];
-                let workdayObject = {
-                    date: workdaysOnThatDay[0]['date'],
-                    displayDate: moment(workdaysOnThatDay[0]['date']).format('LL'),
-                    period: []
-                };
-                for (let i = 0 ; i < workdaysOnThatDay.length ; i++) {
-                    workdayObject.period.push({
-                        id: workdaysOnThatDay[i]['_id'],
-                        slot: workdaysOnThatDay[i]['time']
-                    })
-                }
-                return workdayObject;
-            }
-        );
     }
 }
