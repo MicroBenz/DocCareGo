@@ -8,7 +8,7 @@ module.exports = function (apiRoutes, express) {
     var moment = require('moment');
 
     diagnosisResultRoutes.route('/')
-        .get(utils.methodNotAllowed)
+        .get(getDiagnosisResults)
         .post(createDiagnosisResult)
         .put(utils.methodNotAllowed)
         .delete(utils.methodNotAllowed);
@@ -23,6 +23,63 @@ module.exports = function (apiRoutes, express) {
 
     // Implementation of CRUD are below.
     //----------------- GET -----------------
+    function getDiagnosisResults (req, res) {
+        utils.checkRole(req, res, ['pharmacist']);
+        Workday.find({
+            date: moment().startOf('day').toDate()
+        })
+        .then(
+            function (workdays) {
+                return Appointment.find({
+                    workday: {
+                        $in: workdays
+                    }
+                });
+            },
+            function (error) {
+                console.log(error);
+                res.status(500).send({
+                    success: false,
+                    message: error,
+                    clientMessage: 'Cannot get workday data.'
+                });
+            }
+        )
+        .then(
+            function (appointments) {
+                return DiagnosisResult.find({
+                    appointment: {
+                        $in: appointments
+                    }
+                });
+            },
+            function (error) {
+                console.log(error);
+                res.status(500).send({
+                    success: false,
+                    message: error,
+                    clientMessage: 'Cannot get appointment data.'
+                });
+            }
+        )
+        .then(
+            function (diagnosisResults) {
+                res.json({
+                    success: true,
+                    data: diagnosisResults
+                });
+            },
+            function (error) {
+                console.log(error);
+                res.status(500).send({
+                    success: false,
+                    message: error,
+                    clientMessage: 'Cannot get diagnosisResult data.'
+                });
+            }
+        )
+    }
+    
     function getDiagnosisResultByAppointment (req, res) {
         utils.checkRole(req, res, ['pharmacist','nurse','doctor']);
         DiagnosisResult.findOne({
