@@ -62,9 +62,11 @@ export class WorkdaySelectorComponent implements OnInit {
         this.dataService.getDataWithParams(`${WORKDAY_ENDPOINT}/${this.authService.getUserID()}`, workdayParams)
             .map(this.sortByDate)
             .map(this.filterBeforeToday)
-            .map(this.groupByDate)
+            .map(this.setDisplayDate)
+            // .map(this.groupByDate)
             .subscribe(
                 (dayList) => {
+                    console.log(dayList);
                     this.workdayList = dayList;
                 }
             )
@@ -110,10 +112,19 @@ export class WorkdaySelectorComponent implements OnInit {
     private sortByDate = (response: Array<Object>) => {
         return response.sort(
             (firstItem: Object, secondItem: Object) => {
-                if (moment(firstItem['date']).isBefore(moment(secondItem['date']))) {
+                if (moment(firstItem['date']).isSame(moment(secondItem['date']), 'day')) {
+                    console.log('SAME DAY');                    
+                    if (firstItem['time'] === 'AM') {
+                        return -1;
+                    }
+                    return 1;
+                }
+                else if (moment(firstItem['date']).isBefore(moment(secondItem['date']))) {
                     return -1;
                 }
-                return 1;
+                else {
+                    return 1;                    
+                }
             }
         );
     }
@@ -126,6 +137,17 @@ export class WorkdaySelectorComponent implements OnInit {
         )
     }
 
+    private setDisplayDate = (dayList: Array<Object>) => {
+        console.log(dayList);
+        return dayList.map(
+            (day) => {
+                let period = day['time'] === 'AM'? '(เช้า)': '(บ่าย)';
+                let dateFormatted = moment(day['date']).format('LL');
+                day['displayDate'] = `${dateFormatted} ${period}`;
+                return day;
+            }
+        )
+    }
     private groupByDate = (dayList: Array<Object>) => {
         let decoratedList = {};
         for (let i = 0 ; i < dayList.length ; i += 1) {
