@@ -35,7 +35,7 @@ module.exports = (apiRoutes, express) => {
         }
         if (req.query.doctor) {
             Workday.find({
-                doctor: req.query.query,
+                doctor: req.query.doctor,
                 date: {
                     $gte: moment().startOf('day')
                 }

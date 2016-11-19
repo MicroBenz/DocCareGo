@@ -91,6 +91,7 @@ function getPatientName (res, user) {
     .then(
         function (patient) {
             if(patient) {
+                user._id = patient._id;
                 user.name = patient.name;
                 return {
                     res: res,
@@ -124,6 +125,7 @@ function getDoctorName (res, user) {
     .then(
         function (doctor) {
             if(doctor) {
+                user._id = doctor._id;
                 user.name = doctor.name;
                 return {
                     res: res,
@@ -157,6 +159,7 @@ function getStaffName (res, user) {
     .then(
         function (staff) {
             if(staff) {
+                user._id = staff._id;
                 user.name = staff.name;
                 return {
                     res: res,
@@ -190,6 +193,7 @@ function getNurseName (res, user) {
     .then(
         function (nurse) {
             if(nurse) {
+                user._id = nurse._id;
                 user.name = nurse.name;
                 return {
                     res: res,
@@ -223,6 +227,7 @@ function getPharmacistName (res, user) {
     .then(
         function (pharmacist) {
             if(pharmacist) {
+                user._id = pharmacist._id;
                 user.name = pharmacist.name;
                 return {
                     res: res,
