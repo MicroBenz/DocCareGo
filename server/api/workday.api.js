@@ -6,7 +6,7 @@ module.exports = (apiRoutes, express) => {
     var moment = require('moment');
 
     workdayRoutes.route('/')
-        .get(utils.methodNotAllowed)
+        .get(getWorkdays)
         .post(utils.methodNotAllowed)
         .put(utils.methodNotAllowed)
         .delete(utils.methodNotAllowed);
@@ -22,6 +22,92 @@ module.exports = (apiRoutes, express) => {
 
     // Implementation of CRUD are below.
     //----------------- GET -----------------
+    function getWorkdays (req, res) {
+        utils.checkRole(req, res, ['staff','patient']);
+        var filterField = req.query.filters;
+        if (filterField) {
+            filterField = filterField.split(',').join(' ');
+        }
+        else {
+            filterField = '';
+        }
+        if (req.query.doctor) {
+            Workday.find({
+                doctor: req.query.query,
+                date: {
+                    $gte: moment().startOf('day')
+                }
+            })
+            .populate('doctor')
+            .sort({
+                date: 'asc'
+            })
+            .select(filterField)
+            .then(
+                function (workdays) {
+                    res.json({
+                        success: true,
+                        data: workdays
+                    });
+                },
+                function (error) {
+                    console.log(error);
+                    res.status(500).send({
+                        success: false,
+                        message: error,
+                        clientMessage: 'Cannot get workday data.'
+                    });
+                }
+            );
+        }
+        else if (req.query.clinic) {
+            Doctor.find({
+                clinic: req.query.clinic
+            })
+            .then(
+                function(doctors){
+                    return Workday.find({
+                        doctor: {
+                            $in: doctors
+                        },
+                        date: {
+                            $gte: moment().startOf('day')
+                        }
+                    })
+                    .populate('doctor')
+                    .sort({
+                        date: 'asc'
+                    })
+                    .select(filterField);
+                },
+                function (error) {
+                    console.log(error);
+                    res.status(500).send({
+                        success: false,
+                        message: error,
+                        clientMessage: 'Cannot get doctor data.'
+                    });
+                }
+            )
+            .then(
+                function (workdays) {
+                    res.json({
+                        success: true,
+                        data: workdays
+                    });
+                },
+                function (error) {
+                    console.log(error);
+                    res.status(500).send({
+                        success: false,
+                        message: error,
+                        clientMessage: 'Cannot get workday data.'
+                    });
+                }
+            );
+        }
+    }
+
     function getWorkdayByDoctor (req, res) {
         utils.checkRole(req, res, ['doctor','staff']);
         if (!req.query.month) {
