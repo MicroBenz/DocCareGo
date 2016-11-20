@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 
 import { MANAGE_APPOINTMENT_TITLE } from './../../config/title.config';
 import { DataService } from '../../shared/service/data.service';
 import { APPOINTMENT_ENDPOINT } from '../../config/api.config';
 import * as moment from 'moment';
+import { SearchBoxComponent } from '../../shared/component/searchbox.component';
 
 @Component({
     selector: 'appointment-management',
@@ -19,34 +20,66 @@ import * as moment from 'moment';
         }
     `]
 })
-export class AppointmentManagementComponent implements OnInit {
+export class AppointmentManagementComponent implements OnInit, AfterViewInit {
+    @ViewChild(SearchBoxComponent) private searchBoxComponent: SearchBoxComponent;
+
     public appointmentList;
-    
     constructor(private title: Title, private dataService: DataService) {}
     
     ngOnInit () {
         this.appointmentList = [];
         this.title.setTitle(MANAGE_APPOINTMENT_TITLE);
-        this.dataService.getData(APPOINTMENT_ENDPOINT)
-            .map(
-                (appointments) => {
-                    return appointments.map(
-                        (appointment) => {
-                            appointment['workday']['date'] = moment(appointment['workday']['date']).format('LL');
-                            appointment['workday']['time'] = appointment['workday']['time'] === 'AM'? '9:00 - 11:30': '13:00 - 15:30';
-                            return appointment;
-                        }
-                    )
-                }
-            )
-            .subscribe(
-                (appointments) => {
-                    console.log(appointments);
-                    this.appointmentList = appointments;
-                }
-            )        
+        // this.dataService.getData(APPOINTMENT_ENDPOINT)
+        //     .map(
+        //         (appointments) => {
+        //             return appointments.map(
+        //                 (appointment) => {
+        //                     appointment['workday']['date'] = moment(appointment['workday']['date']).format('LL');
+        //                     appointment['workday']['time'] = appointment['workday']['time'] === 'AM'? '9:00 - 11:30': '13:00 - 15:30';
+        //                     return appointment;
+        //                 }
+        //             )
+        //         }
+        //     )
+        //     .subscribe(
+        //         (appointments) => {
+        //             console.log(appointments);
+        //             this.appointmentList = appointments;
+        //         }
+        //     )        
+    }
+
+    ngAfterViewInit () {
+        this.searchBoxComponent.searchKeyControl.setValue('');
     }
     
+    public getAppointmentsData = (key) => {
+        return this.dataService.getDataWithParams(APPOINTMENT_ENDPOINT, {
+            user: key
+        })
+        .map(
+            (appointments) => {
+                return appointments.map(
+                    (appointment) => {
+                        appointment['workday']['date'] = moment(appointment['workday']['date']).format('LL');
+                        appointment['workday']['time'] = appointment['workday']['time'] === 'AM'? '9:00 - 11:30': '13:00 - 15:30';
+                        return appointment;
+                    }
+                )
+            }
+        )
+            // .subscribe(
+            //     (appointments) => {
+            //         console.log(appointments);
+            //         this.appointmentList = appointments;
+            //     }
+            // )  
+    }
+
+    public onSearchResult (appointments) {
+        console.log('SEARCH RES: ',appointments);
+        this.appointmentList = appointments;
+    }
     postponeAppointment (id) {
         // TODO: Navigate to postpone appointment
         console.log('[AppointmentManagementComponent] postpone id = ', id);

@@ -1,7 +1,9 @@
 <div class="container">
     <div class="box">
         <search-box
-            [searchBoxLabel]="'กรอกรหัสประจำตัวของผู้ป่วย เพื่อค้นหาการนัดหมาย'">
+            [searchBoxLabel]="'กรอกรหัสประจำตัวของผู้ป่วย หรือรหัสประจำตัวของแพทย์เจ้าของนัด เพื่อค้นหาการนัดหมาย'"
+            [serviceFn]="getAppointmentsData"
+            (onSearchResult)="onSearchResult($event)">
         </search-box>
     </div>
     <div class="box">
