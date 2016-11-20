@@ -129,8 +129,7 @@ module.exports = function (apiRoutes, express) {
     }
 
     //----------------- POST (CREATE) -----------------
-
-function createPatient (req, res) {
+    function createPatient (req, res) {
         utils.checkRole(req, res, ['admin']);
         validateField(res, req.body);
         if (!req.body.HN) {

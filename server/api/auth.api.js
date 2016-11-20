@@ -7,6 +7,7 @@ module.exports = function (app, express) {
     
     authRoutes.post('/login', login);
     authRoutes.get('/generateNewHN', generateNewHN);
+    authRoutes.post('/newPatient', createPatient);
 
     function login (req, res) {
         User.findOne({
@@ -102,8 +103,122 @@ module.exports = function (app, express) {
             }
         )
     }
+    function createPatient (req, res) {
+        utils.checkRole(req, res, ['admin']);
+        validateField(res, req.body);
+        if (!req.body.HN) {
+            utils.responseMissingField(res, 'HN');
+        }
+        Patient.findOneWithDeleted({
+            $or: [
+                { HN: req.body.HN },
+                { personalID: req.body.personalID }
+            ]
+        })
+        .then(
+            function (patient) {
+                if (patient) {
+                    res.status(400).send({
+                        success: false,
+                        message: 'Bad Request',
+                        clientMessage: 'This HN or personalID has already in the system'
+                    });
+                    Promise.reject(400);
+                }
+                else {
+                    return {
+                        HN: req.body.HN,
+                        personalID: req.body.personalID,
+                        preName: req.body.preName,
+                        name: req.body.name,
+                        surname: req.body.surname,
+                        houseNumber: req.body.houseNumber,
+                        road: req.body.road,
+                        soi: req.body.soi,
+                        subdistrict: req.body.subdistrict,
+                        district: req.body.district,
+                        province: req.body.province,
+                        zipCode: req.body.zipCode,
+                        country: req.body.country,
+                        tel: req.body.tel,
+                        noMedicines: req.body.noMedicines,
+                    };
+                }
+            },
+            function (error) {
+                console.log(error);
+                res.status(500).send({
+                    success: false,
+                    message: error,
+                    clientMessage: 'Cannot get patient data.'
+                });
+            }
+        )
+        .then(
+            function (patientData) {
+                var patient = new Patient(patientData);
+                return patient.save();
+            }
+        )
+        .then(
+            function (patient) {
+                res.json({
+                    success: true,
+                    clientMessage: 'Create patient succeed',
+                    data: patient
+                });
+            },
+            function (error) {
+                res.status(500).send({
+                    success: false,
+                    clientMessage: 'Create patient failed',
+                    message: error
+                });
+            }
+        );
+    }
 
     app.use('/auth', authRoutes);
+
+    //----------------- ADDITIONAL FUNCTION ----------------- 
+    function validateField (res, body) {
+
+        if (!body.personalID) {
+            utils.responseMissingField(res, 'personalID');
+        }
+
+        if (!body.preName) {
+            utils.responseMissingField(res, 'preName');
+        }
+            
+        if (!body.name) {
+            utils.responseMissingField(res, 'name');
+        }
+            
+        if (!body.surname) {
+            utils.responseMissingField(res, 'surname');
+        }
+
+        if (!body.district) {
+            utils.responseMissingField(res, 'district');
+        }
+
+        if (!body.province) {
+            utils.responseMissingField(res, 'province');
+        }
+
+        if (!body.zipCode) {
+            utils.responseMissingField(res, 'zipCode');
+        }
+
+        if (!body.country) {
+            utils.responseMissingField(res, 'country');
+        }
+
+        if (!body.noMedicines) {
+            utils.responseMissingField(res, 'noMedicines');
+        }
+    }
 
     function createToken (data) {
         user = data.user;
