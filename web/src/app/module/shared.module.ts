@@ -4,7 +4,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 import { AppointmentTableSelectionComponent, AppointmentAccordionComponent } from './../role/patient/index';
-import { MakeAppointmentFormComponent, AppointmentTableCompactComponent } from './../shared/appointment/index';
+import { AppointmentRequestFormComponent, AppointmentSummaryFormComponent, AppointmentTimeSelectorComponent, MakeAppointmentFormComponent } from '../shared/appointment/add-appointment/index'
+import { AppointmentTableCompactComponent } from './../shared/appointment/index';
 import { PatientListComponent, MiniCalendarComponent, SearchBoxComponent } from './../shared/component/index';
 import { FullCalendarComponent } from './../shared/calendar/full.calendar.component';
 import { ModalComponent } from './../shared/modal/modal.component';
@@ -22,6 +23,11 @@ import { ModalComponent } from './../shared/modal/modal.component';
         AppointmentAccordionComponent,
         AppointmentTableCompactComponent,
 
+        // Add Appointment Related
+        AppointmentRequestFormComponent,
+        AppointmentTimeSelectorComponent,
+        AppointmentSummaryFormComponent,
+
         // Shared Component
         MiniCalendarComponent,
         SearchBoxComponent,
@@ -33,6 +39,10 @@ import { ModalComponent } from './../shared/modal/modal.component';
         MakeAppointmentFormComponent,
         AppointmentAccordionComponent,
         AppointmentTableCompactComponent,
+
+        AppointmentRequestFormComponent,
+        AppointmentTimeSelectorComponent,
+        AppointmentSummaryFormComponent,
         
         MiniCalendarComponent,
         SearchBoxComponent,

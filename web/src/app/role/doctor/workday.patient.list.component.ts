@@ -1,5 +1,5 @@
-import { Component, Input, OnChanges, SimpleChange } from '@angular/core';
-import * as moment from 'moment';
+import { Component, Input, OnInit, OnChanges, SimpleChange } from '@angular/core';
+
 import { DataService } from '../../shared/service/data.service';
 import { APPOINTMENT_ENDPOINT } from '../../config/api.config';
 
@@ -11,39 +11,46 @@ import { APPOINTMENT_ENDPOINT } from '../../config/api.config';
             margin-top: 10px;
             margin-bottom: 10px;
         }
-        .tabs.is-boxed {
-            margin-bottom: 0px;
-        }
-        .patient-list {
-            border: 1px solid rgb(219, 219, 219);
-            border-top: none;
-            padding: 10px;
-            height: 380px;
-            overflow: scroll;
+        .hn-column {
+            width: 20%;
         }
     `]
 })
-export class WorkdayPatientListComponent implements OnChanges {
+export class WorkdayPatientListComponent implements OnInit, OnChanges {
     @Input('workdayItem') workdayItem;
-
+    public isFirstLoad: boolean;
+    public patientList;
     constructor(private dataService: DataService) {}
+
+    ngOnInit () {
+        this.patientList = [];
+        this.isFirstLoad = true;
+    }
 
     ngOnChanges (changes: {[propKey: string]: SimpleChange}) {
         let workdayItem = changes['workdayItem']['currentValue'];
         if (workdayItem !== '') {
-            console.log(workdayItem);  
-            this.getDataByWorkdayID(workdayItem['period'][0]['id']);          
+            this.isFirstLoad = false;
+            this.getDataByWorkdayID(workdayItem['_id']);
         }
     }
 
     private getDataByWorkdayID (id) {
-        console.log(id);
         this.dataService.getDataWithParams(APPOINTMENT_ENDPOINT, {
             workday: id
         })
+        .map(
+            (success: Array<Object>) => {
+                return success.map(
+                    (item) => {
+                        return item['patient'];
+                    }
+                )
+            }
+        )
         .subscribe(
             (success) => {
-                console.log('SUCCESS GET WORKDAY: ', success);
+                this.patientList = success;
             }
         )
     }

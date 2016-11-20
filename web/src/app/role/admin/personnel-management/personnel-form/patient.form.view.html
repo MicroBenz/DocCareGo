@@ -81,3 +81,25 @@
         </p>
     </div>
 </div>
+<div class="control is-vertical">
+    <div class="control rows">
+        <div class="control column is-5">
+            <label class="label">รายการยาที่แพ้</label>
+            <p class="control has-addons">
+                <input class="input" type="text" [(ngModel)]="aMedicine">
+                <a class="button is-info" (click)="addNoMedicine()" >เพิ่ม</a>
+            </p>
+            <!--<div *ngIf="formData.noMedicines">-->
+            <div *ngIf="medicines.length > 0">
+                <div *ngFor="let medicine of medicines">
+                    <div class="button-static">
+                        <p class="control has-addons">
+                            <input class="input" type="text" value="{{medicine}}" readonly="readonly">
+                            <a class="button is-warning" (click)="deleteNoMedicine(medicine)">ลบ</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
