@@ -1,0 +1,27 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th class="first-col"></th>
+            <th class="medicine-name-col">ชื่อยา</th>
+            <th>คำอธิบายยา</th>            
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let disease of diseasesList; let i = index">
+            <td>
+                <i (click)="removeDisease(i)" class="fa fa-minus-circle action-button remove-button"></i>
+            </td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>
+                <i (click)="addNewDiseases()" class="fa fa-plus-circle action-button add-button"></i>
+            </td>
+            <td>
+                <input type="text" class="input">                
+            </td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>

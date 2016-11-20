@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Http, Response } from '@angular/http';
-
+import { LOGIN_ENDPOINT } from '../config/api.config';
 import { PATIENT_ENDPOINT } from '../config/api.config';
 import { NEW_PATIENT_REGISTER_TITLE } from '../config/title.config';
 
@@ -37,10 +37,14 @@ import { NEW_PATIENT_REGISTER_TITLE } from '../config/title.config';
 export class NewPatientRegisterComponent implements OnInit {
     public formData;
     public confirmModalContent: string;
+    public alertContent: string;
     public isShowConfirm: boolean;    
     public isShowCancelConfirm: boolean;
     public isShowInvalidate: boolean;
-    constructor(private title: Title, private router: Router, private route: ActivatedRoute, private htttp: Http) {}
+    public isShowAlert: boolean;
+    public isShowOverLength: boolean;
+    public isWrongZipCode: boolean;
+    constructor(private title: Title, private router: Router, private route: ActivatedRoute, private http: Http) {}
     ngOnInit () {
         this.formData = {
             'HN' : '',
@@ -68,18 +72,25 @@ export class NewPatientRegisterComponent implements OnInit {
             || this.formData['houseNumber'] === '' || this.formData['road'] === '' || this.formData['soi'] === '' || this.formData['subdistrict'] === ''
             || this.formData['district'] === '' || this.formData['province'] === '' || this.formData['zipCode'] === '' || this.formData['country'] === ''
             || this.formData['tel'] === '') {
-            return;
+            this.isShowInvalidate = true;
+        }
+        else if(this.formData['personalID'].length !== 13 || /[^\d]+/.exec(this.formData['personalID']) ){
+            this.isShowOverLength = true;
+        }
+        else if( /[^\d]+/.exec(this.formData['zipCode']) ){
+            this.isWrongZipCode = true;
         }
         else {
             console.log('VALIADETED');
-            this.htttp.get(PATIENT_ENDPOINT + '/generateNewHN')
+            this.http.get('/auth' + '/generateNewHN')
                 .map(this.handleResponse, this.handleError)
                 .subscribe(
                     (newHN) => {
-                        console.log('NewHN:', newHN);
-                        this.formData['HN'] = newHN.num;
+                        console.log('NewHN:', newHN.HN);
+                        this.formData['HN'] = newHN.HN;
                         this.decorateModalContent();
                     }
+                    
                 )
 
         }
@@ -100,9 +111,9 @@ export class NewPatientRegisterComponent implements OnInit {
     decorateModalContent () {
         this.confirmModalContent = `
             <h1 class="title">ตรวจสอบข้อมูลก่อนทำการแก้ไข</h1>
-            <p><b>HN</b> ${this.formData['HN']}</p>
+            <p><b>รหัสHNของคุณคือ</b> ${this.formData['HN']}</p>
             <p><b>รหัสบัตรประชาชน</b> ${this.formData['personalID']}</p>
-            <p><b>ชื่อพยาบาล:</b> ${this.formData['name']}</p>
+            <p><b>ชื่อ:</b> ${this.formData['name']}</p>
             <p><b>นามสกุล:</b> ${this.formData['surname']}</p>
             <p><b>บ้านเลขที่:</b> ${this.formData['houseNumber']}</p>
             <p><b>ถนน:</b> ${this.formData['road']}</p>
@@ -111,21 +122,32 @@ export class NewPatientRegisterComponent implements OnInit {
             <p><b>เขต:</b> ${this.formData['district']}</p>
             <p><b>จังหวัด:</b> ${this.formData['province']}</p>
             <p><b>ประเทศ:</b> ${this.formData['country']}</p>
-            <p><bเบอร์โทร:</b> ${this.formData['tel']}</p>
+            <p><b>เบอร์โทร:</b> ${this.formData['tel']}</p>
+            <p><b>ยาที่แพ้:</b> ${this.formData['noMedicines']}</p>
         `;
-
+        this.isShowConfirm = true;
     }
-    addNewPatient(){
-        // this.dataService.saveData(PATIENT_ENDPOINT, this.formData)
-        //     .subscribe(
-        //         (success) => {
-        //             console.log('ADD NEW PATIENT');
-        //             this.navigateToLoginPage();
-        //         },
-        //         (error) => {
-        //                 console.error(error);
-        //         }
-        //     )
+    addNewPatient = () => {
+        this.http.post('/auth/newPatient', this.formData)
+            .map(this.handleResponse, this.handleError)
+            .subscribe(
+                (newPatient) => {
+                    console.log('NEW PATIENT:' newPatient);
+                    this.decorateAlertContent();
+                    this.isShowConfirm = false;
+                },
+                (error) => {
+                    console.error(error);
+                }
+            )
+    }
+
+    decorateAlertContent(){
+        this.alertContent = `
+            <h1 class="title">กรุณาจดรหัสนี้ไว้เพื่อสมัครสมาชิกเข้าสู่ระบบต่อไป</h1>
+            <p><b>รหัสHNของคุณคือ</b> ${this.formData['HN']}</p>
+        `;
+        this.isShowAlert = true;
     }
 
     navigateToLoginPage = () => {
@@ -133,6 +155,9 @@ export class NewPatientRegisterComponent implements OnInit {
     }
     
      dismissModal = () => {
+        this.isShowOverLength = false;
+        this.isWrongZipCode = false;
+        this.isShowAlert = false;
         this.isShowConfirm = false;
         this.isShowCancelConfirm = false;
         this.isShowInvalidate = false;
