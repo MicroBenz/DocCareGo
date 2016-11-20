@@ -21,3 +21,6 @@ export const APPOINTMENT_ENDPOINT: string = API_PREFIX + '/appointments';
 
 // NURSE ENDPOINT
 export const PATIENT_RECORD_ENDPOINT: string = API_PREFIX + '/patientRecords';
+
+// PHARMACIST ENDPOINT
+export const DIAGNOSIS_RESULT_ENDPOINT: string = API_PREFIX + '/diagnosisResults';

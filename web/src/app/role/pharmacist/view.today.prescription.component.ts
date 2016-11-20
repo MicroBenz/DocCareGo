@@ -13,17 +13,23 @@ import { DIAGNOSIS_RESULT_ENDPOINT } from '../../config/api.config';
 export class ViewTodayPrescriptionComponent implements OnInit {
     public patientList;
     public prescriptionList;
+    public prescriptionHistoryList;
+    public medicineAllegyList;
     // public medicines;
-    private selectedPatient
+    private selectedPatient;
+    private prescriptionHistoryIndex: number;
 
     constructor(private title: Title, private dataService: DataService) {}
 
     ngOnInit () {
         this.title.setTitle(VIEW_PATIENT_PRESCRIPTION);
         this.patientList = [];
+        this.prescriptionList = [];
+        this.prescriptionHistoryList = [];
+        this.medicineAllegyList = [];
         
-        this.dataService.getData(DIAGNOSIS_RESULT_ENDPOINT)
-            .subscribe(this.displayPatientPrescriptions, this.errorHandler);
+        // this.dataService.getData(DIAGNOSIS_RESULT_ENDPOINT)
+            // .subscribe(this.displayPatientPrescriptions, this.errorHandler);
         this.patientList = [
            {
                id: 1,
@@ -87,25 +93,78 @@ export class ViewTodayPrescriptionComponent implements OnInit {
                 howto: 'รับประทานหลังอาหารเช้า/กลางวัน/เย็น ครั้งละ 1 เม็ด'
             }
         ];
+        this.prescriptionHistoryList = [
+            [{
+                name: 'พาราเซตตามอล',
+                quantity: '3 เม็ด',
+                howto: 'รับประทานหลังอาหารเช้า/กลางวัน/เย็น ครั้งละ 1 เม็ด'
+            }],
+            [{
+                name: 'abc',
+                quantity: '3 เม็ด',
+                howto: 'รับประทานหลังอาหารเช้า/กลางวัน/เย็น ครั้งละ 1 เม็ด'
+            },
+            {
+                name: 'ddna',
+                quantity: '3 เม็ด',
+                howto: 'รับประทานหลังอาหารเช้า/กลางวัน/เย็น ครั้งละ 1 เม็ด'
+            }]
+        ];
+        this.medicineAllegyList = [
+            {
+                name: 'abc',
+                quantity: '3 เม็ด',
+                howto: 'รับประทานหลังอาหารเช้า/กลางวัน/เย็น ครั้งละ 1 เม็ด'
+            },
+            {
+                name: 'ddna',
+                quantity: '3 เม็ด',
+                howto: 'รับประทานหลังอาหารเช้า/กลางวัน/เย็น ครั้งละ 1 เม็ด'
+            }
+        ];
         this.selectedPatient = {};
+        this.prescriptionHistoryIndex = this.prescriptionHistoryList.length-1;
     }   
 
     public displayPatientPrescriptions = (patientPrescriptions) => {
         console.log(patientPrescriptions);
         this.patientList = patientPrescriptions;
-        this.prescriptionList = patientPrescriptions['medicines'];
+        // this.prescriptionList = patientPrescriptions['medicines'];
     }
 
     private errorHandler = (error) => {
         console.error('ViewTodayPrescriptionComponentError');
     }
 
-    public getPatientPrescriptionHistory() {
+    public getPreviousPrescriptionHistory() {
+        if(this.prescriptionHistoryIndex-1 > -1)
+            this.prescriptionHistoryIndex -= 1;
+    }
 
+    public getPatientPrescriptionHistory() {
+        this.dataService.getData(DIAGNOSIS_RESULT_ENDPOINT)
+            .subscribe(this.displayPatientPrescriptions, this.errorHandler);
+    }
+
+    public displayPatientPrescriptionHistory = (patientPrescription) => {
+        console.log(patientPrescription);
+        this.prescriptionHistoryList = patientPrescription;
+    }
+
+    public getPatientPrescriptionData(selectedPatient) {
+        // get Today precription
+        // this.prescriptionList = selectedPatient['medicines'];
+        // get History prescription
+        // this.getPatientPrescriptionHistory();
+        // this.prescriptionLastHistory = this.prescriptionHistoryList[0];
+        // get no medicines
+        let appointment = selectedPatient['appointment'];
+        // let patient = appointment['patient'];
+        // this.medicineAllegyList = patient['noMedicines'];
     }
 
     onSelectPatient(idx) {
         this.selectedPatient = this.patientList[idx];
-        // this.getPatientPrescriptionHistory(this.selectedPatient);
+        this.getPatientPrescriptionData(this.selectedPatient);
     }
 }

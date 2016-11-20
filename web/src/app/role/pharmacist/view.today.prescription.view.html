@@ -18,7 +18,7 @@
                 <div class="patient-prescription-header">
                     <h1 class="title">ข้อมูลการจ่ายยา</h1>
                 </div>
-                <div class="patient-prescription-content">
+                <div class="patient-prescription-content" *ngIf="(selectedPatient | json) != '{}'">
                     <article class="message is-danger">
                         <div class="message-header">
                             <h1>รายการการแพ้ยา</h1>
@@ -37,7 +37,7 @@
                                 </div>
                                 <div class="level-right">
                                     <span>
-                                        <a class="button">
+                                        <a class="button" (click)="getPreviousPrescriptionHistory()">
                                             <i class="fa fa-chevron-left"></i>
                                         </a>
                                         <a class="button">
@@ -50,7 +50,7 @@
                         <div class="message-body">
                             <patient-prescription
                                 [patient]="selectedPatient"
-                                [prescription]="prescriptionList">
+                                [prescription]="prescriptionHistoryList[prescriptionHistoryIndex]">
                             </patient-prescription>
                         </div>
                     </article>
@@ -65,6 +65,9 @@
                             </patient-prescription>
                         </div>
                     </article>
+                </div>
+                <div class="patient-prescription-content" *ngIf="(selectedPatient | json) == '{}'">
+                    <h1>เลือกผู้ป่วยที่ต้องการบันทึกข้อมูลทางด้านซ้าย</h1>
                 </div>
             </div>
         </div>
