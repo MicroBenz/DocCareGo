@@ -21,6 +21,7 @@ import { ViewTodayPrescriptionComponent } from './role/pharmacist/index';
 
 // Doctor Components
 import { ManageWorkdayComponent, AddWorkdayComponent } from './role/doctor/index';
+import { StartWorkingComponent } from './role/doctor/make-diagnosis/index';
 
 // Admin Component
 import { PersonnelManagementComponent, AddPersonnelComponent } from './role/admin/personnel-management/index';
@@ -100,7 +101,8 @@ const appRoutes: Routes = [
                 component: AddWorkdayComponent
             },
             {
-                path: 'start-working'
+                path: 'start-working',
+                component: StartWorkingComponent
             }
         ]
     },
