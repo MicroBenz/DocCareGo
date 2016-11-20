@@ -1,6 +1,6 @@
 <div class="control is-horizontal">
     <div class="control columns">
-        <p class="control column is-3" *ngIf="isNeedHN">
+         <p class="control column is-3" *ngIf="isNeedHN">
             <label class="label">รหัสโรงพยาบาล (HN)</label>
             <input class="input" type="text" [(ngModel)]="formData.HN">
         </p>
@@ -81,7 +81,28 @@
         </p>
     </div>
 </div>
-<div class="control is-vertical">
+<div>
+    <label class="label">รายการยาที่แพ้</label>
+    <p class="control has-addons">
+        <input class="input" type="text" [(ngModel)]="aMedicine">
+        <a class="button is-info" (click)="addNoMedicine()" >เพิ่ม</a>
+    </p>
+</div>
+<div>
+    <div class="control is-horizontal">
+        <div class="control columns">
+            <div *ngIf="medicines.length > 0">
+                <div class="button-static" *ngFor="let medicine of medicines">
+                    <div class="control has-addons">
+                        <input class="input" type="text" value="{{medicine}}" readonly="readonly">
+                        <a class="button is-danger" (click)="deleteNoMedicine(medicine)">ลบ</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--<div class="control is-vertical">
     <div class="control rows">
         <div class="control column is-5">
             <label class="label">รายการยาที่แพ้</label>
@@ -89,7 +110,6 @@
                 <input class="input" type="text" [(ngModel)]="aMedicine">
                 <a class="button is-info" (click)="addNoMedicine()" >เพิ่ม</a>
             </p>
-            <!--<div *ngIf="formData.noMedicines">-->
             <div *ngIf="medicines.length > 0">
                 <div *ngFor="let medicine of medicines">
                     <div class="button-static">
@@ -102,4 +122,4 @@
             </div>
         </div>
     </div>
-</div>
+</div>-->

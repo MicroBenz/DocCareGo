@@ -4,7 +4,10 @@ import { Component, Input } from '@angular/core';
     templateUrl: './patient.form.view.html',
     styles: [`
         .button-static {
-            margin-top: 13px;
+            margin-top: 20px;
+            margin-left: 10px;
+            margin-right: 5px;
+            display: inline-block;
         }
     `]
 })
