@@ -100,7 +100,7 @@ module.exports = function (apiRoutes, express) {
     }
 
     function getPatientByHN (req, res) {
-        utils.checkRole(req, res, ['admin']);
+        utils.checkRole(req, res, ['admin', 'staff']);
         Patient.findOne({
             HN: req.params.HN
         })

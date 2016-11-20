@@ -1,13 +1,32 @@
 <div class="container">
     <div class="box hn-box">
-        <label class="label">รหัสบัตรประจำตัวผู้ป่วย (HN)</label>
-        <input type="text">
-        <a (click)="confirmPatient()" class="button is-info">ยืนยันผู้ป่วย</a>
+        <h1 class="title">กรอกรหัสประจำตัวผู้ป่วยที่ต้องการนัดหมาย</h1>
+        <div class="columns" *ngIf="!isConfirmHN">
+            <div class="column is-5">
+                <p class="control">
+                    <input class="input" type="text" [(ngModel)]="patientHN">
+                </p>
+            </div>
+            <div class="column">
+                <a (click)="searchPatient()" class="button is-info">ค้นหาผู้ป่วย</a> 
+            </div>
+        </div>
+    </div>
+    <div class="patient-information" *ngIf="isSearchPatientCompleted && !isConfirmHN">
+        <div class="notification is-info" *ngIf="hasPatientWithThatHN">
+            <h2><b>ชื่อผู้ป่วย: </b>{{patientName}}</h2>
+            <i class="fa fa-check" (click)="confirmThisPatient()"></i>        
+        </div>
+        <div class="notification is-danger" *ngIf="!hasPatientWithThatHN">
+            <h2><b>ไม่พบผู้ป่วยที่มี HN นี้ กรุณาลองใหม่</b></h2>
+        </div>
     </div>
 </div>
-<make-appointment-form
-    *ngIf="isConfirmHN"
-    (onConfirmAppointment)="onConfirmAppointment($event)"
-    [isMakeAppointmentSuccess]="isMakeAppointmentSuccess"
-    [isShowLink]="false">
-</make-appointment-form>
+<div class="container">
+    <make-appointment-form
+        *ngIf="isConfirmHN"
+        (onConfirmAppointment)="onConfirmAppointment($event)"
+        [isMakeAppointmentSuccess]="isMakeAppointmentSuccess"
+        [isShowLink]="false">
+    </make-appointment-form>
+</div>

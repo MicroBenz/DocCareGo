@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+
 import { MANAGE_APPOINTMENT_TITLE } from './../../config/title.config';
+import { DataService } from '../../shared/service/data.service';
+import { APPOINTMENT_ENDPOINT } from '../../config/api.config';
 
 @Component({
     selector: 'appointment-management',
@@ -16,11 +19,18 @@ import { MANAGE_APPOINTMENT_TITLE } from './../../config/title.config';
     `]
 })
 export class AppointmentManagementComponent implements OnInit {
-    constructor(private title: Title) {}
-    
     public appointmentList;
-
+    
+    constructor(private title: Title, private dataService: DataService) {}
+    
     ngOnInit () {
+        this.title.setTitle(MANAGE_APPOINTMENT_TITLE);
+        this.dataService.getData(APPOINTMENT_ENDPOINT)
+            .subscribe(
+                (appointments) => {
+                    console.log(appointments);
+                }
+            )        
         this.appointmentList = [
             {
                 id: 1,
@@ -47,7 +57,6 @@ export class AppointmentManagementComponent implements OnInit {
                 time: '13:00 - 13:30'
             }
         ]
-        this.title.setTitle(MANAGE_APPOINTMENT_TITLE);
     }
     
     postponeAppointment (id) {
