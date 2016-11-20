@@ -225,7 +225,7 @@ module.exports = (apiRoutes, express) => {
             })
             .then(
                 function(workdays){
-                    return Appointemnt.find({
+                    return Appointment.find({
                         workday: {
                             $in: workdays
                         }
