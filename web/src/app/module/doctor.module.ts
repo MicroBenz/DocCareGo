@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from './shared.module';
 import { DoctorOnlyRoute } from './../auth/guard/index';
 import { ManageWorkdayComponent, AddWorkdayComponent, WorkdaySelectorComponent, WorkdayPatientListComponent } from './../role/doctor/index';
-import { StartWorkingComponent, PatientInQueueComponent, DiagnosisFormComponent, DiseasesSelectorComponent } from './../role/doctor/make-diagnosis/index';
+import { StartWorkingComponent, PatientInQueueComponent, DiagnosisFormComponent, DiseasesSelectorComponent, MedicineSelectorComponent } from './../role/doctor/make-diagnosis/index';
 
 @NgModule({
     imports: [
@@ -22,7 +22,8 @@ import { StartWorkingComponent, PatientInQueueComponent, DiagnosisFormComponent,
         StartWorkingComponent,
         PatientInQueueComponent,
         DiagnosisFormComponent,
-        DiseasesSelectorComponent
+        DiseasesSelectorComponent,
+        MedicineSelectorComponent
     ],
     exports: [
         ManageWorkdayComponent,

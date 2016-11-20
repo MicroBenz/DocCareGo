@@ -2,7 +2,7 @@
     <thead>
         <tr>
             <th class="first-col"></th>
-            <th class="medicine-name-col">รหัสโรค</th>
+            <th class="disease-name-col">รหัสโรค</th>
             <th></th>            
         </tr>
     </thead>
@@ -27,12 +27,12 @@
             </td>
             <td>
                 <div *ngIf="diseasesSuggestion.length === 0">
-                    <p>ไม่พบข้อมูลยา</p>
+                    <p>ไม่พบข้อมูลโรค</p>
                 </div>
                 <div *ngIf="diseasesSuggestion.length !== 0">
                     <span
                         *ngFor="let disease of diseasesSuggestion; let i = index;" 
-                        class="tag diseases-tag is-primary is-medium"
+                        class="tag diseases-tag is-primary is-medium no-text-selection"
                         (click)="addNewDiseases(i)">
                         {{disease.name}}</span>
                 </div>
@@ -40,5 +40,3 @@
         </tr>
     </tbody>
 </table>
-
-{{diseasesList | json}}
