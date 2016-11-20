@@ -1,4 +1,4 @@
-module.exports = (apiRoutes, express) => {
+module.exports = (app, express) => {
     var userRoutes = express.Router();    
     var User = require('../model/User');
     var utils = require('../utils');
@@ -15,7 +15,7 @@ module.exports = (apiRoutes, express) => {
         .put(utils.methodNotAllowed)
         .delete(utils.methodNotAllowed);
 
-    apiRoutes.use('/users', userRoutes);
+    app.use('/users', userRoutes);
 
     // Implementation of CRUD are below.
     //----------------- GET -----------------
