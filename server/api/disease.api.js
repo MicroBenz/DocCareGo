@@ -35,7 +35,19 @@ module.exports = function (apiRoutes, express) {
                         name: {
                             $regex: req.query.search,
                             $options: 'i'
-                        }
+                        },
+                        icd10: {
+                            $regex: req.query.search,
+                            $options: 'i'
+                        },
+                        snowmed: {
+                            $regex: req.query.search,
+                            $options: 'i'
+                        },
+                        drg: {
+                            $regex: req.query.search,
+                            $options: 'i'
+                        },
                     }
                 ]
             })
