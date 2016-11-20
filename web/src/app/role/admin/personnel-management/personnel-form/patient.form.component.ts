@@ -5,4 +5,5 @@ import { Component, Input } from '@angular/core';
 })
 export class PatientFormComponent {
     @Input('formData') formData;
+    @Input('isNeedHN') isNeedHN = true;
 }

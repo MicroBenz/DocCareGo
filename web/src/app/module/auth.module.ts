@@ -4,11 +4,13 @@ import { FormsModule } from '@angular/forms';
 
 import { NonLoggedInRoute } from './../auth/guard/non.logged.in.guard';
 import { LoginComponent, RegisterComponent, NewPatientRegisterComponent } from './../auth/index';
+import { AdminModule } from './admin.module';
 
 @NgModule({
     imports: [
         CommonModule,
-        FormsModule
+        FormsModule,
+        AdminModule
     ],
     declarations: [
         LoginComponent,

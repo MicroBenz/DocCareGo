@@ -1,5 +1,43 @@
 <div id="register-view">
     <div id="register-box">
-        
+        <patient-form
+        	[formData]="formData"
+        	[isNeedHN]="false">
+        </patient-form>
+        <a class="button is-primary"
+	        (click)="validateForm()">
+	        <i class="fa fa-pencil"></i>แก้ไขข้อมูล</a>
+	    <a class="button is-danger"
+	        (click)="isShowCancelConfirm = true">
+	        <i class="fa fa-trash"></i>ลบข้อมูล</a>
     </div>
 </div>
+<!-- <modal-dialog
+    [description]="confirmModalContent"
+    [modalType]="'revise'"
+    [confirmText]="'ยืนยันการสมัคร'"
+    [cancelText]="'กลับ'"
+    [confirmFn]="addNewPatient"
+    [cancelFn]="dismissModal"
+    [isShowFlag]="isShowConfirm"
+    (isShowFlagChange)="isShowConfirm = $event">
+</modal-dialog>
+
+<modal-dialog
+    [description]="'คุณต้องการยกเลิกการลงทะเบียนหรือไม่?'"
+    [confirmText]="'ยกเลิกการลงทะเบียน'"
+    [cancelText]="'กลับ'"
+    [confirmFn]="navigateToLoginPage"
+    [cancelFn]="dismissModal"
+    [isShowFlag]="isShowCancelConfirm"
+    (isShowFlagChange)="isShowCancelConfirm = $event">
+</modal-dialog>
+
+<modal-dialog
+    [description]="'โปรดกรอกข้อมูลให้ครบถ้วน'"
+    [modalType]="'fail'"
+    [confirmText]="'กรอกข้อมูลต่อ'"
+    [confirmFn]="dismissModal"
+    [isShowFlag]="isShowInvalidate"
+    (isShowFlagChange)="isShowInvalidate = $event">
+</modal-dialog> -->

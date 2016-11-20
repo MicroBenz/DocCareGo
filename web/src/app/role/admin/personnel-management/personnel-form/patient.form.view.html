@@ -1,6 +1,6 @@
 <div class="control is-horizontal">
     <div class="control columns">
-        <p class="control column is-3">
+        <p class="control column is-3" *ngIf="isNeedHN">
             <label class="label">รหัสโรงพยาบาล (HN)</label>
             <input class="input" type="text" [(ngModel)]="formData.HN">
         </p>

@@ -48,7 +48,9 @@ import { ClinicManagementComponent, ClinicTableComponent, AddClinicComponent, Ed
         PersonnelManagementComponent,
         ClinicManagementComponent,
         MedicineManagementComponent,  
-        EditMedicineComponent
+        EditMedicineComponent,
+
+        PatientFormComponent
     ],
     providers: [
         AdminOnlyRoute

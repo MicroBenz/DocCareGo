@@ -22,7 +22,7 @@ import { NEW_PATIENT_REGISTER_TITLE } from '../config/title.config';
             width: 100%;
         }
         #register-box {
-            width: 420px;
+            width: 80%;
             margin: auto;
             padding: 25px;
             background-color: #ffffff;
@@ -32,9 +32,11 @@ import { NEW_PATIENT_REGISTER_TITLE } from '../config/title.config';
     `]
 })
 export class NewPatientRegisterComponent implements OnInit {
+    public formData;
     constructor(private title: Title, private router: Router) {}
 
     ngOnInit () {
+        this.formData = {};
         this.title.setTitle(NEW_PATIENT_REGISTER_TITLE);
     }
 }
