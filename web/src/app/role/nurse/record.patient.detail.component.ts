@@ -70,6 +70,7 @@ export class RecordPatientDetailComponent implements OnInit {
     }
 
     recordPatientDetailDataService = () => {
+        this.patientRecord['appointment'] = this.patient;
         // this.dataService.saveData(PATIENT_RECORD_ENDPOINT, this.patientRecord)
         //     .subscribe(
         //         (success) => {

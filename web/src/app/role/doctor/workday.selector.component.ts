@@ -131,7 +131,7 @@ export class WorkdaySelectorComponent implements OnInit {
     private filterBeforeToday = (dayList: Array<Object>) => {
         return dayList.filter(
             (date) => {
-                return moment().isBefore(date['date']);
+                return moment().isBefore(date['date']) || moment().isSame(date['date'], 'day');
             }
         )
     }

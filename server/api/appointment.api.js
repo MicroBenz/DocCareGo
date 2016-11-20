@@ -1,6 +1,7 @@
 module.exports = (apiRoutes, express) => {
     var AppointmentRoutes = express.Router();    
     var Appointment = require('../model/Appointment');
+    var PatientRecord = require('../model/PatientRecord');
     var Patient = require('../model/Patient');
     var Doctor = require('../model/Doctor');
     var Clinic = require('../model/Clinic');
@@ -70,7 +71,7 @@ module.exports = (apiRoutes, express) => {
                         userRef = user;
                         return Workday.find({
                             date: {
-                                $gte: moment().toDate()
+                                $gte: moment().startOf('day').toDate()
                             }
                         });
                     }
@@ -218,12 +219,173 @@ module.exports = (apiRoutes, express) => {
                 }
             );
         }
+        else if(req.query.doctor){
+            Workday.find({
+                doctor: req.query.doctor,
+                date: moment().startOf('day').toDate()
+            })
+            .then(
+                function(workdays){
+                    return Appointemnt.find({
+                        workday: {
+                            $in: workdays
+                        }
+                    });
+                },
+                function(error){
+                    console.log(error);
+                    res.status(500).send({
+                        success: false,
+                        message: error,
+                        clientMessage: 'Cannot get workday data.'
+                    });
+                }
+            )
+            .then(
+                function(appointemnts){
+                    return PatientRecord.find({
+                        appointment: {
+                            $in: appointments
+                        }
+                    })
+                    .populate('appointment');
+                },
+                function(error){
+                    console.log(error);
+                    res.status(500).send({
+                        success: false,
+                        message: error,
+                        clientMessage: 'Cannot get appointment data.'
+                    });
+                }
+            )
+            .then(
+                function(patientRecords){
+                    let arr = [];
+                    patientRecords.forEach(
+                        function(patientRecord){
+                            patientRecord = patientRecord.toObject();
+                            let p = new Promise(
+                                function(resolve, reject){
+                                    Patient.findById(PatientRecord.appointemnt.patient)
+                                    .then(
+                                        function(patient){
+                                            patientRecord.appointment.patient = patient;
+                                            resolve(patientRecord);
+                                        },
+                                        function(error){
+                                            console.log(error);
+                                            reject(error);
+                                        }
+                                    );
+                                }
+                            )
+                            arr.push(p);
+                        }
+                    );
+                    return Promise.all(arr);
+                },
+                function(error){
+                    console.log(error);
+                    res.status(500).send({
+                        success: false,
+                        message: error,
+                        clientMessage: 'Cannot get patientRecord data.'
+                    });
+                }
+            )
+            .then(
+                function(patientRecords){
+                    res.json({
+                        success: true,
+                        data: patientRecords
+                    });
+                },
+                function(error){
+                    console.log(error);
+                    res.status(500).send({
+                        success: false,
+                        message: error,
+                        clientMessage: 'Cannot get patientRecord data.'
+                    });
+                }
+            );
+        }
         else{
-            res.status(400).send({
-                success: false,
-                message: 'Bad Request',
-                clientMessage: 'Please tell me which appointment do you want?'
-            });
+            Workday.find({
+                date: moment().startOf('day').toDate()
+            })
+            .then(
+                function(workdays){
+                    return Appointment.find({
+                        workday: {
+                            $in: workdays
+                        }
+                    })
+                    .populate('doctor')
+                    .populate('workday')
+                    .populate('patient');
+                },
+                function(error){
+                    console.log(error);
+                    res.status(500).send({
+                        success: false,
+                        message: error,
+                        clientMessage: 'Cannot get workday data.'
+                    });
+                }
+            )
+            .then(
+                function(appointments){
+                    let arr = [];
+                    appointments.forEach(
+                        function(appointment){
+                            appointment = appointment.toObject();
+                            let p = new Promise(
+                                function(resolve, reject){
+                                    Clinic.findById(appointment.doctor.clinic)
+                                    .then(
+                                        function(clinic){
+                                            appointment.doctor.clinic = clinic;
+                                            resolve(appointment);
+                                        },
+                                        function(error){
+                                            console.log(error);
+                                            reject(error);
+                                        }
+                                    );
+                                }
+                            )
+                            arr.push(p);
+                        }
+                    );
+                    return Promise.all(arr);
+                },
+                function(error){
+                    console.log(error);
+                    res.status(500).send({
+                        success: false,
+                        message: error,
+                        clientMessage: 'Cannot get appointment data.'
+                    });
+                }
+            )
+            .then(
+                function(appointments){
+                    res.json({
+                        success: true,
+                        data: appointments
+                    });
+                },
+                function(error){
+                    console.log(error);
+                    res.status(500).send({
+                        success: false,
+                        message: error,
+                        clientMessage: 'Cannot get appointment data.'
+                    });
+                }
+            );
         }
     }
 

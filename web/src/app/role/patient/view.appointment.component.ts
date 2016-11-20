@@ -59,7 +59,9 @@ export class ViewAppointmentComponent implements OnInit {
                         }
                     }
                 )
-                this.selectedAppointment = this.appointments[0];
+                if (this.appointments.length !== 0) {
+                    this.selectedAppointment = this.appointments[0];
+                }
             }
         )
     }
