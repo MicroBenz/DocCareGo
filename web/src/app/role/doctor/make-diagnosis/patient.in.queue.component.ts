@@ -9,19 +9,26 @@ import { DataService } from '../../../shared/service/data.service';
             height: 180px;
             overflow-y: scroll;
         }
+        .is-active, .is-active:hover {
+            background-color: #4ca2ff;
+            color: #ffffff;
+        }
     `]
 })
 export class PatientInQueueComponent implements OnInit {
     @Input('patientList') patientList = [];
     public selectedPatient;
+    public selectedIndex;
 
     constructor(private dataService: DataService) {}
 
     ngOnInit () {
         this.selectedPatient = {};
+        this.selectedIndex = -1;
     }
 
     selectPatient(i) {
         this.selectedPatient = this.patientList[i];
+        this.selectedIndex = i;
     }
 }

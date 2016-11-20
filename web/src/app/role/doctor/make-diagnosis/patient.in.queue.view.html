@@ -5,6 +5,7 @@
     <div class="patient-list-view">
         <a class="panel-block"
             *ngFor="let patient of patientList; let i = index"
+            [class.is-active]="i === selectedIndex"
             (click)="selectPatient(i)">
             {{patient.appointment.patient.preName}}{{patient.appointment.patient.name}} {{patient.appointment.patient.surname}}
         </a>
