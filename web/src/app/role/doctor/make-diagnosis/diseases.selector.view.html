@@ -2,8 +2,8 @@
     <thead>
         <tr>
             <th class="first-col"></th>
-            <th class="medicine-name-col">ชื่อยา</th>
-            <th>คำอธิบายยา</th>            
+            <th class="medicine-name-col">รหัสโรค</th>
+            <th></th>            
         </tr>
     </thead>
     <tbody>
@@ -11,17 +11,34 @@
             <td>
                 <i (click)="removeDisease(i)" class="fa fa-minus-circle action-button remove-button"></i>
             </td>
-            <td></td>
-            <td></td>
+            <td>
+                {{disease.name}}
+            </td>
+            <td>
+                {{disease.description}}
+            </td>
         </tr>
         <tr>
             <td>
-                <i (click)="addNewDiseases()" class="fa fa-plus-circle action-button add-button"></i>
+                <i class="fa fa-search action-button"></i>
             </td>
             <td>
-                <input type="text" class="input">                
+                <input type="text" class="input" [formControl]="disease">
             </td>
-            <td></td>
+            <td>
+                <div *ngIf="diseasesSuggestion.length === 0">
+                    <p>ไม่พบข้อมูลยา</p>
+                </div>
+                <div *ngIf="diseasesSuggestion.length !== 0">
+                    <span
+                        *ngFor="let disease of diseasesSuggestion; let i = index;" 
+                        class="tag diseases-tag is-primary is-medium"
+                        (click)="addNewDiseases(i)">
+                        {{disease.name}}</span>
+                </div>
+            </td>
         </tr>
     </tbody>
 </table>
+
+{{diseasesList | json}}
