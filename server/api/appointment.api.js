@@ -241,7 +241,7 @@ module.exports = (apiRoutes, express) => {
                 }
             )
             .then(
-                function(appointemnts){
+                function(appointments){
                     return PatientRecord.find({
                         appointment: {
                             $in: appointments
