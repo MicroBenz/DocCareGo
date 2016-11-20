@@ -102,18 +102,18 @@ module.exports = function (apiRoutes, express) {
         )
         .then(
             function (patientRecords) {
+                let appointments = [];
                 appointmentsRef.forEach(function(appointment){
                     let hasPatientRecord = false;
                     patientRecords.forEach(function(patientRecord) {
                         if(appointment._id.toString() === patientRecord.appointment.toString()) {
-                            appointment.patientRecord = patientRecord;
                             hasPatientRecord = true;
                         }
                     });
                     if(!hasPatientRecord)
-                        appointment.patientRecord = null;
+                        appointments.push(appointment);
                 });
-                return appointmentsRef;
+                return appointments;
             },
             function (error) {
                 console.log(error);
