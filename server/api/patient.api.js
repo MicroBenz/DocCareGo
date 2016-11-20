@@ -345,9 +345,5 @@ module.exports = function (apiRoutes, express) {
         if (!body.country) {
             utils.responseMissingField(res, 'country');
         }
-
-        if (!body.noMedicines) {
-            utils.responseMissingField(res, 'noMedicines');
-        }
     }
 };

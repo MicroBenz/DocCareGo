@@ -214,10 +214,6 @@ module.exports = function (app, express) {
         if (!body.country) {
             utils.responseMissingField(res, 'country');
         }
-
-        if (!body.noMedicines) {
-            utils.responseMissingField(res, 'noMedicines');
-        }
     }
 
     function createToken (data) {
