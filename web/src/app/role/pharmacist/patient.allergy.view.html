@@ -1,2 +1,3 @@
-<span class="tag is-danger is-medium no-text-selection">ยาตัวอย่าง 1</span>
-<span class="tag is-danger is-medium no-text-selection">ยาตัวอย่าง 2</span>
+<div class="medicine-tab" *ngFor="let med of medicineAllegyList">
+    <span class="tag is-danger is-medium no-text-selection">{{med.name}}</span>
+</div>

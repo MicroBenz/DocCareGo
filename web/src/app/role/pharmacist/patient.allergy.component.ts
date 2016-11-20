@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 @Component({
     selector: 'patient-allergy',
     templateUrl: './patient.allergy.view.html',
@@ -11,8 +11,13 @@ import { Component } from '@angular/core';
         .tag {
             margin-bottom: 10px;
         }
+        .medicine-tab {
+            display: inline-block;
+            margin-right: 5px;
+        }
+        
     `]
 })
 export class PatientAllergyComponent {
-
+    @Input('medicineAllegyList') medicineAllegyList;
 }
