@@ -1,6 +1,6 @@
 <div class="container">
     <div class="box doctor-hn-box">
-        <h1 class="title">กรอกรหัสประจำตัวแพทย์ที่ต้องการจัดการวันออกตรวจ</h1>
+        <h1 class="title">กรอกรหัสประจำตัวแพทย์ที่ต้องการจัดการวันออกตรวจ <i class="fa fa-check-circle" *ngIf="isConfirmDoctor"></i> <span *ngIf="isConfirmDoctor">[{{doctorName}}]</span></h1>
         <div class="columns" *ngIf="!isConfirmDoctor">
             <div class="column is-5">
                 <p class="control">
@@ -21,10 +21,28 @@
             <h2><b>ไม่พบแพทย์ที่มีรหัสนี้</b></h2>
         </div>
     </div>
-    
+    <div class="option-wrapper" *ngIf="isConfirmDoctor">
+        <a class="button is-info is-large" 
+            (click)="chosenFunction = 'add'"
+            [class.is-disabled]="chosenFunction === 'cancel'">
+            <span class="icon">
+                <i class="fa fa-plus-circle"></i>
+            </span>
+            <span>เพิ่มวันออกตรวจ</span>
+        </a>
+        <a class="button is-danger is-large"
+            (click)="chosenFunction = 'cancel'"
+            [class.is-disabled]="chosenFunction === 'add'">
+            <span class="icon">
+                <i class="fa fa-trash"></i>
+            </span>
+            <span>ยกเลิกวันออกตรวจ</span>
+        </a>
+    </div>
+
     <add-workday
         [doctorHN]="selectedDoctor._id"
-        *ngIf="isConfirmDoctor">
+        *ngIf="chosenFunction === 'add'">
     </add-workday>
 
 </div>

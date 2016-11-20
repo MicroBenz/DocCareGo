@@ -9,8 +9,18 @@ import { DOCTOR_ENDPOINT } from '../../config/api.config';
         .container {
             margin-top: 13px;
         }
-        .doctor-information .is-info h1 {
+        .doctor-hn-box i.fa-check-circle {
+            color: green;
+        }
+        .doctor-information .is-info h2 {
             display: inline-block;
+        }
+        .doctor-information .is-info i.fa {
+            font-size: 25px;
+            cursor: pointer;
+        }
+        .option-wrapper {
+            text-align: center;
         }
     `]
 })
@@ -21,6 +31,7 @@ export class WorkdayManagementByStaffComponent implements OnInit {
     public isSearchCompleted: boolean;
     public hasDoctorWithThatHN: boolean;
     public isConfirmDoctor: boolean;
+    public chosenFunction: string;
 
     constructor(private dataService: DataService) {}
 
@@ -31,6 +42,7 @@ export class WorkdayManagementByStaffComponent implements OnInit {
         this.isSearchCompleted = false;
         this.hasDoctorWithThatHN = false;
         this.isConfirmDoctor = false;
+        this.chosenFunction = '';
     }
 
     searchDoctor () {
