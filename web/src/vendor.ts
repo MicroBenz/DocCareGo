@@ -13,10 +13,10 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
 
 // jQuery and Friends
-import 'jquery/dist/jquery';
-import 'fullcalendar/dist/fullcalendar.js';
-import 'fullcalendar/dist/fullcalendar.css';
-import 'fullcalendar/dist/locale/th';
+// import 'jquery/dist/jquery';
+// import 'fullcalendar/dist/fullcalendar.js';
+// import 'fullcalendar/dist/fullcalendar.css';
+// import 'fullcalendar/dist/locale/th';
 import 'moment/moment';
 
 // Bulma and CSS friends

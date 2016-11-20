@@ -10,7 +10,49 @@ import { ADD_WORKDAY_TITLE } from '../../config/title.config';
 @Component({
     selector: 'add-workday',
     templateUrl: './add.workday.view.html',
-    styleUrls: ['add.workday.style.css']
+    styles: [`
+        .container {
+            margin-top: 13px;
+        }
+        .workday-box {
+            color: #ffffff;
+        }
+        .workday-box.disabled {
+            opacity: 0.5;
+        }
+        .workday-box.sunday {
+            background-color: #e03333;
+        }
+        .workday-box.monday {
+            background-color: #f4c535;
+        }
+        .workday-box.tuesday {
+            background-color: #e151c7;
+        }
+        .workday-box.wednesday {
+            background-color: #66bf06;
+        }
+        .workday-box.thursday {
+            background-color: #eb8e36;
+        }
+        .workday-box.friday {
+            background-color: #006af5;
+        }
+        .workday-box.saturday {
+            background-color: #4d2cc3;
+        }
+        .workday-box h1 {
+            font-size: 26px;
+        }
+        .workday-box .icon {
+            position: absolute;
+            top: 20px;
+            right: 15px;
+        }
+        .workday-box .subtitle {
+            margin-bottom: 0px;
+        }
+    `]
 })
 export class AddWorkdayComponent implements OnInit {
     @Input('doctorHN') doctorHN = this.authService.getUserID();
