@@ -76,12 +76,10 @@ module.exports = (apiRoutes, express) => {
                         });
                     }
                     else{
-                        res.status(400).send({
-                            success: false,
-                            message: 'Bad Request',
-                            clientMessage: 'No user with this HN.'
+                        res.json({
+                            success: true,
+                            data: []
                         });
-                        Promise.reject(400);
                     }
                 },
                 function (error) {
