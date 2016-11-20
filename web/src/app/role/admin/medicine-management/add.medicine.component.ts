@@ -3,7 +3,7 @@ import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
 import { DataService } from '../../../shared/service/data.service';
-import { ADD_MEDICINE_TITLE } from '../../../config/title.config'
+import { ADD_MEDICINE_TITLE } from '../../../config/title.config';
 import { MEDICINE_ENDPOINT } from '../../../config/api.config';
 @Component({
     selector: 'add-medicine',
