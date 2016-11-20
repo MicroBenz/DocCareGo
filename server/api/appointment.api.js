@@ -80,6 +80,7 @@ module.exports = (apiRoutes, express) => {
                             success: true,
                             data: []
                         });
+                        Promise.reject(400);
                     }
                 },
                 function (error) {
