@@ -4,7 +4,7 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 
 import { DataService } from '../../../shared/service/data.service';
-import { MEDICINE_ENDPOINT, DISEASES_ENDPOINT } from '../../../config/api.config';
+import { DISEASES_ENDPOINT } from '../../../config/api.config';
 
 @Component({
     selector: 'diseases-selector',
@@ -27,7 +27,12 @@ import { MEDICINE_ENDPOINT, DISEASES_ENDPOINT } from '../../../config/api.config
             color: red;
         }
         .diseases-tag {
-
+            cursor: pointer;
+            margin-bottom: 5px;
+            margin-right: 5px;
+        }
+        .table tbody tr td {
+            vertical-align: middle !important;
         }
     `]
 })
@@ -72,6 +77,8 @@ export class DiseasesSelectorComponent implements OnInit {
             }
         }
         this.diseasesList.push(selectedDiseases);
+        this.disease.setValue('');
+        this.diseasesSuggestion = [];
     }
 
     removeDisease(index) {

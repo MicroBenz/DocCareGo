@@ -32,7 +32,7 @@
                 <div *ngIf="diseasesSuggestion.length !== 0">
                     <span
                         *ngFor="let disease of diseasesSuggestion; let i = index;" 
-                        class="tag diseases-tag is-primary is-medium"
+                        class="tag diseases-tag is-primary is-medium no-text-selection"
                         (click)="addNewDiseases(i)">
                         {{disease.name}}</span>
                 </div>
@@ -40,5 +40,3 @@
         </tr>
     </tbody>
 </table>
-
-{{diseasesList | json}}
