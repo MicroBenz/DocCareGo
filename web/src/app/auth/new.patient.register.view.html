@@ -4,18 +4,19 @@
         	[formData]="formData"
         	[isNeedHN]="false">
         </patient-form>
+        <!-- {{formData | json}} -->
         <a class="button is-primary"
 	        (click)="validateForm()">
-	        <i class="fa fa-pencil"></i>แก้ไขข้อมูล</a>
+	        <i class="fa fa-pencil"></i>สมัครสมาชิก</a>
 	    <a class="button is-danger"
 	        (click)="isShowCancelConfirm = true">
-	        <i class="fa fa-trash"></i>ลบข้อมูล</a>
+	        <i class="fa fa-trash"></i>กลับ</a>
     </div>
 </div>
-<!-- <modal-dialog
+<modal-dialog
     [description]="confirmModalContent"
     [modalType]="'revise'"
-    [confirmText]="'ยืนยันการสมัคร'"
+    [confirmText]="'ยืนยันการสมัครสมาชิก'"
     [cancelText]="'กลับ'"
     [confirmFn]="addNewPatient"
     [cancelFn]="dismissModal"
@@ -40,4 +41,4 @@
     [confirmFn]="dismissModal"
     [isShowFlag]="isShowInvalidate"
     (isShowFlagChange)="isShowInvalidate = $event">
-</modal-dialog> -->
+</modal-dialog>
