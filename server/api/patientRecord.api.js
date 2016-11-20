@@ -2,6 +2,7 @@ module.exports = function (apiRoutes, express) {
     var patientRecordRoutes = express.Router();    
     var PatientRecord = require('../model/PatientRecord');
     var Appointment = require('../model/Appointment');
+    var Clinic = require('../model/Clinic');
     var Workday = require('../model/Workday');
     var utils = require('../utils');
     var moment = require('moment');
