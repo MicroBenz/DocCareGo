@@ -45,7 +45,7 @@ export class PersonnelManagementComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit () {
-        this.searchBoxComponent.searchKeyControl.setValue(undefined);              
+        this.searchBoxComponent.searchKeyControl.setValue(undefined);
     }
 
     switchRole (role) {
