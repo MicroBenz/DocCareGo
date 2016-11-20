@@ -20,13 +20,13 @@
             <td>{{appointment.workday.time}}</td>
             <td>
                 <a class="button is-primary"
-                    (click)="postponeAppointment(appointment.id)">
+                    (click)="postponeAppointment(appointment._id)">
                     <i class="fa fa-pencil"></i>เลื่อนวันนัด</a>
                 <a class="button is-danger"
-                    (click)="cancelAppointment(appointment.id)">
+                    (click)="cancelAppointment(appointment._id)">
                     <i class="fa fa-trash"></i>ยกเลิกนัด</a>
                 <a class="button is-info"
-                    (click)="printoutAppointment(appointment.id)"><i class="fa fa-print"></i>พิมพ์ใบนัด</a>
+                    (click)="printoutAppointment(appointment._id)"><i class="fa fa-print"></i>พิมพ์ใบนัด</a>
             </td>            
         </tr>
     </tbody>

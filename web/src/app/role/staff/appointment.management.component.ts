@@ -23,11 +23,20 @@ import { SearchBoxComponent } from '../../shared/component/searchbox.component';
 export class AppointmentManagementComponent implements OnInit, AfterViewInit {
     @ViewChild(SearchBoxComponent) private searchBoxComponent: SearchBoxComponent;
 
-    public appointmentList;
+    public appointmentList: Array<Object>;
+    public isShowConfirmDeleteModal: boolean;
+    public cancelAppointmentModal: string;
+    public selectedApptId: string;
+    public selectedApptIndex;
+
     constructor(private title: Title, private dataService: DataService) {}
     
     ngOnInit () {
         this.appointmentList = [];
+        this.isShowConfirmDeleteModal = false;
+        this.cancelAppointmentModal = `<h1 class="title">คุณต้องการยกเลิกการนัดหมายใช่หรือไม่?</h1>`;
+        this.selectedApptId = '';
+        this.selectedApptIndex = -1;
         this.title.setTitle(MANAGE_APPOINTMENT_TITLE);
         // this.dataService.getData(APPOINTMENT_ENDPOINT)
         //     .map(
@@ -85,9 +94,24 @@ export class AppointmentManagementComponent implements OnInit, AfterViewInit {
         console.log('[AppointmentManagementComponent] postpone id = ', id);
     }
 
-    cancelAppointment (id) {
+    cancelAppointment = (id, index) => {
         // TODO: Handle Cancel Appointment
         console.log('[AppointmentManagementComponent] cancel id = ', id);
+        this.selectedApptId = id;
+        this.selectedApptIndex = index;
+        this.isShowConfirmDeleteModal = true;        
+    }
+
+    deleteAppointmentDataService = () => {
+        console.log('DATA SERVICE =====> ', this.selectedApptId);
+        this.dataService.deleteData(`${APPOINTMENT_ENDPOINT}/${this.selectedApptId}`)
+            .subscribe(
+                (success) => {
+                    console.log('DELETE SUCCESS ', success);
+                    this.isShowConfirmDeleteModal = false;
+                    this.appointmentList.splice(this.selectedApptIndex, 1);
+                }
+            )
     }
 
     printoutAppointment (id) {

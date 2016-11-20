@@ -15,3 +15,14 @@
         </appointment-table>
     </div>
 </div>
+{{isShowConfirmDeleteModal}}
+<modal-dialog
+    [description]="cancelAppointmentModal"
+    [modalType]="'warning'"
+    [confirmText]="'ยกเลิกการนัดหมาย'"
+    [cancelText]="'กลับ'"
+    [confirmFn]="deleteAppointmentDataService"
+    [cancelFn]="dismissModal"
+    [isShowFlag]="isShowConfirmDeleteModal"
+    (isShowFlagChange)="isShowConfirmDeleteModal = $event">
+</modal-dialog>
