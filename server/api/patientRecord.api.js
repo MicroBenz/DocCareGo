@@ -34,7 +34,9 @@ module.exports = function (apiRoutes, express) {
                     workday: {
                         $in: workdays
                     }
-                });
+                })
+                .populate('doctor')
+                .populate('patient');
             },
             function (error) {
                 console.log(error);
@@ -46,12 +48,42 @@ module.exports = function (apiRoutes, express) {
             }
         )
         .then(
-            function (appointments) {
+            function(appointments){
+                let arr = [];
                 appointments.forEach(
                     function(appointment){
-                        appointmentsRef.push(appointment.toObject());
+                        appointment = appointment.toObject();
+                        let p = new Promise(
+                            function(resolve, reject){
+                                Clinic.findById(appointment.doctor.clinic)
+                                .then(
+                                    function(clinic){
+                                        appointment.doctor.clinic = clinic;
+                                        resolve(appointment);
+                                    },
+                                    function(error){
+                                        reject(error);
+                                    }
+                                );
+                            }
+                        );
+                        arr.push(p);
                     }
-                );
+                )
+                return Promise.all(arr);
+            },
+            function (error) {
+                console.log(error);
+                res.status(500).send({
+                    success: false,
+                    message: error,
+                    clientMessage: 'Cannot get appointment data.'
+                });
+            }
+        )
+        .then(
+            function (appointments) {
+                appointmentsRef = appointments;
                 return PatientRecord.find({
                     appointment: {
                         $in: appointments
