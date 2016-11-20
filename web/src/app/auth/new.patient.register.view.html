@@ -16,12 +16,21 @@
 <modal-dialog
     [description]="confirmModalContent"
     [modalType]="'revise'"
-    [confirmText]="'ยืนยันการสมัครสมาชิก'"
+    [confirmText]="'สมัครสมาชิก'"
     [cancelText]="'กลับ'"
     [confirmFn]="addNewPatient"
     [cancelFn]="dismissModal"
     [isShowFlag]="isShowConfirm"
     (isShowFlagChange)="isShowConfirm = $event">
+</modal-dialog>
+
+<modal-dialog
+    [description]="alertContent"
+    [modalType]="'warning'"
+    [confirmText]="'ยืนยันการสมัครสมาชิก'"
+    [confirmFn]="navigateToLoginPage"
+    [isShowFlag]="isShowAlert"
+    (isShowFlagChange)="isShowAlert = $event">
 </modal-dialog>
 
 <modal-dialog
@@ -41,4 +50,22 @@
     [confirmFn]="dismissModal"
     [isShowFlag]="isShowInvalidate"
     (isShowFlagChange)="isShowInvalidate = $event">
+</modal-dialog>
+
+<modal-dialog
+    [description]="'รหัสประชาชนไม่ถูกต้อง'"
+    [modalType]="'fail'"
+    [confirmText]="'กรอกข้อมูลต่อ'"
+    [confirmFn]="dismissModal"
+    [isShowFlag]="isShowOverLength"
+    (isShowFlagChange)="isShowOverLength = $event">
+</modal-dialog>
+
+<modal-dialog
+    [description]="'รหัสไปรษณีย์ไม่ถูกต้อง'"
+    [modalType]="'fail'"
+    [confirmText]="'กรอกข้อมูลต่อ'"
+    [confirmFn]="dismissModal"
+    [isShowFlag]="isWrongZipCode"
+    (isShowFlagChange)="isWrongZipCode = $event">
 </modal-dialog>
