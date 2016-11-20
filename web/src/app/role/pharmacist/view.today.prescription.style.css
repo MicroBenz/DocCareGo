@@ -1,0 +1,65 @@
+.container {
+    margin-top: 13px;
+}
+.columns {
+    box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
+    border-radius: 5px;
+    height: 550px;
+}
+.box {
+    box-shadow: none;
+    height: 100%;
+    /*//overflow-y: scroll;*/
+    /*//max-height: 550px;*/
+}
+.patient-list-wrapper {
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px; 
+    border-right: 1px solid #c8c7cc;  
+    padding-bottom: 0px;       
+    padding-right: 0px;              
+}
+.patient-list-wrapper .patient-list-header, .patient-prescription-wrapper .patient-prescription-header {
+    margin-left: -20px;
+    margin-top: -20px;
+    margin-right: -20px;
+    padding: 20px;       
+    background-color: #00bfff;            
+}
+.patient-list-wrapper .patient-list-header {
+    border-top-left-radius: 5px;
+}
+.patient-prescription-wrapper .patient-prescription-header {
+    border-top-right-radius: 5px;
+    margin-right: -21px !important;
+}
+.patient-list-content {
+    height: 490px;
+    overflow-y: scroll;
+    margin-left: -20px;
+    margin-right: -20px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.patient-prescription-wrapper {
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;            
+}
+.patient-prescription-content {
+    height: 490px;
+    margin-left: -20px;
+    margin-right: -20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 15px;
+    overflow-y: scroll;
+}
+.title {
+    text-align: center;
+    font-size: 20px;
+    font-weight: 600;
+    color: #ffffff;
+}
+.level {
+    margin-bottom: 0px;
+}
