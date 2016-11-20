@@ -69,9 +69,11 @@ module.exports = function (app, express) {
         Patient.find({})
         .then(
             function(patients){
-                let arr = patients.reduce(
-                    function(prev, patient){
-                        return prev.push(patient.HN);
+                let arr = [];
+                patients.forEach(
+                    function(patient){
+                        if(patient.HN)
+                            arr.push(patient.HN);
                     }
                 );
                 let num;
@@ -79,13 +81,21 @@ module.exports = function (app, express) {
                     num = Math.random();
                     if( num < 0.1 )
                         num += 0.1;
-                    num = Math.floor(num*100000);
+                    num = Math.floor(num*1000000);
                 }
                 while(patients.includes(num));
                 res.json({
                     success: true,
                     clientMessage: 'Generate new HN succeed',
                     HN: num
+                });
+            },
+            function (error) {
+                console.log(error);
+                res.status(500).send({
+                    success: false,
+                    message: error,
+                    clientMessage: 'Cannot get patient data.'
                 });
             }
         )
