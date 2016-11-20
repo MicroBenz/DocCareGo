@@ -39,7 +39,10 @@ module.exports = {
             {
                 test: /\.css$/,
                 include: __dirname + '/web/src/app',
-                loader: 'raw'
+                loaders: [
+                    'to-string-loader',
+                    'css-loader'
+                ]
             },
             {
                 test: /\.less$/,
