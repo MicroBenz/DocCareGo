@@ -36,6 +36,11 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
         .patient-info .patient-clinic {
             font-weight: 200;
         }
+        .patient-list {
+            padding-left: 20px;
+            padding-right: 20px;
+            padding-top: 15px;
+        }
     `]
 })
 export class PatientListComponent {
