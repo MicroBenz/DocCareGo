@@ -1,0 +1,30 @@
+<div class="container">
+    <div class="box doctor-hn-box">
+        <h1 class="title">กรอกรหัสประจำตัวแพทย์ที่ต้องการจัดการวันออกตรวจ</h1>
+        <div class="columns" *ngIf="!isConfirmDoctor">
+            <div class="column is-5">
+                <p class="control">
+                    <input class="input" type="text" [(ngModel)]="doctorHN">
+                </p>
+            </div>
+            <div class="column">
+                <a (click)="searchDoctor()" class="button is-info">ค้นหาแพทย์</a> 
+            </div>
+        </div>
+    </div>
+    <div class="doctor-information" *ngIf="isSearchCompleted && !isConfirmDoctor">
+        <div class="notification is-info" *ngIf="hasDoctorWithThatHN">
+            <h2><b>ชื่อแพทย์: </b>{{doctorName}}</h2>
+            <i class="fa fa-check" (click)="confirmThisDoctor()"></i>        
+        </div>
+        <div class="notification is-danger" *ngIf="!hasDoctorWithThatHN">
+            <h2><b>ไม่พบแพทย์ที่มีรหัสนี้</b></h2>
+        </div>
+    </div>
+    
+    <add-workday
+        [doctorHN]="selectedDoctor._id"
+        *ngIf="isConfirmDoctor">
+    </add-workday>
+
+</div>

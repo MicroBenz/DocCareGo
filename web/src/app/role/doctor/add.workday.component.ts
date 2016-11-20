@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
@@ -13,6 +13,7 @@ import { ADD_WORKDAY_TITLE } from '../../config/title.config';
     styleUrls: ['add.workday.style.css']
 })
 export class AddWorkdayComponent implements OnInit {
+    @Input('doctorHN') doctorHN = this.authService.getUserID();
     public selectedTime;
     public selectedState;
     public allTimeSlot;
@@ -37,7 +38,7 @@ export class AddWorkdayComponent implements OnInit {
         this.isShowConfirm = false;
         this.selectedTime = [];        
         this.createSelectedState();    
-        this.dataService.getData(`${SCHEDULE_ENDPOINT}/${this.authService.getUserID()}`)
+        this.dataService.getData(`${SCHEDULE_ENDPOINT}/${this.doctorHN}`)
             .map((schedules: Array<Object>) => {
                 return schedules.map(
                     (timeSlot) => ({
@@ -139,7 +140,7 @@ export class AddWorkdayComponent implements OnInit {
 
     addWorkday = () => {
         let requestBody = {
-            doctor: this.authService.getUserID(),
+            doctor: this.doctorHN,
             schedules: this.selectedTime
         };
         this.dataService.saveData(SCHEDULE_ENDPOINT, requestBody)

@@ -11,7 +11,7 @@ import { LoginComponent, RegisterComponent, NewPatientRegisterComponent } from '
 import { MakeAppointmentComponent, ViewAppointmentComponent } from './role/patient/index';
 
 // Staff Components
-import { AppointmentManagementComponent, MakeAppointmentByStaffComponent } from './role/staff/index';
+import { AppointmentManagementComponent, MakeAppointmentByStaffComponent, WorkdayManagementByStaffComponent } from './role/staff/index';
 
 // Nurse Components
 import { ViewTodayPatientComponent } from './role/nurse/index';
@@ -143,7 +143,8 @@ const appRoutes: Routes = [
                 component: MakeAppointmentByStaffComponent
             },
             {
-                path: 'manage-workday'
+                path: 'manage-workday',
+                component: WorkdayManagementByStaffComponent
             }
         ]
     },
