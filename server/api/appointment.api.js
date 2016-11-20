@@ -333,7 +333,7 @@ module.exports = (apiRoutes, express) => {
                 }
             )
             .then(
-                function(appointment){
+                function(appointments){
                     res.json({
                         success: true,
                         data: appointments
