@@ -1,13 +1,16 @@
-<div class="container">
+<div class="container-fluid">
     <div class="columns">
+        <div class="column is-4">
+            <div class="box">
+                <patient-in-queue
+                    [patientList]="patientList">
+                </patient-in-queue> 
+            </div>
+        </div>
         <div class="column">
             <div class="box">
-                <patient-in-queue>
-                </patient-in-queue>  
-            </div>              
+                <diagnosis-form></diagnosis-form>
+            </div>
         </div>
-    </div>
-    <div class="box">
-        <diagnosis-form></diagnosis-form>
     </div>
 </div>

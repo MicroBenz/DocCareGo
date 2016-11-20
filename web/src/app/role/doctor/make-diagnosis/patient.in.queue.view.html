@@ -1,0 +1,35 @@
+<nav class="panel">
+    <p class="panel-heading">
+        รายชื่อผู้ป่วย
+    </p>
+    <div class="patient-list-view">
+        <a class="panel-block"
+            *ngFor="let patient of patientList; let i = index"
+            (click)="selectPatient(i)">
+            {{patient.appointment.patient.preName}}{{patient.appointment.patient.name}} {{patient.appointment.patient.surname}}
+        </a>
+    </div>
+</nav>
+<nav class="panel">
+    <p class="panel-heading">
+        ข้อมูลทั่วไป
+    </p>
+    <a class="panel-block">
+        <p><b>น้ำหนัก: </b>{{selectedPatient.weight}}</p>      
+    </a>
+    <a class="panel-block">
+        <p><b>ส่วนสูง: </b>{{selectedPatient.height}}</p>      
+    </a>
+    <a class="panel-block">
+        <p><b>อุณหภูมิ: </b>{{selectedPatient.temperature}}</p>
+    </a>
+    <a class="panel-block">
+        <p><b>อัตราการเต้นของหัวใจ: </b>{{selectedPatient.heartRate}}</p>
+    </a>
+    <a class="panel-block">
+        <p><b>sys: </b>{{selectedPatient.systolic}}</p>   
+    </a>
+    <a class="panel-block">
+        <p><b>dia: </b>{{selectedPatient.diastolic}}</p>        
+    </a>
+</nav>
