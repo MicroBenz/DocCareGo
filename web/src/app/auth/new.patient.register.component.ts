@@ -132,7 +132,7 @@ export class NewPatientRegisterComponent implements OnInit {
             .map(this.handleResponse, this.handleError)
             .subscribe(
                 (newPatient) => {
-                    console.log('NEW PATIENT:' newPatient);
+                    console.log('NEW PATIENT:', newPatient);
                     this.decorateAlertContent();
                     this.isShowConfirm = false;
                 },
