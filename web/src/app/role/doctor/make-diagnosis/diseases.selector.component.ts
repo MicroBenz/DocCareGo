@@ -13,7 +13,7 @@ import { DISEASES_ENDPOINT } from '../../../config/api.config';
         .first-col {
             width: 28px;
         }
-        .medicine-name-col {
+        .disease-name-col {
             width: 300px;
         }
         .action-button {
