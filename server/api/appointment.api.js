@@ -71,7 +71,7 @@ module.exports = (apiRoutes, express) => {
                         userRef = user;
                         return Workday.find({
                             date: {
-                                $gte: moment().toDate()
+                                $gte: moment().startOf('day').toDate()
                             }
                         });
                     }
@@ -222,7 +222,7 @@ module.exports = (apiRoutes, express) => {
         else if(req.query.doctor){
             Workday.find({
                 doctor: req.query.doctor,
-                date: moment().toDate()
+                date: moment().startOf('day').toDate()
             })
             .then(
                 function(workdays){
@@ -313,7 +313,7 @@ module.exports = (apiRoutes, express) => {
         }
         else{
             Workday.find({
-                date: moment().toDate()
+                date: moment().startOf('day').toDate()
             })
             .then(
                 function(workdays){
