@@ -11,11 +11,13 @@
     </thead>
     <tbody *ngIf="appointmentList.length !== 0">
         <tr *ngFor="let appointment of appointmentList;">
-            <td>{{appointment.patient}}</td>
-            <td>{{appointment.doctor}}</td>
-            <td>{{appointment.clinic}}</td>
-            <td>{{appointment.date}}</td>
-            <td>{{appointment.time}}</td>
+            <td>
+                {{appointment.patient.preName}}{{appointment.patient.name}} {{appointment.patient.surname}}
+            </td>
+            <td>{{appointment.doctor.preName}}{{appointment.doctor.name}} {{appointment.doctor.surname}}</td>
+            <td>{{appointment.doctor.clinic.name}}</td>
+            <td>{{appointment.workday.date}}</td>
+            <td>{{appointment.workday.time}}</td>
             <td>
                 <a class="button is-primary"
                     (click)="postponeAppointment(appointment.id)">

@@ -24,39 +24,15 @@ export class AppointmentManagementComponent implements OnInit {
     constructor(private title: Title, private dataService: DataService) {}
     
     ngOnInit () {
+        this.appointmentList = [];
         this.title.setTitle(MANAGE_APPOINTMENT_TITLE);
         this.dataService.getData(APPOINTMENT_ENDPOINT)
             .subscribe(
                 (appointments) => {
                     console.log(appointments);
+                    this.appointmentList = appointments;
                 }
             )        
-        this.appointmentList = [
-            {
-                id: 1,
-                patient: 'นายพิธาน หาญพาณิชยพันธ์',
-                doctor: 'นายแพทย์ธีรัช รักษ์เถา',
-                clinic: 'ทางเดินอาหารและตับ',
-                date: '13/10/2559',
-                time: '13:00 - 13:30'
-            },
-            {
-                id: 3,
-                patient: 'นายธนวัฒน์ เค้าฉลองเคียง',
-                doctor: 'นายแพทย์ธีรัช รักษ์เถา',
-                clinic: 'ทางเดินอาหารและตับ',
-                date: '13/10/2559',
-                time: '13:00 - 13:30'
-            },
-            {
-                id: 4,
-                patient: 'นางสาววันทนี ทองทั่ว',
-                doctor: 'นายแพทย์ธีรัช รักษ์เถา',
-                clinic: 'ทางเดินอาหารและตับ',
-                date: '13/10/2559',
-                time: '13:00 - 13:30'
-            }
-        ]
     }
     
     postponeAppointment (id) {
