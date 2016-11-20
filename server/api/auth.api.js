@@ -3,6 +3,7 @@ module.exports = function (app, express) {
     var bcrypt = require('bcrypt-nodejs');
     var User = require('../model/User');
     var Patient = require('../model/Patient');
+    var utils = require('../utils');
     var authRoutes = express.Router();
     
     authRoutes.post('/login', login);
@@ -104,11 +105,7 @@ module.exports = function (app, express) {
         )
     }
     function createPatient (req, res) {
-        utils.checkRole(req, res, ['admin']);
         validateField(res, req.body);
-        if (!req.body.HN) {
-            utils.responseMissingField(res, 'HN');
-        }
         Patient.findOneWithDeleted({
             $or: [
                 { HN: req.body.HN },
@@ -182,6 +179,9 @@ module.exports = function (app, express) {
 
     //----------------- ADDITIONAL FUNCTION ----------------- 
     function validateField (res, body) {
+        if (!body.HN) {
+            utils.responseMissingField(res, 'HN');
+        }
 
         if (!body.personalID) {
             utils.responseMissingField(res, 'personalID');
