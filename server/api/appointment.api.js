@@ -219,11 +219,42 @@ module.exports = (apiRoutes, express) => {
             );
         }
         else{
-            res.status(400).send({
-                success: false,
-                message: 'Bad Request',
-                clientMessage: 'Please tell me which appointment do you want?'
-            });
+            Workday.find({
+                date: moment().toDate()
+            })
+            .then(
+                function(workdays){
+                    return Appointment.find({
+                        workday: {
+                            $in: workdays
+                        }
+                    });
+                },
+                function(error){
+                    console.log(error);
+                    res.status(500).send({
+                        success: false,
+                        message: error,
+                        clientMessage: 'Cannot get workday data.'
+                    });
+                }
+            )
+            .then(
+                function(appointment){
+                    res.json({
+                        success: true,
+                        data: appointments
+                    });
+                },
+                function(error){
+                    console.log(error);
+                    res.status(500).send({
+                        success: false,
+                        message: error,
+                        clientMessage: 'Cannot get appointment data.'
+                    });
+                }
+            );
         }
     }
 
