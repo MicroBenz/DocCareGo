@@ -87,7 +87,9 @@ module.exports = function (app, express) {
                 res.json({
                     success: true,
                     clientMessage: 'Generate new HN succeed',
-                    HN: num
+                    data: {
+                        HN: num
+                    }
                 });
             },
             function (error) {
