@@ -321,7 +321,10 @@ module.exports = (apiRoutes, express) => {
                         workday: {
                             $in: workdays
                         }
-                    });
+                    })
+                    .populate('doctor')
+                    .populate('workday')
+                    .populate('patient');
                 },
                 function(error){
                     console.log(error);
@@ -329,6 +332,41 @@ module.exports = (apiRoutes, express) => {
                         success: false,
                         message: error,
                         clientMessage: 'Cannot get workday data.'
+                    });
+                }
+            )
+            .then(
+                function(appointments){
+                    let arr = [];
+                    appointments.forEach(
+                        function(appointment){
+                            appointment = appointment.toObject();
+                            let p = new Promise(
+                                function(resolve, reject){
+                                    Clinic.findById(appointment.doctor.clinic)
+                                    .then(
+                                        function(clinic){
+                                            appointment.doctor.clinic = clinic;
+                                            resolve(appointment);
+                                        },
+                                        function(error){
+                                            console.log(error);
+                                            reject(error);
+                                        }
+                                    );
+                                }
+                            )
+                            arr.push(p);
+                        }
+                    );
+                    return Promise.all(arr);
+                },
+                function(error){
+                    console.log(error);
+                    res.status(500).send({
+                        success: false,
+                        message: error,
+                        clientMessage: 'Cannot get appointment data.'
                     });
                 }
             )
