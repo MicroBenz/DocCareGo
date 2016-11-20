@@ -102,15 +102,16 @@ module.exports = function (apiRoutes, express) {
         )
         .then(
             function (patientRecords) {
-                appointmentsRef.forEach(function(appointment){ 
+                appointmentsRef.forEach(function(appointment){
+                    let hasPatientRecord = false;
                     patientRecords.forEach(function(patientRecord) {
-                        if( appointment._id === patientRecord.appointment._id) {
+                        if( appointment._id == patientRecord.appointment._id) {
                             appointment.patientRecord = patientRecord;
-                        }
-                        else {
-                            appointment.patientRecord = null;
+                            hasPatientRecord = true;
                         }
                     });
+                    if(!hasPatientRecord)
+                        appointment.patientRecord = null;
                 });
                 return appointmentsRef;
             },
