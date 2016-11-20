@@ -1,6 +1,7 @@
 module.exports = (apiRoutes, express) => {
     var AppointmentRoutes = express.Router();    
     var Appointment = require('../model/Appointment');
+    var PatientRecord = require('../model/PatientRecord');
     var Patient = require('../model/Patient');
     var Doctor = require('../model/Doctor');
     var Clinic = require('../model/Clinic');
@@ -214,6 +215,98 @@ module.exports = (apiRoutes, express) => {
                         success: false,
                         message: error,
                         clientMessage: 'Cannot get appointment data.'
+                    });
+                }
+            );
+        }
+        else if(req.query.doctor){
+            Workday.find({
+                doctor: req.query.doctor,
+                date: moment().toDate()
+            })
+            .then(
+                function(workdays){
+                    return Appointemnt.find({
+                        workday: {
+                            $in: workdays
+                        }
+                    });
+                },
+                function(error){
+                    console.log(error);
+                    res.status(500).send({
+                        success: false,
+                        message: error,
+                        clientMessage: 'Cannot get workday data.'
+                    });
+                }
+            )
+            .then(
+                function(appointemnts){
+                    return PatientRecord.find({
+                        appointment: {
+                            $in: appointments
+                        }
+                    })
+                    .populate('appointment');
+                },
+                function(error){
+                    console.log(error);
+                    res.status(500).send({
+                        success: false,
+                        message: error,
+                        clientMessage: 'Cannot get appointment data.'
+                    });
+                }
+            )
+            .then(
+                function(patientRecords){
+                    let arr = [];
+                    patientRecords.forEach(
+                        function(patientRecord){
+                            patientRecord = patientRecord.toObject();
+                            let p = new Promise(
+                                function(resolve, reject){
+                                    Patient.findById(PatientRecord.appointemnt.patient)
+                                    .then(
+                                        function(patient){
+                                            patientRecord.appointment.patient = patient;
+                                            resolve(patientRecord);
+                                        },
+                                        function(error){
+                                            console.log(error);
+                                            reject(error);
+                                        }
+                                    );
+                                }
+                            )
+                            arr.push(p);
+                        }
+                    );
+                    return Promise.all(arr);
+                },
+                function(error){
+                    console.log(error);
+                    res.status(500).send({
+                        success: false,
+                        message: error,
+                        clientMessage: 'Cannot get patientRecord data.'
+                    });
+                }
+            )
+            .then(
+                function(patientRecords){
+                    res.json({
+                        success: true,
+                        data: patientRecords
+                    });
+                },
+                function(error){
+                    console.log(error);
+                    res.status(500).send({
+                        success: false,
+                        message: error,
+                        clientMessage: 'Cannot get patientRecord data.'
                     });
                 }
             );
