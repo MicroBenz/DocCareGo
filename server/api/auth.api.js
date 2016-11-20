@@ -2,9 +2,11 @@ module.exports = function (app, express) {
     var jwt = require('jsonwebtoken');
     var bcrypt = require('bcrypt-nodejs');
     var User = require('../model/User');
+    var Patient = require('../model/Patient');
     var authRoutes = express.Router();
     
     authRoutes.post('/login', login);
+    authRoutes.get('/generateNewHN', generateNewHN);
 
     function login (req, res) {
         User.findOne({
@@ -61,6 +63,32 @@ module.exports = function (app, express) {
                 });
             }
         );
+    }
+
+    function generateNewHN (req, res) {
+        Patient.find({})
+        .then(
+            function(patients){
+                let arr = patients.reduce(
+                    function(prev, patient){
+                        return prev.push(patient.HN);
+                    }
+                );
+                let num;
+                do{
+                    num = Math.random();
+                    if( num < 0.1 )
+                        num += 0.1;
+                    num = Math.floor(num*100000);
+                }
+                while(patients.includes(num));
+                res.json({
+                    success: true,
+                    clientMessage: 'Generate new HN succeed',
+                    HN: num
+                });
+            }
+        )
     }
 
     app.use('/auth', authRoutes);

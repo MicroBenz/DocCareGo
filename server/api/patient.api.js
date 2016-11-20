@@ -15,9 +15,6 @@ module.exports = function (apiRoutes, express) {
         .put(updatePatientByHN)
         .delete(deletePatientByHN);
 
-    patientRoutes.route('/generateNewHN')
-        .get(generateNewHN);
-
     apiRoutes.use('/patients', patientRoutes);
 
     // Implementation of CRUD are below.
@@ -129,32 +126,6 @@ module.exports = function (apiRoutes, express) {
                 });
             }
         );
-    }
-
-    function generateNewHN (req, res) {
-        Patient.find({})
-        .then(
-            function(patients){
-                let arr = patients.reduce(
-                    function(prev, patient){
-                        return prev.push(patient.HN);
-                    }
-                );
-                let num;
-                do{
-                    num = Math.random();
-                    if( num < 0.1 )
-                        num += 0.1;
-                    num = Math.floor(num*100000);
-                }
-                while(patients.includes(num));
-                res.json({
-                    success: true,
-                    clientMessage: 'Generate new HN succeed',
-                    HN: num
-                });
-            }
-        )
     }
 
     //----------------- POST (CREATE) -----------------
