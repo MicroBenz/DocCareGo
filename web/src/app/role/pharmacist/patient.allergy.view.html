@@ -1,3 +1,6 @@
 <div class="medicine-tab" *ngFor="let med of medicineAllegyList">
-    <span class="tag is-danger is-medium no-text-selection">{{med.name}}</span>
+    <span class="tag is-danger is-medium no-text-selection">{{med}}</span>
+</div>
+<div class="patient-no-allergy" *ngIf="medicineAllegyList.length < 1">
+    <h1>ไม่มีรายการแพ้ยา</h1>
 </div>

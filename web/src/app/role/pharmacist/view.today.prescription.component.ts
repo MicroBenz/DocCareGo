@@ -33,66 +33,115 @@ export class ViewTodayPrescriptionComponent implements OnInit {
         this.patientList = [
            {
                id: 1,
-               hn: '000022',
-               name: 'นายธนนันท์ ตั้งธนาชัยกุล',
-               doctor: 'นายแพทย์ธีรัช รักษ์เถา',
-               clinic: 'ทางเดินอาหารและตับ',
-               date: '13/1/2559',
-               time: '10:00 - 10:30'
+               appointment: {
+                   description: '',
+                   patient: {
+                       HN: '000022',
+                       preName: 'นาย',
+                       name: 'ธนนันท์',
+                       surname: 'ตั้งธนาชัยกุล',
+                       noMedicines: [
+                           'one','two'
+                       ]
+                   },
+                   doctor: {
+                       preName: 'นายแพทย์',
+                       name: 'ธีรัช ',
+                       surname: 'รักษ์เถา',
+                       clinic: {
+                           name: 'ทางเดินอาหารและตับ'
+                       }
+                   },
+                   workday: {
+                       date: '13/1/2559',
+                       time: '10:00 - 10:30'
+                   }
+               },
+               medicines: [
+                    {
+                        name: 'พาราเซตตามอล',
+                        quantity: '3 เม็ด',
+                        howto: 'รับประทานหลังอาหารเช้า/กลางวัน/เย็น ครั้งละ 1 เม็ด'
+                    }
+                ] 
            },
            {
                id: 2,            
-               hn: '103022',
-               name: 'นางสาววิภวานี วัชระเดชสกุล',
-               doctor: 'นายแพทย์ธีรัช รักษ์เถา',
-               clinic: 'ทางเดินอาหารและตับ',
-               date: '13/1/2559',
-               time: '11:00 - 11:30'
+               appointment: {
+                   description: '',
+                   patient: {
+                       HN: '103022',
+                       preName: 'นางสาว',
+                       name: 'วิภวานี',
+                       surname: 'วัชระเดชสกุล',
+                       noMedicines: [
+                           'one','two','three'
+                       ]
+                   },
+                   doctor: {
+                       preName: 'นายแพทย์',
+                       name: 'ธีรัช ',
+                       surname: 'รักษ์เถา',
+                       clinic: {
+                           name: 'ทางเดินอาหารและตับ'
+                       }
+                   },
+                   workday: {
+                       date: '13/1/2559',
+                       time: '11:00 - 11:30'
+                   }
+               },
+               medicines: [
+                    {
+                        name: 'พาราเซตตามอล',
+                        quantity: '3 เม็ด',
+                        howto: 'รับประทานหลังอาหารเช้า/กลางวัน/เย็น ครั้งละ 1 เม็ด'
+                    },
+                    {
+                        name: 'พาราเซตตามอล',
+                        quantity: '3 เม็ด',
+                        howto: 'รับประทานหลังอาหารเช้า/กลางวัน/เย็น ครั้งละ 1 เม็ด'
+                    }
+                ]
            },
            {
                id: 3,            
-               hn: '204052',
-               name: 'นายธีรัช รักษ์เถา',
-               doctor: 'นายแพทย์ณัษฐพงษ์ อู่สิริมณีชัย',
-               clinic: 'ทางเดินอาหารและตับ',
-               date: '13/1/2559',
-               time: '11:30 - 12:00'
-           },
-           {
-               id: 4,            
-               hn: '123456',
-               name: 'นายณัษฐพงษ์ อู่สิริมณีชัย',
-               doctor: 'นายแพทย์ธีรัช รักษ์เถา',
-               clinic: 'ทางเดินอาหารและตับ',
-               date: '13/1/2559',
-               time: '12:00 - 12:30'
-           },
-           {
-               id: 5,            
-               hn: '654321',
-               name: 'นางสาววันทนีย์ ทองทั่ว',
-               doctor: 'นายแพทย์ณัษฐพงษ์ อู่สิริมณีชัย',
-               clinic: 'ทางเดินอาหารและตับ',
-               date: '13/1/2559',
-               time: '13:00 - 13:30'
-           },
-           {
-               id: 6,            
-               hn: '785912',
-               name: 'นายธนวัฒน์ เค้าฉลองเคียง',
-               doctor: 'นายแพทย์ณัษฐพงษ์ อู่สิริมณีชัย',
-               clinic: 'ทางเดินอาหารและตับ',
-               date: '13/1/2559',
-               time: '16:30 - 17:30'
-           }
+               appointment: {
+                   description: '',
+                   patient: {
+                       HN: '204052',
+                       preName: 'นาย',
+                       name: 'ธีรัช',
+                       surname: 'รักษ์เถา',
+                       noMedicines: []
+                   },
+                   doctor: {
+                       preName: 'นายแพทย์',
+                       name: 'ณัษฐพงษ์',
+                       surname: 'อู่สิริมณีชัย',
+                       clinic: {
+                           name: 'ทางเดินอาหารและตับ'
+                       }
+                   },
+                   workday: {
+                       date: '13/1/2559',
+                       time: '11:30 - 12:00'
+                   }
+               },
+               medicines: [
+                    {
+                        name: 'พาราเซตตามอล',
+                        quantity: '3 เม็ด',
+                        howto: 'รับประทานหลังอาหารเช้า/กลางวัน/เย็น ครั้งละ 1 เม็ด'
+                    },
+                    {
+                        name: 'null',
+                        quantity: '3 เม็ด',
+                        howto: 'รับประทานหลังอาหารเช้า/กลางวัน/เย็น ครั้งละ 1 เม็ด'
+                    }
+                ]
+           } 
         ]; 
-        this.prescriptionList = [
-            {
-                name: 'พาราเซตตามอล',
-                quantity: '3 เม็ด',
-                howto: 'รับประทานหลังอาหารเช้า/กลางวัน/เย็น ครั้งละ 1 เม็ด'
-            }
-        ];
         this.prescriptionHistoryList = [
             [{
                 name: 'พาราเซตตามอล',
@@ -110,18 +159,18 @@ export class ViewTodayPrescriptionComponent implements OnInit {
                 howto: 'รับประทานหลังอาหารเช้า/กลางวัน/เย็น ครั้งละ 1 เม็ด'
             }]
         ];
-        this.medicineAllegyList = [
-            {
-                name: 'abc',
-                quantity: '3 เม็ด',
-                howto: 'รับประทานหลังอาหารเช้า/กลางวัน/เย็น ครั้งละ 1 เม็ด'
-            },
-            {
-                name: 'ddna',
-                quantity: '3 เม็ด',
-                howto: 'รับประทานหลังอาหารเช้า/กลางวัน/เย็น ครั้งละ 1 เม็ด'
-            }
-        ];
+        // this.medicineAllegyList = [
+        //     {
+        //         name: 'abc',
+        //         quantity: '3 เม็ด',
+        //         howto: 'รับประทานหลังอาหารเช้า/กลางวัน/เย็น ครั้งละ 1 เม็ด'
+        //     },
+        //     {
+        //         name: 'ddna',
+        //         quantity: '3 เม็ด',
+        //         howto: 'รับประทานหลังอาหารเช้า/กลางวัน/เย็น ครั้งละ 1 เม็ด'
+        //     }
+        // ];
         this.selectedPatient = {};
         this.prescriptionHistoryIndex = this.prescriptionHistoryList.length-1;
     }   
@@ -141,8 +190,13 @@ export class ViewTodayPrescriptionComponent implements OnInit {
             this.prescriptionHistoryIndex -= 1;
     }
 
-    public getPatientPrescriptionHistory() {
-        this.dataService.getData(DIAGNOSIS_RESULT_ENDPOINT)
+    public getNextPrescriptionHistory() {
+        if(this.prescriptionHistoryIndex+1 < this.prescriptionHistoryList.length)
+            this.prescriptionHistoryIndex += 1;
+    }
+
+    public getPatientPrescriptionHistory(patient) {
+        this.dataService.getDataWithParams(DIAGNOSIS_RESULT_ENDPOINT, {patient: patient})
             .subscribe(this.displayPatientPrescriptions, this.errorHandler);
     }
 
@@ -153,14 +207,14 @@ export class ViewTodayPrescriptionComponent implements OnInit {
 
     public getPatientPrescriptionData(selectedPatient) {
         // get Today precription
-        // this.prescriptionList = selectedPatient['medicines'];
-        // get History prescription
-        // this.getPatientPrescriptionHistory();
-        // this.prescriptionLastHistory = this.prescriptionHistoryList[0];
+        this.prescriptionList = selectedPatient['medicines'];
         // get no medicines
         let appointment = selectedPatient['appointment'];
-        // let patient = appointment['patient'];
-        // this.medicineAllegyList = patient['noMedicines'];
+        let patient = appointment['patient'];
+        this.medicineAllegyList = patient['noMedicines'];
+        // get History prescription
+        // this.getPatientPrescriptionHistory(patient);
+        
     }
 
     onSelectPatient(idx) {

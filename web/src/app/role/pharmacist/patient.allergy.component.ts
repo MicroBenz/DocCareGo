@@ -15,6 +15,9 @@ import { Component, Input } from '@angular/core';
             display: inline-block;
             margin-right: 5px;
         }
+        .patient-no-allergy {
+            padding-top: 10px;
+        }
         
     `]
 })
