@@ -60,26 +60,26 @@ export class RecordPatientDetailComponent implements OnInit {
 
     private decorateModalContent () {
         this.confirmModalContent = `
-            <h1 class="title">ตรวจสอบข้อมูลก่อนทำเพิ่มยา</h1>
+            <h1 class="title">ตรวจสอบข้อมูลก่อนบันทึกข้อมูล</h1>
             <p><b>น้ำหนัก:</b> ${this.patientRecord['weight']}</p>
             <p><b>ส่วนสูง:</b> ${this.patientRecord['height']}</p>
             <p><b>อุณหภูมิ:</b> ${this.patientRecord['temperature']}</p>
-            <p><b>ความดันโลหิต (บีบ/คลาย):</b> ${this.patientRecord['systolic']}/${this.patient['diastolic']} </p>
+            <p><b>ความดันโลหิต (บีบ/คลาย):</b> ${this.patientRecord['systolic']}/${this.patientRecord['diastolic']} </p>
             <p><b>อัตราการเต้นของหัวใจ:</b> ${this.patientRecord['heartRate']}</p>
         `;
     }
 
     recordPatientDetailDataService = () => {
-        this.patientRecord['appointment'] = this.patient;
-        // this.dataService.saveData(PATIENT_RECORD_ENDPOINT, this.patientRecord)
-        //     .subscribe(
-        //         (success) => {
-        //             console.log('RECORD PATIENT DETAIL');
-        //         },
-        //         (error) => {
-        //             console.log(error);
-        //         }
-        //     )
+        this.patientRecord['appointment'] = this.patient['id'];
+        console.log(this.patientRecord);
+        
+        this.dataService.saveData(PATIENT_RECORD_ENDPOINT, this.patientRecord)
+            .subscribe(
+                (success) => {
+                    console.log('RECORD PATIENT DETAIL');
+                    this.dismissModal();
+                }
+            )
     }
 
     dismissModal = () => {

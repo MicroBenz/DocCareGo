@@ -266,7 +266,7 @@ module.exports = (apiRoutes, express) => {
                             patientRecord = patientRecord.toObject();
                             let p = new Promise(
                                 function(resolve, reject){
-                                    Patient.findById(PatientRecord.appointemnt.patient)
+                                    Patient.findById(patientRecord.appointment.patient)
                                     .then(
                                         function(patient){
                                             patientRecord.appointment.patient = patient;

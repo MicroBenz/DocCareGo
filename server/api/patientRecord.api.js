@@ -2,6 +2,7 @@ module.exports = function (apiRoutes, express) {
     var patientRecordRoutes = express.Router();    
     var PatientRecord = require('../model/PatientRecord');
     var Appointment = require('../model/Appointment');
+    var Clinic = require('../model/Clinic');
     var Workday = require('../model/Workday');
     var utils = require('../utils');
     var moment = require('moment');
@@ -101,17 +102,18 @@ module.exports = function (apiRoutes, express) {
         )
         .then(
             function (patientRecords) {
-                appointmentsRef.forEach(function(appointment){ 
+                let appointments = [];
+                appointmentsRef.forEach(function(appointment){
+                    let hasPatientRecord = false;
                     patientRecords.forEach(function(patientRecord) {
-                        if( appointment._id === patientRecord.appointment._id) {
-                            appointment.patientRecord = patientRecord;
-                        }
-                        else {
-                            appointment.patientRecord = null;
+                        if(appointment._id.toString() === patientRecord.appointment.toString()) {
+                            hasPatientRecord = true;
                         }
                     });
+                    if(!hasPatientRecord)
+                        appointments.push(appointment);
                 });
-                return appointmentsRef;
+                return appointments;
             },
             function (error) {
                 console.log(error);
