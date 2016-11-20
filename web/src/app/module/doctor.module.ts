@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { SharedModule } from './shared.module';
 import { DoctorOnlyRoute } from './../auth/guard/index';
 import { ManageWorkdayComponent, AddWorkdayComponent, WorkdaySelectorComponent, WorkdayPatientListComponent } from './../role/doctor/index';
+import { StartWorkingComponent, PatientInQueueComponent } from './../role/doctor/make-diagnosis/index';
 
 @NgModule({
     imports: [
@@ -16,7 +17,9 @@ import { ManageWorkdayComponent, AddWorkdayComponent, WorkdaySelectorComponent, 
         ManageWorkdayComponent,
         AddWorkdayComponent,
         WorkdaySelectorComponent,
-        WorkdayPatientListComponent
+        WorkdayPatientListComponent,
+        StartWorkingComponent,
+        PatientInQueueComponent
     ],
     exports: [
         ManageWorkdayComponent,

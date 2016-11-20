@@ -20,6 +20,24 @@ export class ViewTodayPatientComponent implements OnInit {
         this.title.setTitle(VIEW_TODAY_PATIENT_TITLE);
         this.patientRecordList = [];
         this.dataService.getData(PATIENT_RECORD_ENDPOINT)
+            .map(
+                (appointments) => {
+                    console.log(appointments);
+                    return appointments.map(
+                        (appointment) => {
+                            let name = `${appointment['patient']['preName']}${appointment['patient']['name']} ${appointment['patient']['surname']}`;
+                            let doctor = `${appointment['doctor']['preName']}${appointment['doctor']['name']} ${appointment['doctor']['surname']}`
+                            return {
+                                id: appointment['_id'],
+                                hn: appointment['patient']['HN'],
+                                name: name,
+                                clinic: appointment['doctor']['clinic']['name'],
+                                doctor: doctor
+                            }
+                        }
+                    )
+                }
+            )
             .subscribe(this.displayPatientRecords, this.errorHandler);
         // this.patientRecordList = [
         //     {

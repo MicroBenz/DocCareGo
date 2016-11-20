@@ -5,7 +5,8 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
     templateUrl: './patient.list.view.html',
     styles: [`
         .active {
-            background-color: whitesmoke;
+            background-color: #4ca2ff;
+            color: #ffffff;
         }
         .patient-item {
             border-bottom: 1px solid #c8c7cc;
@@ -18,9 +19,12 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
             border-radius: 50%;
             font-size: 24px;
             color: #ffffff;
-            background-color: #000000;
+            background-color: #ff3860;
             line-height: 45px;
             text-align: center;
+        }
+        .patient-item .time-circle i.fa{
+            line-height: 45px;
         }
         .patient-info {
             padding-left: 0px;
