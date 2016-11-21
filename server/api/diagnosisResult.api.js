@@ -4,6 +4,7 @@ module.exports = function (apiRoutes, express) {
     var Appointment = require('../model/Appointment');
     var Workday = require('../model/Workday');
     var Patient = require('../model/Patient');
+    var Doctor = require('../model/Doctor');
     var Disease = require('../model/Disease');
     var Medicine = require('../model/Medicine');
     var utils = require('../utils');
@@ -55,7 +56,7 @@ module.exports = function (apiRoutes, express) {
                     res.status(500).send({
                         success: false,
                         message: error,
-                        clientMessage: 'Cannot get diagnosisResult data 1'
+                        clientMessage: 'Cannot get diagnosisResult data'
                     });
                 }
             );
@@ -77,7 +78,7 @@ module.exports = function (apiRoutes, express) {
                     res.status(500).send({
                         success: false,
                         message: error,
-                        clientMessage: 'Cannot get workday data.'
+                        clientMessage: 'Cannot get workday data'
                     });
                 }
             )
@@ -97,7 +98,7 @@ module.exports = function (apiRoutes, express) {
                     res.status(500).send({
                         success: false,
                         message: error,
-                        clientMessage: 'Cannot get appointment data.'
+                        clientMessage: 'Cannot get appointment data'
                     });
                 }
             )
@@ -148,7 +149,7 @@ module.exports = function (apiRoutes, express) {
                     res.status(500).send({
                         success: false,
                         message: error,
-                        clientMessage: 'Cannot get diagnosisResult data 2'
+                        clientMessage: 'Cannot get diagnosisResult data'
                     });
                 }
             )
@@ -164,7 +165,7 @@ module.exports = function (apiRoutes, express) {
                     res.status(500).send({
                         success: false,
                         message: error,
-                        clientMessage: 'Cannot get diagnosisResult data 3'
+                        clientMessage: 'Cannot get diagnosisResult data'
                     });
                 }
             );
