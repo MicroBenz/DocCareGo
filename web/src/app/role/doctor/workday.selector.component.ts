@@ -36,6 +36,7 @@ import { WORKDAY_ENDPOINT } from '../../config/api.config';
 })
 export class WorkdaySelectorComponent implements OnInit {
     @Output('onSelectWorkday') onSelectWorkday = new EventEmitter();
+    @Output('onSelectWorkdayIndex') onSelectWorkdayIndex = new EventEmitter();
     public workdayList;
     public currentMonth: number;
     public currentYear: number;
@@ -106,6 +107,7 @@ export class WorkdaySelectorComponent implements OnInit {
         this.selectedDate = this.workdayList[idx]['displayDate'];
         console.log('SELECTED:', this.workdayList[idx]);
         this.onSelectWorkday.emit(this.workdayList[idx]);
+        this.onSelectWorkdayIndex.emit(idx);
     }
 
     // NEW Workday Decorator
