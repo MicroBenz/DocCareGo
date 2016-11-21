@@ -304,7 +304,13 @@ function createUserByData (data) {
             user.preName = data.preName;
             user.name = data.name;
             user.surname = data.surname;
-
+            //send SMS and Email to patient    
+            let smsService = require('../sms.service');
+            let mailService = require('../mail.service');
+            let message = `ระบบจัดการการนัดหมาย DocCare Go\nเรียนคุณ${user.preName}${user.name} ${user.surname}\nขอบคุณที่ท่านได้ทำการสมัครสมาชิกเพื่อเข้าใช้งานระบบการนัดหมาย DocCare Go\nคุณสามารถเข้าสู่ระบบการนัดหมาย DocCare Go ได้ทันทีโดยใช้รหัส HN และรหัสผ่านของท่าน ในการเข้าสู่ระบบ โดยสามารถใช้งานได้ผ่านเว็บไซต์ <link>`;
+            smsService.sendSMS(data.tel, message);
+            mailService.sendEmail(user.email, 'Doccare Go Notice', message);
+                
             data.res.json({
                 success: true,
                 message: 'created user completed',
@@ -336,7 +342,8 @@ function checkHasPatient (req, res) {
                     res: res,
                     preName: patient.preName,
                     name: patient.name,
-                    surname: patient.surname
+                    surname: patient.surname,
+                    tel: patient.tel
                 };
             }
             else {
@@ -371,7 +378,8 @@ function checkHasDoctor (req, res) {
                     res: res,
                     preName: doctor.preName,
                     name: doctor.name,
-                    surname: doctor.surname
+                    surname: doctor.surname,
+                    tel: doctor.tel
                 };
             }
             else {
@@ -406,7 +414,8 @@ function checkHasStaff (req, res) {
                     res: res,
                     preName: staff.preName,
                     name: staff.name,
-                    surname: staff.surname
+                    surname: staff.surname,
+                    tel: staff.tel
                 };
             }
             else {
@@ -441,7 +450,8 @@ function checkHasNurse (req, res) {
                     res: res,
                     preName: nurse.preName,
                     name: nurse.name,
-                    surname: nurse.surname
+                    surname: nurse.surname,
+                    tel: staff.tel
                 };
             }
             else {
@@ -476,7 +486,8 @@ function checkHasPharmacist (req, res) {
                     res: res,
                     preName: pharmacist.preName,
                     name: pharmacist.name,
-                    surname: pharmacist.surname
+                    surname: pharmacist.surname,
+                    tel: pharmacist.tel
                 };
             }
             else {
