@@ -3,7 +3,8 @@
         <tr>
             <th class="first-col"></th>
             <th class="medicine-name-col">ชื่อยา</th>
-            <th>รายละเอียดยา</th>            
+            <th class="quantity-col">จำนวน</th>            
+            <th>รายละเอียดยา</th>
         </tr>
     </thead>
     <tbody>
@@ -13,6 +14,9 @@
             </td>
             <td>
                 {{medicine.name}}
+            </td>
+            <td>
+                <input type="number" class="input" [(ngModel)]="medicineQuantity[i]" min="1">
             </td>
             <td>
                 {{medicine.description}}
@@ -25,7 +29,7 @@
             <td>
                 <input type="text" class="input" [formControl]="medicine">
             </td>
-            <td>
+            <td colspan="2">
                 <div *ngIf="medicineSuggestion.length === 0">
                     <p>ไม่พบข้อมูลยา</p>
                 </div>

@@ -1,5 +1,4 @@
 <div *ngIf="(patient | json) != '{}'">
-    {{patient | json}}
     <div class="patient-info">
         <p><b>ผู้ป่วย: </b>{{patient.name}} [{{patient.hn}}]</p>
         <p><b>แพทย์เจ้าของนัด: </b>{{patient.doctor}}</p>

@@ -5,21 +5,24 @@
     <div class="patient-list-view">
         <a class="panel-block"
             *ngFor="let patient of patientList; let i = index"
-            [class.is-active]="i === selectedIndex"
+            [class.is-active]="i === selectedIndex && isLockSelect"
             (click)="selectPatient(i)">
             {{patient.appointment.patient.preName}}{{patient.appointment.patient.name}} {{patient.appointment.patient.surname}}
         </a>
     </div>
 </nav>
-<nav class="panel">
+<nav class="panel" *ngIf="(selectedPatient | json) !== '{}' && isLockSelect">
     <p class="panel-heading">
         ข้อมูลทั่วไป
     </p>
     <a class="panel-block">
-        <p><b>น้ำหนัก: </b>{{selectedPatient.weight}}</p>      
+        <p><b>สาเหตุที่ขอเข้าพบ: </b>{{selectedPatient.appointment.description}}</p>
     </a>
     <a class="panel-block">
-        <p><b>ส่วนสูง: </b>{{selectedPatient.height}}</p>      
+        <p><b>น้ำหนัก: </b>{{selectedPatient.weight}} กิโลกรัม</p>      
+    </a>
+    <a class="panel-block">
+        <p><b>ส่วนสูง: </b>{{selectedPatient.height}} เซนติเมตร</p>      
     </a>
     <a class="panel-block">
         <p><b>อุณหภูมิ: </b>{{selectedPatient.temperature}}</p>
@@ -28,9 +31,9 @@
         <p><b>อัตราการเต้นของหัวใจ: </b>{{selectedPatient.heartRate}}</p>
     </a>
     <a class="panel-block">
-        <p><b>sys: </b>{{selectedPatient.systolic}}</p>   
+        <p><b>ความดันโลหิต (บีบ): </b>{{selectedPatient.systolic}}</p>   
     </a>
     <a class="panel-block">
-        <p><b>dia: </b>{{selectedPatient.diastolic}}</p>        
+        <p><b>ความดันโลหิต (คลาย): </b>{{selectedPatient.diastolic}}</p>
     </a>
 </nav>

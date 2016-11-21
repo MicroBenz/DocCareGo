@@ -18,6 +18,7 @@ import 'rxjs/add/operator/mergeMap';
 // import 'fullcalendar/dist/fullcalendar.css';
 // import 'fullcalendar/dist/locale/th';
 import 'moment/moment';
+import 'moment/locale/th';
 
 // Bulma and CSS friends
 import 'bulma/css/bulma';

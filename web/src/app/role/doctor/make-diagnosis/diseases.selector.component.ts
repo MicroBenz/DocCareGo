@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
@@ -37,14 +37,13 @@ import { DISEASES_ENDPOINT } from '../../../config/api.config';
     `]
 })
 export class DiseasesSelectorComponent implements OnInit {
-    public diseasesList: Array<Object>;
+    @Input('diseasesList') diseasesList: Array<Object> = [];
     public disease = new FormControl();
     public diseasesSuggestion;
 
     constructor(private dataService: DataService) {}
 
     ngOnInit () {
-        this.diseasesList = [];
         this.diseasesSuggestion = [];
         this.disease.valueChanges
             .debounceTime(500)

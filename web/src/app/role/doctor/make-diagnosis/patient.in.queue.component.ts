@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
 
 import { DataService } from '../../../shared/service/data.service';
 @Component({
@@ -17,6 +17,8 @@ import { DataService } from '../../../shared/service/data.service';
 })
 export class PatientInQueueComponent implements OnInit {
     @Input('patientList') patientList = [];
+    @Input('isLockSelect') isLockSelect = false;
+    @Output('onSelectedPatient') onSelectedPatient = new EventEmitter();
     public selectedPatient;
     public selectedIndex;
 
@@ -28,7 +30,11 @@ export class PatientInQueueComponent implements OnInit {
     }
 
     selectPatient(i) {
-        this.selectedPatient = this.patientList[i];
-        this.selectedIndex = i;
+        if (!this.isLockSelect) {
+            this.selectedPatient = this.patientList[i];
+            this.selectedIndex = i;
+            this.onSelectedPatient.emit(i);
+            this.isLockSelect = true;
+        }
     }
 }
