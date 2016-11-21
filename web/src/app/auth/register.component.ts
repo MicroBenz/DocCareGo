@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { REGISTER_TITLE } from '../config/title.config';
+import { Http, Response } from '@angular/http';
+import { PATIENT_ENDPOINT, DOCTOR_ENDPOINT, NURSE_ENDPOINT, STAFF_ENDPOINT, PHARMACIST_ENDPOINT } from '../config/api.config';
 
 @Component({
     selector: 'auth-register',
@@ -32,10 +34,94 @@ import { REGISTER_TITLE } from '../config/title.config';
     `]
 })
 export class RegisterComponent implements OnInit {
-    constructor(private title: Title, private router: Router) {}
+    public formData;
+    public endpoint;
+    public confirmContent: string;
+    public isShowConfirm: boolean;    
+    public isShowCancelConfirm: boolean;
+    public isShowInvalidate: boolean;
+    public isShowDuplicate: boolean;
+    public isShowNotMatch: boolean;
+    public isShowSuccess: boolean;
+    constructor(private title: Title, private router: Router, private http: Http) {}
 
     ngOnInit () {
         this.title.setTitle(REGISTER_TITLE);
-        
+        this.formData = {
+            'role':'patient',
+            'username':'',
+            'personalID':'',
+            'email':'',
+            'password':'',
+            'reEnterPassword':''
+        };
+        this.endpoint = PATIENT_ENDPOINT;
     }
+
+    private validateForm () {
+        if (this.formData['role'] === '' || this.formData['username'] === '' || this.formData['personalID'] === ''
+            || this.formData['email'] === '' || this.formData['password'] === '' || this.formData['reEnterPassword'] === '') {
+            
+            this.isShowInvalidate = true;
+        }
+        else if(this.formData['password'] !== this.formData['reEnterPassword']){
+            this.isShowNotMatch = true;
+        }
+        else{
+            this.isShowConfirm = true;
+            this.decorateConfirmContent();
+        }
+    }
+
+    private handleResponse = (res: Response) => {
+        let result = res.json();
+        if (result.success)
+            return result.data;
+        else
+            throw new Error(result.clientMessage);
+    }
+
+    private handleError = (error) => {
+        console.error('DataService Error: ', error);        
+    }
+
+    saveNewUser = () =>{
+        this.http.post('/users/', this.formData)
+            .map(this.handleResponse, this.handleError)
+            .subscribe(
+                (newUser) => {
+                    console.log('NEW USER:', newUser);
+                    this.isShowSuccess = true;
+                },
+                (error) => {
+                    console.error(error);
+                }
+            )
+    }
+
+    decorateConfirmContent(){
+        this.confirmContent = `
+            <h1 class="title">ตรวจสอบข้อมูลก่อนทำการสมัครสมาชิก</h1>
+            <p><b>ประเภทสมาชิก</b> ${this.formData['role']}</p>
+            <p><b>HN</b> ${this.formData['username']}</p>
+            <p><b>รหัสบัตรประชาชน</b> ${this.formData['personalID']}</p>
+            <p><b>Email:</b> ${this.formData['email']}</p>
+        `;
+    }
+
+
+
+    navigateToLoginPage = () => {
+        this.router.navigateByUrl('/login');
+    }
+
+    dismissModal = () => {
+        this.isShowSuccess = false;
+        this.isShowNotMatch = false;
+        this.isShowConfirm = false;
+        this.isShowCancelConfirm = false;
+        this.isShowInvalidate = false;
+        this.isShowDuplicate = false;
+    }
+
 }

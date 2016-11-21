@@ -26,15 +26,16 @@
 
 <modal-dialog
     [description]="alertContent"
-    [modalType]="'warning'"
+    [modalType]="'alert'"
     [confirmText]="'ยืนยันการสมัครสมาชิก'"
-    [confirmFn]="navigateToLoginPage"
+    [confirmFn]="showSuccess"
     [isShowFlag]="isShowAlert"
     (isShowFlagChange)="isShowAlert = $event">
 </modal-dialog>
 
 <modal-dialog
     [description]="'คุณต้องการยกเลิกการลงทะเบียนหรือไม่?'"
+    [modalType]="'warning'"
     [confirmText]="'ยกเลิกการลงทะเบียน'"
     [cancelText]="'กลับ'"
     [confirmFn]="navigateToLoginPage"
@@ -68,4 +69,13 @@
     [confirmFn]="dismissModal"
     [isShowFlag]="isWrongZipCode"
     (isShowFlagChange)="isWrongZipCode = $event">
+</modal-dialog>
+
+<modal-dialog
+    [description]="'สมัครสมาชิกสำเร็จ'"
+    [modalType]="'success'"
+    [confirmText]="'กลับสู่หน้าหลัก'"
+    [confirmFn]="navigateToLoginPage"
+    [isShowFlag]="isShowSuccess"
+    (isShowFlagChange)="isShowSuccess = $event">
 </modal-dialog>

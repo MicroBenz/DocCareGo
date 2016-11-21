@@ -4,20 +4,24 @@
         <section class="modal-card-body">
             <img *ngIf="modalType === 'warning'" src="../../assets/img/modal/warning.png">
             <img *ngIf="modalType === 'revise'" src="../../assets/img/modal/revise.png">       
-            <img *ngIf="modalType === 'fail'" src="../../assets/img/modal/fail.png">      
+            <img *ngIf="modalType === 'fail'" src="../../assets/img/modal/fail.png">
+            <img *ngIf="modalType === 'success'" src="../../assets/img/modal/success.png">      
+            <img *ngIf="modalType === 'alert'" src="../../assets/img/modal/alert.png">      
             <div [innerHtml]="description"></div>
         </section>
         <footer class="modal-card-foot">
             <a class="button is-danger is-medium" 
                 [ngClass]="{
                     'is-loading': isLoading,
-                    'is-danger': modalType === 'warning' || modalType === 'fail',
-                    'is-info': modalType === 'revise'
+                    'is-danger': modalType === 'warning' || modalType === 'fail' ,
+                    'is-info': modalType === 'revise',
+                    'is-success': modalType === 'success' || modalType === 'alert'
                 }"
                 (click)="onClickConfirm()">
                 {{confirmText}}
             </a>
-            <a *ngIf="modalType !== 'fail'" class="button is-medium" (click)="hideModal()">{{cancelText}}</a>
+            <a *ngIf="!(modalType === 'fail' || modalType === 'success' || modalType === 'alert')" class="button is-medium" (click)="hideModal()">{{cancelText}}</a>
+            <!-- <a  class="button is-medium" (click)="hideModal()">{{cancelText}}</a> -->
         </footer>
     </div>
 </div>

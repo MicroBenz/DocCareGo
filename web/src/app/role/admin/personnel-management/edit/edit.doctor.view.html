@@ -3,6 +3,7 @@
         <doctor-form
             [formData]="formData">
         </doctor-form>
+        {{formData | json}}
         <div class="button-wrapper">
             <a class="button is-success" (click)="validateForm()">แก้ไขข้อมูลแพทย์</a>
             <a class="button is-danger" (click)="isShowCancelConfirm = true">ยกเลิก</a>
@@ -38,4 +39,13 @@
     [confirmFn]="dismissModal"
     [isShowFlag]="isShowInvalidate"
     (isShowFlagChange)="isShowInvalidate = $event">
+</modal-dialog>
+
+<modal-dialog
+    [description]="'แก้ไขข้อมูลสำเร็จ'"
+    [modalType]="'success'"
+    [confirmText]="'กลับสู่หน้าหลัก'"
+    [confirmFn]="navigateToPersonalManagement"
+    [isShowFlag]="isShowSuccess"
+    (isShowFlagChange)="isShowSuccess = $event">
 </modal-dialog>

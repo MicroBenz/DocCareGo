@@ -44,12 +44,13 @@ export class NewPatientRegisterComponent implements OnInit {
     public isShowAlert: boolean;
     public isShowOverLength: boolean;
     public isWrongZipCode: boolean;
+    public isShowSuccess: boolean;
     constructor(private title: Title, private router: Router, private route: ActivatedRoute, private http: Http) {}
     ngOnInit () {
         this.formData = {
             'HN' : '',
             'personalID' : '',
-            'preName' : '',
+            'preName' : 'นาย',
             'name' : '',
             'surname' : '',
             'houseNumber': '',
@@ -153,8 +154,13 @@ export class NewPatientRegisterComponent implements OnInit {
     navigateToLoginPage = () => {
         this.router.navigateByUrl('/login');
     }
+
+    showSuccess = () => {
+        this.isShowSuccess = true;
+    }
     
      dismissModal = () => {
+        this.isShowSuccess = false;
         this.isShowOverLength = false;
         this.isWrongZipCode = false;
         this.isShowAlert = false;

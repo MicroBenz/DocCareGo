@@ -21,7 +21,7 @@ export class EditPatientComponent implements OnInit {
     public isShowConfirm: boolean;
     public isShowCancelConfirm: boolean;
     public isShowInvalidate: boolean;
-
+    public isShowSuccess: boolean;
     constructor(private title: Title, private router: Router, private route: ActivatedRoute, private dataService: DataService) {}
 
     ngOnInit () {
@@ -32,20 +32,20 @@ export class EditPatientComponent implements OnInit {
             .subscribe(
                 (patient) => {
                     console.log('EDIT Patient:', patient);
-                    this.formData['HN'] = patient.HN;
-                    this.formData['personalID'] = patient.personalID;
-                    this.formData['preName'] = patient.preName;
-                    this.formData['name'] = patient.name;
-                    this.formData['surname'] = patient.surname;
-                    this.formData['houseNumber'] = patient.houseNumber;
-                    this.formData['road'] = patient.road;
-                    this.formData['soi'] = patient.soi;
-                    this.formData['subdistrict'] = patient.subdistrict;
-                    this.formData['district'] = patient.district;
-                    this.formData['province'] = patient.province;
-                    this.formData['zipCode'] = patient.zipCode;
-                    this.formData['country'] = patient.country;
-                    this.formData['tel'] = patient.tel;
+                    this.formData['HN'] = patient.HN || '';
+                    this.formData['personalID'] = patient.personalID || '';
+                    this.formData['preName'] = patient.preName || '';
+                    this.formData['name'] = patient.name || '';
+                    this.formData['surname'] = patient.surname || '';
+                    this.formData['houseNumber'] = patient.houseNumber || '';
+                    this.formData['road'] = patient.road || '';
+                    this.formData['soi'] = patient.soi || '';
+                    this.formData['subdistrict'] = patient.subdistrict || '';
+                    this.formData['district'] = patient.district || '';
+                    this.formData['province'] = patient.province || '';
+                    this.formData['zipCode'] = patient.zipCode || '';
+                    this.formData['country'] = patient.country || '';
+                    this.formData['tel'] = patient.tel || '';
                 }
             )
     }
@@ -59,10 +59,11 @@ export class EditPatientComponent implements OnInit {
             || this.formData['road'] === '' || this.formData['soi'] === '' || this.formData['subdistrict'] === ''
             || this.formData['district'] === '' || this.formData['province'] === '' || this.formData['zipCode'] === ''
             || this.formData['country'] === '' || this.formData['tel'] === '') {
+
             this.isShowInvalidate = true;
         }
         else {
-            this.isShowConfirm = true;
+            
             this.decorateModalContent();
         }
      }
@@ -82,6 +83,7 @@ export class EditPatientComponent implements OnInit {
             <p><b>ประเทศ:</b> ${this.formData['country']}</p>
             <p><bเบอร์โทร:</b> ${this.formData['tel']}</p>
         `;
+        this.isShowConfirm = true;
     }
     savePatient = () => {
         console.log('save patient');
@@ -90,7 +92,7 @@ export class EditPatientComponent implements OnInit {
             .subscribe(
                 (success) => {
                     console.log('SAVE PATIENT SUCCESS');
-                    this.navigateToPersonalManagement();
+                    this.isShowSuccess = true;
                 }
             )
     }
@@ -99,6 +101,7 @@ export class EditPatientComponent implements OnInit {
     }
 
     dismissModal = () => {
+        this.isShowSuccess = false;
         this.isShowConfirm = false;
         this.isShowCancelConfirm = false;
         this.isShowInvalidate = false;

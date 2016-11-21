@@ -38,3 +38,12 @@
     [isShowFlag]="isShowInvalidate"
     (isShowFlagChange)="isShowInvalidate = $event">
 </modal-dialog>
+
+<modal-dialog
+    [description]="'แก้ไขข้อมูลสำเร็จ'"
+    [modalType]="'success'"
+    [confirmText]="'กลับสู่หน้าหลัก'"
+    [confirmFn]="navigateToPersonalManagement"
+    [isShowFlag]="isShowSuccess"
+    (isShowFlagChange)="isShowSuccess = $event">
+</modal-dialog>

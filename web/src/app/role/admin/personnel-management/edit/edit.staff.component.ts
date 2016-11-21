@@ -21,7 +21,7 @@ export class EditStaffComponent implements OnInit {
     public isShowConfirm: boolean;
     public isShowCancelConfirm: boolean;
     public isShowInvalidate: boolean;
-
+    public isShowSuccess: boolean;
 
     constructor(private route: ActivatedRoute, private router: Router, private dataService: DataService) {}
 
@@ -33,11 +33,11 @@ export class EditStaffComponent implements OnInit {
             .subscribe(
                 (staff) => {
                     console.log('EDIT Pharmacist:', staff);
-                    this.formData['HN'] = staff.HN;
-                    this.formData['personalID'] = staff.personalID;
-                    this.formData['preName'] = staff.preName;
-                    this.formData['name'] = staff.name;
-                    this.formData['surname'] = staff.surname;
+                    this.formData['HN'] = staff.HN||'';
+                    this.formData['personalID'] = staff.personalID||'';
+                    this.formData['preName'] = staff.preName||'';
+                    this.formData['name'] = staff.name||'';
+                    this.formData['surname'] = staff.surname||'';
                     
                 }
             )
@@ -72,7 +72,7 @@ export class EditStaffComponent implements OnInit {
             .subscribe(
                 (success) => {
                     console.log('SAVE STAFF SUCCESS');
-                    this.navigateToPersonalManagement();
+                    this.isShowSuccess = true;
                 }
             )
     }
@@ -82,6 +82,7 @@ export class EditStaffComponent implements OnInit {
     }
 
     dismissModal = () => {
+        this.isShowSuccess = false;
         this.isShowConfirm = false;
         this.isShowCancelConfirm = false;
         this.isShowInvalidate = false;

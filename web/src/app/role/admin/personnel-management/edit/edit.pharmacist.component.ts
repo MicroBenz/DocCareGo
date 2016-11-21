@@ -18,6 +18,7 @@ export class EditPharmacistComponent implements OnInit {
     public isShowConfirm: boolean;
     public isShowCancelConfirm: boolean;
     public isShowInvalidate: boolean;
+    public isShowSuccess: boolean;
 
     constructor(private title: Title, private router: Router, private route: ActivatedRoute, private dataService: DataService) {}
 
@@ -29,11 +30,11 @@ export class EditPharmacistComponent implements OnInit {
             .subscribe(
                 (pharmacist) => {
                     console.log('EDIT Pharmacist:', pharmacist);
-                    this.formData['HN'] = pharmacist.HN;
-                    this.formData['personalID'] = pharmacist.personalID;
-                    this.formData['preName'] = pharmacist.preName;
-                    this.formData['name'] = pharmacist.name;
-                    this.formData['surname'] = pharmacist.surname;
+                    this.formData['HN'] = pharmacist.HN || '';
+                    this.formData['personalID'] = pharmacist.personalID||'';
+                    this.formData['preName'] = pharmacist.preName||'';
+                    this.formData['name'] = pharmacist.name||'';
+                    this.formData['surname'] = pharmacist.surname||'';
                     
                 }
             )
@@ -68,7 +69,7 @@ export class EditPharmacistComponent implements OnInit {
             .subscribe(
                 (success) => {
                     console.log('SAVE PHARMACIST SUCCESS');
-                    this.navigateToPersonalManagement();
+                    this.isShowSuccess = true;
                 }
             )
     }
@@ -78,6 +79,7 @@ export class EditPharmacistComponent implements OnInit {
     }
 
     dismissModal = () => {
+        this.isShowSuccess = false;
         this.isShowConfirm = false;
         this.isShowCancelConfirm = false;
         this.isShowInvalidate = false;
