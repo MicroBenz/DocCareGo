@@ -1,11 +1,12 @@
 module.exports = function (apiRoutes, express) {
     var diagnosisResultRoutes = express.Router();    
-    var DiagnosisResult = require('../model/DiagnosisResult.js');
-    var Appointment = require('../model/Appointment.js');
-    var Workday = require('../model/Workday.js');
-    var Disease = require('../model/Disease.js');
-    var Medicine = require('../model/Medicine.js');
-    var utils = require('../utils.js');
+    var DiagnosisResult = require('../model/DiagnosisResult');
+    var Appointment = require('../model/Appointment');
+    var Workday = require('../model/Workday');
+    var Patient = require('../model/Patient');
+    var Disease = require('../model/Disease');
+    var Medicine = require('../model/Medicine');
+    var utils = require('../utils');
     var moment = require('moment');
 
     diagnosisResultRoutes.route('/')
