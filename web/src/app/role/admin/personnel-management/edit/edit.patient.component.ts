@@ -46,6 +46,7 @@ export class EditPatientComponent implements OnInit {
                     this.formData['zipCode'] = patient.zipCode || '';
                     this.formData['country'] = patient.country || '';
                     this.formData['tel'] = patient.tel || '';
+                    this.formData['noMedicines'] = patient.noMedicines || '';
                 }
             )
     }
@@ -81,7 +82,8 @@ export class EditPatientComponent implements OnInit {
             <p><b>เขต:</b> ${this.formData['district']}</p>
             <p><b>จังหวัด:</b> ${this.formData['province']}</p>
             <p><b>ประเทศ:</b> ${this.formData['country']}</p>
-            <p><bเบอร์โทร:</b> ${this.formData['tel']}</p>
+            <p><b>เบอร์โทรศัพท์เคลื่อนที่:</b> ${this.formData['tel']}</p>
+            <p><b>ยาที่แพ้: </b>${this.formData['noMedicines']}</p>
         `;
         this.isShowConfirm = true;
     }

@@ -19,10 +19,15 @@ export class PatientFormComponent {
     public med;
 
     addNoMedicine() {
+        this.medicines = this.formData['noMedicines'];
+        if(this.formData['noMedicines'] === undefined || this.formData['noMedicines'] === null || this.formData['noMedicines'] === []) {
+            this.medicines = [];
+        }
         if(this.aMedicine === null || this.aMedicine === '' || this.aMedicine === undefined) {
             return;
         }
-        if(this.medicines.find(item => item[0] === this.aMedicine))
+        this.med = "this.medicines";
+        if(this.medicines.find(item => item === this.aMedicine))
         {
             return;
         }

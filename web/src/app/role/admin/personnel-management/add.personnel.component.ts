@@ -143,8 +143,9 @@ export class AddPersonnelComponent implements OnInit {
             let zipCode = `<p><b>รหัสไปรษณีย์: </b>${this.formData['zipCode']}</p>`;
             let country = `<p><b>ประเทศ: </b>${this.formData['country']}</p>`;
             let tel = `<p><b>เบอร์โทรศัพท์เคลื่อนที่: </b>${this.formData['tel']}</p>`;
+            let noMed = `<p><b>ยาที่แพ้: </b>${this.formData['noMedicines']}</p>`;
             this.confirmModalContent = headerTemplate + hnAndPersonalID + name + houseNumber + road + soi
-                                        + subdistrict + district + province + zipCode + country + tel;
+                                        + subdistrict + district + province + zipCode + country + tel + noMed;
         }
         else if (this.selectedRole === 'doctor') {
             let clinic = `<p><b>คลินิก: </b>${this.formData['clinic']}</p>`;

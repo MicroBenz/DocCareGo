@@ -91,8 +91,8 @@
 <div>
     <div class="control is-horizontal">
         <div class="control columns">
-            <div *ngIf="medicines.length > 0">
-                <div class="button-static" *ngFor="let medicine of medicines">
+            <div *ngIf="formData.noMedicines">
+                <div class="button-static" *ngFor="let medicine of formData.noMedicines">
                     <div class="control has-addons">
                         <input class="input" type="text" value="{{medicine}}" readonly="readonly">
                         <a class="button is-danger" (click)="deleteNoMedicine(medicine)">ลบ</a>
