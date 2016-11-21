@@ -2,6 +2,7 @@ module.exports = (apiRoutes, express) => {
     var AppointmentRoutes = express.Router();    
     var Appointment = require('../model/Appointment');
     var PatientRecord = require('../model/PatientRecord');
+    var DiagnosisResult = require('../model/DiagnosisResult');
     var Patient = require('../model/Patient');
     var Doctor = require('../model/Doctor');
     var Clinic = require('../model/Clinic');
@@ -219,6 +220,7 @@ module.exports = (apiRoutes, express) => {
             );
         }
         else if(req.query.doctor){
+            let appointmentsRef;
             Workday.find({
                 doctor: req.query.doctor,
                 date: moment().startOf('day').toDate()
@@ -242,12 +244,10 @@ module.exports = (apiRoutes, express) => {
             )
             .then(
                 function(appointments){
-                    return PatientRecord.find({
-                        appointment: {
-                            $in: appointments
-                        }
-                    })
-                    .populate('appointment');
+                    appointmentsRef = appointments;
+                    return DiagnosisResult.find({
+                        appointment: appointments
+                    });
                 },
                 function(error){
                     console.log(error);
@@ -256,6 +256,44 @@ module.exports = (apiRoutes, express) => {
                         message: error,
                         clientMessage: 'Cannot get appointment data.'
                     });
+                }
+            )
+            .then(
+                function(diagnosisResults){
+                    let appointments = [];
+                    diagnosisResults.forEach(
+                        function(diagnosisResults){
+                            appointment.push(diagnosisResults.appointment);
+                        }
+                    );
+                    return appointments;
+                },
+                function(error){
+                    console.log(error);
+                    res.status(500).send({
+                        success: false,
+                        message: error,
+                        clientMessage: 'Cannot get diagnosisResult data.'
+                    });
+                }
+            )
+            .then(
+                function(appointments){
+                    return PatientRecord.find({
+                        $and: [
+                            {
+                                appointment: {
+                                    $in: appointmentsRef
+                                }
+                            },
+                            {
+                                appointment: {
+                                    $nin: appointments
+                                }
+                            }
+                        ]
+                    })
+                    .populate('appointment');
                 }
             )
             .then(
