@@ -18,7 +18,7 @@ module.exports = (apiRoutes, express) => {
         .get(getWorkdayByDoctor)
         .post(utils.methodNotAllowed)
         .put(utils.methodNotAllowed)
-        .delete(deleteWorkdayByDoctor);
+        .delete(deleteWorkdayById);
 
     apiRoutes.use('/workdays', workdayRoutes);
 
@@ -381,27 +381,17 @@ module.exports = (apiRoutes, express) => {
         );
     }
 
-    function deleteWorkdayByDoctor (req, res) {
+    function deleteWorkdayById (req, res) {
         utils.checkRole(req, res, ['doctor','staff']);
-        if (!req.body.date) {
-            utils.responseMissingField(res, 'date');
-        }
-        if (!req.body.time) {
-            utils.responseMissingField(res, 'time');
-        }
         let workdayDeleted;
-        Workday.findOne({
-            doctor: req.params.doctor,
-            date: moment(req.body.date).startOf('day'),
-            time: req.body.time
-        })
+        Workday.findById(req.params.doctor)
         .then(
             function (workday) {
                 if (!workday) {
                     res.status(400).send({
                         success: false,
                         status: 'Bad Request',
-                        message: 'No workday with this doctor.'
+                        message: 'No workday with this id.'
                     });
                 }
                 else {
