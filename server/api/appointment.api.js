@@ -246,7 +246,9 @@ module.exports = (apiRoutes, express) => {
                 function(appointments){
                     appointmentsRef = appointments;
                     return DiagnosisResult.find({
-                        appointment: appointments
+                        appointment: {
+                            $in: appointments
+                        }
                     });
                 },
                 function(error){
