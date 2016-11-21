@@ -117,7 +117,7 @@ module.exports = function (apiRoutes, express) {
                                             .populate('clinic');
                                         },
                                         function(error){
-                                            reject();
+                                            reject(error);
                                         }
                                     ).then(
                                         function(doctor){
@@ -125,7 +125,7 @@ module.exports = function (apiRoutes, express) {
                                             return Workday.findById(diagnosisResult.appointment.workday);
                                         },
                                         function(error){
-                                            reject();
+                                            reject(error);
                                         }
                                     ).then(
                                         function(workday){
@@ -133,7 +133,7 @@ module.exports = function (apiRoutes, express) {
                                             resolve(diagnosisResult);
                                         },
                                         function(error){
-                                            reject();
+                                            reject(error);
                                         }
                                     );
                                 }
