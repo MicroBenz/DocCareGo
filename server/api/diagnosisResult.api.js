@@ -55,7 +55,7 @@ module.exports = function (apiRoutes, express) {
                     res.status(500).send({
                         success: false,
                         message: error,
-                        clientMessage: 'Cannot get diagnosisResult data.'
+                        clientMessage: 'Cannot get diagnosisResult data 1'
                     });
                 }
             );
@@ -148,7 +148,7 @@ module.exports = function (apiRoutes, express) {
                     res.status(500).send({
                         success: false,
                         message: error,
-                        clientMessage: 'Cannot get diagnosisResult data.'
+                        clientMessage: 'Cannot get diagnosisResult data 2'
                     });
                 }
             )
@@ -164,7 +164,7 @@ module.exports = function (apiRoutes, express) {
                     res.status(500).send({
                         success: false,
                         message: error,
-                        clientMessage: 'Cannot get diagnosisResult data.'
+                        clientMessage: 'Cannot get diagnosisResult data 3'
                     });
                 }
             );
