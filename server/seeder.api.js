@@ -176,7 +176,7 @@ function createPatients (req, res) {
             district: 'แขวง'+i,
             province: 'จังหวัด'+i,
             zipCode: 'รหัสไปรษณีย์'+i,
-            tel: 'เบอร์โทร'+i,
+            tel: '0837156829',
             noMedicines: ['ยา1','ยา2']
         };
         let patient = new Patient(data);
@@ -363,7 +363,7 @@ function createUsersPatients (req, res) {
         let data = {
             username: 'patient'+i,
             role: 'patient',
-            email: 'patient'+i+'@doccare.go.th',
+            email: 'first852456@gmail.com',
             password: bcrypt.hashSync('patient'+i)
         };
         let user = new User(data);
@@ -391,7 +391,7 @@ function createUsersDoctors (req, res) {
         let data = {
             username: 'doctor'+i,
             role: 'doctor',
-            email: 'doctor'+i+'@doccare.go.th',
+            email: 'first852456@gmail.com',
             password: bcrypt.hashSync('doctor'+i)
         };
         let user = new User(data);
@@ -419,7 +419,7 @@ function createUsersStaffs (req, res) {
         let data = {
             username: 'staff'+i,
             role: 'staff',
-            email: 'staff'+i+'@doccare.go.th',
+            email: 'first852456@gmail.com',
             password: bcrypt.hashSync('staff'+i)
         };
         let user = new User(data);
@@ -447,7 +447,7 @@ function createUsersNurses (req, res) {
         let data = {
             username: 'nurse'+i,
             role: 'nurse',
-            email: 'nurse'+i+'@doccare.go.th',
+            email: 'first852456@gmail.com',
             password: bcrypt.hashSync('nurse'+i)
         };
         let user = new User(data);
@@ -475,7 +475,7 @@ function createUsersPharmacists (req, res) {
         let data = {
             username: 'pharmacist'+i,
             role: 'pharmacist',
-            email: 'pharmacist'+i+'@doccare.go.th',
+            email: 'first852456@gmail.com',
             password: bcrypt.hashSync('pharmacist'+i)
         };
         let user = new User(data);
