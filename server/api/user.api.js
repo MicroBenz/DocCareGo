@@ -112,6 +112,7 @@ module.exports = (app, express) => {
 };
 
 function getPatientData (req, res, user) {
+    let Patient = require('../model/Patient');
     Patient.findOne({
         HN: req.params.username
     })
@@ -146,6 +147,7 @@ function getPatientData (req, res, user) {
 }
 
 function getDoctorData (req, res, user) {
+    let Doctor = require('../model/Doctor');
     Doctor.findOne({
         HN: req.params.username
     })
@@ -180,6 +182,7 @@ function getDoctorData (req, res, user) {
 }
 
 function getStaffData (req, res, user) {
+    let Staff = require('../model/Staff');
     Staff.findOne({
         HN: req.params.username
     })
@@ -214,6 +217,7 @@ function getStaffData (req, res, user) {
 }
 
 function getNurseData (req, res, user) {
+    let Nurse = require('../model/Nurse');
     Nurse.findOne({
         HN: req.params.username
     })
@@ -248,6 +252,7 @@ function getNurseData (req, res, user) {
 }
 
 function getPharmacistData (req, res, user) {
+    let Pharmacist = require('../model/Pharmacist');
     Pharmacist.findOne({
         HN: req.params.username
     })
@@ -285,10 +290,10 @@ function createUserByData (data) {
     let User = require('../model/User');
     let bcrypt = require('bcrypt-nodejs');
     let info = {
-        username: data.req.username,
-        role: data.req.role,
-        email: data.req.email,
-        password: bcrypt.hasSync(data.req.password)
+        username: data.req.body.username,
+        role: data.req.body.role,
+        email: data.req.body.email,
+        password: bcrypt.hashSync(data.req.body.password)
     };
     let user = new User(info);
     user.save()
@@ -320,7 +325,7 @@ function createUserByData (data) {
 
 function checkHasPatient (req, res) {
     let Patient = require('../model/Patient');
-    Patient.findOne({
+    return Patient.findOne({
         HN: req.body.username
     })
     .then(
@@ -328,7 +333,7 @@ function checkHasPatient (req, res) {
             if(patient) {
                 return {
                     req: req,
-                    req: res,
+                    res: res,
                     preName: patient.preName,
                     name: patient.name,
                     surname: patient.surname
@@ -355,7 +360,7 @@ function checkHasPatient (req, res) {
 
 function checkHasDoctor (req, res) {
     let Doctor = require('../model/Doctor');
-    Doctor.findOne({
+    return Doctor.findOne({
         HN: req.body.username
     })
     .then(
@@ -363,7 +368,7 @@ function checkHasDoctor (req, res) {
             if(doctor) {
                 return {
                     req: req,
-                    req: res,
+                    res: res,
                     preName: doctor.preName,
                     name: doctor.name,
                     surname: doctor.surname
@@ -398,7 +403,7 @@ function checkHasStaff (req, res) {
             if(staff) {
                 return {
                     req: req,
-                    req: res,
+                    res: res,
                     preName: staff.preName,
                     name: staff.name,
                     surname: staff.surname
@@ -425,7 +430,7 @@ function checkHasStaff (req, res) {
 
 function checkHasNurse (req, res) {
     let Nurse = require('../model/Nurse');
-    Nurse.findOne({
+    return Nurse.findOne({
         HN: req.body.username
     })
     .then(
@@ -433,7 +438,7 @@ function checkHasNurse (req, res) {
             if(nurse) {
                 return {
                     req: req,
-                    req: res,
+                    res: res,
                     preName: nurse.preName,
                     name: nurse.name,
                     surname: nurse.surname
@@ -460,7 +465,7 @@ function checkHasNurse (req, res) {
 
 function checkHasPharmacist (req, res) {
     let Pharmacist  = require('../model/Pharmacist ');
-    Pharmacist .findOne({
+    return Pharmacist .findOne({
         HN: req.body.username
     })
     .then(
@@ -468,7 +473,7 @@ function checkHasPharmacist (req, res) {
             if(pharmacist) {
                 return {
                     req: req,
-                    req: res,
+                    res: res,
                     preName: pharmacist.preName,
                     name: pharmacist.name,
                     surname: pharmacist.surname
