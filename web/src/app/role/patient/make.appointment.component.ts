@@ -5,7 +5,12 @@ import { APPOINTMENT_ENDPOINT } from '../../config/api.config';
 
 @Component({
     selector: 'make-appointment',
-    templateUrl: './make.appointment.view.html'
+    templateUrl: './make.appointment.view.html',
+    styles: [`
+        .container {
+            margin-top: 13px;
+        }
+    `]
 })
 export class MakeAppointmentComponent implements OnInit {
     public isMakeAppointmentSuccess: boolean;

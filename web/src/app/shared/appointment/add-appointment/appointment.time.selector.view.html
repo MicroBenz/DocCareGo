@@ -1,4 +1,4 @@
-<div class="columns">
+<div class="columns" *ngIf="isShowSelector">
     <div class="column is-4">
         <p><i class="fa fa-calendar"></i> {{currentDateDisplay}}</p>
         <p><i class="fa fa-clock-o"></i> {{currentTimeDisplay}}</p>
@@ -8,3 +8,4 @@
         <a (click)="getNextTimeSlot()"><i class="fa fa-times"></i></a>
     </div>
 </div>
+<h1 class="title is-5" *ngIf="!isShowSelector">ไม่พบวันออกตรวจของแพทย์ท่านนี้ กรุณาเลือกแพทย์ใหม่</h1>

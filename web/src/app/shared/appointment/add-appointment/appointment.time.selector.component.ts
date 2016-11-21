@@ -20,16 +20,19 @@ export class AppointmentTimeSelectorComponent implements OnInit, OnChanges {
     public currentIndex: number;
     public currentDateDisplay: string;
     public currentTimeDisplay: string;
+    public isShowSelector: boolean;
 
     ngOnInit () {
         this.currentIndex = 0;
         this.currentDateDisplay = '';
         this.currentTimeDisplay = '';
+        this.isShowSelector = false;
     }
 
     ngOnChanges(changes) {
         console.log(changes);
         if (changes['timeSlot'].currentValue.length !== 0) {
+            this.isShowSelector = true;
             this.setCurrentTimeDisplay(0);
         }
     }
