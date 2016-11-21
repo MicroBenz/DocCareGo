@@ -19,6 +19,9 @@ export class PatientFormComponent {
     public med;
 
     addNoMedicine() {
+        if(this.aMedicine === null || this.aMedicine === '' || this.aMedicine === undefined) {
+            return;
+        }
         if(this.medicines.find(item => item[0] === this.aMedicine))
         {
             return;
