@@ -43,6 +43,21 @@ export class ViewAppointmentComponent implements OnInit {
         this.dataService.getDataWithParams(APPOINTMENT_ENDPOINT, {
             user: this.authService.getUserHN()
         })
+        .map(
+            (success: Array<Object>) => {
+                console.log(success);
+                return success.sort(
+                    (firstItem, secondItem) => {
+                        let firstDate = firstItem['workday']['date'];
+                        let secondDate = secondItem['workday']['date'];
+                        if (moment(firstDate).isBefore(secondDate)) {
+                            return -1;
+                        }
+                        return 1;
+                    }
+                )
+            }
+        )
         .subscribe(
             (success: Array<Object>) => {
                 console.log('GET APPOINTMENT');
