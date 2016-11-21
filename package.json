@@ -7,6 +7,8 @@
     "build:dev": "node_modules/webpack/bin/webpack.js --progress",
     "build:prod": "node_modules/webpack/bin/webpack.js --config webpack.prod.js --progress",
     "dev": "node_modules/webpack/bin/webpack.js --progress --watch",
+    "docker-build": "docker build -t doccarego .",
+    "docker-start": "docker run -p 49160:22345 -d --name doccarego doccarego",
     "start": "node server.js",
     "test": "mocha --timeout 10000"
   },
