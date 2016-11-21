@@ -23,6 +23,7 @@ export class AddMedicineComponent implements OnInit {
     public isShowConfirm: boolean;
     public isShowInvalidate: boolean;
     public isShowCancelConfirm: boolean;
+    public isShowSuccess: boolean;
 
     constructor (private title: Title, private router: Router, private dataService: DataService) {}
 
@@ -31,6 +32,7 @@ export class AddMedicineComponent implements OnInit {
         this.isShowConfirm = false;
         this.isShowCancelConfirm = false;
         this.isShowInvalidate = false;
+        this.isShowSuccess = false;
         this.confirmModalContent = '';
         this.medicineData = {
             name: '',
@@ -76,7 +78,7 @@ export class AddMedicineComponent implements OnInit {
             .subscribe(
                 (success) => {
                     console.log('ADD NEW MEDICINE');
-                    this.navigateToMedicineManagement();
+                    this.isShowSuccess = true;
                 },
                 (error) => {
                         console.error(error);
@@ -92,5 +94,6 @@ export class AddMedicineComponent implements OnInit {
         this.isShowConfirm = false;
         this.isShowCancelConfirm = false;
         this.isShowInvalidate = false;
+        this.isShowSuccess = false;
     }
 }

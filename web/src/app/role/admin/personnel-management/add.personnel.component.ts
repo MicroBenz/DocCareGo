@@ -29,6 +29,7 @@ export class AddPersonnelComponent implements OnInit {
     public isShowConfirm: boolean;
     public isShowCancelConfirm: boolean;
     public isShowInvalidate: boolean;
+    public isShowSuccess: boolean;
     private roleMapping = {
         patient: 'ผู้ป่วย',
         doctor: 'แพทย์',
@@ -48,6 +49,7 @@ export class AddPersonnelComponent implements OnInit {
         this.isShowConfirm = false;
         this.isShowCancelConfirm = false;
         this.isShowInvalidate = false;
+        this.isShowSuccess = false;
     }
 
     addNewPersonnel () {
@@ -69,6 +71,7 @@ export class AddPersonnelComponent implements OnInit {
         this.isShowCancelConfirm = false;
         this.isShowInvalidate = false;
         this.isSelected = false;
+        this.isShowSuccess = false;
     }
 
     private validateForm () {
@@ -178,7 +181,7 @@ export class AddPersonnelComponent implements OnInit {
             return this.dataService.saveData(endPoint, formData)
                 .subscribe(
                     (success) => {
-                        this.navigateToPersonnelManagement();
+                        this.isShowSuccess = true;
                     },
                     (error) => {
                         console.error(error);

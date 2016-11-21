@@ -24,6 +24,7 @@ export class AddClinicComponent implements OnInit {
     public isShowConfirm: boolean;
     public isShowCancelConfirm: boolean;
     public isShowInvalidate: boolean;
+    public isShowSuccess: boolean;
     public confirmModalContent: string;
 
     constructor (private title: Title, private router: Router, private dataService: DataService) {}
@@ -37,6 +38,7 @@ export class AddClinicComponent implements OnInit {
         this.isShowConfirm = false;
         this.isShowCancelConfirm = false;
         this.isShowInvalidate = false;
+        this.isShowSuccess = false;
         this.confirmModalContent = '';
     }
 
@@ -65,7 +67,7 @@ export class AddClinicComponent implements OnInit {
         }
     }
 
-    private decorateModalContent () {
+    decorateModalContent () {
         this.confirmModalContent = `
             <h1 class="title">ตรวจสอบข้อมูลก่อนทำเพิ่มแผนก</h1>
             <p><b>ชื่อแผนก:</b> ${this.clinicData['name']}</p>
@@ -78,7 +80,7 @@ export class AddClinicComponent implements OnInit {
             .subscribe(
                 (success) => {
                     console.log('ADD NEW CLINIC');
-                    this.navigateToClinicManagement();
+                    this.isShowSuccess = true;
                 },
                 (error) => {
                         console.error(error);
@@ -87,13 +89,14 @@ export class AddClinicComponent implements OnInit {
     }
 
      navigateToClinicManagement = () => {
-        this.router.navigateByUrl('/admin/clinic-management');
+        this.router.navigateByUrl(`/admin/clinic-management`);
     }
 
     dismissModal = () => {
         this.isShowConfirm = false;
         this.isShowCancelConfirm = false;
         this.isShowInvalidate = false;
+        this.isShowSuccess = false;
     }
 
 }
