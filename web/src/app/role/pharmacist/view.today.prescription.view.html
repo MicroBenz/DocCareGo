@@ -50,7 +50,7 @@
                         <div class="message-body">
                             <patient-prescription
                                 [patient]="selectedPatient"
-                                [prescription]="prescriptionHistoryList[prescriptionHistoryIndex]">
+                                [prescription]="prescriptionHistoryList[prescriptionHistoryIndex]['prescriptionHistory']">
                             </patient-prescription>
                         </div>
                     </article>
@@ -71,5 +71,9 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div>
+        <p>Sax</p>
+        <p>{{selectedPatient | json}}</p>
     </div>
 </div>

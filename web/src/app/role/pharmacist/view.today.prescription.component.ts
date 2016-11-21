@@ -81,8 +81,8 @@ export class ViewTodayPrescriptionComponent implements OnInit {
     public prescriptionList;
     public prescriptionHistoryList;
     public medicineAllegyList;
-    // public medicines;
     private selectedPatient;
+    private prescriptionHistoryItem;
     private prescriptionHistoryIndex: number;
 
     constructor(private title: Title, private dataService: DataService) {}
@@ -94,120 +94,138 @@ export class ViewTodayPrescriptionComponent implements OnInit {
         this.prescriptionHistoryList = [];
         this.medicineAllegyList = [];
         
-        this.dataService.getData(DIAGNOSIS_RESULT_ENDPOINT)
-            .subscribe(this.displayPatientPrescriptions, this.errorHandler);
-        // this.patientList = [
-        //    {
-        //        id: 1,
-        //        appointment: {
-        //            description: '',
-        //            patient: {
-        //                HN: '000022',
-        //                preName: 'นาย',
-        //                name: 'ธนนันท์',
-        //                surname: 'ตั้งธนาชัยกุล',
-        //                noMedicines: [
-        //                    'one','two'
-        //                ]
-        //            },
-        //            doctor: {
-        //                preName: 'นายแพทย์',
-        //                name: 'ธีรัช ',
-        //                surname: 'รักษ์เถา',
-        //                clinic: {
-        //                    name: 'ทางเดินอาหารและตับ'
-        //                }
-        //            },
-        //            workday: {
-        //                date: '13/1/2559',
-        //                time: '10:00 - 10:30'
-        //            }
-        //        },
-        //        medicines: [
-        //             {
-        //                 name: 'พาราเซตตามอล',
-        //                 quantity: '3 เม็ด',
-        //                 howto: 'รับประทานหลังอาหารเช้า/กลางวัน/เย็น ครั้งละ 1 เม็ด'
-        //             }
-        //         ] 
-        //    },
-        //    {
-        //        id: 2,            
-        //        appointment: {
-        //            description: '',
-        //            patient: {
-        //                HN: '103022',
-        //                preName: 'นางสาว',
-        //                name: 'วิภวานี',
-        //                surname: 'วัชระเดชสกุล',
-        //                noMedicines: [
-        //                    'one','two','three'
-        //                ]
-        //            },
-        //            doctor: {
-        //                preName: 'นายแพทย์',
-        //                name: 'ธีรัช ',
-        //                surname: 'รักษ์เถา',
-        //                clinic: {
-        //                    name: 'ทางเดินอาหารและตับ'
-        //                }
-        //            },
-        //            workday: {
-        //                date: '13/1/2559',
-        //                time: '11:00 - 11:30'
-        //            }
-        //        },
-        //        medicines: [
-        //             {
-        //                 name: 'พาราเซตตามอล',
-        //                 quantity: '3 เม็ด',
-        //                 howto: 'รับประทานหลังอาหารเช้า/กลางวัน/เย็น ครั้งละ 1 เม็ด'
-        //             },
-        //             {
-        //                 name: 'พาราเซตตามอล',
-        //                 quantity: '3 เม็ด',
-        //                 howto: 'รับประทานหลังอาหารเช้า/กลางวัน/เย็น ครั้งละ 1 เม็ด'
-        //             }
-        //         ]
-        //    },
-        //    {
-        //        id: 3,            
-        //        appointment: {
-        //            description: '',
-        //            patient: {
-        //                HN: '204052',
-        //                preName: 'นาย',
-        //                name: 'ธีรัช',
-        //                surname: 'รักษ์เถา',
-        //                noMedicines: []
-        //            },
-        //            doctor: {
-        //                preName: 'นายแพทย์',
-        //                name: 'ณัษฐพงษ์',
-        //                surname: 'อู่สิริมณีชัย',
-        //                clinic: {
-        //                    name: 'ทางเดินอาหารและตับ'
-        //                }
-        //            },
-        //            workday: {
-        //                date: '13/1/2559',
-        //                time: '11:30 - 12:00'
-        //            }
-        //        },
-        //        medicines: [
-        //             {
-        //                 name: 'พาราเซตตามอล',
-        //                 quantity: '3 เม็ด',
-        //                 howto: 'รับประทานหลังอาหารเช้า/กลางวัน/เย็น ครั้งละ 1 เม็ด'
-        //             },
-        //             {
-        //                 name: 'null',
-        //                 quantity: '3 เม็ด',
-        //                 howto: 'รับประทานหลังอาหารเช้า/กลางวัน/เย็น ครั้งละ 1 เม็ด'
-        //             }
-        //         ]
-        //    } 
-        // ]; 
+        // this.dataService.getData(DIAGNOSIS_RESULT_ENDPOINT)
+        //     .map(
+        //         (diagnosis_results) => {
+        //             console.log(diagnosis_results);
+        //             return diagnosis_results.map(
+        //                 (diagnosis_results) => {
+        //                     let name = `${diagnosis_results['appointment']['patient']['preName']}${diagnosis_results['appointment']['patient']['name']} ${diagnosis_results['appointment']['patient']['surname']}`;
+        //                     let doctor = `${diagnosis_results['appointment']['doctor']['preName']}${diagnosis_results['appointment']['doctor']['name']} ${diagnosis_results['appointment']['doctor']['surname']}`;
+        //                     return {
+        //                         id: diagnosis_results['_id'],
+        //                         hn: diagnosis_results['appointment']['patient']['HN'],
+        //                         name: name,
+        //                         patient: diagnosis_results['appointment']['patient'],
+        //                         doctor: doctor,
+        //                         clinic: diagnosis_results['appointment']['doctor']['clinic']['name'],
+        //                         noMedicines: diagnosis_results['appointment']['patient']['noMedicines'],
+        //                         date: diagnosis_results['appointment']['workday']['date'],
+        //                         // time: diagnosis_results['appointment']['workday']['time'],
+        //                         medicines: diagnosis_results['medicines']
+        //                     }
+        //                 }
+        //             )
+        //         }
+        //     )
+        //     .subscribe(this.displayPatientPrescriptions, this.errorHandler);
+        this.patientList = [
+           {
+               id: 1,
+               hn: '000022',
+               name: 'นายธนนันท์ ตั้งธนาชัยกุล',
+               doctor: 'นายแพทย์ธีรัช รักษ์เถา',
+               clinic: 'ทางเดินอาหารและตับ',
+               date: '13/1/2559',
+               time: '10:00 - 10:30',
+               noMedicines: [ 'one','two' ],
+               medicines: [
+                    {
+                        name: 'พาราเซตตามอล',
+                        quantity: '3 เม็ด',
+                        howto: 'รับประทานหลังอาหารเช้า/กลางวัน/เย็น ครั้งละ 1 เม็ด'
+                    }
+                ] 
+           },
+           {
+               id: 2,
+               hn: '103022',
+               name: 'นางสาววิภวานี วัชระเดชสกุล',
+               doctor: 'นายแพทย์ธีรัช รักษ์เถา',
+               clinic: 'ทางเดินอาหารและตับ',
+               date: '13/1/2559',
+               time: '11:00 - 11:30',
+               noMedicines: [ 'one','two','three' ],
+               medicines: [
+                    {
+                        name: 'พาราเซตตามอล',
+                        quantity: '3 เม็ด',
+                        howto: 'รับประทานหลังอาหารเช้า/กลางวัน/เย็น ครั้งละ 1 เม็ด'
+                    },
+                    {
+                        name: 'พาราเซตตามอล',
+                        quantity: '3 เม็ด',
+                        howto: 'รับประทานหลังอาหารเช้า/กลางวัน/เย็น ครั้งละ 1 เม็ด'
+                    }
+                ]
+           },
+           {
+               id: 3,
+               hn: '204052',
+               name: 'นายธีรัช รักษ์เถา',
+               doctor: 'นายแพทย์ณัษฐพงษ์ อู่สิริมณีชัย',
+               clinic: 'ทางเดินอาหารและตับ',
+               date: '13/1/2559',
+               time: '11:30 - 12:00',
+               noMedicines: [],
+               medicines: [
+                    {
+                        name: 'พาราเซตตามอล',
+                        quantity: '3 เม็ด',
+                        howto: 'รับประทานหลังอาหารเช้า/กลางวัน/เย็น ครั้งละ 1 เม็ด'
+                    },
+                    {
+                        name: 'null',
+                        quantity: '3 เม็ด',
+                        howto: 'รับประทานหลังอาหารเช้า/กลางวัน/เย็น ครั้งละ 1 เม็ด'
+                    }
+                ]
+           } 
+        ]; 
+        this.prescriptionHistoryList = [
+            {
+                prescriptionHistory: [
+                    {
+                        name: 'พาราเซตตามอล',
+                        quantity: '3 เม็ด',
+                        howto: 'รับประทานหลังอาหารเช้า/กลางวัน/เย็น ครั้งละ 1 เม็ด'
+                    }
+                ]
+            },
+            {
+                prescriptionHistory: [
+                    {
+                        name: 'abc',
+                        quantity: '3 เม็ด',
+                        howto: 'รับประทานหลังอาหารเช้า/กลางวัน/เย็น ครั้งละ 1 เม็ด'
+                    },
+                    {
+                        name: 'ddna',
+                        quantity: '3 เม็ด',
+                        howto: 'รับประทานหลังอาหารเช้า/กลางวัน/เย็น ครั้งละ 1 เม็ด'
+                    }
+                ]
+            }
+        ];
+        // this.prescriptionHistoryList = [
+        //     [{
+        //         name: 'พาราเซตตามอล',
+        //         quantity: '3 เม็ด',
+        //         howto: 'รับประทานหลังอาหารเช้า/กลางวัน/เย็น ครั้งละ 1 เม็ด'
+        //     }],
+        //     [{
+        //         name: 'abc',
+        //         quantity: '3 เม็ด',
+        //         howto: 'รับประทานหลังอาหารเช้า/กลางวัน/เย็น ครั้งละ 1 เม็ด'
+        //     },
+        //     {
+        //         name: 'ddna',
+        //         quantity: '3 เม็ด',
+        //         howto: 'รับประทานหลังอาหารเช้า/กลางวัน/เย็น ครั้งละ 1 เม็ด'
+        //     }]
+        // ];
+
+        // this.prescriptionHistoryItem = this.prescriptionHistoryList[this.prescriptionHistoryList.length-1]['prescriptionHistory'];
         this.selectedPatient = {};
         this.prescriptionHistoryIndex = this.prescriptionHistoryList.length-1;
     }   
@@ -216,6 +234,12 @@ export class ViewTodayPrescriptionComponent implements OnInit {
         console.log(patientPrescriptions);
         this.patientList = patientPrescriptions;
         // this.prescriptionList = patientPrescriptions['medicines'];
+    }
+
+    public displayPatientPrescriptionHistory = (patientPrescriptionHistory) => {
+        console.log(patientPrescriptionHistory);
+        this.prescriptionHistoryList = patientPrescriptionHistory;
+        // this.prescriptionHistoryItem = this.prescriptionHistoryList[this.prescriptionHistoryList.length-1];
     }
 
     private errorHandler = (error) => {
@@ -234,23 +258,33 @@ export class ViewTodayPrescriptionComponent implements OnInit {
 
     public getPatientPrescriptionHistory(patient) {
         this.dataService.getDataWithParams(DIAGNOSIS_RESULT_ENDPOINT, {patient: patient})
-            .subscribe(this.displayPatientPrescriptions, this.errorHandler);
-    }
-
-    public displayPatientPrescriptionHistory = (patientPrescription) => {
-        console.log(patientPrescription);
-        this.prescriptionHistoryList = patientPrescription;
+            .map(
+                (diagosis_history) => {
+                    console.log(diagosis_history);
+                    return diagosis_history.map(
+                        (diagosis_history) => {
+                            let name = `${diagosis_history['appointment']['patient']['preName']}${diagosis_history['appointment']['patient']['name']} ${diagosis_history['appointment']['patient']['surname']}`;
+                            return {
+                                id: diagosis_history['_id'],
+                                hn: diagosis_history['appointment']['patient']['HN'],
+                                name: name,
+                                date: diagosis_history['appointment']['workday']['date'],
+                                prescriptionHistory: diagosis_history['medicines']
+                            }
+                        }
+                    )
+                }
+            )
+            .subscribe(this.displayPatientPrescriptionHistory, this.errorHandler);
     }
 
     public getPatientPrescriptionData(selectedPatient) {
         // get Today precription
         this.prescriptionList = selectedPatient['medicines'];
         // get no medicines
-        let appointment = selectedPatient['appointment'];
-        let patient = appointment['patient'];
-        this.medicineAllegyList = patient['noMedicines'];
+        this.medicineAllegyList = selectedPatient['noMedicines'];
         // get History prescription
-        this.getPatientPrescriptionHistory(patient);
+        // this.getPatientPrescriptionHistory(selectedPatient['patient']);
         
     }
 
