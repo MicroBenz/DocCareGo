@@ -42,14 +42,16 @@ export class AddClinicComponent implements OnInit {
 
     private validateForm () {
         if(this.clinicData === undefined || this.clinicData === null) {
-            this.isShowInvalidate = true; 
+            return false;
         }
-        else if (this.clinicData['name'] === '' || this.clinicData['description'] === '') {
-            this.isShowInvalidate = true;
+        if (this.clinicData['name'] === undefined || this.clinicData['name'] === null || this.clinicData['name'] === '') {
+            return false;
+        }
+        if (this.clinicData['description'] === undefined || this.clinicData['description'] === null || this.clinicData['description'] === '') {
+            return false;
         }
         else {
-            this.isShowConfirm = true;
-            this.decorateModalContent();
+            return true;
         }
     }
 
