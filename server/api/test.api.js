@@ -1,6 +1,22 @@
 let smsService = require('../sms.service');
 let mailService = require('../mail.service');
 
+function createPdf (req, res) {
+    var fs = require('fs');
+    var pdf = require('html-pdf');
+    var html = fs.readFileSync('./server/api/test/businesscard.html', 'utf8');
+    var options = { format: 'Letter' };
+    
+    pdf.create(html, options).toFile('./server/api/test/businesscard.pdf',
+        function(err, path) {
+            if (err) 
+                return console.log(err);
+            console.log(path); // { filename: '/app/businesscard.pdf' } 
+            res.send(path);
+        }
+    );
+}
+
 function getRemainCredit (req, res) {
     smsService.checkSMSCredit()
         .subscribe(
@@ -113,5 +129,6 @@ module.exports = function (app, express) {
     testRoutes.get('/sms/checkCredit', getRemainCredit);
     testRoutes.post('/sms/sendSMS', sendSMS);    
     testRoutes.post('/email/sendEmail', sendEmail);    
+    testRoutes.post('/pdf', createPdf);    
     app.use('/test', testRoutes);
 }

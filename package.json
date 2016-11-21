@@ -42,6 +42,7 @@
     "express": "~4.13.4",
     "font-awesome": "^4.6.3",
     "fullcalendar": "^3.0.1",
+    "html-pdf": "^2.1.0",
     "jquery": "^2.2.4",
     "jsonwebtoken": "^7.1.9",
     "method-override": "~2.0.2",
