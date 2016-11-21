@@ -95,6 +95,7 @@ export class WorkdayPatientListComponent implements OnInit, OnChanges {
                 (success) => {
                     console.log(success);
                     this.dismissNoti();
+                    location.reload();
                 }
             )
     }
