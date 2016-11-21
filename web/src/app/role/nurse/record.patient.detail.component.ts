@@ -105,6 +105,7 @@ export class RecordPatientDetailComponent implements OnInit {
                 (success) => {
                     console.log('RECORD PATIENT DETAIL');
                     this.dismissModal();
+                    location.reload();
                 }
             )
     }

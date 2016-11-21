@@ -31,10 +31,6 @@ import { WORKDAY_ENDPOINT, APPOINTMENT_ENDPOINT } from '../../../config/api.conf
     `]
 })
 export class MakeAppointmentFormComponent implements OnInit {
-    // public clinicList;
-    // public doctorList;
-    // public selectedClinicIndex;
-    // public selectedDoctorIndex;
     public selectedClinic;
     public selectedDoctor;
     public selectedTimeSlot;
@@ -49,50 +45,12 @@ export class MakeAppointmentFormComponent implements OnInit {
     constructor(private router: Router, private title: Title, private dataService: DataService, private authService: AuthService) {}
 
     ngOnInit () {
-        this.title.setTitle(MAKE_APPOINTMENT_TITLE);
-        // this.clinicList = [];
-        // this.doctorList = [];  
-        // this.selectedDoctorIndex = '-1';
-        // this.selectedClinicIndex = '-1';
-        // this.selectedClinic = {};
-        // this.selectedDoctor = {};   
+        this.title.setTitle(MAKE_APPOINTMENT_TITLE);   
         this.selectedTimeSlot = {};
-        // this.causeToAppointment = ''; 
         this.isConfirmedAppointmentDetail = false;
         this.isConfirmedTimeSlot = false;
-        // this.isAppointmentSuccess = false;
         this.allTimeSlot = []; 
-        // this.dataService.getData(CLINIC_ENDPOINT)
-        //     .subscribe(
-        //         (success) => {
-        //             this.clinicList = success;
-        //         }
-        //     )
     }
-
-    // onSelectClinic(index) {
-    //     this.selectedDoctorIndex = '-1';
-    //     this.selectedDoctor = {};
-    //     this.selectedClinic = this.clinicList[Number(index)];
-    //     this.dataService.getDataWithParams(DOCTOR_ENDPOINT, {
-    //         clinic: this.clinicList[Number(index)]['_id']
-    //     })
-    //     .subscribe(
-    //         (success) => {
-    //             console.log(success);
-    //             this.doctorList = success;
-    //         }
-    //     )
-    // }
-
-    // onSelectDoctor(index) {
-    //     this.selectedDoctor = this.doctorList[Number(index)];        
-    // }
-
-    // confirmAppointmentDetail () {
-    //     this.isConfirmedAppointmentDetail = true;
-    //     // this.requestAvailableTime();
-    // }
 
     public onConfirmAppointmentDetail (data) {
         console.log('ON CONFIRM', data);
@@ -116,7 +74,7 @@ export class MakeAppointmentFormComponent implements OnInit {
                 (workdays: Array<Object>) => {
                     this.allTimeSlot = workdays.map(
                         (item) => {
-                            let timeToDisplay = item['time'] ===  'AM' ? '9:00 - 11:30': '13:00 - 15:00';
+                            let timeToDisplay = item['time'] ===  'AM' ? '9:00 - 11:30': '13:00 - 15:30';
                             let displayDate = moment(item['date']).format('LL');
                             return {
                                 id: item['_id'],
