@@ -20,7 +20,6 @@ module.exports = (app, express) => {
     // Implementation of CRUD are below.
     //----------------- GET -----------------
     function getUserByUsername (req, res) {
-        utils.checkRole(req, res, ['patient','doctor','staff','nurse','pharmacist']);
         User.findOne({
             username: req.params.username
         })
@@ -49,7 +48,6 @@ module.exports = (app, express) => {
 
     //----------------- POST -----------------
     function createUser (req, res) {
-        utils.checkRole(req, res, ['patient','doctor','staff','nurse','pharmacist']);
         validateField(res, req.body);
         User.findOne({
             username: req.body.username
