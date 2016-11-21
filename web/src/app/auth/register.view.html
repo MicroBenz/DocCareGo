@@ -95,6 +95,33 @@
 </modal-dialog>
 
 <modal-dialog
+    [description]="'รหัสประชาชนไม่ถูกต้อง'"
+    [modalType]="'fail'"
+    [confirmText]="'กรอกข้อมูลต่อ'"
+    [confirmFn]="dismissModal"
+    [isShowFlag]="isShowOverLength"
+    (isShowFlagChange)="isShowOverLength = $event">
+</modal-dialog>
+
+<modal-dialog
+    [description]="duplicateContent"
+    [modalType]="'fail'"
+    [confirmText]="'ตกลง'"
+    [confirmFn]="dismissModal"
+    [isShowFlag]="isShowDuplicate"
+    (isShowFlagChange)="isShowDuplicate = $event">
+</modal-dialog>
+
+<modal-dialog
+    [description]="'รหัสผ่านต้องยาวอย่างน้อย 6 ตัวอักษร'"
+    [modalType]="'fail'"
+    [confirmText]="'กรอกข้อมูลต่อ'"
+    [confirmFn]="dismissModal"
+    [isShowFlag]="isShowLowerLength"
+    (isShowFlagChange)="isShowLowerLength = $event">
+</modal-dialog>
+
+<modal-dialog
     [description]="'โปรดกรอกข้อมูลให้ครบถ้วน'"
     [modalType]="'fail'"
     [confirmText]="'กรอกข้อมูลต่อ'"

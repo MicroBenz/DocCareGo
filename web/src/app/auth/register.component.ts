@@ -36,13 +36,18 @@ import { PATIENT_ENDPOINT, DOCTOR_ENDPOINT, NURSE_ENDPOINT, STAFF_ENDPOINT, PHAR
 export class RegisterComponent implements OnInit {
     public formData;
     public endpoint;
+    public duplicateContent:string;
     public confirmContent: string;
+    public HNNoMatchContent: string;
     public isShowConfirm: boolean;    
     public isShowCancelConfirm: boolean;
     public isShowInvalidate: boolean;
     public isShowDuplicate: boolean;
     public isShowNotMatch: boolean;
     public isShowSuccess: boolean;
+    public isShowOverLength: boolean;
+    public isShowHNNoMatch: boolean;
+    public isShowLowerLength: boolean;
     constructor(private title: Title, private router: Router, private http: Http) {}
 
     ngOnInit () {
@@ -64,9 +69,20 @@ export class RegisterComponent implements OnInit {
             
             this.isShowInvalidate = true;
         }
+        // else if(this.checkDuplicate()){
+            
+        // }
         else if(this.formData['password'] !== this.formData['reEnterPassword']){
             this.isShowNotMatch = true;
         }
+        else if(this.formData['password'].length < 6){
+            this.isShowLowerLength = true;
+
+        }
+        else if(this.formData['personalID'].length !== 13 || /[^\d]+/.exec(this.formData['personalID']) ){
+            this.isShowOverLength = true;
+        }
+        
         else{
             this.isShowConfirm = true;
             this.decorateConfirmContent();
@@ -75,6 +91,7 @@ export class RegisterComponent implements OnInit {
 
     private handleResponse = (res: Response) => {
         let result = res.json();
+        console.log('result',result);
         if (result.success)
             return result.data;
         else
@@ -82,8 +99,33 @@ export class RegisterComponent implements OnInit {
     }
 
     private handleError = (error) => {
-        console.error('DataService Error: ', error);        
+        console.error('DataService Error: ', error);      
     }
+
+
+// ============================ try to check duplicate before confirm modal ==============================
+    checkDuplicate = () => {
+        console.log('username' + this.formData['username']);
+        this.http.get('/users/' + this.formData['username'])
+            .map(this.handleResponse, this.handleError)
+            .subscribe(
+                (user) => {
+                    console.log('USER:', user);
+                    // this.isShowDuplicate = true;
+                    // this.decorateDuplicateContent();
+                    this.validateForm();
+                },
+                (error) => {
+                    console.error(error);
+                    this.isShowHNNoMatch = true;
+                    this.decorateHNNoMatchContent();
+                    
+                }
+            )
+        
+    }
+// ==========================================================================================================
+
 
     saveNewUser = () =>{
         this.http.post('/users/', this.formData)
@@ -95,6 +137,9 @@ export class RegisterComponent implements OnInit {
                 },
                 (error) => {
                     console.error(error);
+                    // this.isShowConfirm = false;
+                    this.isShowDuplicate = true;
+                    this.decorateDuplicateContent();
                 }
             )
     }
@@ -109,19 +154,36 @@ export class RegisterComponent implements OnInit {
         `;
     }
 
+    decorateDuplicateContent(){
+        this.duplicateContent = `
+            <h1 class="title">รหัสHNไม่ถูกต้อง</h1>
+            <p>กรุณาติดต่อเจ้าฟน้าที่</p>
+            
+        `;
+        
+    }
 
+    decorateHNNoMatchContent(){
+        this.HNNoMatchContent = `
+            <h1 class="title">รหัสHNไม่ถูกต้อง</h1>
+            <p><h3>กรุณากรอกรหัสใหม่อีกครั้ง</h3></p>
+            `;
+    }
 
     navigateToLoginPage = () => {
         this.router.navigateByUrl('/login');
     }
 
     dismissModal = () => {
+        this.isShowHNNoMatch = false;
         this.isShowSuccess = false;
         this.isShowNotMatch = false;
         this.isShowConfirm = false;
         this.isShowCancelConfirm = false;
         this.isShowInvalidate = false;
         this.isShowDuplicate = false;
+        this.isShowLowerLength = false;
+        this.isShowOverLength = false;
     }
 
 }
