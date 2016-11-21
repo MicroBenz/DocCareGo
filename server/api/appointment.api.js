@@ -263,7 +263,7 @@ module.exports = (apiRoutes, express) => {
                     let appointments = [];
                     diagnosisResults.forEach(
                         function(diagnosisResults){
-                            appointment.push(diagnosisResults.appointment.toString());
+                            appointment.push(diagnosisResults.appointment);
                         }
                     );
                     return appointments;
@@ -280,18 +280,10 @@ module.exports = (apiRoutes, express) => {
             .then(
                 function(appointments){
                     return PatientRecord.find({
-                        $and: [
-                            {
-                                appointment: {
-                                    $in: appointmentsRef
-                                }
-                            },
-                            {
-                                appointment: {
-                                    $nin: appointments
-                                }
-                            }
-                        ]
+                        appointment: {
+                            $in: appointmentsRef,
+                            $nin: appointments
+                        }
                     })
                     .populate('appointment');
                 }
