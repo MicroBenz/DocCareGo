@@ -312,7 +312,10 @@ module.exports = (apiRoutes, express) => {
                     workday: {
                         $in: workdays
                     }
-                });
+                })
+                .populate('patient')
+                .populate('doctor')
+                .populate('workday');
             },
             function(error) {
                 console.log(error);
@@ -362,7 +365,26 @@ module.exports = (apiRoutes, express) => {
         )
         .then(
             function(appointments){
-                // send SMS and Email to all of appointments
+                //send SMS and Email to patient
+                let smsService = require('../sms.service');
+                let mailService = require('../mail.service');
+                appointments.forEach(
+                    function(appointment){
+                        let message = `ระบบจัดการการนัดหมาย DocCare Go\nเรียนคุณ${appointment.patient.preName}${appointment.patient.name} ${appointment.patient.surname}\nเนื่องจากแพทย์เจ้าของนัด ${appointment.doctor.preNmae}${appointment.doctor.name} ${appointment.doctor.surname} ไม่สามารถทำการออกตรวจในวันและเวลานัดหมายเดิม (วันที่ ${moment(appointment.workday.date).locale('th').format('LL')} เวลา ${appointment.workday.time==="AM"?"9:00-11:30":"13:00-15:30"} ) รบกวนท่านติดต่อโดยตรงกับเจ้าหน้าที่ทางโทรศัพท์ (เบอร์โทรศัพท์: 0xx-xxx-xxxx) เพื่อนัดหมายใหม่ต่อไป\nทางโรงพยาบาลต้องขออภัยในความไม่สะดวกมา ณ ที่นี้ด้วย`;
+                        smsService.sendSMS(appointment.patient.tel, message);
+                        User.find({
+                            username: appointment.patient.HN
+                        })
+                        .then(
+                            function(user){
+                                mailService.sendEmail(user.email, 'Doccare Go Notice', message);
+                            },function(error){
+                                console.log(error);
+                            }
+                        );
+                    }
+                );
+
                 res.json({
                     success: true,
                     clientMessage: 'Delete Workday succeed.',
