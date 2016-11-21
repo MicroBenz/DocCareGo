@@ -66,7 +66,7 @@
                         </div>
                     </article>
                 </div>
-                <div class="patient-prescription-content" *ngIf="(selectedPatient | json) == '{}'">
+                <div class="patient-prescription-content" *ngIf="(selectedPatient | json) == '{}' && patientList.length > 0">
                     <h1>เลือกผู้ป่วยที่ต้องการบันทึกข้อมูลทางด้านซ้าย</h1>
                 </div>
             </div>
