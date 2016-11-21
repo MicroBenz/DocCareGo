@@ -263,7 +263,7 @@ module.exports = (apiRoutes, express) => {
                     let appointments = [];
                     diagnosisResults.forEach(
                         function(diagnosisResults){
-                            appointment.push(diagnosisResults.appointment);
+                            appointment.push(diagnosisResults.appointment.toString());
                         }
                     );
                     return appointments;
