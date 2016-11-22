@@ -50,7 +50,9 @@
                         <div class="message-body">
                             <patient-prescription
                                 [patient]="selectedPatient"
-                                [prescription]="prescriptionHistoryItem">
+                                [prescription]="prescriptionHistoryItem"
+                                [numberOfMedicines]="amountOfPrescriptionHistory">
+                                
                             </patient-prescription>
                         </div>
                     </article>
@@ -61,7 +63,8 @@
                         <div class="message-body">
                             <patient-prescription
                                 [patient]="selectedPatient"
-                                [prescription]="prescriptionList">
+                                [prescription]="prescriptionList"
+                                [numberOfMedicines]="amountOfPrescription">
                             </patient-prescription>
                         </div>
                     </article>
@@ -72,4 +75,6 @@
             </div>
         </div>
     </div>
+    <div>
+        <p>{{amountOfPrescription}}</p>
 </div>
