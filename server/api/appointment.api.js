@@ -465,7 +465,7 @@ module.exports = (apiRoutes, express) => {
             function(patient){
                 if(patient){
                     patientRef = patient;
-                    return User.find({
+                    return User.findOne({
                         username: patient.HN
                     });
                 }
@@ -537,7 +537,15 @@ module.exports = (apiRoutes, express) => {
                 let smsService = require('../sms.service');
                 let mailService = require('../mail.service');
                 let message = `ระบบจัดการการนัดหมาย DocCare Go\nเรียนคุณ${appointment.patient.preName}${appointment.patient.name} ${appointment.patient.surname}\nโปรดตรวจสอบข้อมูลการนัดหมายของท่านดังต่อไปนี้\nรหัสผู้ป่วย: ${appointment.patient.HN}\tชื่อ-นามสกุล ผู้ป่วย: ${appointment.patient.preName}${appointment.patient.name} ${appointment.patient.surname}\nวันเวลานัดหมาย: ${moment(appointment.workday.date).locale('th').format('LL')} ${appointment.workday.time==="AM"?"9:00-11:30":"13:00-15:30"}\nแพทย์เจ้าของนัด: ${appointment.doctor.preName}${appointment.doctor.name} ${appointment.doctor.surname}\nหากท่านต้องการเปลี่ยนแปลงวันเวลาของการนัดหมาย สามารถเปลี่ยนแปลงการนัดหมายโดยตรงกับเจ้าหน้าที่ทางโทรศัพท์ (เบอร์โทรศัพท์: 0xx-xxx-xxxx)`;
-                smsService.sendSMS(appointment.patient.tel, message);
+                smsService.sendSMS(appointment.patient.tel, message)
+                .subscribe(
+                    (success) => {
+                        console.log(success);
+                    },
+                    (error) => {
+                        console.log(error);
+                    }
+                );
                 mailService.sendEmail(userRef.email, 'Doccare Go Notice', message);
                 res.json({
                     success: true,

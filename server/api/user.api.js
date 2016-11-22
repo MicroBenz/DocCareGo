@@ -309,7 +309,15 @@ function createUserByData (data) {
             let mailService = require('../mail.service');
             let message = `ระบบจัดการการนัดหมาย DocCare Go\nเรียนคุณ${user.preName}${user.name} ${user.surname}\nขอบคุณที่ท่านได้ทำการสมัครสมาชิกเพื่อเข้าใช้งานระบบการนัดหมาย DocCare Go\nคุณสามารถเข้าสู่ระบบการนัดหมาย DocCare Go ได้ทันทีโดยใช้รหัส HN และรหัสผ่านของท่าน ในการเข้าสู่ระบบ โดยสามารถใช้งานได้ผ่านเว็บไซต์ <link>`;
             if(data.req.body.role === 'patient')
-                smsService.sendSMS(data.tel, message);
+                smsService.sendSMS(data.tel, message)
+                .subscribe(
+                    (success) => {
+                        console.log(success);
+                    },
+                    (error) => {
+                        console.log(error);
+                    }
+                );
             mailService.sendEmail(user.email, 'Doccare Go Notice', message);
                 
             data.res.json({

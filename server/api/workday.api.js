@@ -371,8 +371,16 @@ module.exports = (apiRoutes, express) => {
                 appointments.forEach(
                     function(appointment){
                         let message = `ระบบจัดการการนัดหมาย DocCare Go\nเรียนคุณ${appointment.patient.preName}${appointment.patient.name} ${appointment.patient.surname}\nเนื่องจากแพทย์เจ้าของนัด ${appointment.doctor.preNmae}${appointment.doctor.name} ${appointment.doctor.surname} ไม่สามารถทำการออกตรวจในวันและเวลานัดหมายเดิม (วันที่ ${moment(appointment.workday.date).locale('th').format('LL')} เวลา ${appointment.workday.time==="AM"?"9:00-11:30":"13:00-15:30"} ) รบกวนท่านติดต่อโดยตรงกับเจ้าหน้าที่ทางโทรศัพท์ (เบอร์โทรศัพท์: 0xx-xxx-xxxx) เพื่อนัดหมายใหม่ต่อไป\nทางโรงพยาบาลต้องขออภัยในความไม่สะดวกมา ณ ที่นี้ด้วย`;
-                        smsService.sendSMS(appointment.patient.tel, message);
-                        User.find({
+                        smsService.sendSMS(appointment.patient.tel, message)
+                        .subscribe(
+                            (success) => {
+                                console.log(success);
+                            },
+                            (error) => {
+                                console.log(error);
+                            }
+                        );
+                        User.findOne({
                             username: appointment.patient.HN
                         })
                         .then(
