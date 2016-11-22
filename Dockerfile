@@ -19,6 +19,9 @@ COPY . /usr/src/doccarego
 RUN npm install
 RUN webpack -p
 
+#add commands
+RUN echo 'mongod & npm start' > commands.sh
+
 EXPOSE 22345
 
-CMD ["mongod"]
+CMD ["sh","commands.sh"]
