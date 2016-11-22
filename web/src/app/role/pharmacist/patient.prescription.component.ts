@@ -9,4 +9,5 @@ import { Component, Input } from '@angular/core';
 export class PatientPrescriptionComponent {
     @Input('patient') patient;
     @Input('prescription') prescription;
+    @Input('numberOfMedicines') numberOfMedicines;
 }

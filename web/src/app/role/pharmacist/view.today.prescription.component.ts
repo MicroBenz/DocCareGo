@@ -81,9 +81,13 @@ export class ViewTodayPrescriptionComponent implements OnInit {
     public prescriptionList;
     public prescriptionHistoryList;
     public medicineAllegyList;
+    public amountOfPrescription;
+    public amountOfPrescriptionHistory;
+    public isShowConfirm: boolean;
     private selectedPatient;
     private prescriptionHistoryItem;
     private prescriptionHistoryIndex: number;
+
 
     constructor(private title: Title, private dataService: DataService) {}
 
@@ -93,6 +97,9 @@ export class ViewTodayPrescriptionComponent implements OnInit {
         this.prescriptionList = [];
         this.prescriptionHistoryList = [];
         this.medicineAllegyList = [];
+        this.amountOfPrescription = [];
+        this.amountOfPrescriptionHistory = [];
+        this.isShowConfirm = false;
 
         
         this.dataService.getData(DIAGNOSIS_RESULT_ENDPOINT)
@@ -113,7 +120,8 @@ export class ViewTodayPrescriptionComponent implements OnInit {
                                 noMedicines: diagnosis_results['appointment']['patient']['noMedicines'],
                                 date: diagnosis_results['appointment']['workday']['date'],
                                 // time: diagnosis_results['appointment']['workday']['time'],
-                                medicines: diagnosis_results['medicines']
+                                medicines: diagnosis_results['medicines'],
+                                numberOfMedicines: diagnosis_results['numberOfMedicines']
                             }
                         }
                     )
@@ -241,7 +249,7 @@ export class ViewTodayPrescriptionComponent implements OnInit {
         this.prescriptionHistoryList = patientPrescriptionHistory;
         this.prescriptionHistoryIndex = this.prescriptionHistoryList.length-1;
         this.prescriptionHistoryItem = this.prescriptionHistoryList[this.prescriptionHistoryIndex]['prescriptionHistory'];
-        // this.prescriptionHistoryItem = this.prescriptionHistoryList[this.prescriptionHistoryList.length-1];
+        this.amountOfPrescriptionHistory = this.prescriptionHistoryList[this.prescriptionHistoryIndex]['numberOfMedicines'];
     }
 
     private errorHandler = (error) => {
@@ -252,12 +260,14 @@ export class ViewTodayPrescriptionComponent implements OnInit {
         if(this.prescriptionHistoryIndex-1 > -1)
             this.prescriptionHistoryIndex -= 1;
         this.prescriptionHistoryItem = this.prescriptionHistoryList[this.prescriptionHistoryIndex]['prescriptionHistory'];
+        this.amountOfPrescriptionHistory = this.prescriptionHistoryList[this.prescriptionHistoryIndex]['numberOfMedicines'];
     }
 
     public getNextPrescriptionHistory() {
         if(this.prescriptionHistoryIndex+1 < this.prescriptionHistoryList.length)
             this.prescriptionHistoryIndex += 1;
         this.prescriptionHistoryItem = this.prescriptionHistoryList[this.prescriptionHistoryIndex]['prescriptionHistory'];
+        this.amountOfPrescriptionHistory = this.prescriptionHistoryList[this.prescriptionHistoryIndex]['numberOfMedicines'];
     }
 
     public getPatientPrescriptionHistory(patient) {
@@ -273,7 +283,8 @@ export class ViewTodayPrescriptionComponent implements OnInit {
                                 hn: diagosis_history['appointment']['patient']['HN'],
                                 name: name,
                                 date: diagosis_history['appointment']['workday']['date'],
-                                prescriptionHistory: diagosis_history['medicines']
+                                prescriptionHistory: diagosis_history['medicines'],
+                                numberOfMedicines: diagosis_history['numberOfMedicines']
                             }
                         }
                     )
@@ -285,6 +296,7 @@ export class ViewTodayPrescriptionComponent implements OnInit {
     public getPatientPrescriptionData(selectedPatient) {
         // get Today precription
         this.prescriptionList = selectedPatient['medicines'];
+        this.amountOfPrescription = selectedPatient['numberOfMedicines'];
         // get no medicines
         this.medicineAllegyList = selectedPatient['noMedicines'];
         // get History prescription
@@ -295,5 +307,13 @@ export class ViewTodayPrescriptionComponent implements OnInit {
     onSelectPatient(idx) {
         this.selectedPatient = this.patientList[idx];
         this.getPatientPrescriptionData(this.selectedPatient);
+    }
+
+    confirmPrescription() {
+        this.isShowConfirm = true;
+    }
+
+    dismissModal = () => {
+        this.isShowConfirm = false;
     }
 }
