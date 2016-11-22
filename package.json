@@ -1,6 +1,6 @@
 {
   "name": "doccare-go",
-  "version": "0.0.1",
+  "version": "1.0.0-beta1",
   "description": "DocCare Go: Hospital Appointment System - Software Engineering Term Project",
   "main": "server.js",
   "scripts": {
