@@ -5,13 +5,15 @@
 		    <div class="control columns">
 			    <p class="control column is-6">
 				    <label class="label">ประเภทของสมาชิก </label>
-				    <select [(ngModel)]="formData.role">
-		                <option>patient</option>
-		                <option>doctor</option>
-		                <option>nurse</option>
-		                <option>staff</option>
-		                <option>pharmacist</option>                   
-		            </select>
+                    <span class="select">
+                        <select [(ngModel)]="formData.role">
+                            <option value="patient">ผู้ป่วย</option>
+                            <option value="doctor">แพทย์</option>
+                            <option value="nurse">พยาบาล</option>
+                            <option value="staff">เจ้าหน้าที่</option>
+                            <option value="pharmacist">เภสัชกร</option>                   
+                        </select>
+                    </span>
 		        </p>
 		    </div>
 		</div>
@@ -44,10 +46,7 @@
 		            <input class="input" type="password" [(ngModel)]="formData.reEnterPassword">
 		        </p>
 		    </div>
-		</div>
-
-		{{formData | json}}
-		
+		</div>		
 		<div class="button-wrapper">
             <a class="button is-success" (click)="validateForm()">สมัครสมาชิก</a>
             <a class="button is-danger" (click)="isShowCancelConfirm = true">ยกเลิก</a>

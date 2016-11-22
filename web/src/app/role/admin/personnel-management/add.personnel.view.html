@@ -48,7 +48,6 @@
         <pharmacist-form 
             *ngIf="selectedRole === 'pharmacist' && isSelected"
             [formData]="formData"></pharmacist-form>
-        {{formData | json}}
         <div class="button-wrapper">    
             <a class="button is-success" (click)="addNewPersonnel()">เพิ่มบุคลากรใหม่</a>    
             <a class="button is-danger" (click)="isShowCancelConfirm = true">กลับ</a>    

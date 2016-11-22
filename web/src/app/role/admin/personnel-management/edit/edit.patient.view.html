@@ -3,7 +3,6 @@
         <patient-form
             [formData]="formData">
         </patient-form>
-        {{formData | json}}
         <div class="button-wrapper">
             <a class="button is-success" (click)="validateForm()">แก้ไขข้อมูลผู้ป่วย</a>
             <a class="button is-danger" (click)="isShowCancelConfirm = true">ยกเลิก</a>
