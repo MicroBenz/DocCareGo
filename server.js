@@ -18,10 +18,8 @@ app.listen(port, function () {
     console.log('Apps Listening on port ' + port);
 });
 
-console.log(process.env.APP_DEBUG);
 var clientRoot = process.env.APP_DEBUG == 'true' ? 'web/dist' : 'web/prod';
 app.use(express.static(clientRoot));
-console.log(clientRoot);
 app.get('/', function (req, res) {
     res.sendfile(__dirname + '/' + clientRoot + '/index.html');
 });
