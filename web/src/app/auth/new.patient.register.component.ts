@@ -62,7 +62,7 @@ export class NewPatientRegisterComponent implements OnInit {
             'zipCode' : '',
             'country' : '',
             'tel' : '',
-            'noMedicines' : ''
+            'noMedicines' : []
         };
         this.confirmModalContent = '';
         this.title.setTitle(NEW_PATIENT_REGISTER_TITLE);
