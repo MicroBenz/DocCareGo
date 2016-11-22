@@ -1,0 +1,50 @@
+<div class="container">
+    <div class="box">
+        <pharmacist-form
+            [formData]="formData">
+        </pharmacist-form>
+        <div class="button-wrapper">
+            <a class="button is-success" (click)="validateForm()">แก้ไขข้อมูลเภสัชกร</a>
+            <a class="button is-danger" (click)="isShowCancelConfirm = true">ยกเลิก</a>
+        </div>
+    </div>
+    
+</div>
+<modal-dialog
+    [description]="confirmModalContent"
+    [modalType]="'revise'"
+    [confirmText]="'แก้ไขข้อมูลเภสัชกร'"
+    [cancelText]="'กลับ'"
+    [confirmFn]="savePharmacist"
+    [cancelFn]="dismissModal"
+    [isShowFlag]="isShowConfirm"
+    (isShowFlagChange)="isShowConfirm = $event">
+</modal-dialog>
+
+<modal-dialog
+    [description]="'คุณต้องการยกเลิกการแก้ไขข้อมูลเภสัชกรหรือไม่?'"
+    [confirmText]="'ยกเลิกการแก้ไข'"
+    [cancelText]="'กลับ'"
+    [confirmFn]="navigateToPersonalManagement"
+    [cancelFn]="dismissModal"
+    [isShowFlag]="isShowCancelConfirm"
+    (isShowFlagChange)="isShowCancelConfirm = $event">
+</modal-dialog>
+
+<modal-dialog
+    [description]="'โปรดกรอกข้อมูลให้ครบถ้วน'"
+    [modalType]="'fail'"
+    [confirmText]="'กรอกข้อมูลต่อ'"
+    [confirmFn]="dismissModal"
+    [isShowFlag]="isShowInvalidate"
+    (isShowFlagChange)="isShowInvalidate = $event">
+</modal-dialog>
+
+<modal-dialog
+    [description]="'แก้ไขข้อมูลสำเร็จ'"
+    [modalType]="'success'"
+    [confirmText]="'กลับสู่หน้าหลัก'"
+    [confirmFn]="navigateToPersonalManagement"
+    [isShowFlag]="isShowSuccess"
+    (isShowFlagChange)="isShowSuccess = $event">
+</modal-dialog>

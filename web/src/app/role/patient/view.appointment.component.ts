@@ -1,4 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
+import * as moment from 'moment';
+
+import { VIEW_APPOINTMENT_TITLE } from './../../config/title.config';
+import { DataService } from '../../shared/service/data.service';
+import { APPOINTMENT_ENDPOINT } from '../../config/api.config';
+import { AuthService } from '../../shared/service/auth.service';
 
 @Component({
     selector: 'view-appointment',
@@ -18,30 +25,63 @@ import { Component } from '@angular/core';
         }
     `]
 })
-export class ViewAppointmentComponent {
-    public appointments = [
-        {'date': '11/1/2559', 'time': '13:00 - 15:00', 'clinic': 'ระบบประสาทและสมอง', 'doctor': 'นายแพทย์ธีรัช รักษ์เถา'},
-        {'date': '12/1/2559', 'time': '13:00 - 13:30', 'clinic': 'ทางเดินอาหารและตับ', 'doctor': 'นายแพทย์ธนนันท์ ตั้งธนาชัยกุล'},
-        {'date': '13/1/2559', 'time': '11:00 - 11:30', 'clinic': 'GGSE', 'doctor': 'นายแพทย์จอห์น ชาวไร่'},
-        {'date': '22/2/2559', 'time': '15:00 - 15:30', 'clinic': 'ทดสอบแผนกยาวมากมากมากยาวโคตรๆ', 'doctor': 'นายแพทย์สุเทพ กลชาญวิทย์'}
-    ]
-
-    private selectedAppointment = this.appointments[0];
-    private monthMapping = ['มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน', 'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม'];
+export class ViewAppointmentComponent implements OnInit {
+    public appointments;
+    private selectedAppointment;
+    
+    constructor(private title: Title, private dataService: DataService, private authService: AuthService) {}
+    
+    ngOnInit () {
+        this.appointments = [];
+        this.selectedAppointment = {
+            clinic: '',
+            doctor: '',
+            date: '',
+            time: ''
+        };
+        this.title.setTitle(VIEW_APPOINTMENT_TITLE);        
+        this.dataService.getDataWithParams(APPOINTMENT_ENDPOINT, {
+            user: this.authService.getUserHN()
+        })
+        .map(
+            (success: Array<Object>) => {
+                console.log(success);
+                return success.sort(
+                    (firstItem, secondItem) => {
+                        let firstDate = firstItem['workday']['date'];
+                        let secondDate = secondItem['workday']['date'];
+                        if (moment(firstDate).isBefore(secondDate)) {
+                            return -1;
+                        }
+                        return 1;
+                    }
+                )
+            }
+        )
+        .subscribe(
+            (success: Array<Object>) => {
+                console.log('GET APPOINTMENT');
+                console.log(success);
+                this.appointments = success.map(
+                    (item) => {
+                        let doctorName = `${item['doctor']['preName']}${item['doctor']['name']} ${item['doctor']['surname']}`;
+                        let date = moment(item['workday']['date']).format('D/M/YYYY');
+                        return {
+                            'date': date,
+                            'time': item['workday']['time'] === 'AM'? '9:00 - 11:30': '13:00 - 15:30',
+                            'clinic': item['doctor']['clinic']['name'],
+                            'doctor': doctorName
+                        }
+                    }
+                )
+                if (this.appointments.length !== 0) {
+                    this.selectedAppointment = this.appointments[0];
+                }
+            }
+        )
+    }
 
     public onSelectRow(selectedAppointment) {
         this.selectedAppointment = selectedAppointment;
-    }
-
-    private getSelectedAppointment () {
-        return this.selectedAppointment;
-    }
-
-    private getSelectedAppointmentDate () {
-        let dateString = this.getSelectedAppointment().date;
-        let day = dateString.split('/')[0];
-        let month = this.monthMapping[Number(dateString.split('/')[1]) - 1];
-        let year = dateString.split('/')[2];
-        return day + ' ' + month + ' ' + year;
     }
 }

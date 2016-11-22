@@ -1,0 +1,46 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th class="first-col"></th>
+            <th class="medicine-name-col">ชื่อยา</th>
+            <th class="quantity-col">จำนวน</th>            
+            <th>รายละเอียดยา</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let medicine of medicineList; let i = index">
+            <td>
+                <i (click)="removeMedicine(i)" class="fa fa-minus-circle action-button remove-button"></i>
+            </td>
+            <td>
+                {{medicine.name}}
+            </td>
+            <td>
+                <input type="number" class="input" [(ngModel)]="medicineQuantity[i]" min="1">
+            </td>
+            <td>
+                {{medicine.description}}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <i class="fa fa-search action-button"></i>
+            </td>
+            <td>
+                <input type="text" class="input" [formControl]="medicine">
+            </td>
+            <td colspan="2">
+                <div *ngIf="medicineSuggestion.length === 0">
+                    <p>ไม่พบข้อมูลยา</p>
+                </div>
+                <div *ngIf="medicineSuggestion.length !== 0">
+                    <span
+                        *ngFor="let medicine of medicineSuggestion; let i = index;" 
+                        class="tag medicine-tag is-primary is-medium no-text-selection"
+                        (click)="addNewMedicine(i)">
+                        {{medicine.name}}</span>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>

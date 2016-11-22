@@ -1,0 +1,45 @@
+<div class="container">
+    <div class="box">
+        
+        <div class="search-box-wrapper">
+            <search-box
+                [searchBoxLabel]="'ค้นหาบุคลากร โดยเลือกประเภทบุคลากร แล้วพิมพ์ชื่อ-นามสกุลเพื่อทำการค้นหา'"
+                [serviceFn]="searchFunction(selectedRole)"
+                (onSearchResult)="onSearchResult($event)">
+            </search-box>
+        </div>
+        <div class="add-button-wrapper">
+            <a class="button is-info" (click)="navigateToAddPersonnel()"><i class="fa fa-plus-circle"></i> เพิ่มบุคลากรโรงพยาบาล</a>            
+        </div>
+        <div class="tabs is-toggle">
+            <ul>
+                <li [ngClass]="{'is-active': selectedRole === 'patient'}"
+                    (click)="switchRole('patient')">
+                    <a>ผู้ป่วย</a>
+                </li>
+                <li [ngClass]="{'is-active': selectedRole === 'doctor'}"
+                    (click)="switchRole('doctor')">
+                    <a>แพทย์</a>
+                </li>
+                <li [ngClass]="{'is-active': selectedRole === 'nurse'}"
+                    (click)="switchRole('nurse')">
+                    <a>พยาบาล</a>
+                </li>
+                <li [ngClass]="{'is-active': selectedRole === 'staff'}"
+                    (click)="switchRole('staff')">
+                    <a>เจ้าหน้าที่</a>
+                </li>
+                <li [ngClass]="{'is-active': selectedRole === 'pharmacist'}"
+                    (click)="switchRole('pharmacist')">
+                    <a>เภสัชกร</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="box">
+        <personnel-table
+            [personnelList]="personnelList"
+            [role]="selectedRole">
+        </personnel-table>
+    </div>
+</div>

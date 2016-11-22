@@ -1,0 +1,22 @@
+<div *ngIf="patientList.length !== 0">
+    <div class="patient-item"
+        *ngFor="let patient of patientList; let i = index" 
+        (click)="onSelectPatient(i)"
+        [class.active]="i === selectedIndex">
+        <div class="columns">
+            <div class="column is-2">
+                <div class="time-circle">
+                    <p class="no-text-selection"><i class="fa fa-stethoscope"></i></p>
+                </div>
+            </div>
+            <div class="column patient-info">
+                <h3 class="patient-name no-text-selection">[{{patient.hn}}] 
+                    {{patient.name}}</h3>  
+                <p class="patient-clinic no-text-selection"><b>แผนก: </b>{{patient.clinic}}</p>
+            </div>
+        </div>
+    </div>    
+</div>
+<div class="patient-list" *ngIf="patientList.length === 0">
+    <h1>ไม่มีผู้ป่วยที่รอเข้ารับการตรวจแล้ว</h1>
+</div>

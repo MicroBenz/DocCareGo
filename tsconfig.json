@@ -14,7 +14,10 @@
       "es6"
     ],
     "types": [
-      "node"
+      "node",
+      "jquery",
+      "fullcalendar",
+      "moment"
     ]
   },
   "exclude": [

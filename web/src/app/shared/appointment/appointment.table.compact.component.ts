@@ -18,14 +18,14 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
         }
     `]
 })
-export class AppointmentTableCompact {
-    @Input('appointments') appointmentData = [];
+export class AppointmentTableCompactComponent {
+    @Input('appointments') appointments = [];
     @Input('isClearSelection') isClearSelection = true;
     @Output() onSelectRow = new EventEmitter<any>();
 
     private selectedIndex = 0;
     selectAppointment(idx) {
-        this.onSelectRow.emit(this.appointmentData[idx]);
+        this.onSelectRow.emit(this.appointments[idx]);
         this.selectedIndex = idx;
     }
 }

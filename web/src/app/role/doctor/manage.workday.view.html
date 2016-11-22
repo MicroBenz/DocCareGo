@@ -1,0 +1,16 @@
+<div class="container">
+    <div class="box">
+        <div class="columns">
+            <div class="column is-4">
+                <workday-selector
+                    (onSelectWorkday)="onSelectWorkday($event)">
+                </workday-selector>
+            </div>
+            <div class="column is-8">
+                <workday-patient-list
+                    [workdayItem]="selectedWorkday">
+                </workday-patient-list>
+            </div>
+        </div>    
+    </div>
+</div>

@@ -2,20 +2,34 @@ import { Routes, RouterModule } from '@angular/router';
 import { ModuleWithProviders } from '@angular/core';
 
 // Apps Components
-import { AppComponent, AppComponentWithNav } from './main/index';
-import { LoginComponent, RegisterComponent } from './auth/index';
+import { AppComponentWithNavComponent } from './main/index';
+
+// Auth Components
+import { LoginComponent, RegisterComponent, NewPatientRegisterComponent } from './auth/index';
 
 // Patient Components
 import { MakeAppointmentComponent, ViewAppointmentComponent } from './role/patient/index';
 
 // Staff Components
-import { AppointmentManagementComponent, MakeAppointmentByStaffComponent } from './role/staff/index';
+import { AppointmentManagementComponent, MakeAppointmentByStaffComponent, WorkdayManagementByStaffComponent } from './role/staff/index';
 
 // Nurse Components
 import { ViewTodayPatientComponent } from './role/nurse/index';
 
+// Pharmacist Components
+import { ViewTodayPrescriptionComponent } from './role/pharmacist/index';
+
+// Doctor Components
+import { ManageWorkdayComponent, AddWorkdayComponent } from './role/doctor/index';
+import { StartWorkingComponent } from './role/doctor/make-diagnosis/index';
+
+// Admin Component
+import { PersonnelManagementComponent, AddPersonnelComponent } from './role/admin/personnel-management/index';
+import { EditDoctorComponent, EditNurseComponent, EditPatientComponent, EditPharmacistComponent, EditStaffComponent } from './role/admin/personnel-management/edit/index';
+import { MedicineManagementComponent, AddMedicineComponent, EditMedicineComponent } from './role/admin/medicine-management/index';
+import { ClinicManagementComponent, AddClinicComponent, EditClinicComponent } from './role/admin/clinic-management/index';
 // Auth Guard
-import { PatientOnlyRoute, DoctorOnlyRoute, NurseOnlyRoute, StaffOnlyRoute, PharmacistOnlyRoute, NonLoggedInRoute } from './auth/guard/index';
+import { AdminOnlyRoute, PatientOnlyRoute, DoctorOnlyRoute, NurseOnlyRoute, StaffOnlyRoute, PharmacistOnlyRoute, NonLoggedInRoute } from './auth/guard/index';
 
 const appRoutes: Routes = [
     {
@@ -38,8 +52,15 @@ const appRoutes: Routes = [
         ]
     },
     {
+        path: 'register/new-patient',
+        component: NewPatientRegisterComponent,
+        canActivate: [
+            NonLoggedInRoute
+        ]
+    },
+    {
         path: 'patient',
-        component: AppComponentWithNav,
+        component: AppComponentWithNavComponent,
         canActivate: [
             PatientOnlyRoute
         ],
@@ -61,7 +82,7 @@ const appRoutes: Routes = [
     },
     {
         path: 'doctor',
-        component: AppComponentWithNav,
+        component: AppComponentWithNavComponent,
         canActivate: [
             DoctorOnlyRoute
         ],
@@ -72,16 +93,22 @@ const appRoutes: Routes = [
                 pathMatch: 'full'
             },
             {
-                path: 'manage-workday'
+                path: 'manage-workday',
+                component: ManageWorkdayComponent
             },
             {
-                path: 'start-working'
+                path: 'add-workday',
+                component: AddWorkdayComponent
+            },
+            {
+                path: 'start-working',
+                component: StartWorkingComponent
             }
         ]
     },
     {
         path: 'nurse',
-        component: AppComponentWithNav,
+        component: AppComponentWithNavComponent,
         canActivate: [
             NurseOnlyRoute
         ],
@@ -99,7 +126,7 @@ const appRoutes: Routes = [
     },
     {
         path: 'staff',
-        component: AppComponentWithNav,
+        component: AppComponentWithNavComponent,
         canActivate: [
             StaffOnlyRoute
         ],
@@ -118,13 +145,14 @@ const appRoutes: Routes = [
                 component: MakeAppointmentByStaffComponent
             },
             {
-                path: 'manage-workday'
+                path: 'manage-workday',
+                component: WorkdayManagementByStaffComponent
             }
         ]
     },
     {
         path: 'pharmacist',
-        component: AppComponentWithNav,
+        component: AppComponentWithNavComponent,
         canActivate: [
             PharmacistOnlyRoute
         ],
@@ -136,6 +164,73 @@ const appRoutes: Routes = [
             },
             {
                 path: 'view-prescription',
+                component: ViewTodayPrescriptionComponent
+            }
+        ]
+    },
+    {
+        path: 'admin',
+        component: AppComponentWithNavComponent,
+        canActivate: [
+            AdminOnlyRoute
+        ],
+        children: [
+            {
+                path: '',
+                redirectTo: '/admin/personnel-management',
+                pathMatch: 'full'
+            },
+            {
+                path: 'personnel-management',
+                component: PersonnelManagementComponent
+            },
+            {
+                path: 'personnel-management/add-personnel',
+                component: AddPersonnelComponent
+            },
+            {
+                path: 'personnel-management/edit-patient/:HN',
+                component: EditPatientComponent
+            },
+            {
+                path: 'personnel-management/edit-doctor/:HN',
+                component: EditDoctorComponent
+            },
+            {
+                path: 'personnel-management/edit-nurse/:HN',
+                component: EditNurseComponent
+            },
+            {
+                path: 'personnel-management/edit-staff/:HN',
+                component: EditStaffComponent
+            },
+            {
+                path: 'personnel-management/edit-pharmacist/:HN',
+                component: EditPharmacistComponent
+            },
+            {
+                path: 'medicine-management',
+                component: MedicineManagementComponent
+            },
+            {
+                path: 'medicine-management/add-medicine',
+                component: AddMedicineComponent
+            },
+            {
+                path: 'medicine-management/edit-medicine/:medicineName',
+                component: EditMedicineComponent
+            },
+            {
+                path: 'clinic-management',
+                component: ClinicManagementComponent
+            },
+            {
+                path: 'clinic-management/add-clinic',
+                component: AddClinicComponent
+            },
+            {
+                path: 'clinic-management/edit-clinic/:clinicName',
+                component: EditClinicComponent
             }
         ]
     }

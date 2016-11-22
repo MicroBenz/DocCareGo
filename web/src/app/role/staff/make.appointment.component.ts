@@ -1,6 +1,9 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MakeAppointmentForm } from './../../shared/appointment/make.appointment.form.component';
+
+import { Title } from '@angular/platform-browser';
+import { DataService } from '../../shared/service/data.service';
+import { PATIENT_ENDPOINT, APPOINTMENT_ENDPOINT } from '../../config/api.config';
 
 @Component({
     selector: 'staff-make-appointment',
@@ -12,29 +15,66 @@ import { MakeAppointmentForm } from './../../shared/appointment/make.appointment
         .appointment-button {
             margin-top: 15px;
         }
+        .hn-box {
+            margin-bottom: 20px;
+        }
+        .patient-information .is-info h2{
+            display: inline-block;
+        }
+        .patient-information .is-info i.fa {
+            font-size: 25px;
+        }
     `]
 })
-export class MakeAppointmentByStaffComponent {
-    @ViewChild(MakeAppointmentForm) private makeAppointmentForm: MakeAppointmentForm;
-    private appointmentData = {};
-    private patient;
+export class MakeAppointmentByStaffComponent implements OnInit {
+    public isConfirmHN: boolean;
+    public isSearchPatientCompleted: boolean;
+    public isMakeAppointmentSuccess: boolean;
+    public hasPatientWithThatHN: boolean;
+    public patientHN: string;
+    public patientName: string;
+    public selectedPatient;
 
-    constructor(private router: Router) {}
-
-    makeAppointment () {
-        this.appointmentData = {
-            patient: this.patient,
-            date: this.makeAppointmentForm.appointmentData['date'],
-            time: this.makeAppointmentForm.appointmentData['time'],
-            doctor: this.makeAppointmentForm.appointmentData['doctor'],
-            cause: this.makeAppointmentForm.appointmentData['cause']
-        };     
-        console.log(this.appointmentData);
-        this.router.navigateByUrl('/staff/manage-appointment');
+    constructor(private dataService: DataService) {}
+    ngOnInit () {
+        this.patientHN = '';
+        this.patientName = '';
+        this.selectedPatient = {};
+        this.isConfirmHN = false;
+        this.isMakeAppointmentSuccess = false;
+        this.isSearchPatientCompleted = false;
+        this.hasPatientWithThatHN = false;
     }
 
-    cancelAppointment () {
-        // TODO: Use this.appointmentData to get form data        
-        this.router.navigateByUrl('/staff/manage-appointment');
+    searchPatient () {
+        this.dataService.getData(`${PATIENT_ENDPOINT}/${this.patientHN}`)
+            .subscribe(
+                (patient) => {
+                    this.isSearchPatientCompleted = true;
+                    this.hasPatientWithThatHN = true;                    
+                    this.patientName = `${patient.preName}${patient.name} ${patient.surname}`;
+                    this.selectedPatient = patient;
+                },
+                (error) => {
+                    this.isSearchPatientCompleted = true; 
+                    this.hasPatientWithThatHN = false;                   
+                }
+            )
+    }
+
+    confirmThisPatient () {
+        this.isConfirmHN = true;
+    }
+
+    onConfirmAppointment (formData) {
+        formData['patient'] = this.selectedPatient.HN;
+        console.log(formData);
+        this.dataService.saveData(APPOINTMENT_ENDPOINT, formData)
+            .subscribe(
+                (success) => {
+                    console.log('MAKE APPOINTMENT SUCCESS');
+                    this.isMakeAppointmentSuccess = true;                    
+                }
+            )        
     }
 }

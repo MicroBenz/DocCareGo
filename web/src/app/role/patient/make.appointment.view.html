@@ -1,9 +1,6 @@
 <div class="container">
-    <div class="box">
-        <make-appointment-form></make-appointment-form>
-        <p class="control appointment-button">
-            <a class="button is-success" (click)="makeAppointment()">นัดหมายแพทย์</a>
-            <a class="button" (click)="cancelAppointment()">ยกเลิก</a>
-        </p>
-    </div>
+    <make-appointment-form
+        (onConfirmAppointment)="onConfirmAppointment($event)"
+        [isMakeAppointmentSuccess]="isMakeAppointmentSuccess">
+    </make-appointment-form>
 </div>

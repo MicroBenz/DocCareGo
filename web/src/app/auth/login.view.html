@@ -1,20 +1,27 @@
 <div id="login-view">
-    <img id="web-logo" src="assets/img/logo_horizontal.png">
+    <img id="web-logo" src="assets/img/logo_vertical.png">
     <div id="login-box">
         <div class="notification is-danger" *ngIf="isLoginFail">
-            ล็อคอินล้มเหลว กรุณาลองใหม่
+            {{loginFailMessage}}
         </div>
-        <div class="row">
-            <input class="input" type="text" placeholder="ชื่อผู้ใช้งาน" onfocus="this.placeholder = ''" onblur="this.placeholder = 'ชื่อผู้ใช้งาน'" [(ngModel)]="usr" (keyup.enter)="login()">        
+        <p class="control has-icon">
+            <input class="input is-medium" type="text"
+                placeholder="รหัสประจำตัวโรงพยาบาล"
+                [(ngModel)]="usr"
+                (keyup.enter)="login()">
+            <i class="fa fa-user"></i>
+        </p>
+        <p class="control has-icon">
+            <input class="input is-medium" type="password"
+                placeholder="รหัสผ่าน"
+                [(ngModel)]="pwd"
+                (keyup.enter)="login()">
+            <i class="fa fa-lock"></i>
+        </p>
+        <div class="button-wrapper">
+            <a class="button is-success" [class.is-loading]="isWaitForLogin" (click)="login()">เข้าสู่ระบบ</a>
+            <a class="button is-info" (click)="navigateToNewPatientRegister()">ผู้ป่วยใหม่สมัครสมาชิก</a>    
         </div>
-        <div class="row">
-            <input class="input" type="password" placeholder="รหัสผ่าน" onfocus="this.placeholder = ''" onblur="this.placeholder = 'รหัสผ่าน'" [(ngModel)]="pwd" (keyup.enter)="login()">
-        </div>
-        {{usr}} {{pwd}}
-        <div class="row">
-            <button class="button is-primary" (click)="login()">เข้าสู่ระบบ</button>
-        </div>
-        <p class="register-text">ยังไม่มีชื่อผู้ใช้งาน? <a class="register-button" (click)="navigator.navigateToRegister()">ลงทะเบียนใช้งาน</a></p>
+        <p>สำหรับผู้ป่วยเดิมและบุคลากร <a (click)="navigateToRegister()">สมัครตรงนี้</a></p>
     </div>
-    <a (click)="testHTTP()">TEST HTTP WITH AUTH</a>
 </div>

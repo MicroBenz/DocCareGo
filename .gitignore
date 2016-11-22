@@ -38,5 +38,7 @@ jspm_packages
 
 # Project ignore
 web/dist
+web/prod
 .env
 web/src/assets/css
+.vscode/*

@@ -1,0 +1,125 @@
+<div class="control is-horizontal">
+    <div class="control columns">
+         <p class="control column is-3" *ngIf="isNeedHN">
+            <label class="label">รหัสโรงพยาบาล (HN)</label>
+            <input class="input" type="text" [(ngModel)]="formData.HN">
+        </p>
+        <p class="control column is-3">
+            <label class="label">รหัสบัตรประจำตัวประชาชน</label>
+            <input class="input" type="text" [(ngModel)]="formData.personalID">
+        </p>
+    </div>
+</div>
+<div class="control is-horizontal">
+    <div class="control columns">
+        <p class="control column is-2">
+            <label class="label">คำนำหน้าชื่อ</label>
+            <span class="select">
+                <select [(ngModel)]="formData.preName">
+                    <option disabled>คำนำหน้าชื่อ</option>
+                    <option>นาย</option>
+                    <option>นาง</option>
+                    <option>นางสาว</option>
+                </select>
+            </span>
+        </p>
+        <p class="control column is-3">
+            <label class="label">ชื่อ</label>
+            <input class="input" type="text" [(ngModel)]="formData.name">
+        </p>
+        <p class="control column is-3">
+            <label class="label">นามสกุล</label>
+            <input class="input" type="text" [(ngModel)]="formData.surname">
+        </p>
+    </div>
+</div>
+<div class="control is-horizontal">
+    <div class="control columns">
+        <p class="control column is-2">
+            <label class="label">บ้านเลขที่</label>
+            <input class="input" type="text" [(ngModel)]="formData.houseNumber">
+        </p>
+        <p class="control column is-3">
+            <label class="label">ถนน</label>
+            <input class="input" type="text" [(ngModel)]="formData.road">
+        </p>
+        <p class="control column is-3">
+            <label class="label">ซอย</label>
+            <input class="input" type="text" [(ngModel)]="formData.soi">
+        </p>
+    </div>
+</div>
+<div class="control is-horizontal">
+    <div class="control columns">
+        <p class="control column is-3">
+            <label class="label">แขวง/ตำบล</label>
+            <input class="input" type="text" [(ngModel)]="formData.subdistrict">
+        </p>
+        <p class="control column is-3">
+            <label class="label">เขต/อำเภอ</label>
+            <input class="input" type="text" [(ngModel)]="formData.district">
+        </p>
+        <p class="control column is-3">
+            <label class="label">จังหวัด</label>
+            <input class="input" type="text" [(ngModel)]="formData.province">
+        </p>
+    </div>
+</div>
+<div class="control is-horizontal">
+    <div class="control columns">
+        <p class="control column is-2">
+            <label class="label">รหัสไปรษณีย์</label>
+            <input class="input" type="text" [(ngModel)]="formData.zipCode">
+        </p>
+        <p class="control column is-3">
+            <label class="label">ประเทศ</label>
+            <input class="input" type="text" [(ngModel)]="formData.country">
+        </p>
+        <p class="control column is-3">
+            <label class="label">เบอร์โทรศัพท์เคลื่อนที่</label>
+            <input class="input" type="text" [(ngModel)]="formData.tel">
+        </p>
+    </div>
+</div>
+<div>
+    <label class="label">รายการยาที่แพ้</label>
+    <p class="control has-addons">
+        <input class="input" type="text" [(ngModel)]="aMedicine">
+        <a class="button is-info" (click)="addNoMedicine()" >เพิ่ม</a>
+    </p>
+</div>
+<div>
+    <div class="control is-horizontal">
+        <div class="control columns">
+            <div *ngIf="formData.noMedicines">
+                <div class="button-static" *ngFor="let medicine of formData.noMedicines">
+                    <div class="control has-addons">
+                        <input class="input" type="text" value="{{medicine}}" readonly="readonly">
+                        <a class="button is-danger" (click)="deleteNoMedicine(medicine)">ลบ</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--<div class="control is-vertical">
+    <div class="control rows">
+        <div class="control column is-5">
+            <label class="label">รายการยาที่แพ้</label>
+            <p class="control has-addons">
+                <input class="input" type="text" [(ngModel)]="aMedicine">
+                <a class="button is-info" (click)="addNoMedicine()" >เพิ่ม</a>
+            </p>
+            <div *ngIf="medicines.length > 0">
+                <div *ngFor="let medicine of medicines">
+                    <div class="button-static">
+                        <p class="control has-addons">
+                            <input class="input" type="text" value="{{medicine}}" readonly="readonly">
+                            <a class="button is-warning" (click)="deleteNoMedicine(medicine)">ลบ</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>-->

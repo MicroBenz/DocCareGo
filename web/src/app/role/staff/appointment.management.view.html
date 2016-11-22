@@ -1,7 +1,11 @@
 <div class="container">
-    <searchbox
-        [searchBoxLabel]="'ค้นหาการนัดหมาย โดยพิมพ์ชื่อ-นามสกุลผู้ป่วย หรือรหัสการนัดหมาย'">
-    </searchbox>
+    <div class="box">
+        <search-box
+            [searchBoxLabel]="'กรอกรหัสประจำตัวของผู้ป่วย หรือรหัสประจำตัวของแพทย์เจ้าของนัด เพื่อค้นหาการนัดหมาย'"
+            [serviceFn]="getAppointmentsData"
+            (onSearchResult)="onSearchResult($event)">
+        </search-box>
+    </div>
     <div class="box">
         <appointment-table
             [appointmentList]="appointmentList"
@@ -11,3 +15,14 @@
         </appointment-table>
     </div>
 </div>
+{{isShowConfirmDeleteModal}}
+<modal-dialog
+    [description]="cancelAppointmentModal"
+    [modalType]="'warning'"
+    [confirmText]="'ยกเลิกการนัดหมาย'"
+    [cancelText]="'กลับ'"
+    [confirmFn]="deleteAppointmentDataService"
+    [cancelFn]="dismissModal"
+    [isShowFlag]="isShowConfirmDeleteModal"
+    (isShowFlagChange)="isShowConfirmDeleteModal = $event">
+</modal-dialog>

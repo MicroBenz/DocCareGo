@@ -30,10 +30,19 @@ module.exports = {
             },
             {
                 test: /\.css$/,
+                exclude: __dirname + '/web/src/app',
                 loader: ExtractTextPlugin.extract({
                     fallbackLoader: "style-loader",
                     loader:  "css-loader"
                 })
+            },
+            {
+                test: /\.css$/,
+                include: __dirname + '/web/src/app',
+                loaders: [
+                    'to-string-loader',
+                    'css-loader'
+                ]
             },
             {
                 test: /\.less$/,
@@ -49,6 +58,10 @@ module.exports = {
         ]
     },
     plugins: [
+        new webpack.ProvidePlugin({
+            $: "jquery",
+            jQuery: "jquery"
+        }),
         new ExtractTextPlugin({
             filename: 'styles.css'
         }),
@@ -72,6 +85,9 @@ module.exports = {
             ]
         )
     ],
+    watchOptions: {
+        aggregateTimeout: 2000
+    },
     output: {
         path: './web/dist',
         filename: '[name].bundle.js',

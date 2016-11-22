@@ -7,8 +7,9 @@
                 </div>
                 <div class="patient-list-content">
                     <patient-list 
-                        [patientList]="patientList"
-                        (onSelectPatient)="onSelectPatient($event)"></patient-list>
+                        [patientList]="patientRecordList"
+                        (patientEmitter)="onSelectPatient($event)">
+                    </patient-list>
                 </div>
             </div>
         </div>
@@ -17,7 +18,7 @@
                 <div class="patient-recorder-header">
                     <h1 class="title">บันทึกข้อมูลผู้ป่วย</h1>
                 </div>
-                <div class="patient-recorder-content">
+                <div class="patient-recorder-content" *ngIf="patientRecordList.length !== 0">
                     <record-patient-detail
                         [patient]="selectedPatient">
                     </record-patient-detail>

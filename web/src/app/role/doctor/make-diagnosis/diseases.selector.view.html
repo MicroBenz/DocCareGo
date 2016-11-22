@@ -1,0 +1,42 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th class="first-col"></th>
+            <th class="disease-name-col">รหัสโรค</th>
+            <th></th>            
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let disease of diseasesList; let i = index">
+            <td>
+                <i (click)="removeDisease(i)" class="fa fa-minus-circle action-button remove-button"></i>
+            </td>
+            <td>
+                {{disease.name}}
+            </td>
+            <td>
+                {{disease.description}}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <i class="fa fa-search action-button"></i>
+            </td>
+            <td>
+                <input type="text" class="input" [formControl]="disease">
+            </td>
+            <td>
+                <div *ngIf="diseasesSuggestion.length === 0">
+                    <p>ไม่พบข้อมูลโรค</p>
+                </div>
+                <div *ngIf="diseasesSuggestion.length !== 0">
+                    <span
+                        *ngFor="let disease of diseasesSuggestion; let i = index;" 
+                        class="tag diseases-tag is-primary is-medium no-text-selection"
+                        (click)="addNewDiseases(i)">
+                        {{disease.name}}</span>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>

@@ -1,0 +1,37 @@
+<div class="notification is-danger" *ngIf="isShowConfirmDelete">
+    คุณต้องการยกเลิกวันออกตรวจหรือไม่?
+    <i class="fa fa-check" (click)="cancelWorkdayDataService()"></i>
+    <i class="fa fa-times" (click)="dismissNoti()"></i>        
+</div>
+<div *ngIf="!isFirstLoad" class="box">
+    <div class="header">
+        <p class="title is-5">รายการผู้ป่วยในวันที่ {{workdayItem.displayDate}}</p>
+        <a class="button is-danger" (click)="cancelWorkday(workdayItem._id)">
+            <span class="icon">
+                <i class="fa fa-trash"></i>
+            </span>
+            <span>ยกเลิกวันออกตรวจ</span>
+        </a>
+    </div>
+    <div class="patient-list">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th class="hn-column">HN</th>
+                    <th>ชื่อ-นามสกุล</th>
+                </tr>
+            </thead>
+            <tbody *ngIf="patientList.length !== 0">
+                <tr *ngFor="let patient of patientList">
+                    <td>{{patient.HN}}</td>
+                    <td>{{patient.name}} {{patient.surname}}</td>
+                </tr>
+            </tbody>
+            <tbody *ngIf="patientList.length === 0">
+                <tr>
+                    <td colspan="2">ไม่มีผู้ป่วยทำการนัดหมายกับท่านในรอบนี้</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

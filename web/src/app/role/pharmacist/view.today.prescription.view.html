@@ -1,0 +1,75 @@
+<div class="container">
+    <div class="columns is-gapless">
+        <div class="column is-5">
+            <div class="box patient-list-wrapper">
+                <div class="patient-list-header">
+                    <h1 class="title">รายชื่อผู้ป่วย</h1>
+                </div>
+                <div class="patient-list-content">
+                    <patient-list 
+                        [patientList]="patientList"
+                        (patientEmitter)="onSelectPatient($event)">
+                    </patient-list>
+                </div>
+            </div>
+        </div>
+        <div class="column is-7">
+            <div class="box patient-prescription-wrapper">
+                <div class="patient-prescription-header">
+                    <h1 class="title">ข้อมูลการจ่ายยา</h1>
+                </div>
+                <div class="patient-prescription-content" *ngIf="(selectedPatient | json) != '{}'">
+                    <article class="message is-danger">
+                        <div class="message-header">
+                            <h1>รายการการแพ้ยา</h1>
+                        </div>
+                        <div class="message-body">
+                            <patient-allergy [medicineAllegyList]="medicineAllegyList"></patient-allergy>            
+                        </div>
+                    </article>
+                    <article class="message is-info">
+                        <div class="message-header">
+                            <div class="level">
+                                <div class="level-left">
+                                    <div class="level-item">
+                                        <h1>ประวัติการจ่ายยา</h1>
+                                    </div>
+                                </div>
+                                <div class="level-right">
+                                    <span>
+                                        <a class="button" (click)="getPreviousPrescriptionHistory()">
+                                            <i class="fa fa-chevron-left"></i>
+                                        </a>
+                                        <a class="button" (click)="getNextPrescriptionHistory()">
+                                            <i class="fa fa-chevron-right"></i>
+                                        </a>
+                                    </span>  
+                                </div>
+                            </div>
+                        </div>
+                        <div class="message-body">
+                            <patient-prescription
+                                [patient]="selectedPatient"
+                                [prescription]="prescriptionHistoryItem">
+                            </patient-prescription>
+                        </div>
+                    </article>
+                    <article class="message is-info">
+                        <div class="message-header">
+                            <h1>การจ่ายยาวันนี้</h1>                            
+                        </div>
+                        <div class="message-body">
+                            <patient-prescription
+                                [patient]="selectedPatient"
+                                [prescription]="prescriptionList">
+                            </patient-prescription>
+                        </div>
+                    </article>
+                </div>
+                <div class="patient-prescription-content" *ngIf="(selectedPatient | json) == '{}' && patientList.length > 0">
+                    <h1>เลือกผู้ป่วยที่ต้องการบันทึกข้อมูลทางด้านซ้าย</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,48 @@
+<div class="container">
+    <div class="box doctor-hn-box">
+        <h1 class="title">กรอกรหัสประจำตัวแพทย์ที่ต้องการจัดการวันออกตรวจ <i class="fa fa-check-circle" *ngIf="isConfirmDoctor"></i> <span *ngIf="isConfirmDoctor">[{{doctorName}}]</span></h1>
+        <div class="columns" *ngIf="!isConfirmDoctor">
+            <div class="column is-5">
+                <p class="control">
+                    <input class="input" type="text" [(ngModel)]="doctorHN">
+                </p>
+            </div>
+            <div class="column">
+                <a (click)="searchDoctor()" class="button is-info">ค้นหาแพทย์</a> 
+            </div>
+        </div>
+    </div>
+    <div class="doctor-information" *ngIf="isSearchCompleted && !isConfirmDoctor">
+        <div class="notification is-info" *ngIf="hasDoctorWithThatHN">
+            <h2><b>ชื่อแพทย์: </b>{{doctorName}}</h2>
+            <i class="fa fa-check" (click)="confirmThisDoctor()"></i>        
+        </div>
+        <div class="notification is-danger" *ngIf="!hasDoctorWithThatHN">
+            <h2><b>ไม่พบแพทย์ที่มีรหัสนี้</b></h2>
+        </div>
+    </div>
+    <div class="option-wrapper" *ngIf="isConfirmDoctor">
+        <a class="button is-info is-large" 
+            (click)="chosenFunction = 'add'"
+            [class.is-disabled]="chosenFunction === 'cancel'">
+            <span class="icon">
+                <i class="fa fa-plus-circle"></i>
+            </span>
+            <span>เพิ่มวันออกตรวจ</span>
+        </a>
+        <a class="button is-danger is-large"
+            (click)="chosenFunction = 'cancel'"
+            [class.is-disabled]="chosenFunction === 'add'">
+            <span class="icon">
+                <i class="fa fa-trash"></i>
+            </span>
+            <span>ยกเลิกวันออกตรวจ</span>
+        </a>
+    </div>
+
+    <add-workday
+        [doctorHN]="selectedDoctor._id"
+        *ngIf="chosenFunction === 'add'">
+    </add-workday>
+
+</div>

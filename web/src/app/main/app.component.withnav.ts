@@ -1,16 +1,17 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
-    selector: 'app',
+    selector: 'doccare-go-app',
     template: `
         <apps-nav></apps-nav>
-        <router-outlet></router-outlet>
+        <div class="outlet-wrapper">
+            <router-outlet></router-outlet>
+        </div>
     `,
     styles: [`
-        body {
+        .outlet-wrapper {
             padding-top: 115px;
         }
-    `],
-    encapsulation: ViewEncapsulation.None
+    `]
 })
-export class AppComponentWithNav {}
+export class AppComponentWithNavComponent {}

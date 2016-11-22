@@ -6,79 +6,51 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { provideAuth, JwtHelper } from 'angular2-jwt';
 
-// Components
-import { AppComponent, AppComponentWithNav} from './main/index';
-import { NavComponent } from './nav/nav.component';
-import { LoginComponent, RegisterComponent } from './auth/index';
-import { MakeAppointmentComponent, ViewAppointmentComponent, AppointmentAccordionComponent, AppointmentTableSelectionComponent } from './role/patient/index';
-import { AppointmentManagementComponent, MakeAppointmentByStaffComponent } from './role/staff/index';
-import { ViewTodayPatientComponent, PatientListComponent, RecordPatientDetailComponent } from './role/nurse/index';
+// Modules
+import { PatientModule } from './module/patient.module';
+import { DoctorModule } from './module/doctor.module';
+import { NurseModule } from './module/nurse.module';
+import { PharmacistModule } from './module/pharmacist.module';
+import { StaffModule } from './module/staff.module';
+import { AdminModule } from './module/admin.module';
+import { SharedModule } from './module/shared.module';
+import { AuthModule } from './module/auth.module';
 
-// Shared Components
-import { AppointmentTableCompact } from './shared/appointment/appointment.table.compact.component';
-import { AppointmentTableComponent } from './shared/appointment/appointment.table.component';
-import { MiniCalendarComponent } from './shared/component/mini.calendar.component';
-import { SearchBoxComponent } from './shared/component/searchbox.component';
-import { MakeAppointmentForm } from './shared/appointment/make.appointment.form.component';
+// Components
+import { AppComponent, AppComponentWithNavComponent } from './main/index';
+import { NavComponent } from './nav/nav.component';
 
 // Routing
 import { routing, appRoutingProviders } from './app.routing';
-import { PatientOnlyRoute, NurseOnlyRoute, DoctorOnlyRoute, PharmacistOnlyRoute, StaffOnlyRoute, NonLoggedInRoute } from './auth/guard/index';
 
 // Service
 import { AuthService } from './shared/service/auth.service';
+import { DataService } from './shared/service/data.service';
 
 @NgModule({
     bootstrap: [
         AppComponent
     ],
     declarations: [
-        /* Main Components */
         AppComponent,
-        AppComponentWithNav,
-        NavComponent,
-
-        /* Auth Components */
-        LoginComponent,
-        RegisterComponent,
-
-        /* Shared Components */
-        MiniCalendarComponent,
-        SearchBoxComponent,
-
-        /* Shared Components -> Appointment related */
-        MakeAppointmentForm,
-        AppointmentTableCompact,
-        AppointmentTableComponent,        
-
-        /* Patient Components */
-        MakeAppointmentComponent,        
-        ViewAppointmentComponent,        
-        AppointmentTableSelectionComponent,
-        AppointmentAccordionComponent,
-
-        /* Staff Components */
-        AppointmentManagementComponent,
-        MakeAppointmentByStaffComponent,
-
-        /* Nurse Components */
-        ViewTodayPatientComponent,
-        PatientListComponent,
-        RecordPatientDetailComponent
+        AppComponentWithNavComponent,
+        NavComponent
     ],
     imports: [
         BrowserModule,
         FormsModule,
         HttpModule,
-        routing
+        routing,
+        AuthModule,
+        SharedModule,
+        PatientModule,
+        DoctorModule,
+        NurseModule,
+        PharmacistModule,
+        StaffModule,
+        AdminModule
     ],
     providers: [
-        PatientOnlyRoute,
-        DoctorOnlyRoute,
-        NurseOnlyRoute,
-        PharmacistOnlyRoute,
-        StaffOnlyRoute,
-        NonLoggedInRoute,
         JwtHelper,
         provideAuth({
             headerName: 'x-access-token',
@@ -92,11 +64,12 @@ import { AuthService } from './shared/service/auth.service';
             provide: LocationStrategy,
             useClass: HashLocationStrategy
         },
-        AuthService
+        AuthService,
+        DataService
     ]
 })
 export class AppModule {
     constructor() {
-        console.log('[AppModule] current token: ', window.localStorage.getItem('doccareGoToken'));
+        console.log('[AppModule] user token: ', window.localStorage.getItem('doccareGoToken'));     
     }
 }

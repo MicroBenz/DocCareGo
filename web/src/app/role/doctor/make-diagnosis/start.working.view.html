@@ -1,0 +1,33 @@
+<div class="container-fluid">
+    <div class="notification is-success" *ngIf="isRecordSuccess">
+        บันทึกการตรวจสำเร็จแล้ว
+    </div>
+    <div class="columns">
+        <div class="column is-4">
+            <div class="box">
+                <patient-in-queue
+                    [patientList]="patientList"
+                    (onSelectedPatient)="onSelectPatient($event)"
+                    [isLockSelect]="isLockPatientList">
+                </patient-in-queue> 
+            </div>
+        </div>
+        <div class="column" *ngIf="isShowDiagnosisForm">
+            <div class="box">
+                <diagnosis-form></diagnosis-form>
+                <div class="button-wrapper">
+                    <a class="button is-success" (click)="popupNoti()">บันทึกการตรวจ</a>
+                    <a class="button is-danger" (click)="clearAllForm()">ยกเลิก</a>
+                </div>
+                <div class="notification is-info" *ngIf="isShowConfirmNoti">
+                    ยืนยันบันทึกการตรวจหรือไม่?
+                    <i class="fa fa-check" (click)="recordDiagnosis()"></i>
+                    <i class="fa fa-times" (click)="dismissNoti()"></i>
+                </div>
+                <div class="notification is-danger" *ngIf="isShowErrorNoti">
+                    ยังบันทึกข้อมูลการตรวจไม่ครบ โปรดตรวจสอบข้อมูล
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

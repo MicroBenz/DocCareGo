@@ -1,0 +1,80 @@
+<div id="register-view">
+    <div id="register-box">
+        <patient-form
+        	[formData]="formData"
+        	[isNeedHN]="false">
+        </patient-form>
+        <a class="button is-success"
+	        (click)="validateForm()">
+	        สมัครสมาชิก</a>
+	    <a class="button is-danger"
+	        (click)="isShowCancelConfirm = true">
+	        กลับ</a>
+    </div>
+</div>
+<modal-dialog
+    [description]="confirmModalContent"
+    [modalType]="'revise'"
+    [confirmText]="'สมัครสมาชิก'"
+    [cancelText]="'กลับ'"
+    [confirmFn]="addNewPatient"
+    [cancelFn]="dismissModal"
+    [isShowFlag]="isShowConfirm"
+    (isShowFlagChange)="isShowConfirm = $event">
+</modal-dialog>
+
+<modal-dialog
+    [description]="alertContent"
+    [modalType]="'alert'"
+    [confirmText]="'ยืนยันการสมัครสมาชิก'"
+    [confirmFn]="showSuccess"
+    [isShowFlag]="isShowAlert"
+    (isShowFlagChange)="isShowAlert = $event">
+</modal-dialog>
+
+<modal-dialog
+    [description]="'คุณต้องการยกเลิกการลงทะเบียนหรือไม่?'"
+    [modalType]="'warning'"
+    [confirmText]="'ยกเลิกการลงทะเบียน'"
+    [cancelText]="'กลับ'"
+    [confirmFn]="navigateToLoginPage"
+    [cancelFn]="dismissModal"
+    [isShowFlag]="isShowCancelConfirm"
+    (isShowFlagChange)="isShowCancelConfirm = $event">
+</modal-dialog>
+
+<modal-dialog
+    [description]="'โปรดกรอกข้อมูลให้ครบถ้วน'"
+    [modalType]="'fail'"
+    [confirmText]="'กรอกข้อมูลต่อ'"
+    [confirmFn]="dismissModal"
+    [isShowFlag]="isShowInvalidate"
+    (isShowFlagChange)="isShowInvalidate = $event">
+</modal-dialog>
+
+<modal-dialog
+    [description]="'รหัสประชาชนไม่ถูกต้อง'"
+    [modalType]="'fail'"
+    [confirmText]="'กรอกข้อมูลต่อ'"
+    [confirmFn]="dismissModal"
+    [isShowFlag]="isShowOverLength"
+    (isShowFlagChange)="isShowOverLength = $event">
+</modal-dialog>
+
+<modal-dialog
+    [description]="'รหัสไปรษณีย์ไม่ถูกต้อง'"
+    [modalType]="'fail'"
+    [confirmText]="'กรอกข้อมูลต่อ'"
+    [confirmFn]="dismissModal"
+    [isShowFlag]="isWrongZipCode"
+    (isShowFlagChange)="isWrongZipCode = $event">
+</modal-dialog>
+
+<modal-dialog
+    [description]="'สมัครสมาชิกสำเร็จ'"
+    [modalType]="'success'"
+    [confirmText]="'กลับสู่หน้าหลัก'"
+    [confirmFn]="navigateToLoginPage"
+    [isShowFlag]="isShowSuccess"
+    (isShowFlagChange)="isShowSuccess = $event">
+</modal-dialog>

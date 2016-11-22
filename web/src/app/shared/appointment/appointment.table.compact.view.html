@@ -6,9 +6,9 @@
             <th class="clinic-col">แผนก</th>
         </tr>
     </thead>
-    <tbody *ngIf="appointmentData.length !== 0">
+    <tbody *ngIf="appointments.length !== 0">
         <tr 
-            *ngFor="let appointment of appointmentData; let i = index"
+            *ngFor="let appointment of appointments; let i = index"
             (click)="selectAppointment(i)"
             [class.active]="i === selectedIndex">
             <td class="no-text-selection">{{appointment.date}}</td>
@@ -16,7 +16,7 @@
             <td class="no-text-selection">{{appointment.clinic}}</td>
         </tr>
     </tbody>
-    <tbody *ngIf="appointmentData.length === 0">
+    <tbody *ngIf="appointments.length === 0">
         <tr>
             <td colspan="2">คุณไม่มีการนัดหมาย</td>
         </tr>

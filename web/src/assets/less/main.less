@@ -1,18 +1,12 @@
-@theme: #00a250;
-@theme-darker: #37BC9B;
-@red: #fe424d;
-@blue: #007aff;
 @white: #ffffff;
 @black: #000000;
-@grey: #c8c7cc;
-@material-grey: #fafafa;
-@green: #00a250;
+@apps-background: #e6e9ed;
 
 html, body {
     width: 100%;
     height: 100%;
     color: @black;
-    background-color: @material-grey;
+    background-color: @apps-background;
     -webkit-font-smoothing: antialiased;
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
@@ -45,45 +39,12 @@ h1, h2, h3, h4, h5, p {
     transition: all 0.2s ease-in-out;
 }
 
-// .button {
-//     border: none;
-//     border-radius:  0px;
-//     .inout-transition();
-// }
-
-// .is-primary {
-//     color: @white;
-//     background-color: @green !important;
-//     height: 41px;
-//     &:hover, &:active {
-//         color: @white;
-//         background-color: @green;
-//     }
-//     &:hover {
-//         .BoxShadowHelper(2);
-//     }
-// }
-
-@officer-color: #006883;
-@patient-color: #00a250;
+@patient-color: #78b54d;
 @doctor-color: #ff6000;
 @nurse-color: #006ebb;
 @pharmacist-color: #6c3925;
-.officer-role > .profile-circle {
-    background-color: @officer-color;
-}
-.patient-role > .profile-circle {
-    background-color: @patient-color;
-}
-.doctor-role > .profile-circle {
-    background-color: @doctor-color;
-}
-.nurse-role > .profile-circle {
-    background-color: @nurse-color;
-}
-.pharmacist-role > .profile-circle {
-    background-color: @pharmacist-color;
-}
+@staff-color: #006883;
+@admin-color: #48cfad;
 
 .active-helper (@color) {
     color: @color !important;
@@ -92,35 +53,77 @@ h1, h2, h3, h4, h5, p {
         border-bottom-color: @color !important;
     }
 }
-.officer-role a.is-active {
-    .active-helper(@officer-color);
+
+.patient-role {
+    > .profile-circle {
+        background-color: @patient-color;
+    }
+    a.is-active {
+        .active-helper(@patient-color);          
+    }
+    a:hover {
+        border-bottom-color: @patient-color !important;        
+    }
 }
-.officer-role a:hover {
-    border-bottom-color: @officer-color !important;
+
+.doctor-role {
+    > .profile-circle {
+        background-color: @doctor-color;
+    }
+    a.is-active {
+        .active-helper(@doctor-color);          
+    }
+    a:hover {
+        border-bottom-color: @doctor-color !important;        
+    }
 }
-.patient-role a.is-active {
-    .active-helper(@patient-color);
+
+.nurse-role {
+    > .profile-circle {
+        background-color: @patient-color;
+    }
+    a.is-active {
+        .active-helper(@patient-color);          
+    }
+    a:hover {
+        border-bottom-color: @patient-color !important;        
+    }
 }
-.patient-role a:hover {
-    border-bottom-color: @patient-color !important;
+
+.pharmacist-role {
+    > .profile-circle {
+        background-color: @pharmacist-color;
+    }
+    a.is-active {
+        .active-helper(@pharmacist-color);          
+    }
+    a:hover {
+        border-bottom-color: @pharmacist-color !important;        
+    }
 }
-.doctor-role a.is-active {
-    .active-helper(@doctor-color);
+
+.staff-role {
+    > .profile-circle {
+        background-color: @staff-color;
+    }
+    a.is-active {
+        .active-helper(@staff-color);          
+    }
+    a:hover {
+        border-bottom-color: @staff-color !important;        
+    }
 }
-.doctor-role a:hover {
-    border-bottom-color: @doctor-color !important;
-}
-.nurse-role a.is-active {
-    .active-helper(@nurse-color);
-}
-.nurse-role a:hover {
-    border-bottom-color: @nurse-color !important;
-}
-.pharmacist-role a.is-active {
-    .active-helper(@pharmacist-color);
-}
-.pharmacist-role a:hover {
-    border-bottom-color: @pharmacist-color !important;
+
+.admin-role {
+    > .profile-circle {
+        background-color: @admin-color;
+    }
+    a.is-active {
+        .active-helper(@admin-color);          
+    }
+    a:hover {
+        border-bottom-color: @admin-color !important;        
+    }
 }
 
 .no-text-selection {

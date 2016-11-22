@@ -1,0 +1,50 @@
+<div class="container">
+    <div class="box">
+        <medicine-form
+            [formData]="medicineData">
+        </medicine-form>
+        <div class="button-wrapper">
+            <a class="button is-success" (click)="addNewMedicine()">เพิ่มข้อมูลยา</a>
+            <a class="button is-danger" (click)="isShowCancelConfirm = true">ยกเลิก</a>
+        </div>
+    </div>
+</div>
+
+<modal-dialog
+    [description]="confirmModalContent"
+    [modalType]="'revise'"
+    [confirmText]="'เพิ่มยา'"
+    [cancelText]="'กลับ'"
+    [confirmFn]="addMedicineDataService"
+    [cancelFn]="dismissModal"
+    [isShowFlag]="isShowConfirm"
+    (isShowFlagChange)="isShowConfirm = $event">
+</modal-dialog>
+
+<modal-dialog
+    [description]="'คุณต้องการยกเลิกการเพิ่มข้อมูลยาหรือไม่?'"
+    [confirmText]="'ยกเลิกการเพิ่มข้อมูล'"
+    [cancelText]="'กลับ'"
+    [confirmFn]="navigateToMedicineManagement"
+    [cancelFn]="dismissModal"
+    [isShowFlag]="isShowCancelConfirm"
+    (isShowFlagChange)="isShowCancelConfirm = $event">
+</modal-dialog>
+
+<modal-dialog
+    [description]="'โปรดกรอกข้อมูลให้ครบถ้วน'"
+    [modalType]="'fail'"
+    [confirmText]="'กรอกข้อมูลต่อ'"
+    [confirmFn]="dismissModal"
+    [isShowFlag]="isShowInvalidate"
+    (isShowFlagChange)="isShowInvalidate = $event">
+</modal-dialog>
+
+<modal-dialog
+    [description]="'เพิ่มข้อมูลสำเร็จ'"
+    [modalType]="'success'"
+    [confirmText]="'กลับสู่หน้าหลัก'"
+    [confirmFn]="navigateToMedicineManagement"
+    [isShowFlag]="isShowSuccess"
+    (isShowFlagChange)="isShowSuccess = $event">
+</modal-dialog>

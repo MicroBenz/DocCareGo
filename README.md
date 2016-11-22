@@ -1,4 +1,7 @@
 # DocCare Go
+
+<center><img src="./web/src/assets/img/logo_horizontal.png"></center>
+
 > Term Project รายวิชา Software Engineering คณะวิศวกรรมศาสตร์ ภาควิชาวิศวกรรมคอมพิวเตอร์ จุฬาลงกรณ์มหาวิทยาลัย ปีการศึกษา 2559 พัฒนาโดยกลุ่ม Hospital Again? โดยใช้ชุด MEAN Stack ในการพัฒนา
 
 DocCare Go เป็นระบบจัดการการนัดหมายของผู้ป่วยนอก (OPD - Out Patient Department)
@@ -18,7 +21,12 @@ DocCare Go เป็นระบบจัดการการนัดหมา
 - ติดตั้ง Library ที่ต้องใช้ โดยคำสั่ง `npm install`
 - สั่ง `gulp dev` เพื่อสั่งเปิด Web Server และรัน Web Apps
 
-# TODO when in Front-End Development
+# Project Seeder API
+- POST /seed/default/data
+- POST /seed/default/user
+- POST /seed/admin
+
+# For Front-End Developer
 ในช่วงของการ Development นั้น หากพัฒนาในส่วนของ Front-End ต้องสั่ง
 
 ```

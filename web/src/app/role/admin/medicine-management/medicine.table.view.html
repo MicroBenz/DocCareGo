@@ -1,0 +1,39 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th>ชื่อยา</th>
+            <th>รายละเอียดยา</th>
+            <th class="action-column"></th>         
+        </tr>
+    </thead>
+    <tbody *ngIf="medicineList.length !== 0">
+        <tr *ngFor="let medicine of medicineList; let i = index;">
+            <td>{{medicine.name}}</td>
+            <td>{{medicine.description}}</td>
+            <td>
+                <a class="button is-primary"
+                    (click)="editInfo(medicine.name)">
+                    <i class="fa fa-pencil"></i>แก้ไขข้อมูล</a>
+                <a class="button is-danger"
+                    (click)="deleteItem(medicine.name, i)">
+                    <i class="fa fa-trash"></i>ลบข้อมูล</a>
+            </td>            
+        </tr>
+    </tbody>
+    <tbody *ngIf="medicineList.length === 0">
+        <tr>
+            <td colspan="2">ไม่พบข้อมูลยา</td>
+        </tr>
+    </tbody>
+</table>
+
+<modal-dialog
+    [description]="deleteDialog"
+    [modalType]="'warning'"
+    [confirmText]="'ลบยาออกจากระบบ'"
+    [cancelText]="'กลับ'"
+    [confirmFn]="deleteMedicine"
+    [cancelFn]="dismissModal"
+    [isShowFlag]="isShowConfirmDelete"
+    (isShowFlagChange)="isShowConfirmDelete = $event">
+</modal-dialog>

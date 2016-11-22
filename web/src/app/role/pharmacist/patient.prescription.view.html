@@ -1,0 +1,16 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th class="no-text-selection">ชื่อยา</th>
+            <th class="no-text-selection">จำนวน</th>   
+            <th class="no-text-selection">จำนวน</th>                     
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of prescription;">
+            <td class="no-text-selection">{{item.name}}</td>
+            <td class="no-text-selection">{{item.quantity}}</td>
+            <td class="no-text-selection">{{item.howto}}</td>            
+        </tr>
+    </tbody>
+</table>

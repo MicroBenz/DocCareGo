@@ -1,0 +1,130 @@
+<div id="register-view">
+    <div id="register-box">
+
+    	<div class="control is-horizontal">
+		    <div class="control columns">
+			    <p class="control column is-6">
+				    <label class="label">ประเภทของสมาชิก </label>
+                    <span class="select">
+                        <select [(ngModel)]="formData.role">
+                            <option value="patient">ผู้ป่วย</option>
+                            <option value="doctor">แพทย์</option>
+                            <option value="nurse">พยาบาล</option>
+                            <option value="staff">เจ้าหน้าที่</option>
+                            <option value="pharmacist">เภสัชกร</option>                   
+                        </select>
+                    </span>
+		        </p>
+		    </div>
+		</div>
+
+		<div class="control is-horizontal">
+		    <div class="control columns">
+		        <p class="control column is-12">
+		            <label class="label">รหัสโรงพยาบาล (HN)</label>
+		            <input class="input" type="text" [(ngModel)]="formData.username">
+		        <!-- </p> -->
+		        <!-- <p class="control column is-3"> -->
+		            <label class="label">รหัสบัตรประจำตัวประชาชน</label>
+		            <input class="input" type="text" [(ngModel)]="formData.personalID">
+		        </p>
+		    </div>
+		</div>
+
+		<div class="control is-horizontal">
+		    <div class="control columns">
+		        <p class="control column is-12">
+		            <label class="label">E-mail</label>
+		            <input class="input" type="text" [(ngModel)]="formData.email">
+		        <!-- </p> -->
+		        <!-- <p class="control column is-3"> -->
+		            <label class="label">Password</label>
+		            <input class="input" type="password" [(ngModel)]="formData.password">
+		        <!-- </p> -->
+		        <!-- <p class="control column is-3"> -->
+		            <label class="label">Re-enter Password</label>
+		            <input class="input" type="password" [(ngModel)]="formData.reEnterPassword">
+		        </p>
+		    </div>
+		</div>		
+		<div class="button-wrapper">
+            <a class="button is-success" (click)="validateForm()">สมัครสมาชิก</a>
+            <a class="button is-danger" (click)="isShowCancelConfirm = true">ยกเลิก</a>
+        </div>
+		
+    </div>
+</div>
+<modal-dialog
+    [description]="confirmContent"
+    [modalType]="'revise'"
+    [confirmText]="'สมัครสมาชิก'"
+    [cancelText]="'กลับ'"
+    [confirmFn]="saveNewUser"
+    [cancelFn]="dismissModal"
+    [isShowFlag]="isShowConfirm"
+    (isShowFlagChange)="isShowConfirm = $event">
+</modal-dialog>
+
+<modal-dialog
+    [description]="'สมัครสมาชิกสำเร็จ'"
+    [modalType]="'success'"
+    [confirmText]="'กลับสู่หน้าหลัก'"
+    [confirmFn]="navigateToLoginPage"
+    [isShowFlag]="isShowSuccess"
+    (isShowFlagChange)="isShowSuccess = $event">
+</modal-dialog>
+
+<modal-dialog
+    [description]="'Password and Re-Enter password is not match.'"
+    [modalType]="'fail'"
+    [confirmText]="'กลับ'"
+    [confirmFn]="dismissModal"
+    [isShowFlag]="isShowNotMatch"
+    (isShowFlagChange)="isShowNotMatch = $event">
+</modal-dialog>
+
+<modal-dialog
+    [description]="'คุณต้องการยกเลิกการลงทะเบียนหรือไม่?'"
+    [confirmText]="'ยกเลิกการลงทะเบียน'"
+    [cancelText]="'กลับ'"
+    [confirmFn]="navigateToLoginPage"
+    [cancelFn]="dismissModal"
+    [isShowFlag]="isShowCancelConfirm"
+    (isShowFlagChange)="isShowCancelConfirm = $event">
+</modal-dialog>
+
+<modal-dialog
+    [description]="'รหัสประชาชนไม่ถูกต้อง'"
+    [modalType]="'fail'"
+    [confirmText]="'กรอกข้อมูลต่อ'"
+    [confirmFn]="dismissModal"
+    [isShowFlag]="isShowOverLength"
+    (isShowFlagChange)="isShowOverLength = $event">
+</modal-dialog>
+
+<modal-dialog
+    [description]="duplicateContent"
+    [modalType]="'fail'"
+    [confirmText]="'ตกลง'"
+    [confirmFn]="dismissModal"
+    [isShowFlag]="isShowDuplicate"
+    (isShowFlagChange)="isShowDuplicate = $event">
+</modal-dialog>
+
+<modal-dialog
+    [description]="'รหัสผ่านต้องยาวอย่างน้อย 6 ตัวอักษร'"
+    [modalType]="'fail'"
+    [confirmText]="'กรอกข้อมูลต่อ'"
+    [confirmFn]="dismissModal"
+    [isShowFlag]="isShowLowerLength"
+    (isShowFlagChange)="isShowLowerLength = $event">
+</modal-dialog>
+
+<modal-dialog
+    [description]="'โปรดกรอกข้อมูลให้ครบถ้วน'"
+    [modalType]="'fail'"
+    [confirmText]="'กรอกข้อมูลต่อ'"
+    [confirmFn]="dismissModal"
+    [isShowFlag]="isShowInvalidate"
+    (isShowFlagChange)="isShowInvalidate = $event">
+</modal-dialog>
