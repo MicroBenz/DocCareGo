@@ -4,11 +4,11 @@
   "description": "DocCare Go: Hospital Appointment System - Software Engineering Term Project",
   "main": "server.js",
   "scripts": {
-    "build:dev": "node_modules/webpack/bin/webpack.js --progress",
-    "build:prod": "node_modules/webpack/bin/webpack.js --config webpack.prod.js --progress",
-    "dev": "node_modules/webpack/bin/webpack.js --progress --watch",
-    "docker-build": "docker build -t doccarego .",
-    "docker-start": "docker run -p 49160:22345 -d --name doccarego doccarego",
+    "build:dev": "webpack --progress -p",
+    "build:prod": "webpack --config webpack.prod.js --progress -p",
+    "dev": "webpack --progress --watch",
+    "docker:build": "docker build -t doccarego .",
+    "docker:start": "docker run -p 49160:22345 -d --name doccarego doccarego",
     "start": "node server.js",
     "test": "mocha --timeout 10000"
   },
@@ -41,9 +41,7 @@
     "dotenv": "^2.0.0",
     "express": "~4.13.4",
     "font-awesome": "^4.6.3",
-    "fullcalendar": "^3.0.1",
     "html-pdf": "^2.1.0",
-    "jquery": "^2.2.4",
     "jsonwebtoken": "^7.1.9",
     "method-override": "~2.0.2",
     "mocha": "^3.1.2",
@@ -57,8 +55,6 @@
     "zone.js": "^0.6.23"
   },
   "devDependencies": {
-    "@types/fullcalendar": "^2.7.34",
-    "@types/jquery": "^2.0.33",
     "@types/moment": "^2.13.0",
     "@types/node": "^6.0.45",
     "angular2-template-loader": "^0.5.0",
@@ -81,7 +77,6 @@
     "typescript": "2.0.0",
     "url-loader": "^0.5.7",
     "webpack": "2.1.0-beta.22",
-    "webpack-dev-server": "^2.1.0-beta.2",
     "webpack-md5-hash": "0.0.5",
     "webpack-merge": "^0.15.0"
   }

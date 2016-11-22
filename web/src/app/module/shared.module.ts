@@ -7,7 +7,6 @@ import { AppointmentTableSelectionComponent, AppointmentAccordionComponent } fro
 import { AppointmentRequestFormComponent, AppointmentSummaryFormComponent, AppointmentTimeSelectorComponent, MakeAppointmentFormComponent } from '../shared/appointment/add-appointment/index'
 import { AppointmentTableCompactComponent } from './../shared/appointment/index';
 import { PatientListComponent, MiniCalendarComponent, SearchBoxComponent } from './../shared/component/index';
-import { FullCalendarComponent } from './../shared/calendar/full.calendar.component';
 import { ModalComponent } from './../shared/modal/modal.component';
 
 @NgModule({
@@ -32,7 +31,6 @@ import { ModalComponent } from './../shared/modal/modal.component';
         MiniCalendarComponent,
         SearchBoxComponent,
         PatientListComponent,
-        FullCalendarComponent,
         ModalComponent
     ],
     exports: [
@@ -47,7 +45,6 @@ import { ModalComponent } from './../shared/modal/modal.component';
         MiniCalendarComponent,
         SearchBoxComponent,
         PatientListComponent,
-        FullCalendarComponent,
         ModalComponent      
     ]
 })
