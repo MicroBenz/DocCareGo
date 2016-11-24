@@ -37,7 +37,6 @@ export class EditMedicineComponent implements OnInit {
         this.dataService.getData(MEDICINE_ENDPOINT + '/' + medicineName)
             .subscribe(
                 (medicine) => {
-                    console.log('EDIT MED:', medicine);
                     this.medicineData['name'] = medicine.name;
                     this.medicineData['description'] = medicine.description;
                 }
@@ -66,12 +65,10 @@ export class EditMedicineComponent implements OnInit {
     }
 
     saveMedicine = () => {
-        console.log('save medicine');
         let medicineName = this.route.snapshot.params['medicineName'];
         this.dataService.updateData(MEDICINE_ENDPOINT + '/' + medicineName, this.medicineData)
             .subscribe(
                 (success) => {
-                    console.log('SAVE MEDICINE SUCCESS');
                     this.navigateToMedicineManagement();
                 }
             )

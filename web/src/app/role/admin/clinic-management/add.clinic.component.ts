@@ -79,11 +79,10 @@ export class AddClinicComponent implements OnInit {
         this.dataService.saveData(CLINIC_ENDPOINT, this.clinicData)
             .subscribe(
                 (success) => {
-                    console.log('ADD NEW CLINIC');
                     this.isShowSuccess = true;
                 },
                 (error) => {
-                        console.error(error);
+                    console.error(error);
                 }
             )
     }

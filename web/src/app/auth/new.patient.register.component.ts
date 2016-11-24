@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Http, Response } from '@angular/http';
-import { LOGIN_ENDPOINT } from '../config/api.config';
-import { PATIENT_ENDPOINT } from '../config/api.config';
 import { NEW_PATIENT_REGISTER_TITLE } from '../config/title.config';
 
 @Component({
@@ -82,12 +80,10 @@ export class NewPatientRegisterComponent implements OnInit {
             this.isWrongZipCode = true;
         }
         else {
-            console.log('VALIADETED');
             this.http.get('/auth' + '/generateNewHN')
                 .map(this.handleResponse, this.handleError)
                 .subscribe(
                     (newHN) => {
-                        console.log('NewHN:', newHN.HN);
                         this.formData['HN'] = newHN.HN;
                         this.decorateModalContent();
                     }
@@ -133,7 +129,6 @@ export class NewPatientRegisterComponent implements OnInit {
             .map(this.handleResponse, this.handleError)
             .subscribe(
                 (newPatient) => {
-                    console.log('NEW PATIENT:', newPatient);
                     this.decorateAlertContent();
                     this.isShowConfirm = false;
                 },

@@ -39,7 +39,6 @@ export class EditClinicComponent implements OnInit {
         this.dataService.getData(CLINIC_ENDPOINT + '/' + clinicName)
             .subscribe(
                 (clinic) => {
-                    console.log('EDIT CLINIC:', clinic);
                     this.clinicData['name'] = clinic.name;
                     this.clinicData['description'] = clinic.description;
                 }
@@ -68,12 +67,10 @@ export class EditClinicComponent implements OnInit {
     }
 
     updateClinic = () => {
-        console.log('UPDATE CLINIC');
         let clinicName = this.route.snapshot.params['clinicName'];
         this.dataService.updateData(CLINIC_ENDPOINT + '/' + clinicName, this.clinicData)
             .subscribe(
                 (success) => {
-                    console.log('UPDATE CLINIC SUCCESS');
                     this.navigateToClinicManagement();
                 }
             )

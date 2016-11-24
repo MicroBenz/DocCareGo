@@ -38,24 +38,7 @@ export class AppointmentManagementComponent implements OnInit, AfterViewInit {
         this.selectedApptId = '';
         this.selectedApptIndex = -1;
         this.title.setTitle(MANAGE_APPOINTMENT_TITLE);
-        // this.dataService.getData(APPOINTMENT_ENDPOINT)
-        //     .map(
-        //         (appointments) => {
-        //             return appointments.map(
-        //                 (appointment) => {
-        //                     appointment['workday']['date'] = moment(appointment['workday']['date']).format('LL');
-        //                     appointment['workday']['time'] = appointment['workday']['time'] === 'AM'? '9:00 - 11:30': '13:00 - 15:30';
-        //                     return appointment;
-        //                 }
-        //             )
-        //         }
-        //     )
-        //     .subscribe(
-        //         (appointments) => {
-        //             console.log(appointments);
-        //             this.appointmentList = appointments;
-        //         }
-        //     )        
+   
     }
 
     ngAfterViewInit () {
@@ -77,37 +60,26 @@ export class AppointmentManagementComponent implements OnInit, AfterViewInit {
                 )
             }
         )
-            // .subscribe(
-            //     (appointments) => {
-            //         console.log(appointments);
-            //         this.appointmentList = appointments;
-            //     }
-            // )  
     }
 
     public onSearchResult (appointments) {
-        console.log('SEARCH RES: ',appointments);
         this.appointmentList = appointments;
     }
     postponeAppointment (id) {
         // TODO: Navigate to postpone appointment
-        console.log('[AppointmentManagementComponent] postpone id = ', id);
     }
 
     cancelAppointment = (id, index) => {
         // TODO: Handle Cancel Appointment
-        console.log('[AppointmentManagementComponent] cancel id = ', id);
         this.selectedApptId = id;
         this.selectedApptIndex = index;
         this.isShowConfirmDeleteModal = true;        
     }
 
     deleteAppointmentDataService = () => {
-        console.log('DATA SERVICE =====> ', this.selectedApptId);
         this.dataService.deleteData(`${APPOINTMENT_ENDPOINT}/${this.selectedApptId}`)
             .subscribe(
                 (success) => {
-                    console.log('DELETE SUCCESS ', success);
                     this.isShowConfirmDeleteModal = false;
                     this.appointmentList.splice(this.selectedApptIndex, 1);
                 }
@@ -116,6 +88,5 @@ export class AppointmentManagementComponent implements OnInit, AfterViewInit {
 
     printoutAppointment (id) {
         // TODO: Handle Printout Appointment
-        console.log('[AppointmentManagementComponent] printout id = ', id);        
     }
 }

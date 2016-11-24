@@ -49,7 +49,6 @@ export class AppointmentRequestFormComponent implements OnInit {
         })
         .subscribe(
             (success) => {
-                console.log(success);
                 this.doctorList = success;
             }
         )

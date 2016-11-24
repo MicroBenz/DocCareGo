@@ -3,7 +3,7 @@ import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { REGISTER_TITLE } from '../config/title.config';
 import { Http, Response } from '@angular/http';
-import { PATIENT_ENDPOINT, DOCTOR_ENDPOINT, NURSE_ENDPOINT, STAFF_ENDPOINT, PHARMACIST_ENDPOINT } from '../config/api.config';
+import { PATIENT_ENDPOINT } from '../config/api.config';
 
 @Component({
     selector: 'auth-register',
@@ -91,7 +91,6 @@ export class RegisterComponent implements OnInit {
 
     private handleResponse = (res: Response) => {
         let result = res.json();
-        console.log('result',result);
         if (result.success)
             return result.data;
         else
@@ -105,12 +104,10 @@ export class RegisterComponent implements OnInit {
 
 // ============================ try to check duplicate before confirm modal ==============================
     checkDuplicate = () => {
-        console.log('username' + this.formData['username']);
         this.http.get('/users/' + this.formData['username'])
             .map(this.handleResponse, this.handleError)
             .subscribe(
                 (user) => {
-                    console.log('USER:', user);
                     // this.isShowDuplicate = true;
                     // this.decorateDuplicateContent();
                     this.validateForm();
@@ -132,7 +129,6 @@ export class RegisterComponent implements OnInit {
             .map(this.handleResponse, this.handleError)
             .subscribe(
                 (newUser) => {
-                    console.log('NEW USER:', newUser);
                     this.isShowSuccess = true;
                 },
                 (error) => {

@@ -53,7 +53,6 @@ export class MakeAppointmentFormComponent implements OnInit {
     }
 
     public onConfirmAppointmentDetail (data) {
-        console.log('ON CONFIRM', data);
         this.isConfirmedAppointmentDetail = true;
         this.selectedClinic = data.clinic;
         this.selectedDoctor = data.doctor;

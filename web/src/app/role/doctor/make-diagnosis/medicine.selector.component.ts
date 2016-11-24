@@ -51,7 +51,6 @@ export class MedicineSelectorComponent implements OnInit {
             .flatMap(
                 (searchKey) => {
                     if (searchKey === '') {
-                        console.log('EMPTY SEARCH KEY');
                         this.medicineSuggestion = [];
                         return [];
                     }
@@ -61,7 +60,6 @@ export class MedicineSelectorComponent implements OnInit {
             .subscribe(
                 (medicines) => {
                     this.medicineSuggestion = medicines;
-                    console.log(medicines);
                 }
             )
     }

@@ -26,8 +26,6 @@ export class MakeAppointmentComponent implements OnInit {
         this.dataService.saveData(APPOINTMENT_ENDPOINT, formData)
             .subscribe(
                 (success) => {
-                    console.log('MAKE APPOINTMENT SUCCESS');
-                    console.log(success);
                     this.isMakeAppointmentSuccess = true;                    
                 }
             )

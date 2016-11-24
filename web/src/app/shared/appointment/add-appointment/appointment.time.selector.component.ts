@@ -30,7 +30,6 @@ export class AppointmentTimeSelectorComponent implements OnInit, OnChanges {
     }
 
     ngOnChanges(changes) {
-        console.log(changes);
         if (changes['timeSlot'].currentValue.length !== 0) {
             this.isShowSelector = true;
             this.setCurrentTimeDisplay(0);

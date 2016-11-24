@@ -77,7 +77,6 @@ export class ViewTodayPatientComponent implements OnInit {
         this.dataService.getData(PATIENT_RECORD_ENDPOINT)
             .map(
                 (appointments) => {
-                    console.log(appointments);
                     return appointments.map(
                         (appointment) => {
                             let name = `${appointment['patient']['preName']}${appointment['patient']['name']} ${appointment['patient']['surname']}`;
@@ -99,7 +98,6 @@ export class ViewTodayPatientComponent implements OnInit {
     }
 
     public displayPatientRecords = (patientRecords) => {
-        console.log(patientRecords);
         this.patientRecordList = patientRecords;
     }
 

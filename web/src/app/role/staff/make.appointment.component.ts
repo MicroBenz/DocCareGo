@@ -68,11 +68,9 @@ export class MakeAppointmentByStaffComponent implements OnInit {
 
     onConfirmAppointment (formData) {
         formData['patient'] = this.selectedPatient.HN;
-        console.log(formData);
         this.dataService.saveData(APPOINTMENT_ENDPOINT, formData)
             .subscribe(
                 (success) => {
-                    console.log('MAKE APPOINTMENT SUCCESS');
                     this.isMakeAppointmentSuccess = true;                    
                 }
             )        

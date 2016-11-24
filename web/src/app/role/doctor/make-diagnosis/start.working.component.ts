@@ -57,13 +57,11 @@ export class StartWorkingComponent implements OnInit {
         .subscribe(
             (patients: Array<Object>) => {
                 this.patientList = patients;
-                console.log(patients);
             }
         )
     }
 
     onSelectPatient (index) {
-        console.log('SELECTED' , index);
         this.selectedPatient = this.patientList[index];
         this.selectedPatientIndex = index;
         this.isShowDiagnosisForm = true;
@@ -71,10 +69,8 @@ export class StartWorkingComponent implements OnInit {
     }
 
     popupNoti () {
-        console.log('RECORD');
         this.isShowConfirmNoti = true;
         this.isShowErrorNoti = false;
-        console.log(this.selectedPatient);
         let diagnosisBody = {
             appointment: this.selectedPatient['appointment']['_id'],
             description: this.diagnosisFormComponent.diagnosisData,
@@ -118,7 +114,6 @@ export class StartWorkingComponent implements OnInit {
         this.dataService.saveData(DIAGNOSIS_RESULT_ENDPOINT, this.diagnosisBody)
             .subscribe(
                 (success) => {
-                    console.log('SUCCESS RECORD');
                     this.patientInQueueComponent.patientList.splice(this.selectedPatientIndex, 1);
                     this.clearAllForm();
                     this.isRecordSuccess = true;

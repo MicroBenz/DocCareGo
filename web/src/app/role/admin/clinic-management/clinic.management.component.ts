@@ -38,7 +38,6 @@ export class ClinicManagementComponent implements OnInit {
     }
 
     public displayClinics = (clinics) => {
-        console.log(clinics);
         this.clinicList = clinics;
     }
 

@@ -51,7 +51,6 @@ export class DiseasesSelectorComponent implements OnInit {
             .flatMap(
                 (searchKey) => {
                     if (searchKey === '') {
-                        console.log('EMPTY SEARCH KEY');
                         this.diseasesSuggestion = [];
                         return [];
                     }
@@ -61,17 +60,14 @@ export class DiseasesSelectorComponent implements OnInit {
             .subscribe(
                 (diseases) => {
                     this.diseasesSuggestion = diseases;
-                    console.log(diseases);
                 }
             )
     }
 
     addNewDiseases(index) {
         let selectedDiseases = this.diseasesSuggestion[index];
-        console.log(selectedDiseases);
         for (let i = 0 ; i < this.diseasesList.length ; i += 1) {
             if (selectedDiseases['_id'] === this.diseasesList[i]['_id']) {
-                console.log('EXIST');
                 return;
             }
         }

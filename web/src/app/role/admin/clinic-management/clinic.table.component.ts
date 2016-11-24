@@ -46,7 +46,6 @@ export class ClinicTableComponent implements OnInit {
         this.dataService.deleteData(`${CLINIC_ENDPOINT}/${this.selectedDeleteName}`)
             .subscribe(
                 (success) => {
-                    console.log('DELETE SUCCESS');
                     this.clinicList.splice(this.selectedIndex, 1);
                     this.dismissModal();
                 }

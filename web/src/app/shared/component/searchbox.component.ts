@@ -44,7 +44,6 @@ export class SearchBoxComponent implements OnInit {
             .subscribe(
                 (searchResult) => {
                     this.isSearching = false;
-                    console.log('RES ', searchResult);
                     this.onSearchResult.emit(searchResult);
                 },
                 (error) => {

@@ -18,13 +18,11 @@ export class DoctorFormComponent implements OnInit {
         this.dataService.getData(CLINIC_ENDPOINT)
             .subscribe(
                 (success: Array<any>) => {
-                    console.log(success);
                     this.clinicList = success.map(
                         (item) => {
                             return item['name']
                         }
                     )
-                    console.log(this.clinicList);
                 }
             )
     }

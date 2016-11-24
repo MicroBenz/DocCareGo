@@ -51,7 +51,6 @@ export class MedicineTableComponent implements OnInit {
         this.dataService.deleteData(`${MEDICINE_ENDPOINT}/${this.selectedDelete}`)
             .subscribe(
                 (success) => {
-                    console.log('DELETE SUCCEED');
                     this.medicineList.splice(this.selectedIndex, 1);
                     this.dismissModal();
                 }

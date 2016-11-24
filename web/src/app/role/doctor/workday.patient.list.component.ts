@@ -84,7 +84,6 @@ export class WorkdayPatientListComponent implements OnInit, OnChanges {
     }
 
     cancelWorkday(id) {
-        console.log(id);
         this.deleteId = id;
         this.isShowConfirmDelete = true;
     }
@@ -93,7 +92,6 @@ export class WorkdayPatientListComponent implements OnInit, OnChanges {
         this.dataService.deleteData(`${WORKDAY_ENDPOINT}/${this.deleteId}`)
             .subscribe(
                 (success) => {
-                    console.log(success);
                     this.dismissNoti();
                     location.reload();
                 }

@@ -66,7 +66,6 @@ export class WorkdaySelectorComponent implements OnInit {
             .map(this.setDisplayDate)
             .subscribe(
                 (dayList) => {
-                    console.log(dayList);
                     this.workdayList = dayList;
                 }
             )
@@ -101,16 +100,11 @@ export class WorkdaySelectorComponent implements OnInit {
     }
 
     public selectWorkday (idx) {
-        // let splittedDate = day.split(' ');
-        // let date = moment().set('date', splittedDate[0]).set('month', splittedDate[1]).set('year', splittedDate[2]);
-        // this.selectedDate = day;
         this.selectedDate = this.workdayList[idx]['displayDate'];
-        console.log('SELECTED:', this.workdayList[idx]);
         this.onSelectWorkday.emit(this.workdayList[idx]);
         this.onSelectWorkdayIndex.emit(idx);
     }
 
-    // NEW Workday Decorator
     private sortByDate = (response: Array<Object>) => {
         return response.sort(
             (firstItem: Object, secondItem: Object) => {
@@ -139,7 +133,6 @@ export class WorkdaySelectorComponent implements OnInit {
     }
 
     private setDisplayDate = (dayList: Array<Object>) => {
-        console.log(dayList);
         return dayList.map(
             (day) => {
                 let period = day['time'] === 'AM'? '(เช้า)': '(บ่าย)';

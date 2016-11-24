@@ -38,7 +38,6 @@ export class MedicineManagementComponent implements OnInit {
     }
 
     public displayMedicines = (medicines) => {
-        console.log(medicines);
         this.medicineList = medicines;
     }
 

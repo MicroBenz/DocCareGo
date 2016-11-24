@@ -47,9 +47,7 @@ export class PersonnelTableComponent implements OnInit{
     }
 
     public editInfo (hn) {
-        console.log('EDIT ', this.role, hn);
         let editRoute = `/admin/personnel-management/edit-${this.role}/${hn}`;
-        console.log(editRoute);
         this.router.navigateByUrl(editRoute);
     }
 
@@ -83,7 +81,6 @@ export class PersonnelTableComponent implements OnInit{
         this.dataService.deleteData(`${endpoint}/${this.personnelList[this.toDeleteIndex].HN}`)
             .subscribe(
                 (success) => {
-                    console.log('DELETE SUCCESS ', success);
                     this.personnelList.splice(this.toDeleteIndex, 1);
                     this.dismissModal();
                 }

@@ -28,11 +28,9 @@ export class EditStaffComponent implements OnInit {
     ngOnInit () {
         this.formData = {};
         let hn = this.route.snapshot.params['HN'];
-        console.log(hn);
         this.dataService.getData(STAFF_ENDPOINT + '/' + hn)
             .subscribe(
                 (staff) => {
-                    console.log('EDIT Pharmacist:', staff);
                     this.formData['HN'] = staff.HN||'';
                     this.formData['personalID'] = staff.personalID||'';
                     this.formData['preName'] = staff.preName||'';
@@ -66,12 +64,10 @@ export class EditStaffComponent implements OnInit {
     }
 
     saveStaff = () => {
-        console.log('save staff');
         let hn = this.route.snapshot.params['HN'];
         this.dataService.updateData(STAFF_ENDPOINT + '/' + hn, this.formData)
             .subscribe(
                 (success) => {
-                    console.log('SAVE STAFF SUCCESS');
                     this.isShowSuccess = true;
                 }
             )

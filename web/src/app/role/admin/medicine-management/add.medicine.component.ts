@@ -77,7 +77,6 @@ export class AddMedicineComponent implements OnInit {
          this.dataService.saveData(MEDICINE_ENDPOINT, this.medicineData)
             .subscribe(
                 (success) => {
-                    console.log('ADD NEW MEDICINE');
                     this.isShowSuccess = true;
                 },
                 (error) => {

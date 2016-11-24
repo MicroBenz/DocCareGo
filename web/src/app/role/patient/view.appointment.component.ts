@@ -45,7 +45,6 @@ export class ViewAppointmentComponent implements OnInit {
         })
         .map(
             (success: Array<Object>) => {
-                console.log(success);
                 return success.sort(
                     (firstItem, secondItem) => {
                         let firstDate = firstItem['workday']['date'];
@@ -60,8 +59,6 @@ export class ViewAppointmentComponent implements OnInit {
         )
         .subscribe(
             (success: Array<Object>) => {
-                console.log('GET APPOINTMENT');
-                console.log(success);
                 this.appointments = success.map(
                     (item) => {
                         let doctorName = `${item['doctor']['preName']}${item['doctor']['name']} ${item['doctor']['surname']}`;

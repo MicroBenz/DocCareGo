@@ -102,7 +102,6 @@ export class AddWorkdayComponent implements OnInit {
             let slotIdx = schedule['time'] === 'AM'? 0: 1;
             disabledSlot[dayIdx][slotIdx] = true;
         }
-        console.log(disabledSlot);
         this.allTimeSlot = [
             [
                 {dayLabel: 'อาทิตย์เช้า', timeSlot: this.timeSlot[0], class: 'sunday', dayIdx: 0, timeIdx: 0, isDisable: disabledSlot[0][0]},
@@ -154,7 +153,6 @@ export class AddWorkdayComponent implements OnInit {
                 }
             }
         }
-        console.log(selectedArr);
         this.selectedTime = selectedArr;
         this.updateDialogText();
     }
@@ -188,7 +186,6 @@ export class AddWorkdayComponent implements OnInit {
         this.dataService.saveData(SCHEDULE_ENDPOINT, requestBody)
             .subscribe(
                 (success) => {
-                    console.log('ADD SCHEDULE SUCCESS');
                     this.navigateToMainDoctor();
                 }
             )

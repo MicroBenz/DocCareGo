@@ -50,8 +50,6 @@ export class WorkdayManagementByStaffComponent implements OnInit {
         this.dataService.getData(`${DOCTOR_ENDPOINT}/${this.doctorHN}`)
             .subscribe(
                 (doctor) => {
-                    console.log('GET DOCTOR');
-                    console.log(doctor);
                     this.isSearchCompleted = true;  
                     this.hasDoctorWithThatHN = true;                  
                     this.doctorName = `${doctor.preName}${doctor.name} ${doctor.surname}`;

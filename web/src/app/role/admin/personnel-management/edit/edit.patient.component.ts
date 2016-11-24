@@ -27,11 +27,9 @@ export class EditPatientComponent implements OnInit {
     ngOnInit () {
         this.formData = {};
         let hn = this.route.snapshot.params['HN'];
-        console.log(hn);
         this.dataService.getData(PATIENT_ENDPOINT + '/' + hn)
             .subscribe(
                 (patient) => {
-                    console.log('EDIT Patient:', patient);
                     this.formData['HN'] = patient.HN || '';
                     this.formData['personalID'] = patient.personalID || '';
                     this.formData['preName'] = patient.preName || '';
@@ -88,12 +86,10 @@ export class EditPatientComponent implements OnInit {
         this.isShowConfirm = true;
     }
     savePatient = () => {
-        console.log('save patient');
         let hn = this.route.snapshot.params['HN'];
         this.dataService.updateData(PATIENT_ENDPOINT + '/' + hn, this.formData)
             .subscribe(
                 (success) => {
-                    console.log('SAVE PATIENT SUCCESS');
                     this.isShowSuccess = true;
                 }
             )

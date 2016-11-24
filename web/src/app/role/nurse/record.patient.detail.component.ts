@@ -98,12 +98,9 @@ export class RecordPatientDetailComponent implements OnInit {
 
     recordPatientDetailDataService = () => {
         this.patientRecord['appointment'] = this.patient['id'];
-        console.log(this.patientRecord);
-        
         this.dataService.saveData(PATIENT_RECORD_ENDPOINT, this.patientRecord)
             .subscribe(
                 (success) => {
-                    console.log('RECORD PATIENT DETAIL');
                     this.dismissModal();
                     location.reload();
                 }
