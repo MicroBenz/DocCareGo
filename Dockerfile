@@ -17,7 +17,7 @@ COPY . /usr/src/doccarego
 
 # Install app dependencies
 RUN npm install
-RUN webpack -p
+RUN webpack --config webpack.prod.js --progress -p
 
 #add commands
 RUN echo 'mongod & npm start' > commands.sh
